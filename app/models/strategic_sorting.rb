@@ -1,0 +1,2 @@
+class StrategicSorting < ApplicationRecord
+end

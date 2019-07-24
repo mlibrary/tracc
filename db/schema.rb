@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_004104) do
+ActiveRecord::Schema.define(version: 2019_07_24_011019) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -24,6 +24,41 @@ ActiveRecord::Schema.define(version: 2019_07_24_004104) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
+  create_table "cards", force: :cascade do |t|
+    t.string "request_type"
+    t.string "i_or_p"
+    t.string "requester_name"
+    t.string "requester_email"
+    t.string "requester_div"
+    t.string "contact_names"
+    t.string "title"
+    t.string "short_description"
+    t.string "prev_work"
+    t.string "accomplish"
+    t.string "benefits"
+    t.string "goal_alignment"
+    t.string "at_stake"
+    t.string "ext_pressure"
+    t.string "non_tech"
+    t.string "time_constraints"
+    t.string "priority"
+    t.string "sponsor"
+    t.string "more_info"
+    t.string "short_name"
+    t.string "start_cycle"
+    t.string "done_cycle"
+    t.string "card_status"
+    t.string "ext_link"
+    t.string "lit_lead"
+    t.string "lit_dept"
+    t.string "service_lead"
+    t.string "other_contacts"
+    t.string "comments"
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "searches", force: :cascade do |t|
     t.binary "query_params"
     t.integer "user_id"
@@ -31,6 +66,18 @@ ActiveRecord::Schema.define(version: 2019_07_24_004104) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
+  end
+
+  create_table "strategic_sortings", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "domain"
+    t.string "enthusiasm"
+    t.string "knowledge"
+    t.string "resource"
+    t.string "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_strategic_sortings_on_card_id"
   end
 
   create_table "users", force: :cascade do |t|

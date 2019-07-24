@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :strategic_sortings
+  resources :cards
   mount Blacklight::Engine => '/'
   concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
   root to: "catalog#index"

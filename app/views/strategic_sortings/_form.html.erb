@@ -1,0 +1,17 @@
+<%= form_with(model: strategic_sorting, local: true) do |form| %>
+  <% if strategic_sorting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(strategic_sorting.errors.count, "error") %> prohibited this strategic_sorting from being saved:</h2>
+
+      <ul>
+      <% strategic_sorting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

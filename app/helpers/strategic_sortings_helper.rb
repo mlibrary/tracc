@@ -1,0 +1,2 @@
+module StrategicSortingsHelper
+end

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Strategic Sortings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @strategic_sortings.each do |strategic_sorting| %>
+      <tr>
+        <td><%= link_to 'Show', strategic_sorting %></td>
+        <td><%= link_to 'Edit', edit_strategic_sorting_path(strategic_sorting) %></td>
+        <td><%= link_to 'Destroy', strategic_sorting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Strategic Sorting', new_strategic_sorting_path %>
