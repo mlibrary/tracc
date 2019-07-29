@@ -64,7 +64,7 @@ class CardsController < ApplicationController
     end
   end
 
-  def import_cards
+  def import_cards #new service cards
     
     uploaded_csv = params[:file]
     csv_text = File.read(uploaded_csv.path)
@@ -102,7 +102,7 @@ class CardsController < ApplicationController
         row_hash[:requester_fname] = row_hash.delete "first name"
         row_hash[:requester_lname] = row_hash.delete "last name"
         row_hash[:requester_email] = row_hash.delete "email"
-        row_hash[:requester_div] = row_hash.delete "Division"
+        row_hash[:requester_div] = row_hash.delete "Q16"
         row_hash[:short_description] = row_hash.delete "Q3"
           row_hash[:prev_work] = row_hash.delete "Q4"
           row_hash[:accomplish] = row_hash.delete "Q5"
@@ -130,8 +130,8 @@ class CardsController < ApplicationController
       #complexity_hash = Hash["card_id" => id, "status" => "Not Recorded"]
       #Complexity.create!(complexity_hash) 
       #Impact.create!(complexity_hash) 
-        comment_hash = Hash["card_id" => id, "comment_txt" => "New card created", "uemail" => "njaffer@umich.edu"] 
-        Comment.create!(comment_hash)
+        #comment_hash = Hash["card_id" => id, "comment_txt" => "New card created", "uemail" => "njaffer@umich.edu"] 
+        #Comment.create!(comment_hash)
     end  
   end
 end 
