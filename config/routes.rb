@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
   end
+
+  get 'cards/import', to: 'cards#import', as: 'import_cards'
+  post 'cards/import_cards'
+
   devise_for :users
   concern :exportable, Blacklight::Routes::Exportable.new
 
