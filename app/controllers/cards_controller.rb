@@ -77,7 +77,6 @@ class CardsController < ApplicationController
       #flag = false
 
       #if (flag)  
-      byebug
         #if (row_hash["Status"]== "Survey Preview")
         if (row_hash["Status"] ==  "IP Address")
         
@@ -123,7 +122,6 @@ class CardsController < ApplicationController
         row_hash.delete_if { |k, v| v.nil? }
 
         row_hash.merge!(start_cycle: params[:cycle])
-        byebug
         c = Card.new (row_hash)
         c.save!
         id = c.id
