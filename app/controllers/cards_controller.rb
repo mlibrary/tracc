@@ -103,20 +103,111 @@ class CardsController < ApplicationController
         row_hash[:requester_email] = row_hash.delete "email"
         row_hash[:requester_div] = row_hash.delete "Q16"
         row_hash[:short_description] = row_hash.delete "Q3"
-          row_hash[:prev_work] = row_hash.delete "Q4"
-          row_hash[:accomplish] = row_hash.delete "Q5"
+        row_hash[:prev_work] = row_hash.delete "Q4"
+        row_hash[:accomplish] = row_hash.delete "Q5"
         
-  
-    
-    
+        details = Array.new
+        details[0] = row_hash[:Q5_1_TEXT]
+        details[1] = row_hash[:Q5_2_TEXT]
+        details[2] = row_hash[:Q5_3_TEXT]
+        details[3] = row_hash[:Q5_4_TEXT]
+        details[4] = row_hash[:Q5_5_TEXT]
+        
+        row_hash.merge!(accomplish_details: details)
+        row_hash.delete "Q5_1_TEXT"
+        row_hash.delete "Q5_2_TEXT"
+        row_hash.delete "Q5_3_TEXT"
+        row_hash.delete "Q5_4_TEXT"
+        row_hash.delete "Q5_5_TEXT"
+        
         row_hash[:benefits] = row_hash.delete "Q6"
+        #Array.new
+        details[0] = row_hash[:Q6_1_TEXT]
+        details[1] = row_hash[:Q6_2_TEXT]
+        details[2] = row_hash[:Q6_3_TEXT]
+        details[3] = row_hash[:Q6_4_TEXT]
+        details[4] = row_hash[:Q6_5_TEXT]
+        details[5] = row_hash[:Q6_6_TEXT]
+        details[6] = row_hash[:Q6_7_TEXT]
+        
+        row_hash.merge!(benefits_details: details)
+        row_hash.delete "Q6_1_TEXT"
+        row_hash.delete "Q6_2_TEXT"
+        row_hash.delete "Q6_3_TEXT"
+        row_hash.delete "Q6_4_TEXT"
+        row_hash.delete "Q6_5_TEXT"
+        row_hash.delete "Q6_6_TEXT"
+        row_hash.delete "Q6_7_TEXT"
+        
         row_hash[:goal_alignment] = row_hash.delete "Q7"
+
         row_hash[:at_stake] = row_hash.delete "Q8"
+        details[0] = row_hash[:Q8_1_TEXT]
+        details[1] = row_hash[:Q8_2_TEXT]
+        details[2] = row_hash[:Q8_3_TEXT]
+        details[3] = row_hash[:Q8_4_TEXT]
+        details[4] = details[5] = details[6]= ""
+        
+        row_hash.merge!(at_stake_details: details)
+        row_hash.delete "Q8_1_TEXT"
+        row_hash.delete "Q8_2_TEXT"
+        row_hash.delete "Q8_3_TEXT"
+        row_hash.delete "Q8_4_TEXT"
+       
         row_hash[:ext_pressure] = row_hash.delete "Q9"
+        details[0] = row_hash[:Q9_1_TEXT]
+        details[1] = row_hash[:Q9_2_TEXT]
+        details[2] = row_hash[:Q9_3_TEXT]
+        details[3] = row_hash[:Q9_4_TEXT]
+        details[4] = row_hash[:Q9_5_TEXT]
+        details[5] = row_hash[:Q9_6_TEXT]
+        details[6]= ""
+        
+        row_hash.merge!(ext_pressure_details: details)
+        row_hash.delete "Q9_1_TEXT"
+        row_hash.delete "Q9_2_TEXT"
+        row_hash.delete "Q9_3_TEXT"
+        row_hash.delete "Q9_4_TEXT"
+        row_hash.delete "Q9_5_TEXT"
+        row_hash.delete "Q9_6_TEXT"
+
         row_hash[:non_tech] = row_hash.delete "Q10"
+        details[0] = row_hash[:Q10_1_TEXT]
+        details[1] = row_hash[:Q10_2_TEXT]
+        details[2] = row_hash[:Q10_3_TEXT]
+        details[3] = row_hash[:Q10_4_TEXT]
+        details[4] = row_hash[:Q10_5_TEXT]
+        details[5] = ""
+       
+        
+        row_hash.merge!(non_tech_details: details)
+        row_hash.delete "Q10_1_TEXT"
+        row_hash.delete "Q10_2_TEXT"
+        row_hash.delete "Q10_3_TEXT"
+        row_hash.delete "Q10_4_TEXT"
+        row_hash.delete "Q10_5_TEXT"
+        
+
         row_hash[:time_constraints] = row_hash.delete "Q11"
+        details[0] = row_hash[:Q11_1_TEXT]
+        details[1] = row_hash[:Q11_2_TEXT]
+        details[2] = row_hash[:Q11_3_TEXT]
+        details[3] = row_hash[:Q11_4_TEXT]
+        details[4] = row_hash[:Q11_5_TEXT]
+        details[5] = ""
+       
+        
+        row_hash.merge!(time_constraints_details: details)
+        row_hash.delete "Q11_1_TEXT"
+        row_hash.delete "Q11_2_TEXT"
+        row_hash.delete "Q11_3_TEXT"
+        row_hash.delete "Q11_4_TEXT"
+        row_hash.delete "Q11_5_TEXT"
+
         row_hash[:more_info] = row_hash.delete "Q14"
         row_hash[:priority] = row_hash.delete "Q12"
+        row_hash[:other_contacts] = row_hash.delete "Q13"
+
         #row_hash[:sponsor] = row_hash.delete "Q23"
         row_hash[:card_since] = row_hash.delete "RecordedDate"
         row_hash.delete_if { |k, v| v.nil? }
