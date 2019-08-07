@@ -64,7 +64,7 @@ class CardsController < ApplicationController
     end
   end
 
-  def import_cards #new service cards
+  def import_new_cards #new service cards
     
     uploaded_csv = params[:file]
     csv_text = File.read(uploaded_csv.path)
@@ -97,9 +97,13 @@ class CardsController < ApplicationController
         row_hash.delete "DistributionChannel"
         row_hash.delete "UserLanguage"
         
+        row_hash[:request_type] = "New Service" 
         row_hash[:title] = row_hash.delete "Q1"
         row_hash[:requester_fname] = row_hash.delete "first name"
         row_hash[:requester_lname] = row_hash.delete "last name"
+        if ( (row_hash[:requester_fname] != nil) && (row_hash[:requester_fname] != nil) )
+          row_hash[:requester_name] = row_hash[:requester_fname] + " " + row_hash[:requester_lname] 
+        end
         row_hash[:requester_email] = row_hash.delete "email"
         row_hash[:requester_div] = row_hash.delete "Q16"
         row_hash[:short_description] = row_hash.delete "Q3"
