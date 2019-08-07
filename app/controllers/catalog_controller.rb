@@ -31,7 +31,7 @@ class CatalogController < ApplicationController
     #config.per_page = [10,20,50,100]
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'title_tsim'
+    config.index.title_field = 'card_titlel_tsim'
     #config.index.display_type_field = 'format'
     #config.index.thumbnail_field = 'thumbnail_path_ss'
 
@@ -42,15 +42,15 @@ class CatalogController < ApplicationController
     config.add_results_collection_tool(:view_type_group)
 
     config.add_show_tools_partial(:bookmark, partial: 'bookmark_control', if: :render_bookmarks_control?)
-    config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
-    config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
-    config.add_show_tools_partial(:citation)
+    #config.add_show_tools_partial(:email, callback: :email_action, validator: :validate_email_params)
+    #config.add_show_tools_partial(:sms, if: :render_sms_action?, callback: :sms_action, validator: :validate_sms_params)
+    #config.add_show_tools_partial(:citation)
 
     config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
     config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
 
     # solr field configuration for document/show views
-    config.show.title_field = 'title_tsim'
+    config.show.title_field = 'card_titlel_tsim'
     #config.show.display_type_field = 'format'
     #config.show.thumbnail_field = 'thumbnail_path_ss'
 
@@ -113,7 +113,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
 
     # Card index fields
-    config.add_index_field 'card_titlel_tsim', label: 'Title'
+    #config.add_index_field 'card_titlel_tsim', label: 'Title'
     config.add_index_field 'card_requester_name_ssim', label: 'Requester'
     config.add_index_field 'card_request_type_ssi', label: 'Request Type'
     config.add_index_field 'card_i_or_p_ssi', label: 'Investigation/Project'
@@ -126,7 +126,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     # Card show fields
-    config.add_show_field 'card_titlel_tsim', label: 'Title'
+    #config.add_show_field 'card_titlel_tsim', label: 'Title'
     config.add_show_field 'card_request_type_ssi', label: 'Request Type'
     config.add_show_field 'card_i_or_p_ssi', label: 'Investigation/Project'
     config.add_show_field 'card_requester_name_ssim', label: 'Requester'

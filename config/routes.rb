@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   get 'cards/import', to: 'cards#import', as: 'import_cards'
-  post 'cards/import_cards'
+  post 'cards/import_new_cards'
 
   devise_for :users
   concern :exportable, Blacklight::Routes::Exportable.new

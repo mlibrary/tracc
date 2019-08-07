@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_011019) do
   create_table "cards", force: :cascade do |t|
     t.string "request_type"
     t.string "i_or_p"
+    t.string "requester_name"
     t.string "requester_fname"
     t.string "requester_lname"
     t.string "requester_email"
