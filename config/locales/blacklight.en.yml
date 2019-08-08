@@ -2,3 +2,90 @@ en:
   blacklight:
     application_name: 'Cycle Managment Tool'
     welcome: 'Welcome to TRACC!'
+    search:
+      page_title:
+        title: '%{constraints} - %{application_name} Search Results'
+        constraint: '%{label}: %{value}'
+        many_constraint_values: '%{values} selected'
+      header: 'Search'
+      search_constraints_header: 'Search Constraints'
+      search_results: 'Search Results'
+      errors:
+        request_error: "Sorry, I don't understand your search."
+        invalid_solr_id: "Sorry, you have requested a record that doesn't exist."
+      per_page:
+        label: '%{count}<span class="sr-only"> per page</span>'
+        button_label: '%{count} per page'
+        title: 'Number of results to display per page'
+        submit: 'Update'
+      sort:
+        label: 'Sort by %{field}'
+        submit: 'sort results'
+      form:
+        search_field:
+          label: 'Search in'
+          title: 'Targeted search options'
+          post_label: 'for'
+        search:
+          label: 'search for'
+          placeholder: 'Search...'
+        submit: 'Search'
+      pagination:
+        title: 'Results navigation'
+      pagination_info:
+        no_items_found: 'No %{entry_name} found'
+        single_item_found: '<strong>1</strong> %{entry_name} found'
+        pages:
+          one: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num}</strong>'
+          other: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num}</strong>'
+      entry_pagination_info:
+        one: '<strong>1 of 1</strong>'
+        other: '<strong>%{current}</strong> of <strong>%{total}</strong>'
+      documents:
+        counter: '%{counter}. '
+      facets:
+        title: 'Limit your search'
+        clear: 'Clear Filter'
+        sort:
+          count: 'Numerical Sort'
+          index: 'A-Z Sort'
+        count: '%{number}'
+        more_html: 'more <span class="sr-only">%{field_name}</span> »'
+        selected:
+          remove: '[remove]'
+        missing: "[Missing]"
+        all: All
+      group:
+        more: 'more »'
+      filters:
+        title: 'You searched for:'
+        label: '%{label}:'
+        remove:
+          value: 'Remove constraint %{value}'
+          label_value: 'Remove constraint %{label}: %{value}'
+      start_over: 'Start Over'
+      index:
+        label: '%{label}:'
+      show:
+        title: '%{document_title} - %{application_name}'
+        label: '%{label}:'
+      rss_feed: 'RSS for results'
+      atom_feed: 'Atom for results'
+      bookmarks:
+        present: "In Bookmarks"
+        absent: "Bookmark"
+        inprogress: "Saving..."
+      zero_results:
+        title: "No results found for your search"
+        modify_search: "Try modifying your search"
+        use_fewer_keywords: "Use fewer keywords to start, then refine your search using the links on the left."
+        search_fields: "you searched by %{search_fields}"
+        search_everything: "try searching everything"
+      view_title: "View results as: "
+      view:
+        list: "List"
+
+    entry_name:
+      default: 'entry'
+
+    did_you_mean: 'Did you mean to type: %{options}?'
