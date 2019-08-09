@@ -32,10 +32,13 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :short_name
       t.string :start_cycle
       t.string :done_cycle  
+      t.string :exp_start_month
+      t.string :exp_end_month  
+      t.string :lib_divisions
       t.string :card_status
       t.string :ext_link
       t.string :lit_lead
-      t.string :lit_dept    
+      t.string :lit_depts    
       t.string :service_lead
       t.string :other_contacts
       t.string :comments

@@ -1,0 +1,2 @@
+class ComplexityController < ApplicationController
+end

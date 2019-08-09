@@ -1,5 +1,8 @@
 class Card < ActiveRecord::Base
-	# self.table_name = "cards"
+	has_one :complexity
+    has_one :impact
+    has_one :strategic_sorting
+    has_many :cycle_review
 	after_save :index_record
 	# before_destroy :remove_from_index
 
@@ -45,7 +48,7 @@ class Card < ActiveRecord::Base
 			'card_updated_at_dtsi' => updated_at
 		}
 
-		conn.add doc
+	  conn.add doc
 	  conn.commit
 	
     # SolrService.add(self.to_solr)

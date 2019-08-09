@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_011019) do
+ActiveRecord::Schema.define(version: 2019_08_09_161527) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -55,10 +55,13 @@ ActiveRecord::Schema.define(version: 2019_07_24_011019) do
     t.string "short_name"
     t.string "start_cycle"
     t.string "done_cycle"
+    t.string "exp_start_month"
+    t.string "exp_end_month"
+    t.string "lib_divisions"
     t.string "card_status"
     t.string "ext_link"
     t.string "lit_lead"
-    t.string "lit_dept"
+    t.string "lit_depts"
     t.string "service_lead"
     t.string "other_contacts"
     t.string "comments"
@@ -66,6 +69,43 @@ ActiveRecord::Schema.define(version: 2019_07_24_011019) do
     t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "complexities", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "status"
+    t.string "comments"
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_complexities_on_card_id"
+  end
+
+  create_table "cycle_reviews", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "status"
+    t.string "rationale"
+    t.string "cycle"
+    t.string "notes"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_cycle_reviews_on_card_id"
+  end
+
+  create_table "cycles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "impacts", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "status"
+    t.string "comments"
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_impacts_on_card_id"
   end
 
   create_table "searches", force: :cascade do |t|
@@ -84,6 +124,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_011019) do
     t.string "knowledge"
     t.string "resource"
     t.string "comments"
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_strategic_sortings_on_card_id"
