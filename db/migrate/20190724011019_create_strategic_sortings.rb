@@ -8,7 +8,7 @@ class CreateStrategicSortings < ActiveRecord::Migration[5.2]
       t.string :knowledge
       t.string :resource   
       t.string :comments 	
-
+      t.datetime :recorded_on ,  default: -> { 'CURRENT_TIMESTAMP' }
       t.timestamps
     end
   end

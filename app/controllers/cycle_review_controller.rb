@@ -1,0 +1,2 @@
+class CycleReviewController < ApplicationController
+end
