@@ -15,8 +15,7 @@ class CardsController < ApplicationController
   end
 
   # GET /cards/new
-  def new
-    
+  def new 
     @card = Card.new
   end
 
@@ -57,7 +56,8 @@ class CardsController < ApplicationController
   # DELETE /cards/1
   # DELETE /cards/1.json
   def destroy
-    @card.destroy
+    card = Card.find( params[:id] )
+    card.destroy
     respond_to do |format|
       format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
       format.json { head :no_content }
