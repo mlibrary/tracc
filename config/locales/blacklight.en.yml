@@ -1,6 +1,6 @@
 en:
   blacklight:
-    application_name: 'Cycle Managment Tool'
+    application_name: 'Cycle Management Tool'
     welcome: 'Welcome to TRACC!'
     search:
       page_title:
@@ -44,7 +44,7 @@ en:
       documents:
         counter: '%{counter}. '
       facets:
-        title: 'Limit your search'
+        title: 'Refine search'
         clear: 'Clear Filter'
         sort:
           count: 'Numerical Sort'
