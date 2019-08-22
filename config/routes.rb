@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
   resources :strategic_sortings
-  resources :cards
+  resources :cards do
+
+    collection do
+      get :import, :import_card, :import_complexity, :import_impact, :import_cycle_review
+    end
+
+  end
+
   mount Blacklight::Engine => '/'
   concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
   root to: "catalog#index"
@@ -11,7 +18,6 @@ Rails.application.routes.draw do
     concerns :searchable
   end
 
-  get 'cards/import', to: 'cards#import', as: 'import_cards'
   post 'cards/import_new_cards'
 
   devise_for :users

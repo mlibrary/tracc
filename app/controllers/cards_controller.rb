@@ -11,7 +11,22 @@ class CardsController < ApplicationController
   # GET /cards/1
   # GET /cards/1.json
   def show
+    @one_card = Card.find( params[:id] )   
+  end
 
+  def import
+  end
+
+  def import_card
+  end
+
+  def import_impact
+  end
+
+  def import_complexity
+  end
+
+  def import_review_cycle
   end
 
   # GET /cards/new
