@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<%#= link_to 'Edit', edit_card_path(@card) %> 
+<%#= link_to 'Back', cards_path %>
+
+<p> import impact </p>
+
+<%= form_tag("import_new_cards", :enctype =>"multipart/form-data") do %>
+   <div class="row">
+   <div class="field">
+     <%= label_tag :file %>
+     <%= file_field_tag :file,  :required => true  %>
+   </div>
+</div>
+<div class="row">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= text_field_tag :cycle ,nil, :required => true   %>
+   </div>
+</div>
+   <div class="row">
+   <div class="actions">
+      <%= submit_tag 'Next' %>
+   </div>
+</div>
+<% end %>

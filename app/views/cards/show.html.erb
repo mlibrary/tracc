@@ -1,24 +1,47 @@
-<p id="notice"><%= notice %></p>
+<p> All Metadata associated with this Card </p>
 
-<%#= link_to 'Edit', edit_card_path(@card) %> |
-<%#= link_to 'Back', cards_path %>
-
-<%= form_tag("import_new_cards", :enctype =>"multipart/form-data") do %>
-   <div class="row">
-   <div class="field">
-     <%= label_tag :file %>
-     <%= file_field_tag :file,  :required => true  %>
-   </div>
-</div>
-<div class="row">
-    <div class="field">
-     <%= label_tag :cycle %>
-     <%= text_field_tag :cycle ,nil, :required => true   %>
-   </div>
-</div>
-   <div class="row">
-   <div class="actions">
-      <%= submit_tag 'Next' %>
-   </div>
-</div>
-<% end %>
+id = <%= @one_card.id %>
+<br>request_type = <%= @one_card.request_type %>
+<br>i_or_p = <%= @one_card.i_or_p %>
+<br>requester_name = <%= @one_card.requester_name %>
+<br>requester_fname = <%= @one_card.requester_fname %>
+<br>requester_lname = <%= @one_card.requester_lname %>
+<br>requester_email = <%= @one_card.requester_email %>
+<br>requester_div = <%= @one_card.requester_div %>
+<br>contact_names =  <%= @one_card.contact_names %>
+<br>title = <%= @one_card.title  %>
+<br>short_description = <%= @one_card.short_description %>
+<br>prev_work = <%= @one_card.prev_work %>
+<br>accomplish = <%= @one_card.accomplish %>
+<br>accomplish_details = @one_card.accomplish_details
+<br>benefits =  <%= @one_card.benefits %>
+<br>benefits_details =  <%= @one_card.benefits_details %>
+<br>goal_alignment = <%= @one_card.goal_alignment %>
+<br>at_stake = <%= @one_card.at_stake %>
+<br>at_stake_details = <%= @one_card.at_stake_details %>
+<br>ext_pressure = <%= @one_card.ext_pressure %>
+<br>ext_pressure_details = <%= @one_card.ext_pressure_details %>
+<br>non_tech = <%= @one_card.non_tech %>
+<br>non_tech_detatils = <%= @one_card.non_tech_details %>
+<br>time_constraints = <%= @one_card.time_constraints %>
+<br>time_constraints_details = <%= @one_card.time_constraints_details %>
+<br>priority = <%= @one_card.priority  %>
+<br>sponsor = <%= @one_card.sponsor %>
+<br>more_info = <%= @one_card.more_info %>
+<br>short_name = <%= @one_card.short_name %>
+<br>start_cycle = <%= @one_card.start_cycle %>
+<br>done_cycle = <%= @one_card.done_cycle %>
+<br>exp_start_month = <%= @one_card.exp_start_month %>
+<br>exp_end_month = <%= @one_card.exp_end_month %>
+<br>lib_divisions = <%= @one_card.lib_divisions %>
+<br>card_status = <%= @one_card.card_status %>
+<br>ext_link = <%= @one_card.ext_link %>
+<br>lit_lead = <%= @one_card.lit_lead %>
+<br>lit_depts = <%= @one_card.lit_depts %>
+<br>service_lead = <%= @one_card.service_lead %>
+<br>other_contacts = <%= @one_card.other_contacts %>
+<br>comments = <%= @one_card.comments %>
+<br>card_since = <%= @one_card.card_since %>
+<br>recorded_on = <%= @one_card.recorded_on %>
+<br>created_at = <%= @one_card.created_at %>
+<br>updated_at = <%= @one_card.updated_at %>
