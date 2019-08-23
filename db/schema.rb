@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_161527) do
+ActiveRecord::Schema.define(version: 2019_08_23_155309) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -65,7 +65,42 @@ ActiveRecord::Schema.define(version: 2019_08_09_161527) do
     t.string "service_lead"
     t.string "other_contacts"
     t.string "comments"
+    t.string "domain"
+    t.string "enthusiasm"
+    t.string "knowledge"
+    t.string "resource"
+    t.string "investigation_scope"
+    t.string "tech_knowledge"
+    t.string "team_scope"
+    t.string "infrastructure"
+    t.string "iapplication"
+    t.string "front_end"
+    t.string "data_content"
+    t.decimal "total_complexity_score"
+    t.string "cost"
+    t.string "divergence"
+    t.string "staff_resources"
+    t.string "money"
+    t.string "operational"
+    t.decimal "total_cost_score"
+    t.decimal "weighted_score"
+    t.decimal "benefit_score"
+    t.decimal "accomplish_score"
+    t.decimal "at_stake_score"
+    t.decimal "pressures_score"
+    t.decimal "change_score"
+    t.decimal "impact_score"
+    t.decimal "gut_check"
     t.datetime "card_since"
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "uemail"
+    t.string "comment_txt"
     t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -94,6 +129,11 @@ ActiveRecord::Schema.define(version: 2019_08_09_161527) do
   end
 
   create_table "cycles", force: :cascade do |t|
+    t.string "cycle_name"
+    t.string "description"
+    t.date "start"
+    t.date "end"
+    t.boolean "current_cycle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
