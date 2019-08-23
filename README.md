@@ -6,7 +6,8 @@ For contribution to code development:
 
 1. Fork and Clone the repo
 2. bundle install --path=.bundle
-3. bundle exec rails db:migrate
+3. Run the migrations: bundle exec rails db:migrate
+4. See the data: bundle exec rake db:seed
 4. bundle exec solr_wrapper
 5. bundle exec rails s 
 
