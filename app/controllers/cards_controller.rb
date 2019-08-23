@@ -26,8 +26,6 @@ class CardsController < ApplicationController
   def import_complexity
   end
 
-  def import_review_cycle
-  end
 
   # GET /cards/new
   def new 
@@ -231,7 +229,7 @@ class CardsController < ApplicationController
         row_hash[:card_since] = row_hash.delete "RecordedDate"
         row_hash.delete_if { |k, v| v.nil? }
 
-        row_hash.merge!(start_cycle: params[:cycle])
+        row_hash.merge!(in_cycle: params[:cycle])
         c = Card.new (row_hash)
         c.save!
         id = c.id

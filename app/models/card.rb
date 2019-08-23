@@ -35,6 +35,7 @@ class Card < ActiveRecord::Base
 			'card_sponsor_ssim' => sponsor,
 			'card_more_info_tsm' => more_info,
 			'card_short_name_ssi' => short_name,
+			'card_in_cycle_ssi' => in_cycle,
 			'card_start_cycle_ssi' => start_cycle,
 			'card_done_cycle_ssi' => done_cycle,
 			'card_card_status_tsi' => card_status,

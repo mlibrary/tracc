@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
 
-  resources :strategic_sortings
+  #resources :strategic_sortings
+
+  resources :cycle_review do
+    collection do
+      get :import_cycle_review, :export_cycle_review 
+    end
+  end  
   resources :cards do
 
     collection do
-      get :import, :import_card, :import_complexity, :import_impact, :import_cycle_review
+      get :import, :import_card, :import_complexity, :import_impact
     end
 
   end
