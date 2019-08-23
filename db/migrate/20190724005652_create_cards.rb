@@ -42,6 +42,38 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :service_lead
       t.string :other_contacts
       t.string :comments
+#strategic sorting
+      t.string :domain
+      t.string :enthusiasm
+      t.string :knowledge
+      t.string :resource   
+      t.string :comments     
+# complexity
+      t.string :investigation_scope
+      t.string :tech_knowledge
+      t.string :team_scope
+      t.string :infrastructure
+      t.string :iapplication
+      t.string :front_end
+      t.string :investigation_scope
+      t.string :data_content
+      t.decimal :total_complexity_score
+      t.string :cost 
+      t.string :divergence
+      t.string :staff_resources
+      t.string :money
+      t.string :operational
+      t.decimal :total_cost_score
+      t.decimal :weighted_score
+# impact
+      t.decimal :benefit_score
+      t.decimal :accomplish_score
+      t.decimal :at_stake_score
+      t.decimal :pressures_score
+      t.decimal :change_score
+      t.decimal :impact_score
+      t.decimal :gut_check
+
       t.datetime :card_since
 
       t.datetime :recorded_on ,  default: -> { 'CURRENT_TIMESTAMP' }
