@@ -26,8 +26,6 @@ class CardsController < ApplicationController
   def import_complexity
   end
 
-  def import_review_cycle
-  end
 
   # GET /cards/new
   def new 
