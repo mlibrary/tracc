@@ -44,7 +44,7 @@ en:
       documents:
         counter: '%{counter}. '
       facets:
-        title: 'Refine search'
+        title: ''
         clear: 'Clear Filter'
         sort:
           count: 'Numerical Sort'

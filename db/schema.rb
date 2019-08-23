@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_155309) do
     t.string "sponsor"
     t.string "more_info"
     t.string "short_name"
+    t.string "in_cycle"
     t.string "start_cycle"
     t.string "done_cycle"
     t.string "exp_start_month"

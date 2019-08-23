@@ -30,6 +30,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :sponsor
       t.string :more_info
       t.string :short_name
+      t.string :in_cycle      
       t.string :start_cycle
       t.string :done_cycle  
       t.string :exp_start_month

@@ -80,15 +80,17 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'card_request_type_ssi', label: 'Card Request Type', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_i_or_p_ssi', label: 'Card Investigation/Project'
-    config.add_facet_field 'card_requester_name_ssim', label: 'Card Requester Name', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_requester_div_ssim', label: 'Card Requester Divison', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_benefits_tsim', label: 'Card Benefits', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_priority_ssi', label: 'Card Priority', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_sponsor_ssim', label: 'Card Sponsor', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_start_cycle_ssi', label: 'Card Start Cycle', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_done_cycle_ssi', label: 'Card Done Cycle', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'card_request_type_ssi', label: 'Request Type', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'card_i_or_p_ssi', label: 'Type'
+    config.add_facet_field 'card_requester_name_ssim', label: 'Requester Name', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'card_requester_div_ssim', label: 'Requester Divison', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'card_benefits_tsim', label: 'Benefits', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'card_priority_ssi', label: 'Card Priority', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'card_sponsor_ssim', label: 'Card Sponsor', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'card_in_cycle_ssi', label: 'Request Cycle', limit: true, index_range: 'A'..'Z'
+    
+    config.add_facet_field 'card_start_cycle_ssi', label: 'Start Cycle', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'card_done_cycle_ssi', label: 'Done Cycle', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'card_card_status_tsi', label: 'Card Status', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'card_lit_lead_tsim', label: 'Card LIT Lead', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'card_lit_dept_tsim', label: 'Card LIT Dept', limit: true, index_range: 'A'..'Z'
@@ -118,19 +120,21 @@ class CatalogController < ApplicationController
     #config.add_index_field 'card_titlel_tsim', label: 'Title'
     config.add_index_field 'card_requester_name_ssim', label: 'Requester'
     config.add_index_field 'card_request_type_ssi', label: 'Request Type'
-    config.add_index_field 'card_i_or_p_ssi', label: 'Investigation/Project'
+    config.add_index_field 'card_i_or_p_ssi', label: 'Type'
     config.add_index_field 'card_priority_ssi', label: 'Priority'
     config.add_index_field 'card_requester_div_ssim', label: 'Requester Divison'
     config.add_index_field 'card_card_status_tsi', label: 'Card Status'
-    config.add_index_field 'card_start_cycle_dtsi', label: 'Start Cycle'
-    config.add_index_field 'card_done_cycle_dtsi', label: 'Done Cycle'
+    config.add_index_field 'card_in_cycle_ssi', label: 'Request Cycle'
+   
+    config.add_index_field 'card_start_cycle_ssi', label: 'Start Cycle'
+    config.add_index_field 'card_done_cycle_ssi', label: 'Done Cycle'
     
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     # Card show fields
     #config.add_show_field 'card_titlel_tsim', label: 'Title'
     config.add_show_field 'card_request_type_ssi', label: 'Request Type'
-    config.add_show_field 'card_i_or_p_ssi', label: 'Investigation/Project'
+    config.add_show_field 'card_i_or_p_ssi', label: 'Type'
     config.add_show_field 'card_requester_name_ssim', label: 'Requester'
     config.add_show_field 'card_requester_email_ssim', label: 'Requester Email'
     config.add_show_field 'card_requester_div_ssim', label: 'Requester Divison'
@@ -148,8 +152,10 @@ class CatalogController < ApplicationController
     config.add_show_field 'card_sponsor_ssim', label: 'Sponsor'
     config.add_show_field 'card_more_info_tsm', label: 'More Info'
     config.add_show_field 'card_short_name_ssi', label: 'Short Name'
-    config.add_show_field 'card_start_cycle_dtsi', label: 'Start Cycle'
-    config.add_show_field 'card_done_cycle_dtsi', label: 'Done Cycle'
+    config.add_show_field 'card_in_cycle_ssi', label: 'Request Cycle'
+    
+    config.add_show_field 'card_start_cycle_ssi', label: 'Start Cycle'
+    config.add_show_field 'card_done_cycle_ssi', label: 'Done Cycle'
     config.add_show_field 'card_card_status_tsi', label: 'Card Status'
     config.add_show_field 'card_ext_link_tsm', label: 'External Link'
     config.add_show_field 'card_lit_lead_tsim' , label: 'LIT Lead'
