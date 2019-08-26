@@ -31,7 +31,7 @@ class CatalogController < ApplicationController
     #config.per_page = [10,20,50,100]
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'card_titlel_tsim'
+    config.index.title_field = 'title_ssi'
     #config.index.display_type_field = 'format'
     #config.index.thumbnail_field = 'thumbnail_path_ss'
 
@@ -52,7 +52,7 @@ class CatalogController < ApplicationController
     config.add_nav_action(:import, partial: 'cards/import')
 
     # solr field configuration for document/show views
-    config.show.title_field = 'card_titlel_tsim'
+    config.show.title_field = 'title_ssi'
     #config.show.display_type_field = 'format'
     #config.show.thumbnail_field = 'thumbnail_path_ss'
 
@@ -80,25 +80,19 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'card_request_type_ssi', label: 'Request Type', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_i_or_p_ssi', label: 'Type'
-    config.add_facet_field 'card_requester_name_ssim', label: 'Requester Name', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_requester_div_ssim', label: 'Requester Divison', limit: true, index_range: 'A'..'Z'
-    #config.add_facet_field 'card_benefits_tsim', label: 'Benefits', limit: true, index_range: 'A'..'Z'
-    #config.add_facet_field 'card_priority_ssi', label: 'Card Priority', limit: true, index_range: 'A'..'Z'
-    #config.add_facet_field 'card_sponsor_ssim', label: 'Card Sponsor', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_in_cycle_ssi', label: 'Request Cycle', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'request_type_ssi', label: 'Request Type', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'i_or_p_ssi', label: 'Type'
+    config.add_facet_field 'requester_name_ssim', label: 'Requester Name', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'requester_div_ssim', label: 'Requester Divison', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'in_cycle_ssi', label: 'Request Cycle', limit: true, index_range: 'A'..'Z'
     
-    config.add_facet_field 'card_start_cycle_ssi', label: 'Start Cycle', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_done_cycle_ssi', label: 'Done Cycle', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_card_status_tsi', label: 'Card Status', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_lit_lead_tsim', label: 'Card LIT Lead', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_lit_dept_tsim', label: 'Card LIT Dept', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'card_service_lead_tsim', label: 'Card Service Lead', limit: true, index_range: 'A'..'Z'
-    # config.add_facet_field 'card_recorded_on_dtsi', label: 'Card Recorded Date', limit: true, index_range: 'A'..'Z'
-    # config.add_facet_field 'card_created_at_dtsi', label: 'Card Created Date', limit: true, index_range: 'A'..'Z'
-    # config.add_facet_field 'card_updated_at_dtsi', label: 'Card Updated Date', limit: true, index_range: 'A'..'Z'
-
+    config.add_facet_field 'start_cycle_ssi', label: 'Start Cycle', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'done_cycle_ssi', label: 'Done Cycle', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'status_ssi', label: 'Card Status', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'lit_lead_ssim', label: 'Card LIT Lead', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'lit_dept_ssim', label: 'Card LIT Dept', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'service_lead_ssim', label: 'Card Service Lead', limit: true, index_range: 'A'..'Z'
+   
     # config.add_facet_field 'example_pivot_field', label: 'Pivot Field', :pivot => ['format', 'language_ssim']
 
     # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', :query => {
@@ -117,56 +111,56 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
 
     # Card index fields
-    #config.add_index_field 'card_titlel_tsim', label: 'Title'
-    config.add_index_field 'card_short_name_ssi', label: 'Short Name'
-    config.add_index_field 'card_requester_name_ssim', label: 'Requester'
-    config.add_index_field 'card_request_type_ssi', label: 'Request Type'
-    config.add_index_field 'card_i_or_p_ssi', label: 'Type'
-    config.add_index_field 'card_priority_ssi', label: 'Priority'
-    config.add_index_field 'card_requester_div_ssim', label: 'Requester Divison'
-    config.add_index_field 'card_card_status_tsi', label: 'Card Status'
-    config.add_index_field 'card_in_cycle_ssi', label: 'Request Cycle'
+    config.add_index_field 'title_ssi', label: 'Title'
+    config.add_index_field 'short_name_ssi', label: 'Short Name'
+    config.add_index_field 'requester_name_ssim', label: 'Requester'
+    config.add_index_field 'request_type_ssi', label: 'Request Type'
+    config.add_index_field 'i_or_p_ssi', label: 'Type'
+    config.add_index_field 'priority_ssi', label: 'Priority'
+    config.add_index_field 'requester_div_ssim', label: 'Requester Divison'
+    config.add_index_field 'status_ssi', label: 'Card Status'
+    config.add_index_field 'cycle_ssi', label: 'Request Cycle'
    
-    config.add_index_field 'card_start_cycle_ssi', label: 'Start Cycle'
-    config.add_index_field 'card_done_cycle_ssi', label: 'Done Cycle'
+    config.add_index_field 'start_cycle_ssi', label: 'Start Cycle'
+    config.add_index_field 'done_cycle_ssi', label: 'Done Cycle'
     
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     # Card show fields
-    #config.add_show_field 'card_titlel_tsim', label: 'Title'
-    config.add_show_field 'card_request_type_ssi', label: 'Request Type'
-    config.add_show_field 'card_i_or_p_ssi', label: 'Type'
-    config.add_show_field 'card_requester_name_ssim', label: 'Requester'
-    config.add_show_field 'card_requester_email_ssim', label: 'Requester Email'
-    config.add_show_field 'card_requester_div_ssim', label: 'Requester Divison'
-    config.add_show_field 'card_contact_names_ssim', label: 'Contact Names'
-    config.add_show_field 'card_short_description_ssi', label: 'Short Description'
-    config.add_show_field 'card_prev_work_tsim', label: 'Previous Work'
-    config.add_show_field 'card_accomplish_tsim', label: 'Accomplished'
-    config.add_show_field 'card_benefits_tsim', label: 'Benefits'
-    config.add_show_field 'card_goal_alignment_tsim', label: 'Goal Alignment'
-    config.add_show_field 'card_at_stake_tsm', label: 'At Stake'
-    config.add_show_field 'card_ext_pressure_tsm', label: 'External Pressure'
-    config.add_show_field 'card_non_tech_tsm', label: 'Non-Technical'
-    config.add_show_field 'card_time_constraints_tsm', label: 'Time Constraints'
-    config.add_show_field 'card_priority_ssi', label: 'Priority'
-    config.add_show_field 'card_sponsor_ssim', label: 'Sponsor'
-    config.add_show_field 'card_more_info_tsm', label: 'More Info'
-    config.add_show_field 'card_short_name_ssi', label: 'Short Name'
-    config.add_show_field 'card_in_cycle_ssi', label: 'Request Cycle'
+   
+    config.add_show_field 'request_type_ssi', label: 'Request Type'
+    config.add_show_field 'i_or_p_ssi', label: 'Type'
+    config.add_show_field 'requester_name_ssim', label: 'Requester'
+    config.add_show_field 'requester_email_ssim', label: 'Requester Email'
+    config.add_show_field 'requester_div_ssim', label: 'Requester Divison'
+    config.add_show_field 'contact_names_ssim', label: 'Contact Names'
+    config.add_show_field 'short_description_ssi', label: 'Short Description'
+    config.add_show_field 'prev_work_tsim', label: 'Previous Work'
+    config.add_show_field 'accomplish_tsim', label: 'Accomplished'
+    config.add_show_field 'benefits_tsim', label: 'Benefits'
+    config.add_show_field 'goal_alignment_tsim', label: 'Goal Alignment'
+    config.add_show_field 'stake_tsm', label: 'At Stake'
+    config.add_show_field 'ext_pressure_tsm', label: 'External Pressure'
+    config.add_show_field 'non_tech_tsm', label: 'Non-Technical'
+    config.add_show_field 'time_constraints_tsm', label: 'Time Constraints'
+    config.add_show_field 'priority_ssi', label: 'Priority'
+    config.add_show_field 'sponsor_ssim', label: 'Sponsor'
+    config.add_show_field 'more_info_tsm', label: 'More Info'
+    config.add_show_field 'short_name_ssi', label: 'Short Name'
+    config.add_show_field 'in_cycle_ssi', label: 'Request Cycle'
     
-    config.add_show_field 'card_start_cycle_ssi', label: 'Start Cycle'
-    config.add_show_field 'card_done_cycle_ssi', label: 'Done Cycle'
-    config.add_show_field 'card_card_status_tsi', label: 'Card Status'
-    config.add_show_field 'card_ext_link_tsm', label: 'External Link'
-    config.add_show_field 'card_lit_lead_tsim' , label: 'LIT Lead'
-    config.add_show_field 'card_lit_dept_tsim', label: 'LIT Dept'
-    config.add_show_field 'card_service_lead_tsim', label: 'Service Lead'
-    config.add_show_field 'card_other_contacts_tsm', label: 'Other Contacts'
-    config.add_show_field 'card_comments_tsim', label: 'Comments'
-    config.add_show_field 'card_recorded_on_dtsi', label: 'Recorded Date'
-    config.add_show_field 'card_created_at_dtsi', label: 'Created Date'
-    config.add_show_field 'card_updated_at_dtsi', label: 'Updated Data'
+    config.add_show_field 'start_cycle_ssi', label: 'Start Cycle'
+    config.add_show_field 'done_cycle_ssi', label: 'Done Cycle'
+    config.add_show_field 'status_tsi', label: 'Card Status'
+    config.add_show_field 'ext_link_tsm', label: 'External Link'
+    config.add_show_field 'lit_lead_tsim' , label: 'LIT Lead'
+    config.add_show_field 'lit_dept_tsim', label: 'LIT Dept'
+    config.add_show_field 'service_lead_tsim', label: 'Service Lead'
+    config.add_show_field 'other_contacts_tsm', label: 'Other Contacts'
+    config.add_show_field 'comments_tsim', label: 'Comments'
+    config.add_show_field 'recorded_on_dtsi', label: 'Recorded Date'
+    config.add_show_field 'created_at_dtsi', label: 'Created Date'
+    config.add_show_field 'updated_at_dtsi', label: 'Updated Data'
 
 
     # "fielded" search configuration. Used by pulldown among other places.
@@ -233,9 +227,9 @@ class CatalogController < ApplicationController
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
    
-    config.add_sort_field 'card_short_name_ssi asc',label: 'short name'
-    config.add_sort_field 'card_card_status_tsi asc', label: 'status'
-    config.add_sort_field 'card_titlel_tsi asc', label: 'title'
+    config.add_sort_field 'short_name_ssi asc',label: 'short name'
+    config.add_sort_field 'status_ssi asc', label: 'status'
+    config.add_sort_field 'title_ssi asc', label: 'title'
 
 
     # If there are more than this many search results, no spelling ("did you
