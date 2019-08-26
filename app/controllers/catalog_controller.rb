@@ -118,6 +118,7 @@ class CatalogController < ApplicationController
 
     # Card index fields
     #config.add_index_field 'card_titlel_tsim', label: 'Title'
+    config.add_index_field 'card_short_name_ssi', label: 'Short Name'
     config.add_index_field 'card_requester_name_ssim', label: 'Requester'
     config.add_index_field 'card_request_type_ssi', label: 'Request Type'
     config.add_index_field 'card_i_or_p_ssi', label: 'Type'
@@ -231,10 +232,11 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc, pub_date_si desc, title_si asc', label: 'relevance'
-    config.add_sort_field 'pub_date_si desc, title_si asc', label: 'year'
-    config.add_sort_field 'author_si asc, title_si asc', label: 'author'
-    config.add_sort_field 'title_si asc, pub_date_si desc', label: 'title'
+   
+    config.add_sort_field 'card_short_name_ssi asc',label: 'short name'
+    config.add_sort_field 'card_card_status_tsi asc', label: 'status'
+    config.add_sort_field 'card_titlel_tsi asc', label: 'title'
+
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

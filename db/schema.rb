@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_155309) do
     t.decimal "impact_score"
     t.decimal "gut_check"
     t.datetime "card_since"
+    t.datetime "last_update_comment"
     t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
