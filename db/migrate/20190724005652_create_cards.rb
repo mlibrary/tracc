@@ -76,7 +76,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.decimal :gut_check
 
       t.datetime :card_since
-
+      t.datetime :last_update_comment
       t.datetime :recorded_on ,  default: -> { 'CURRENT_TIMESTAMP' }
       t.timestamps
     end
