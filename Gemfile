@@ -73,3 +73,5 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
+
+gem 'ettin', '~> 1.2'
