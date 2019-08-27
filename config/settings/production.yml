@@ -1,5 +1,0 @@
-rails:
-  # Set the key base in settings.local.yml or production.local.yml or use the
-  # SECRET_KEY_BASE environment variable, which will take precedence. It is
-  # left nil here to trigger the error message from Rails if not specified.
-  secret_key_base:
