@@ -95,6 +95,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    deep_merge (1.2.1)
     deprecation (1.0.0)
       activesupport
     devise (4.6.2)
@@ -109,6 +110,8 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     dot-properties (0.1.3)
     erubi (1.8.0)
+    ettin (1.3.0)
+      deep_merge
     execjs (2.7.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
@@ -319,6 +322,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise-guests (~> 0.6)
+  ettin (~> 1.2)
   googlecharts
   jbuilder (~> 2.5)
   jquery-rails
