@@ -1,6 +1,8 @@
 class CycleReview < ApplicationRecord
 	belongs_to :card
+    after_save :index_record
 
+  def index_record
 	conn = Blacklight.default_index.connection
   	doc = { 
 			'id' => self.id,
@@ -13,4 +15,6 @@ class CycleReview < ApplicationRecord
 		}
 	conn.add doc
 	conn.commit
+  end
+  
 end

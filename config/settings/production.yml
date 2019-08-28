@@ -1,0 +1,4 @@
+hostname: fdtool-demo.www.lib.umich.edu
+
+rails:
+  secret_key_base: 20a666531ae2cf29a70d5b078df8e6b1c4c6230aa091a967d29ca6d6144bd31e7a9278046621ffae9ab5d5198a89b0ff126a174d320f1f4a2a6298afcae28196
