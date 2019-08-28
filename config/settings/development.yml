@@ -1,0 +1,4 @@
+rails:
+  database:
+    database: db/development.sqlite3
+  secret_key_base: d19076ff1c21f6565c19dc65bbd2e44655a03e0b49bb6e05553ed65421d75d7780f9038833a6fb79087a5faa9064243d469c69e8c7a5441825b6ab10b8ee7ccd
