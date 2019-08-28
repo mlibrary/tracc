@@ -9,6 +9,59 @@
   </p>
 </div>
 
+<% cards = Card.all %>
+
+<% cycles = Array.new  %>
+<% cards.each do | value |   %>
+  <% if ( value.start_cycle.nil? || value.start_cycle.empty? )  %>
+    <%  cycles <<  "Nil Value" %>
+  <% else %>
+    <%  cycles <<  value.start_cycle %>
+  <% end %>
+
+<% end  %>
+
+<% cycle_hash = {}  %>
+<% cycles.uniq.each{|e| cycle_hash[e]= cycles.count(e)}  %>
+
+<% data_array_1 = Array.new  %>
+<% data_array_2 = Array.new  %>
+<% cycle_hash.each do | cycle, count |  %>
+<% 	data_array_1 << cycle  %>
+<% 	data_array_2 << count %>
+<% end %>
+
+<% labels = "" %>
+<% data_array_1.each do | value |  %>
+<% 	labels << value + "|"  %>
+<% end %>
+<%# labels.slice!(labels.length-1,labels.length) %>
+<%# byebug %>
+<% label = Array.new %>
+<% label << labels %>
+<% label2 = Array.new %>
+<% label2 << label %>
+
+<% test_data = Gchart.bar( %>
+<% :size => '600x400', %>
+<% :bar_colors => ['0088FF'], %>
+<% :title => "Cycles and Counts", %>
+<% :bg => 'EFEFEF', %>
+<% :legend => data_array_1, %>
+<% :data => [data_array_2], %>
+<% :stacked => false, %>
+<% :legend_position => 'bottom', %>
+<% :axis_with_labels => [['x'], ['y']], %>
+<% :max_value => 100, %>
+<% :min_value => 0, %>
+<% :bar_width_and_spacing => [100,6], %>
+<% :axis_labels => label2, %>
+<% ) %>
+
+
+<%= image_tag test_data %>
+
+
 <div id="getting-started">
   <h2>heading 1</h2>
 </div>
