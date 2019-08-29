@@ -34,6 +34,51 @@ class CardsController < ApplicationController
 
   # GET /cards/1/edit
   def edit
+    @at_stake_list = Array.new
+    @at_stake_list << "It will place the Library at risk"
+    @at_stake_list << "It will leave the Library at a competitive disadvantage"
+    @at_stake_list << "It will create or perpetuate a gap or a less efficient workaround"
+    @at_stake_list << "Other"
+
+    @accomplish_list = Array.new
+    @accomplish_list << "Advance Library/campus strategic initiative"
+    @accomplish_list << "Improve outward-facing Library services or processes"
+    @accomplish_list << "Improve internal operational efficiency"
+    @accomplish_list << "Enhance the Library's reputation"
+    @accomplish_list << "Other"
+
+    @benefits_list = Array.new
+    @benefits_list << "Students"
+    @benefits_list << "Faculty & Researchers"
+    @benefits_list << "UM Library Staff" 
+    @benefits_list << "Stakeholders of other UM campus units"           
+    @benefits_list << "External partners"   
+    @benefits_list << "Researchers and Students beyond UM"
+    @benefits_list << "Other"
+
+    @ext_pressure_list = Array.new
+    @ext_pressure_list << "Political"
+    @ext_pressure_list << "Reputation & Integrity"
+    @ext_pressure_list << "Timeliness"
+    @ext_pressure_list << "Financial"    
+    @ext_pressure_list << "Legal"
+    @ext_pressure_list << "Other"
+
+    @non_tech_list = Array.new
+    @non_tech_list << "Service model change"
+    @non_tech_list << "New workflows, processes, or other organizational changes"
+    @non_tech_list << "Hard to get people on board"
+    @non_tech_list << "Need for new training programs and documentation"
+    @non_tech_list << "Other"
+
+    @time_constraints_list = Array.new
+    @time_constraints_list << "Grant or award"
+    @time_constraints_list << "University or department mandate"
+    @time_constraints_list << "External collaborations"
+    @time_constraints_list << "Compliance"
+    @time_constraints_list << "None/Other"
+   
+
     @card = Card.find( params[:id] )
   end
 
@@ -56,7 +101,27 @@ class CardsController < ApplicationController
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
+
     @card = Card.find( params[:id] )
+    params[:card][:at_stake] = params[:card][:at_stake]*","
+    params[:card][:at_stake_details] = params[:card][:at_stake_details]*"__|__"
+
+    params[:card][:accomplish] = params[:card][:accomplish]*","
+    params[:card][:accomplish_details] = params[:card][:accomplish_details]*"__|__"
+
+    params[:card][:non_tech] = params[:card][:non_tech]*","
+    params[:card][:non_tech_details] = params[:card][:non_tech_details]*"__|__"
+
+    params[:card][:time_constraints] = params[:card][:time_constraints]*","
+    params[:card][:time_constraints_details] = params[:card][:time_constraints_details]*"__|__"
+
+    params[:card][:ext_pressure] = params[:card][:ext_pressure]*","
+    params[:card][:ext_pressure_details] = params[:card][:ext_pressure_details]*"__|__"
+
+    params[:card][:benefits] = params[:card][:benefits]*","
+    params[:card][:benefits_details] = params[:card][:benefits_details]*"__|__"
+
+
     respond_to do |format|
       if @card.update(card_params)
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
@@ -123,6 +188,8 @@ class CardsController < ApplicationController
         row_hash[:requester_div] = row_hash.delete "Q16"
         row_hash[:short_description] = row_hash.delete "Q3"
         row_hash[:prev_work] = row_hash.delete "Q4"
+
+        row_hash["Q5"].gsub!( /\s+/, " " ) unless row_hash["Q5"].nil?        
         row_hash[:accomplish] = row_hash.delete "Q5"
         
         details = Array.new
@@ -131,16 +198,18 @@ class CardsController < ApplicationController
         details[2] = row_hash["Q5_3_TEXT"]
         details[3] = row_hash["Q5_4_TEXT"]
         details[4] = row_hash["Q5_5_TEXT"]
-        
-        row_hash.merge!(accomplish_details: details)
+           
+        row_hash[:accomplish_details] = details.join('__|__')
         row_hash.delete "Q5_1_TEXT"
         row_hash.delete "Q5_2_TEXT"
         row_hash.delete "Q5_3_TEXT"
         row_hash.delete "Q5_4_TEXT"
         row_hash.delete "Q5_5_TEXT"
         
+        row_hash["Q6"].gsub!( /\s+/, " " ) unless row_hash["Q6"].nil?
         row_hash[:benefits] = row_hash.delete "Q6"
         #Array.new
+        details = []
 
         details[0] = row_hash["Q6_1_TEXT"]
         details[1] = row_hash["Q6_2_TEXT"]
@@ -150,7 +219,7 @@ class CardsController < ApplicationController
         details[5] = row_hash["Q6_6_TEXT"]
         details[6] = row_hash["Q6_7_TEXT"]
 
-        row_hash.merge!(benefits_details: details)
+        row_hash[:benefits_details] = details.join('__|__')
         row_hash.delete "Q6_1_TEXT"
         row_hash.delete "Q6_2_TEXT"
         row_hash.delete "Q6_3_TEXT"
@@ -161,20 +230,24 @@ class CardsController < ApplicationController
         
         row_hash[:goal_alignment] = row_hash.delete "Q7"
 
+        row_hash["Q8"].gsub!( /\s+/, " " ) unless row_hash["Q8"].nil?
         row_hash[:at_stake] = row_hash.delete "Q8"
+        details = []
         details[0] = row_hash["Q8_1_TEXT"]
         details[1] = row_hash["Q8_2_TEXT"]
         details[2] = row_hash["Q8_3_TEXT"]
         details[3] = row_hash["Q8_4_TEXT"]
         details[4] = details[5] = details[6]= ""
         
-        row_hash.merge!(at_stake_details: details)
+        row_hash[:at_stake_details] = details.join('__|__')
         row_hash.delete "Q8_1_TEXT"
         row_hash.delete "Q8_2_TEXT"
         row_hash.delete "Q8_3_TEXT"
         row_hash.delete "Q8_4_TEXT"
        
+        row_hash["Q9"].gsub!( /\s+/, " " )  unless row_hash["Q9"].nil?     
         row_hash[:ext_pressure] = row_hash.delete "Q9"
+        details = []
         details[0] = row_hash["Q9_1_TEXT"]
         details[1] = row_hash["Q9_2_TEXT"]
         details[2] = row_hash["Q9_3_TEXT"]
@@ -183,7 +256,7 @@ class CardsController < ApplicationController
         details[5] = row_hash["Q9_6_TEXT"]
         details[6]= ""
         
-        row_hash.merge!(ext_pressure_details: details)
+        row_hash[:ext_pressure_details] = details.join('__|__')
         row_hash.delete "Q9_1_TEXT"
         row_hash.delete "Q9_2_TEXT"
         row_hash.delete "Q9_3_TEXT"
@@ -191,7 +264,9 @@ class CardsController < ApplicationController
         row_hash.delete "Q9_5_TEXT"
         row_hash.delete "Q9_6_TEXT"
 
-        row_hash[:non_tech] = row_hash.delete "Q10"
+        row_hash["Q10"].gsub!( /\s+/, " " ) unless row_hash["Q10"].nil?
+        row_hash[:non_tech] = row_hash.delete "Q10" 
+        details = []
         details[0] = row_hash["Q10_1_TEXT"]
         details[1] = row_hash["Q10_2_TEXT"]
         details[2] = row_hash["Q10_3_TEXT"]
@@ -200,7 +275,7 @@ class CardsController < ApplicationController
         details[5] = ""
        
         
-        row_hash.merge!(non_tech_details: details)
+        row_hash[:non_tech_details] = details.join('__|__')
         row_hash.delete "Q10_1_TEXT"
         row_hash.delete "Q10_2_TEXT"
         row_hash.delete "Q10_3_TEXT"
@@ -208,7 +283,9 @@ class CardsController < ApplicationController
         row_hash.delete "Q10_5_TEXT"
         
 
+        row_hash["Q11"].gsub!( /\s+/, " " ) unless row_hash["Q11"].nil?
         row_hash[:time_constraints] = row_hash.delete "Q11"
+        details = []
         details[0] = row_hash["Q11_1_TEXT"]
         details[1] = row_hash["Q11_2_TEXT"]
         details[2] = row_hash["Q11_3_TEXT"]
@@ -217,7 +294,7 @@ class CardsController < ApplicationController
         details[5] = ""
        
         
-        row_hash.merge!(time_constraints_details: details)
+        row_hash[:time_constraints_details] = details.join('__|__')
         row_hash.delete "Q11_1_TEXT"
         row_hash.delete "Q11_2_TEXT"
         row_hash.delete "Q11_3_TEXT"
@@ -256,8 +333,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:request_type, :i_or_p, :requester_name, :requester_email, :requester_div, :contact_names, :title, :short_description, :prev_work, :accomplish, :benefits, :goal_alignment, :at_stake, :ext_pressure, :non_tech, :time_constraints, :priority, :sponsor, :more_info, :short_name, :in_cycle, :start_cycle, :done_cycle, :card_status, :ext_link, :lit_lead, :lit_dept, :service_lead, :other_contacts, :comments, :at_stake_details)
+      params.require(:card).permit(:request_type, :i_or_p, :requester_name, :requester_email, :requester_div, :contact_names, :title, :short_description, :prev_work, :accomplish, :benefits, :goal_alignment, :at_stake, :ext_pressure, :non_tech, :time_constraints, :priority, :sponsor, :more_info, :short_name, :in_cycle, :start_cycle, :done_cycle, :card_status, :ext_link, :lit_lead, :lit_dept, :service_lead, :other_contacts, :comments, :at_stake_details, :accomplish_details, :non_tech_details, :benefits_details, :ext_pressure_details, :time_constraints_details)
     end
-
     
 end
