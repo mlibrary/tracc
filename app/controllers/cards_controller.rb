@@ -34,6 +34,7 @@ class CardsController < ApplicationController
 
   # GET /cards/1/edit
   def edit
+    @card = Card.find( params[:id] )
   end
 
   # POST /cards
@@ -55,6 +56,7 @@ class CardsController < ApplicationController
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
+    @card = Card.find( params[:id] )
     respond_to do |format|
       if @card.update(card_params)
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
@@ -249,9 +251,11 @@ end
     #  @card = Card.find(params[:id])
     end
 
+    #:request_type, :i_or_p, :requester_name, :requester_email, :requester_div, :contact_names, :title, :short_description, :prev_work, :accomplish, :benefits, :goal_alignment, :at_stake, :ext_pressure, :non_tech, :time_constraints, :priority, :sponsor, :more_info, :short_name, :in_cycle, :start_cycle, :done_cycle, :card_status, :ext_link, :lit_lead, :lit_dept, :service_lead, :other_contacts, :comments,
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-     # params.fetch(:card, {})
+      params.require(:card).permit(:request_type, :i_or_p, :requester_name, :requester_email, :requester_div, :contact_names, :title, :short_description, :prev_work, :accomplish, :benefits, :goal_alignment, :at_stake, :ext_pressure, :non_tech, :time_constraints, :priority, :sponsor, :more_info, :short_name, :in_cycle, :start_cycle, :done_cycle, :card_status, :ext_link, :lit_lead, :lit_dept, :service_lead, :other_contacts, :comments, :at_stake_details)
     end
 
     
