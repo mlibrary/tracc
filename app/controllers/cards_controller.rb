@@ -126,11 +126,11 @@ class CardsController < ApplicationController
         row_hash[:accomplish] = row_hash.delete "Q5"
         
         details = Array.new
-        details[0] = row_hash[:Q5_1_TEXT]
-        details[1] = row_hash[:Q5_2_TEXT]
-        details[2] = row_hash[:Q5_3_TEXT]
-        details[3] = row_hash[:Q5_4_TEXT]
-        details[4] = row_hash[:Q5_5_TEXT]
+        details[0] = row_hash["Q5_1_TEXT"]
+        details[1] = row_hash["Q5_2_TEXT"]
+        details[2] = row_hash["Q5_3_TEXT"]
+        details[3] = row_hash["Q5_4_TEXT"]
+        details[4] = row_hash["Q5_5_TEXT"]
         
         row_hash.merge!(accomplish_details: details)
         row_hash.delete "Q5_1_TEXT"
@@ -141,14 +141,15 @@ class CardsController < ApplicationController
         
         row_hash[:benefits] = row_hash.delete "Q6"
         #Array.new
-        details[0] = row_hash[:Q6_1_TEXT]
-        details[1] = row_hash[:Q6_2_TEXT]
-        details[2] = row_hash[:Q6_3_TEXT]
-        details[3] = row_hash[:Q6_4_TEXT]
-        details[4] = row_hash[:Q6_5_TEXT]
-        details[5] = row_hash[:Q6_6_TEXT]
-        details[6] = row_hash[:Q6_7_TEXT]
-        
+
+        details[0] = row_hash["Q6_1_TEXT"]
+        details[1] = row_hash["Q6_2_TEXT"]
+        details[2] = row_hash["Q6_3_TEXT"]
+        details[3] = row_hash["Q6_4_TEXT"]
+        details[4] = row_hash["Q6_5_TEXT"]
+        details[5] = row_hash["Q6_6_TEXT"]
+        details[6] = row_hash["Q6_7_TEXT"]
+
         row_hash.merge!(benefits_details: details)
         row_hash.delete "Q6_1_TEXT"
         row_hash.delete "Q6_2_TEXT"
@@ -161,10 +162,10 @@ class CardsController < ApplicationController
         row_hash[:goal_alignment] = row_hash.delete "Q7"
 
         row_hash[:at_stake] = row_hash.delete "Q8"
-        details[0] = row_hash[:Q8_1_TEXT]
-        details[1] = row_hash[:Q8_2_TEXT]
-        details[2] = row_hash[:Q8_3_TEXT]
-        details[3] = row_hash[:Q8_4_TEXT]
+        details[0] = row_hash["Q8_1_TEXT"]
+        details[1] = row_hash["Q8_2_TEXT"]
+        details[2] = row_hash["Q8_3_TEXT"]
+        details[3] = row_hash["Q8_4_TEXT"]
         details[4] = details[5] = details[6]= ""
         
         row_hash.merge!(at_stake_details: details)
@@ -174,12 +175,12 @@ class CardsController < ApplicationController
         row_hash.delete "Q8_4_TEXT"
        
         row_hash[:ext_pressure] = row_hash.delete "Q9"
-        details[0] = row_hash[:Q9_1_TEXT]
-        details[1] = row_hash[:Q9_2_TEXT]
-        details[2] = row_hash[:Q9_3_TEXT]
-        details[3] = row_hash[:Q9_4_TEXT]
-        details[4] = row_hash[:Q9_5_TEXT]
-        details[5] = row_hash[:Q9_6_TEXT]
+        details[0] = row_hash["Q9_1_TEXT"]
+        details[1] = row_hash["Q9_2_TEXT"]
+        details[2] = row_hash["Q9_3_TEXT"]
+        details[3] = row_hash["Q9_4_TEXT"]
+        details[4] = row_hash["Q9_5_TEXT"]
+        details[5] = row_hash["Q9_6_TEXT"]
         details[6]= ""
         
         row_hash.merge!(ext_pressure_details: details)
@@ -191,11 +192,11 @@ class CardsController < ApplicationController
         row_hash.delete "Q9_6_TEXT"
 
         row_hash[:non_tech] = row_hash.delete "Q10"
-        details[0] = row_hash[:Q10_1_TEXT]
-        details[1] = row_hash[:Q10_2_TEXT]
-        details[2] = row_hash[:Q10_3_TEXT]
-        details[3] = row_hash[:Q10_4_TEXT]
-        details[4] = row_hash[:Q10_5_TEXT]
+        details[0] = row_hash["Q10_1_TEXT"]
+        details[1] = row_hash["Q10_2_TEXT"]
+        details[2] = row_hash["Q10_3_TEXT"]
+        details[3] = row_hash["Q10_4_TEXT"]
+        details[4] = row_hash["Q10_5_TEXT"]
         details[5] = ""
        
         
@@ -208,11 +209,11 @@ class CardsController < ApplicationController
         
 
         row_hash[:time_constraints] = row_hash.delete "Q11"
-        details[0] = row_hash[:Q11_1_TEXT]
-        details[1] = row_hash[:Q11_2_TEXT]
-        details[2] = row_hash[:Q11_3_TEXT]
-        details[3] = row_hash[:Q11_4_TEXT]
-        details[4] = row_hash[:Q11_5_TEXT]
+        details[0] = row_hash["Q11_1_TEXT"]
+        details[1] = row_hash["Q11_2_TEXT"]
+        details[2] = row_hash["Q11_3_TEXT"]
+        details[3] = row_hash["Q11_4_TEXT"]
+        details[4] = row_hash["Q11_5_TEXT"]
         details[5] = ""
        
         
