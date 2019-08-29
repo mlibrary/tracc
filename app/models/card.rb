@@ -11,11 +11,10 @@ class Card < ActiveRecord::Base
  
 
   def index_record
-  	
   	conn = Blacklight.default_index.connection
   	doc = { 
 			'id' => self.id,
-			'equest_type_ssi' => request_type,
+			'request_type_ssi' => request_type,
 			'i_or_p_ssi' => i_or_p,
 			'requester_name_ssim' => requester_name,
 			'requester_email_ssim' => requester_email,
