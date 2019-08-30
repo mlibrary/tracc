@@ -11,6 +11,7 @@ class Card < ActiveRecord::Base
  
 
   def index_record
+  	
   	conn = Blacklight.default_index.connection
   	doc = { 
 			'id' => self.id,

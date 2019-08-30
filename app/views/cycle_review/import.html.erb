@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h4> Import Cards </h4>
+<h4> Import Cycle Review </h4>
 
-<%= form_tag("import_new_cards", :enctype =>"multipart/form-data") do %>
+<%= form_tag("import_cycle_review", :enctype =>"multipart/form-data") do %>
    <div class="row">
    <div class="field">
      <%= label_tag :file %>
@@ -14,6 +14,13 @@
     <div class="field">
      <%= label_tag :cycle %>
      <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name")  %>
+  
+   </div>
+</div>
+<div class="row">
+    <div class="field">
+     <%= label_tag :review_type %>
+     <%= select_tag "review_type", options_for_select([['Mid Cycle', 1], ['End of Cycle', 2]]) %>
   
    </div>
 </div>

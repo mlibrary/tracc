@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   resources :cycle_review do
     collection do
-      get :import_cycle_review, :export_cycle_review 
+      get :import
+      post :import_cycle_review, :export_cycle_review 
     end
   end  
   resources :cards do

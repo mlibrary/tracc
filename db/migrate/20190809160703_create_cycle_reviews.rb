@@ -7,7 +7,7 @@ class CreateCycleReviews < ActiveRecord::Migration[5.2]
       t.string :rationale
       t.string :cycle
       t.string :notes 
-      t.string :type 
+      t.string :review_type 
       t.timestamps
     end
   end

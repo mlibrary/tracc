@@ -3,18 +3,18 @@ class CycleReview < ApplicationRecord
     after_save :index_record
 
   def index_record
-	conn = Blacklight.default_index.connection
-  	doc = { 
-			'id' => self.id,
-			 'status_ssi'=> status,
-             'rationale_ssi'=> rationale,
-             'review_cycle_ssi' =>cycle,
-             'review_notes_ssi' =>notes, 
-             'review_type' =>type 
+	# conn = Blacklight.default_index.connection
+ #  	doc = { 
+	# 		'id' => self.id,
+	# 		 'status_ssi'=> status,
+ #             'rationale_ssi'=> rationale,
+ #             'review_cycle_ssi' =>cycle,
+ #             'review_notes_ssi' =>notes, 
+ #             'review_type' =>review_type 
 			
-		}
-	conn.add doc
-	conn.commit
+	# 	}
+	# conn.add doc
+	# conn.commit
   end
   
 end

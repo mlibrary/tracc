@@ -46,9 +46,7 @@ Card.create(title:'Metadata Aggregation Tools for Michigan Service Hub (DPLA Com
 ',short_name:'Aggregation Tool',i_or_p:'Project',in_cycle:'FY19:2',card_status:'In-Progress',start_cycle:'FY19:2')
 Card.create(title:'Rebuild HathiTrust SLIP indexing process',short_name:'HT SLIP',i_or_p:'Project',in_cycle:'FY19:2',card_status:'In-Progress',start_cycle:'FY19:2')
 Card.create(title:'Tool/Interface for HathiTrust staff to change approved users'' elevated access to in-copyright materials',short_name:'HT SLIP',i_or_p:'Project',in_cycle:'FY19:2',card_status:'In-Progress',start_cycle:'FY19:2')
-#Card.create(title:'',short_name:'',i_or_p:'',in_cycle:'')
-#Card.create(title:'',short_name:'',i_or_p:'',in_cycle:'')
-#Card.create(title:'',short_name:'',i_or_p:'',in_cycle:'')
+
 #Card.create(title:'',short_name:'',i_or_p:'Project',in_cycle:'FY19:1')
 #Card.create(title:'',short_name:'',i_or_p:'Investigation',in_cycle:'FY19:1')
 Card.create(title:'Consultation Service Design Scheduling, Knowledgebase and CRM Tool Pilot [X-DIV]',short_name:'Service Design and CRM',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1')
@@ -63,6 +61,15 @@ Card.create(title:'LIT Space Redesign, Phase 2: 4th Floor Hatcher North',short_n
 Card.create(title:'Deep Blue Data Upgrade To Hyrax 2.0',short_name:'DBD Upgrade',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1')
 Card.create(title:'DSpace to Hyrax data migration',short_name:'DSpace 2 Hyrax',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1')
 
+Card.create(title:'Create common libraries to deal with search/advanced search',short_name:'Common Libraries',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
+Card.create(title:'Retire Debian 8',short_name:'Retire Debian 8',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
+Card.create(title:'Migrate SCRC and Clements Aeon to Atlas hosting',short_name:'Aeon hosting',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
+Card.create(title:'Migrate Fulcrum to an isolated hosting environment',short_name:'Fulcrum hosting',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
+Card.create(title:'Footprints succession',short_name:'Footprints succession',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
+Card.create(title:'Millennium Project websites',short_name:'Millennium websites',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'')
+Card.create(title:'Non-HLB Expertise',short_name:'Non-HLB expertise',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'')
+Card.create(title:'Catalog Search Holdings Redesign',short_name:'Catalog Search Holdings',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
+#Card.create(title:'',short_name:'Common Libraries',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'')
 
 
 

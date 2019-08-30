@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_155309) do
     t.string "rationale"
     t.string "cycle"
     t.string "notes"
-    t.string "type"
+    t.string "review_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_cycle_reviews_on_card_id"
