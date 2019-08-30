@@ -1,6 +1,6 @@
 en:
   blacklight:
-    application_name: 'Cycle Management Tool'
+    application_name: 'LIT Cycle Management Tool'
     welcome: 'Welcome to TRACC!'
     search:
       page_title:
