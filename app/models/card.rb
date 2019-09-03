@@ -4,11 +4,15 @@ class Card < ActiveRecord::Base
   has_one :strategic_sorting
   has_many :cycle_review
   after_save :index_record
-  # before_destroy :remove_from_index 
-
+  before_destroy :remove_from_index 
 
   attr_accessor  :lit_dept
  
+  def remove_from_index
+  	conn = Blacklight.default_index.connection
+    conn.delete_by_id self.id
+	conn.commit
+  end
 
   def index_record
   	
@@ -27,10 +31,10 @@ class Card < ActiveRecord::Base
 			'accomplish_tsim' => accomplish,
 			'benefits_tsim' => benefits,
 			'oal_alignment_tsim' => goal_alignment,
-			'at_stake_tsm' => at_stake,
-			'ext_pressure_tsm' => ext_pressure,
-			'non_tech_tsm' => non_tech,
-			'time_constraints_tsm' => time_constraints,
+			'at_stake_tsim' => at_stake,
+			'ext_pressure_tsim' => ext_pressure,
+			'non_tech_tsim' => non_tech,
+			'time_constraints_tsim' => time_constraints,
 			'priority_ssi' => priority,
 			'sponsor_ssim' => sponsor,
 			'more_info_tsm' => more_info,
