@@ -15,6 +15,7 @@ class CycleReviewController < ApplicationController
       title =  "%"+row_hash["title"]+"%"
       d = Card.where("title LIKE ?", title)   
       d1 = d.first
+      
       if (d1 !=nil)
         row_hash.merge!(card_id: d1.id)
         row_hash.merge!(cycle: params[:cycle])
@@ -27,7 +28,9 @@ class CycleReviewController < ApplicationController
         s.save!
 
         d1.card_status = row_hash["status"]
+        d1.rationale = row_hash["rationale"]
         d1.save! 
+
      else
      	 Rails.logger.debug(row_hash)
      	 

@@ -43,6 +43,7 @@ class Card < ActiveRecord::Base
 			'start_cycle_ssi' => start_cycle,
 			'done_cycle_ssi' => done_cycle,
 			'status_ssi' => card_status,
+			'rationale_ssi' => rationale,
 			'ext_link_ssi' => ext_link,
 			'lit_lead_ssim' => lit_lead,
 			'lit_dept_ssim' => lit_dept,
