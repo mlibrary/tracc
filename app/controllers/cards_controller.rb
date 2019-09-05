@@ -103,24 +103,7 @@ class CardsController < ApplicationController
   def update
 
     @card = Card.find( params[:id] )
-    params[:card][:at_stake] = params[:card][:at_stake]*","
-    params[:card][:at_stake_details] = params[:card][:at_stake_details]*"__|__"
-
-    params[:card][:accomplish] = params[:card][:accomplish]*","
-    params[:card][:accomplish_details] = params[:card][:accomplish_details]*"__|__"
-
-    params[:card][:non_tech] = params[:card][:non_tech]*","
-    params[:card][:non_tech_details] = params[:card][:non_tech_details]*"__|__"
-
-    params[:card][:time_constraints] = params[:card][:time_constraints]*","
-    params[:card][:time_constraints_details] = params[:card][:time_constraints_details]*"__|__"
-
-    params[:card][:ext_pressure] = params[:card][:ext_pressure]*","
-    params[:card][:ext_pressure_details] = params[:card][:ext_pressure_details]*"__|__"
-
-    params[:card][:benefits] = params[:card][:benefits]*","
-    params[:card][:benefits_details] = params[:card][:benefits_details]*"__|__"
-
+   
 
     respond_to do |format|
       if @card.update(card_params)

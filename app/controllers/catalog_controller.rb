@@ -89,6 +89,8 @@ class CatalogController < ApplicationController
     config.add_facet_field 'start_cycle_ssi', label: 'Start Cycle', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'done_cycle_ssi', label: 'Done Cycle', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'status_ssi', label: 'Card Status', limit: true, index_range: 'A'..'Z'
+    config.add_facet_field 'rationale_ssi', label: 'Rationale', limit: true, index_range: 'A'..'Z'
+   
     config.add_facet_field 'lit_lead_ssim', label: 'Card LIT Lead', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'lit_dept_ssim', label: 'Card LIT Dept', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'service_lead_ssim', label: 'Card Service Lead', limit: true, index_range: 'A'..'Z'
@@ -118,7 +120,8 @@ class CatalogController < ApplicationController
     config.add_index_field 'i_or_p_ssi', label: 'Type'
     config.add_index_field 'priority_ssi', label: 'Priority'
     config.add_index_field 'requester_div_ssim', label: 'Requester Divison'
-    config.add_index_field 'status_ssi', label: 'Card Status'
+    config.add_index_field 'status_ssi', label: 'Progress Status'
+    config.add_index_field 'rationale_ssi', label: 'Rationale'
     config.add_index_field 'cycle_ssi', label: 'Request Cycle'
    
     config.add_index_field 'start_cycle_ssi', label: 'Start Cycle'
