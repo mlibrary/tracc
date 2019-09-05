@@ -37,7 +37,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :exp_end_month  
       t.string :lib_divisions
       t.string :card_status
-      t.string :rationale
+      #t.string :rationale
       t.string :ext_link
       t.string :lit_lead
       t.string :lit_depts    
