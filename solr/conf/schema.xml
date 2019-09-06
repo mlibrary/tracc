@@ -180,17 +180,6 @@
     <dynamicField name="*_lli" type="location" stored="false" indexed="true" multiValued="false"/>
     <dynamicField name="*_llim" type="location" stored="false" indexed="true" multiValued="true"/>
 
-    <dynamicField name="*_lls" type="location" stored="true" indexed="false" multiValued="false"/>
-    <dynamicField name="*_llsm" type="location" stored="true" indexed="false" multiValued="true"/>
-    <dynamicField name="*_llsi" type="location" stored="true" indexed="true" multiValued="false"/>
-    <dynamicField name="*_llsim" type="location" stored="true" indexed="true" multiValued="true"/>
-
-    <dynamicField name="*_srpt" type="location_rpt" stored="true" indexed="true" multiValued="true" />
-    <dynamicField name="*_bbox" type="bbox" stored="true" indexed="true" />
-
-
-    <!-- suggest and spelling -->
-    <dynamicField name="*spell" type="textSpell" indexed="true" stored="false" multiValued="true" />
     <dynamicField name="*suggest" type="textSuggest" indexed="true" stored="false" multiValued="true" />
 
     <!-- you must define copyField source and dest fields explicity or schemaBrowser doesn't work -->
@@ -273,11 +262,7 @@
     <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType"
                geo="true" distErrPct="0.025" maxDistErr="0.001" distanceUnits="kilometers"/>
 
-    <field name="bbox" type="bbox" />
-    <fieldType name="bbox" class="solr.BBoxField"
-               geo="true" distanceUnits="kilometers" numberType="_bbox_coord" storeSubFields="false"/>
-    <fieldType name="_bbox_coord" class="solr.DoublePointField" docValues="true" stored="false"/>
-
+   
     <fieldType name="text" class="solr.TextField" omitNorms="false">
       <analyzer>
         <tokenizer class="solr.ICUTokenizerFactory"/>
