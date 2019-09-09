@@ -69,6 +69,7 @@ group :development, :test do
   gem 'solr_wrapper', '>= 0.15'
 end
 
+gem 'mysql2'
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'bootstrap', '~> 4.0'
 gem 'popper_js'
