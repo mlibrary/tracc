@@ -15,6 +15,56 @@ Cycle.create(cycle_name:'FY20:1',start:'July 2019',end:'Oct 2019',current_cycle:
 Cycle.create(cycle_name:'FY20:2',start:'Nov 2019',end:'Feb 2020',current_cycle:0)
 Cycle.create(cycle_name:'FY20:3',start:'Mar 2020',end:'Jun 2020',current_cycle:0)
 
+#FY18:3
+Card.create(title:'EPTF Revamp [DO]',short_name:'EPTF',i_or_p:'Investigation',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'User Experience Assessment: Public-Facing Components of the Special Collections Library’s Aeon Implementation [COL]',short_name:'UX Assessment',i_or_p:'Investigation',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'Campus Partnership Map [MPUB]',short_name:'Partnership Map',i_or_p:'Investigation',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'Real-time Readership Activity Map [MPUB]',short_name:'Readership Map',i_or_p:'Investigation',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'Bibliographic rights algorithm [HT]',short_name:'Bib rights',i_or_p:'Investigation',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'Review/restructuring of HathiTrust Drupal website environment and tools [HT]',short_name:'HT website',i_or_p:'Investigation',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'Replace ERRWPC with better preservation and access focused service [X-DIV]',short_name:'ERRWPC',i_or_p:'Project',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'URI Enrichment in MARC Records [COL]',short_name:'MARC Records',i_or_p:'Project',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'Develop bidirectional workflow between HTRC Workset Builder and HTDL Collection Builder for exporting collections [HT]',short_name:'HT workflow',i_or_p:'Project',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'Fishrappr++ (Detroit Jewish News) [LIT]',short_name:'Fishrappr',i_or_p:'Project',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'ArcLight Fall 2017 [LIT]',short_name:'ArcLight',i_or_p:'Project',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+
+#FY18:2 
+
+Card.create(title:'Enterprise Level Workflow/Communication Tool Request [X-DIV]',short_name:'Workflow Tool',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'LIT preservation principles [LIT]',short_name:'Preservation principles',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Improving collection of and analysis of usage data (from Google Analytics and log data) [HT]',short_name:'HT Usage Data',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Define needs and use cases for collection analysis to support digital collection development, shared print program, and Federal documents program, including selection of analysis tools (Systems advice on tool selection only) [HT]
+',short_name:'HT Collection Analysis',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Develop plan to open up front matter [HT]',short_name:'HT Front Matter',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'SALI Improvements [L&T]',short_name:'SALI',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Aeon update to facilitate container IDs [LIT]',short_name:'Aeon',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Middle English Compendium renovation [LIT]',short_name:'MEC',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Update Digitized Audio ingest script [LIT]',short_name:'Audio Ingest',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Digital Collections Audit [LIT]',short_name:'DC Audit',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Michigan Service Hub Development (DPLA) [LIT]',short_name:'DPLA dev',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Deep Blue Data Fall 2017 [LIT]',short_name:'DB Data',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Omeka Improvements, Phase 2 [LIT]',short_name:'Omeka',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Search Beta Phase 5 [LIT]',short_name:'Search',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Favorites Phase 4 [LIT]',short_name:'Favorites',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Library Analytics [LIT]',short_name:'Analytics',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Deep Blue Documents Fall 2017 [LIT]',short_name:'DB Docs',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Building ObjectClass - Phase 4 [LIT]',short_name:'ObjectClass',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Improvement of Interfaces for DLXS Bentley TextClass Collections: Phase 2 [LIT]
+',short_name:'Bentley TextClass',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Develop RFP for outside consultant to conduct broader user experience assessment of HTDL (Consulting on RFP development only) [HT]
+',short_name:'HT assessment',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Connect Qualtrics and JIRA via email [RSR]
+',short_name:'Qualtrics & Jira',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'User interface for access to CoreLogic Data [RSR]
+',short_name:'CoreLogic interface',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Review metadata data model across all HT/HTRC data stores [HT]
+',short_name:'HT Data model review',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Review metadata data model across all HT/HTRC data stores [HT]
+',short_name:'HT Data model review',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+
+
+
+
 #FY19:3
 Card.create(title:'Virtual Reading Room',short_name:'Virtual Ref Room',i_or_p:'Investigation',in_cycle:'FY19:3',card_status:'On-Hold',start_cycle:'FY19:3')
 Card.create(title:'Brunnhilde VM Front Door Card',short_name:'Brunnhilde',i_or_p:'Project',in_cycle:'FY19:3',card_status:'In-Progress',start_cycle:'FY19:3')
@@ -49,6 +99,7 @@ Card.create(title:'Tool/Interface for HathiTrust staff to change approved users'
 
 #Card.create(title:'',short_name:'',i_or_p:'Project',in_cycle:'FY19:1')
 #Card.create(title:'',short_name:'',i_or_p:'Investigation',in_cycle:'FY19:1')
+#FY19:1
 Card.create(title:'Consultation Service Design Scheduling, Knowledgebase and CRM Tool Pilot [X-DIV]',short_name:'Service Design and CRM',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1')
 Card.create(title:'Lexis Nexis Web Services Kit [X-DIV]',short_name:'Lexis Nexis',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1')
 Card.create(title:'Open Michigan',short_name:'Open MI',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1')
@@ -61,6 +112,7 @@ Card.create(title:'LIT Space Redesign, Phase 2: 4th Floor Hatcher North',short_n
 Card.create(title:'Deep Blue Data Upgrade To Hyrax 2.0',short_name:'DBD Upgrade',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1')
 Card.create(title:'DSpace to Hyrax data migration',short_name:'DSpace 2 Hyrax',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1')
 
+#FY20:1
 Card.create(title:'Create common libraries to deal with search/advanced search',short_name:'Common Libraries',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
 Card.create(title:'Retire Debian 8',short_name:'Retire Debian 8',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
 Card.create(title:'Migrate SCRC and Clements Aeon to Atlas hosting',short_name:'Aeon hosting',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1')
