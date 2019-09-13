@@ -8,13 +8,6 @@ class SolrDocument
     document.key?( SolrDocument.extension_parameters[:marc_source_field] )
   end
   
-  field_semantics.merge!(    
-                         :title => "title_ssm",
-                         :author => "author_ssm",
-                         :language => "language_ssim",
-                         :format => "format"
-                         )
-
 
 
   # self.unique_key = 'id'

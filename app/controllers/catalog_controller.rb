@@ -10,7 +10,7 @@ class CatalogController < ApplicationController
     # config.repository_class = Blacklight::Solr::Repository
     #
     ## Class for converting Blacklight's url parameters to into request parameters for the search index
-    # config.search_builder_class = ::SearchBuilder
+    config.search_builder_class = ::SearchBuilder
     #
     ## Model that maps search index responses to the blacklight response model
     # config.response_model = Blacklight::Solr::Response
@@ -19,8 +19,12 @@ class CatalogController < ApplicationController
     # config.raw_endpoint.enabled = false
 
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
+    
     config.default_solr_params = {
-      rows: 10
+      qt: "search",
+      rows: 10,
+      # qf: "title_tesim description_tesim creator_tesim keyword_tesim"
+      qf: "title_tesim all_text_timv"
     }
 
     # solr path which will be added to solr base url before the other solr params.
@@ -81,7 +85,7 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
     config.add_facet_field 'request_type_ssi', label: 'Request Type', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'i_or_p_ssi', label: 'Type'
+    config.add_facet_field 'i_or_p_ssi', label: 'Activity Type'
     config.add_facet_field 'requester_name_ssim', label: 'Requester Name', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'requester_div_ssim', label: 'Requester Divison', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'in_cycle_ssi', label: 'Request Cycle', limit: true, index_range: 'A'..'Z'
@@ -117,7 +121,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'short_name_ssi', label: 'Short Name'
     config.add_index_field 'requester_name_ssim', label: 'Requester'
     config.add_index_field 'request_type_ssi', label: 'Request Type'
-    config.add_index_field 'i_or_p_ssi', label: 'Type'
+    config.add_index_field 'i_or_p_ssi', label: 'Activity Type'
     config.add_index_field 'priority_ssi', label: 'Priority'
     config.add_index_field 'requester_div_ssim', label: 'Requester Divison'
     config.add_index_field 'status_ssi', label: 'Progress Status'
@@ -132,7 +136,7 @@ class CatalogController < ApplicationController
     # Card show fields
    
     config.add_show_field 'request_type_ssi', label: 'Request Type'
-    config.add_show_field 'i_or_p_ssi', label: 'Type'
+    config.add_show_field 'i_or_p_ssi', label: 'Activity Type'
     config.add_show_field 'requester_name_ssim', label: 'Requester'
     config.add_show_field 'requester_email_ssim', label: 'Requester Email'
     config.add_show_field 'requester_div_ssim', label: 'Requester Divison'
@@ -205,13 +209,13 @@ class CatalogController < ApplicationController
     #   }
     # end
 
-    # config.add_search_field('start cycle') do |field|
-    #   field.solr_parameters = {
-    #     'spellcheck.dictionary': 'start_cycle',
-    #     qf: '${start_cycle_qf}',
-    #     pf: '${start_cycle_pf}'
-    #   }
-    # end
+     config.add_search_field('title') do |field|
+       field.solr_parameters = {
+         'spellcheck.dictionary': 'title',
+         qf: '${title_qf}',
+         pf: '${title_pf}'
+       }
+     end
 
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as
