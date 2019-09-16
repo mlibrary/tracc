@@ -1,23 +1,19 @@
 <div class="jumbotron text-center">
-  <h1 class="jumbotron-heading"><%= t('blacklight.welcome') %></h1>
-
+  
+  <p class="lead"> LIT Cycle Management Tool: Track work from intake to close</p>
   <p class="lead">Take - Rate - Assess - Communicate - Close </p>
-  <p class="lead"> Cycle Management: Tracking work from intake to close</p>
 
   <p>
     <%#= link_to 'Process Documentation', '', class: 'btn btn-primary' %>
   </p>
 </div>
-
 <% cards = Card.all %>
 
 <% cycles = Array.new  %>
 <% cards.each do | value |   %>
-  <% if ( value.start_cycle.nil? || value.start_cycle.empty? )  %>
-    <%  cycles <<  "Nil Value" %>
-  <% else %>
-    <%  cycles <<  value.start_cycle %>
-  <% end %>
+ 
+    <%  cycles <<  value.in_cycle %>
+  
 
 <% end  %>
 
@@ -27,13 +23,13 @@
 <% data_array_1 = Array.new  %>
 <% data_array_2 = Array.new  %>
 <% cycle_hash.each do | cycle, count |  %>
-<% 	data_array_1 << cycle  %>
-<% 	data_array_2 << count %>
+<%  data_array_1 << cycle  %>
+<%  data_array_2 << count %>
 <% end %>
 
 <% labels = "" %>
 <% data_array_1.each do | value |  %>
-<% 	labels << value + "|"  %>
+<%  labels << value + "|"  %>
 <% end %>
 <%# labels.slice!(labels.length-1,labels.length) %>
 
@@ -42,26 +38,81 @@
 <% label2 = Array.new %>
 <% label2 << label %>
 
-<% test_data = Gchart.bar( %>
-<% :size => '600x400', %>
-<% :bar_colors => ['0088FF'], %>
-<% :title => "Cycles and Counts", %>
-<% :bg => 'EFEFEF', %>
-<% :legend => data_array_1, %>
-<% :data => [data_array_2], %>
-<% :stacked => false, %>
-<% :legend_position => 'bottom', %>
-<% :axis_with_labels => [['x'], ['y']], %>
-<% :max_value => 100, %>
-<% :min_value => 0, %>
-<% :bar_width_and_spacing => [100,6], %>
-<% :axis_labels => label2, %>
-<% ) %>
+  <% test_data = Gchart.bar( %>
+                  <% :size => '600x400', %>
+                  <% :bar_colors => ['0088FF'], %>
+                  <% :title => "Cycles and Requests", %>
+                  <% :bg => 'EFEFEF', %>
+                  <% :legend => data_array_1, %>
+                  <% :data => [data_array_2], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => 50, %>
+                  <% :min_value => 0, %>
+                  <% :bar_width_and_spacing => [70,6], %>
+                  <% :axis_labels => label2, %>
+                  <% ) %>
 
+    
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Stats: New Requests
+        </button>
+      </h5>
+    </div>
 
-<%= image_tag test_data %>
-
-
-<div id="getting-started">
-  <h2>heading 1</h2>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <%= image_tag test_data %>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Stats: Work Status
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        <%= image_tag test_data %>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Stats: Requests per Cycles
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        <%= image_tag test_data %>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Recent Updates
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div class="card-body">
+        <%= image_tag test_data %>
+      </div>
+    </div>
+  </div>
 </div>
+
+

@@ -23,15 +23,15 @@ Card.create(title:'Real-time Readership Activity Map [MPUB]',short_name:'Readers
 Card.create(title:'Bibliographic rights algorithm [HT]',short_name:'Bib rights',i_or_p:'Investigation',in_cycle:'FY18:3',card_status:'none',start_cycle:'FY18:3')
 Card.create(title:'Review/restructuring of HathiTrust Drupal website environment and tools [HT]',short_name:'HT website',i_or_p:'Investigation',in_cycle:'FY18:3',card_status:'none',start_cycle:'FY18:3')
 Card.create(title:'Replace ERRWPC with better preservation and access focused service [X-DIV]',short_name:'ERRWPC',i_or_p:'Project',in_cycle:'FY18:3',card_status:'none',start_cycle:'FY18:3')
-Card.create(title:'URI Enrichment in MARC Records [COL]',short_name:'MARC Records',i_or_p:'Project',in_cycle:'FY18:3',card_status:'',start_cycle:'FY18:3')
+Card.create(title:'URI Enrichment in MARC Records [COL]',short_name:'MARC Records',i_or_p:'Project',in_cycle:'FY18:3',card_status:'none',start_cycle:'FY18:3')
 Card.create(title:'Develop bidirectional workflow between HTRC Workset Builder and HTDL Collection Builder for exporting collections [HT]',short_name:'HT workflow',i_or_p:'Project',in_cycle:'FY18:3',card_status:'none',start_cycle:'FY18:3')
 Card.create(title:'Fishrappr++ (Detroit Jewish News) [LIT]',short_name:'Fishrappr',i_or_p:'Project',in_cycle:'FY18:3',card_status:'none',start_cycle:'FY18:3')
 Card.create(title:'ArcLight Fall 2017 [LIT]',short_name:'ArcLight',i_or_p:'Project',in_cycle:'FY18:3',card_status:'none',start_cycle:'FY18:3')
 
 #FY18:2 
 
-Card.create(title:'Enterprise Level Workflow/Communication Tool Request [X-DIV]',short_name:'Workflow Tool',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
-Card.create(title:'LIT preservation principles [LIT]',short_name:'Preservation principles',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Enterprise Level Workflow/Communication Tool Request [X-DIV]',short_name:'Workflow Tool',i_or_p:'TASC Investigation',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
+Card.create(title:'LIT preservation principles [LIT]',short_name:'Preservation principles',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
 Card.create(title:'Improving collection of and analysis of usage data (from Google Analytics and log data) [HT]',short_name:'HT Usage Data',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
 Card.create(title:'Define needs and use cases for collection analysis to support digital collection development, shared print program, and Federal documents program, including selection of analysis tools (Systems advice on tool selection only) [HT]
 ',short_name:'HT Collection Analysis',i_or_p:'Investigation',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
@@ -48,7 +48,7 @@ Card.create(title:'Search Beta Phase 5 [LIT]',short_name:'Search',i_or_p:'Projec
 Card.create(title:'Favorites Phase 4 [LIT]',short_name:'Favorites',i_or_p:'Project',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
 Card.create(title:'Library Analytics [LIT]',short_name:'Analytics',i_or_p:'Project',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
 Card.create(title:'Deep Blue Documents Fall 2017 [LIT]',short_name:'DB Docs',i_or_p:'Project',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
-Card.create(title:'Building ObjectClass - Phase 4 [LIT]',short_name:'ObjectClass',i_or_p:'Project',in_cycle:'FY18:2',card_status:'',start_cycle:'FY18:2')
+Card.create(title:'Building ObjectClass - Phase 4 [LIT]',short_name:'ObjectClass',i_or_p:'Project',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
 Card.create(title:'Improvement of Interfaces for DLXS Bentley TextClass Collections: Phase 2 [LIT]',short_name:'Bentley TextClass',i_or_p:'Project',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
 Card.create(title:'Develop RFP for outside consultant to conduct broader user experience assessment of HTDL (Consulting on RFP development only) [HT]
 ',short_name:'HT assessment',i_or_p:'Project',in_cycle:'FY18:2',card_status:'none',start_cycle:'FY18:2')
@@ -81,7 +81,7 @@ Card.create(title:'Move the Civil Rights Litigation Clearinghouse to AWS',short_
 # FY19:2
 Card.create(title:'Undergraduate Student Library Assignment Calculator/Research Scheduler',short_name:'Research Scheduler',i_or_p:'Investigation',in_cycle:'FY19:2',card_status:'On-Hold',start_cycle:'FY19:2')
 Card.create(title:'Canvas LTI Integration, Library PageBuilder',short_name:'Canvas PageBuilder',i_or_p:'Investigation',in_cycle:'FY19:2',card_status:'In-Progress',start_cycle:'FY19:2')
-Card.create(title:'Technology to support Bibframe analysis',short_name:'Bibframe Analysis',i_or_p:'Investigation',in_cycle:'FY19:2',card_status:'In-Progress',start_cycle:'FY19:2')
+Card.create(title:'Technology to support Bibframe analysis',short_name:'Bibframe Analysis',i_or_p:'TASC Investigation',in_cycle:'FY19:2',card_status:'In-Progress',start_cycle:'FY19:2')
 Card.create(title:'Investigate IIIF Solutions Appropriate for Michigan Service Hub (DPLA)',short_name:'IIIF for DPLA',i_or_p:'Investigation',in_cycle:'FY19:2',card_status:'In-Progress',start_cycle:'FY19:2')
 Card.create(title:'Exploring better ways to integrate Google Sheets and Trello for LIT CG',short_name:'Trello API',i_or_p:'Investigation',in_cycle:'FY19:2',card_status:'Done',start_cycle:'FY19:2')
 Card.create(title:'LIT Documentation Standards',short_name:'LIT Doc Standards',i_or_p:'Investigation',in_cycle:'FY19:2',card_status:'Done',start_cycle:'FY19:2')
@@ -103,7 +103,7 @@ Card.create(title:'Consultation Service Design Scheduling, Knowledgebase and CRM
 Card.create(title:'Lexis Nexis Web Services Kit [X-DIV]',short_name:'Lexis Nexis',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'none')
 Card.create(title:'Open Michigan',short_name:'Open MI',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'none')
 Card.create(title:'Infrastructure Support for “The Impact of the Academic Library on Learning in the University” IMLS Grant [LIT]',short_name:'Impact of the Academic Library',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'none')
-Card.create(title:'War of the Worlds Primary Source Materials Online Access [RSR]',short_name:'War of the Worlds',i_or_p:'Investigation',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'none')
+Card.create(title:'War of the Worlds Primary Source Materials Online Access [RSR]',short_name:'War of the Worlds',i_or_p:'TASC Investigation',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'none')
 Card.create(title:'Website Redesign Phase 2: HathiTrust website revamp/redesign',short_name:'HT Website Phase 2',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'none')
 Card.create(title:'Create a process and policies for recruiting users for testing of HTDL applications',short_name:'HTDL User Policies',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'none')
 Card.create(title:'LIT Space Redesign, Phase 1: North Buhr',short_name:'Space Redesign-1',i_or_p:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'none')
