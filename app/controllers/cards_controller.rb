@@ -21,9 +21,91 @@ class CardsController < ApplicationController
   end
 
   def import_impact
+  end  
+  
+  def import_impact_ratings
+  
+    uploaded_csv = params[:file]
+    csv_text = File.read(uploaded_csv.path)
+    csv = CSV.parse(csv_text, :headers => true, :encoding => 'windows-1251:utf-8')
+    
+  
+    csv.each do |row|
+
+    row_hash = row.to_hash
+
+    if (row_hash["Investigations"]) != nil
+      title = row_hash["Investigations"]
+    else 
+      title = row_hash["Projects"]
+    end
+
+    d = Card.where("title LIKE ?", title)   
+    d1 = d.first
+      
+      if (d1 !=nil)
+     
+        d1.benefit_score= row_hash["BENEFIT"]
+        d1.accomplish_score = row_hash["ACCOMPLISH"]
+        d1.at_stake_score = row_hash["AT STAKE"]
+        d1.pressures_score = row_hash["PRESSURES"]
+        d1.change_score = row_hash["CHANGE"]
+        d1.impact_score = row_hash["IMPACT SCORE"]
+        d1.gut_check = row_hash["GUT CHECK"]
+        d1.impact_notes = row_hash["Notes"]
+        
+
+        d1.save!
+      end  
+    end
   end
 
   def import_complexity
+  end
+    
+  def import_complexity_ratings
+    uploaded_csv = params[:file]
+    csv_text = File.read(uploaded_csv.path)
+    csv = CSV.parse(csv_text, :headers => true, :encoding => 'windows-1251:utf-8')
+    
+  
+    csv.each do |row|
+     
+    row_hash = row.to_hash
+    byebug
+
+    if (row_hash["Requests: INVESTIGATIONS"]) != nil
+      title = row_hash["Requests: INVESTIGATIONS"]
+    else 
+      title = row_hash["Requests: PROJECTS"]
+    end
+
+    d = Card.where("title LIKE ?", title)   
+    d1 = d.first
+      
+      if (d1 !=nil)
+     
+        d1.infrastructure= row_hash["Infrastructure"]
+        d1.application = row_hash["Application"]
+        d1.front_end = row_hash["Front End Development / Research / Design"]
+        d1.data_content = row_hash["Data & Content"]
+        d1.staff_resources = row_hash["Staff Resources"]
+        d1.money = row_hash["Money"]
+        d1.operational = row_hash["Operational"]
+        d1.total_complexity_score = row_hash["Total Complexity Score"]
+        d1.weighted_score = row_hash["Weighted Effort Score"]
+        d1.short_name = row_hash["Request Short Name"]
+        d1.domain = row_hash["Domain"]
+        d1.investigation_scope = row_hash["Investigation Scope"]
+        d1.tech_knowledge = row_hash["Technical Knowledge/ Expertise"]
+        d1.team_scope = row_hash["Team Scope"]
+        d1.cost = row_hash["Cost"]
+        d1.divergence = row_hash["Potential Divergence from Platform"]
+        d1.total_cost_score= row_hash["Total Cost Score"]
+        d1.complexity_notes = row_hash["Notes"]
+        d1.save!
+      end  
+    end
   end
 
 

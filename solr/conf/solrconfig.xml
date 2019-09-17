@@ -43,7 +43,7 @@
        -->
         <str name="qf">
           id
-          title_unstem_search^1000
+          title_ssi
           all_text_timv
           text
         </str>
@@ -52,6 +52,7 @@
           text^10
         </str>
 
+    
       
        <str name="title_qf">
           title_unstem_search^1000
