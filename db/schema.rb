@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_155309) do
     t.string "tech_knowledge"
     t.string "team_scope"
     t.string "infrastructure"
-    t.string "iapplication"
+    t.string "application"
     t.string "front_end"
     t.string "data_content"
     t.decimal "total_complexity_score"

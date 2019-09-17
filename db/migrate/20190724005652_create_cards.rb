@@ -55,9 +55,8 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :tech_knowledge
       t.string :team_scope
       t.string :infrastructure
-      t.string :iapplication
+      t.string :application
       t.string :front_end
-      t.string :investigation_scope
       t.string :data_content
       t.decimal :total_complexity_score
       t.string :cost 
@@ -67,6 +66,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :operational
       t.decimal :total_cost_score
       t.decimal :weighted_score
+      t.string :complexity_notes
 # impact
       t.decimal :benefit_score
       t.decimal :accomplish_score
@@ -75,6 +75,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.decimal :change_score
       t.decimal :impact_score
       t.decimal :gut_check
+      t.string  :impact_notes
 
       t.datetime :card_since
       t.datetime :last_update_comment

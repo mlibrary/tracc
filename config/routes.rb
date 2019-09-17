@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   end
 
   post 'cards/import_new_cards'
+  post 'cards/import_complexity_ratings'
+  post 'cards/import_impact_ratings'
+
 
   devise_for :users
   concern :exportable, Blacklight::Routes::Exportable.new

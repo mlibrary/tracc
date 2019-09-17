@@ -59,7 +59,7 @@
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
           Stats: New Requests
         </button>
       </h5>
@@ -103,13 +103,30 @@
     <div class="card-header" id="headingThree">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          Recent Updates
+          Recently updated In-Progress Cards
         </button>
       </h5>
     </div>
+
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
       <div class="card-body">
-        <%= image_tag test_data %>
+        <% 
+          d = DateTime.now - 1.month
+
+          Card.all.each do |c| 
+          cstatus = c.card_status
+          dtime = c.updated_at
+          
+          if !dtime.nil?
+            if dtime > d 
+              id = c.id 
+              url ="cards/" + id.to_s
+        %>  
+             <p><a href=<%=url%> ><%= c.title %></a></p>
+            <% end
+             end
+          end 
+          %>
       </div>
     </div>
   </div>
