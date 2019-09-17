@@ -54,7 +54,6 @@
                   <% :axis_labels => label2, %>
                   <% ) %>
 
-    
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -65,7 +64,7 @@
       </h5>
     </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
         <%= image_tag test_data %>
       </div>
@@ -110,6 +109,9 @@
 
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
       <div class="card-body">
+        <div class="card" >
+       <ul class="list-group list-group-flush">
+   
         <% 
           d = DateTime.now - 1.month
 
@@ -121,12 +123,15 @@
             if dtime > d 
               id = c.id 
               url ="cards/" + id.to_s
-        %>  
-             <p><a href=<%=url%> ><%= c.title %></a></p>
+        %> 
+         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
+            
             <% end
              end
           end 
           %>
+        </ul>
+       </div>    
       </div>
     </div>
   </div>

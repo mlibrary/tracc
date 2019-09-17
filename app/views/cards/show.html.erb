@@ -1,47 +1,97 @@
 <p> All Metadata associated with this Card </p>
 
-id = <%= @one_card.id %>
-<br>request_type = <%= @one_card.request_type %>
-<br>i_or_p = <%= @one_card.i_or_p %>
-<br>requester_name = <%= @one_card.requester_name %>
-<br>requester_fname = <%= @one_card.requester_fname %>
-<br>requester_lname = <%= @one_card.requester_lname %>
-<br>requester_email = <%= @one_card.requester_email %>
-<br>requester_div = <%= @one_card.requester_div %>
-<br>contact_names =  <%= @one_card.contact_names %>
-<br>title = <%= @one_card.title  %>
-<br>short_description = <%= @one_card.short_description %>
-<br>prev_work = <%= @one_card.prev_work %>
-<br>accomplish = <%= @one_card.accomplish %>
-<br>accomplish_details = <%= @one_card.accomplish_details %>
-<br>benefits =  <%= @one_card.benefits %>
-<br>benefits_details =  <%= @one_card.benefits_details %>
-<br>goal_alignment = <%= @one_card.goal_alignment %>
-<br>at_stake = <%= @one_card.at_stake %>
-<br>at_stake_details = <%= @one_card.at_stake_details %>
-<br>ext_pressure = <%= @one_card.ext_pressure %>
-<br>ext_pressure_details = <%= @one_card.ext_pressure_details %>
-<br>non_tech = <%= @one_card.non_tech %>
-<br>non_tech_detatils = <%= @one_card.non_tech_details %>
-<br>time_constraints = <%= @one_card.time_constraints %>
-<br>time_constraints_details = <%= @one_card.time_constraints_details %>
-<br>priority = <%= @one_card.priority  %>
-<br>sponsor = <%= @one_card.sponsor %>
-<br>more_info = <%= @one_card.more_info %>
-<br>short_name = <%= @one_card.short_name %>
-<br>start_cycle = <%= @one_card.start_cycle %>
-<br>done_cycle = <%= @one_card.done_cycle %>
-<br>exp_start_month = <%= @one_card.exp_start_month %>
-<br>exp_end_month = <%= @one_card.exp_end_month %>
-<br>lib_divisions = <%= @one_card.lib_divisions %>
-<br>card_status = <%= @one_card.card_status %>
-<br>ext_link = <%= @one_card.ext_link %>
-<br>lit_lead = <%= @one_card.lit_lead %>
-<br>lit_depts = <%= @one_card.lit_depts %>
-<br>service_lead = <%= @one_card.service_lead %>
-<br>other_contacts = <%= @one_card.other_contacts %>
-<br>comments = <%= @one_card.comments %>
-<br>card_since = <%= @one_card.card_since %>
-<br>recorded_on = <%= @one_card.recorded_on %>
-<br>created_at = <%= @one_card.created_at %>
-<br>updated_at = <%= @one_card.updated_at %>
+
+<h4><b><%= @one_card.i_or_p %>: <%= @one_card.title %></b>b></h4>
+  <div class="card" >
+  	<div class="card-header" id="headingOne">
+  		<h5>Basic Info:</h5>
+  	</div>	
+       <ul class="list-group list-group-flush">
+       <li class="list-group-item">Short Name: one_card.short_name </li> 
+       
+       <li class="list-group-item">Request Type: <%= @one_card.request_type %></li> 
+       <li class="list-group-item">Requester: <%= @one_card.requester_name%> Division: <%=@one_card.requester_div%> Email:  <%= @one_card.requester_email  %></li>
+     </ul>
+     </div>
+     <p>&nbsp;</p>
+     <div class="card" >
+  	 <div class="card-header" id="headingOne">
+  		<h5>Details:</h5>
+  	 </div>	  
+  	   <ul class="list-group list-group-flush">
+  	   <li class="list-group-item"><%= @one_card.short_description %></li>	
+       <li class="list-group-item"><li class="list-group-item">at_stake = <%= @one_card.at_stake %>
+<li class="list-group-item">at_stake_details = <%= @one_card.at_stake_details %></li>
+<li class="list-group-item">ext_pressure = <%= @one_card.ext_pressure %></li>
+<li class="list-group-item">ext_pressure_details = <%= @one_card.ext_pressure_details %></li>
+<li class="list-group-item">non_tech = <%= @one_card.non_tech %></li>
+<li class="list-group-item">non_tech_detatils = <%= @one_card.non_tech_details %></li>
+<li class="list-group-item">time_constraints = <%= @one_card.time_constraints %></li>
+<li class="list-group-item">time_constraints_details = <%= @one_card.time_constraints_details %></li>
+<li class="list-group-item">priority = <%= @one_card.priority  %></li>
+<li class="list-group-item">sponsor = <%= @one_card.sponsor %></li>
+<li class="list-group-item">more_info = <%= @one_card.more_info %></li>
+<li class="list-group-item">short_name = <%= @one_card.short_name %></li>
+<li class="list-group-item">start_cycle = <%= @one_card.start_cycle %></li>
+<li class="list-group-item">done_cycle = <%= @one_card.done_cycle %></li>
+<li class="list-group-item">exp_start_month = <%= @one_card.exp_start_month %></li>
+<li class="list-group-item">exp_end_month = <%= @one_card.exp_end_month %></li>
+<li class="list-group-item">lib_divisions = <%= @one_card.lib_divisions %></li>
+<li class="list-group-item">card_status = <%= @one_card.card_status %></li>
+<li class="list-group-item">ext_link = <%= @one_card.ext_link %></li>
+<li class="list-group-item">lit_lead = <%= @one_card.lit_lead %></li>
+<li class="list-group-item">lit_depts = <%= @one_card.lit_depts %></li>
+<li class="list-group-item">service_lead = <%= @one_card.service_lead %></li>
+<li class="list-group-item">other_contacts = <%= @one_card.other_contacts %></li>
+<li class="list-group-item">comments = <%= @one_card.comments %></li>
+<li class="list-group-item">card_since = <%= @one_card.card_since %></li>
+<li class="list-group-item">recorded_on = <%= @one_card.recorded_on %></li>
+<li class="list-group-item">created_at = <%= @one_card.created_at %></li>
+<li class="list-group-item">updated_at = <%= @one_card.updated_at %></li></li>
+    
+       </ul>
+      </div> 
+       <p>&nbsp;</p>
+     <div class="card" >
+  	 <div class="card-header" id="headingOne">
+  		<h5>Complexity Rating:</h5>
+  	 </div>	  
+  	   <ul class="list-group list-group-flush">
+  	 
+  	   <li class="list-group-item"><%= @one_card.investigation_scope %></li>	
+       <li class="list-group-item"><%= @one_card.tech_knowledge %></li>
+       <li class="list-group-item">Team Scope: = <%= @one_card.team_scope %></li>
+       <li class="list-group-item">Infrastructure = <%= @one_card.infrastructure %></li>
+       <li class="list-group-item">benefits =  <%= @one_card.application %></li>
+       <li class="list-group-item">benefits_details =  <%= @one_card.front_end %></li>
+       <li class="list-group-item"><%= @one_card.data_content %></li>
+       <li class="list-group-item"><%= @one_card.total_complexity_score %></li>
+       <li class="list-group-item"><%= @one_card.cost %> </li>
+
+       <li class="list-group-item"><%= @one_card.divergence%></li>
+       <li class="list-group-item"><%= @one_card.staff_resources%></li>
+       <li class="list-group-item"><%= @one_card.money%></li>
+       <li class="list-group-item"><%= @one_card.operational%></li>
+       <li class="list-group-item"><%= @one_card.total_cost_score%></li>
+       <li class="list-group-item"><%= @one_card.weighted_score%></li>
+       <li class="list-group-item"><%= @one_card.complexity_notes%></li>
+       </ul>
+      </div>     
+       <p>&nbsp;</p>
+     <div class="card" >
+  	 <div class="card-header" id="headingOne">
+  		<h5>Impact Rating:</h5>
+  	 </div>	  
+  	   <ul class="list-group list-group-flush">
+  	   <li class="list-group-item"><%= @one_card.short_description %></li>	
+       <li class="list-group-item"></li>
+       <li class="list-group-item"></li>
+       <li class="list-group-item"></li>
+       <li class="list-group-item"></li>
+       <li class="list-group-item"></li>
+       <li class="list-group-item"></li>
+       </ul>
+      </div> 
+
+
+
