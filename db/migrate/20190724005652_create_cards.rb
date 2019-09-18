@@ -49,7 +49,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :enthusiasm
       t.string :knowledge
       t.string :resource   
-      t.string :comments     
+      t.string :s_comments     
 # complexity
       t.string :investigation_scope
       t.string :tech_knowledge
