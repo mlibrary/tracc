@@ -76,13 +76,11 @@
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
       	 <ul class="list-group list-group-flush">
-         <li class="list-group-item"><%= @one_card.short_description %></li>	
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
+         <li class="list-group-item">Enthusiasm: <%= @one_card.enthusiasm %></li>	
+       <li class="list-group-item">Knowledge: <%= @one_card.knowledge %></li>
+       <li class="list-group-item">Resources: <%= @one_card.resource %></li>
+       <li class="list-group-item">Comments: <%= @one_card.s_comments %></li>
+       
        </ul>
       </div>
     </div>
@@ -131,18 +129,29 @@
     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
       <div class="card-body">
       	 <ul class="list-group list-group-flush">
-         <li class="list-group-item"><%= @one_card.short_description %></li>	
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
+        	
+       <li class="list-group-item">Benefit: <%= @one_card.benefit_score %></li>
+       <li class="list-group-item">accomplish: <%= @one_card.accomplish_score %></li>
+       <li class="list-group-item">At Stake: <%= @one_card.at_stake_score %></li>
+       <li class="list-group-item">Pressures: <%= @one_card.pressures_score %></li>
+       <li class="list-group-item">Change: <%= @one_card.change_score %></li>
+       <li class="list-group-item">Impact Score: <%= @one_card.impact_score %></li>
+       <li class="list-group-item">Gut Check: <%= @one_card.gut_check %></li>
+       <li class="list-group-item">Notes: <%= @one_card.impact_notes %></li>
        </ul>
       </div>
     </div>
   </div>
 </div>
+
+
+      
+      
+      
+      
+      
+      
+      
     
   	   
   	 
