@@ -1,11 +1,11 @@
 
-<h4><b><%= @one_card.i_or_p %>: <%= @one_card.title %></b></h4>
+<h4><b></b></h4>
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
-    	<h5 class="mb-0">
+      <h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Basic Info
+          <%= @one_card.i_or_p %>: <%= @one_card.title %>
         </button>
       </h5>
     </div>
@@ -30,7 +30,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
          <ul class="list-group list-group-flush">
-  	   <li class="list-group-item">Description: <%= @one_card.short_description %></li>	
+       <li class="list-group-item">Description: <%= @one_card.short_description %></li> 
        <li class="list-group-item">at_stake = <%= @one_card.at_stake %></li>
 <li class="list-group-item">at_stake_details = <%= @one_card.at_stake_details %></li>
 <li class="list-group-item">ext_pressure = <%= @one_card.ext_pressure %></li>
@@ -75,14 +75,12 @@
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
-      	 <ul class="list-group list-group-flush">
-         <li class="list-group-item"><%= @one_card.short_description %></li>	
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
+         <ul class="list-group list-group-flush">
+         <li class="list-group-item">Enthusiasm: <%= @one_card.enthusiasm %></li> 
+       <li class="list-group-item">Knowledge: <%= @one_card.knowledge %></li>
+       <li class="list-group-item">Resources: <%= @one_card.resource %></li>
+       <li class="list-group-item">Comments: <%= @one_card.s_comments %></li>
+       
        </ul>
       </div>
     </div>
@@ -100,7 +98,7 @@
   
        <ul class="list-group list-group-flush">
 
-  	   <li class="list-group-item">Investigation Scope:<%= @one_card.investigation_scope %></li>	
+       <li class="list-group-item">Investigation Scope:<%= @one_card.investigation_scope %></li>  
        <li class="list-group-item">Tech Knowledge: <%= @one_card.tech_knowledge %></li>
        <li class="list-group-item">Team Scope: <%= @one_card.team_scope %></li>
        <li class="list-group-item">Infrastructure: <%= @one_card.infrastructure %></li>
@@ -130,22 +128,33 @@
     </div>
     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
       <div class="card-body">
-      	 <ul class="list-group list-group-flush">
-         <li class="list-group-item"><%= @one_card.short_description %></li>	
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
-       <li class="list-group-item"></li>
+         <ul class="list-group list-group-flush">
+          
+       <li class="list-group-item">Benefit: <%= @one_card.benefit_score %></li>
+       <li class="list-group-item">accomplish: <%= @one_card.accomplish_score %></li>
+       <li class="list-group-item">At Stake: <%= @one_card.at_stake_score %></li>
+       <li class="list-group-item">Pressures: <%= @one_card.pressures_score %></li>
+       <li class="list-group-item">Change: <%= @one_card.change_score %></li>
+       <li class="list-group-item">Impact Score: <%= @one_card.impact_score %></li>
+       <li class="list-group-item">Gut Check: <%= @one_card.gut_check %></li>
+       <li class="list-group-item">Notes: <%= @one_card.impact_notes %></li>
        </ul>
       </div>
     </div>
   </div>
 </div>
+
+
+      
+      
+      
+      
+      
+      
+      
     
-  	   
-  	 
+       
+     
      
 
 
