@@ -98,6 +98,13 @@ class CatalogController < ApplicationController
     config.add_facet_field 'lit_lead_ssim', label: 'Card LIT Lead', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'lit_dept_ssim', label: 'Card LIT Dept', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'service_lead_ssim', label: 'Card Service Lead', limit: true, index_range: 'A'..'Z'
+
+    config.add_facet_field 'accomplish_ssim', label: 'Accomplished', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'benefits_ssim', label: 'Benefits', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'at_stake_ssim', label: 'At Stake', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'ext_pressure_sism', label: 'External Pressure', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'non_tech_ssim', label: 'Non-Technical', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'time_constraints_ssim', label: 'Time Constraints', limit: true, index_range: 'A'..'Z'
    
     # config.add_facet_field 'example_pivot_field', label: 'Pivot Field', :pivot => ['format', 'language_ssim']
 
@@ -129,7 +136,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'cycle_ssi', label: 'Request Cycle'
    
     config.add_index_field 'start_cycle_ssi', label: 'Start Cycle'
-    config.add_index_field 'done_cycle_ssi', label: 'Done Cycle'
+    config.add_index_field 'done_cycle_ssi', label: 'Done Cycle'   
     
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -143,13 +150,15 @@ class CatalogController < ApplicationController
     config.add_show_field 'contact_names_ssim', label: 'Contact Names'
     config.add_show_field 'short_description_ssi', label: 'Short Description'
     config.add_show_field 'prev_work_tsim', label: 'Previous Work'
+
     config.add_show_field 'accomplish_tsim', label: 'Accomplished'
     config.add_show_field 'benefits_tsim', label: 'Benefits'
-    config.add_show_field 'goal_alignment_tsim', label: 'Goal Alignment'
-    config.add_show_field 'stake_tsm', label: 'At Stake'
-    config.add_show_field 'ext_pressure_tsm', label: 'External Pressure'
-    config.add_show_field 'non_tech_tsm', label: 'Non-Technical'
-    config.add_show_field 'time_constraints_tsm', label: 'Time Constraints'
+    config.add_show_field 'at_stake_tsim', label: 'At Stake'
+    config.add_show_field 'ext_pressure_tism', label: 'External Pressure'
+    config.add_show_field 'non_tech_tsim', label: 'Non-Technical'
+    config.add_show_field 'time_constraints_tsim', label: 'Time Constraints'
+
+    config.add_show_field 'goal_alignment_tsim', label: 'Goal Alignment'    
     config.add_show_field 'priority_ssi', label: 'Priority'
     config.add_show_field 'sponsor_ssim', label: 'Sponsor'
     config.add_show_field 'more_info_tsm', label: 'More Info'
