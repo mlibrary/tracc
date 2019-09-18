@@ -15,7 +15,22 @@ class Card < ActiveRecord::Base
   end
 
   def index_record
-  	
+  		
+	#'accomplish_ssim' => ['9aaaa aaa', '9bbbb bbb'],
+    accomplish_array = []
+    accomplish_array = accomplish.split("__|__") unless time_constraints.nil?
+	benefits_array = []
+	benefits_array = benefits.split("__|__") unless time_constraints.nil?
+	at_stake_array = []
+	at_stake_array = at_stake.split("__|__") unless time_constraints.nil?
+	ext_pressure_array = []
+	ext_pressure_array = ext_pressure.split("__|__") unless time_constraints.nil?
+	non_tech_array = []
+	non_tech_array = non_tech.split("__|__") unless time_constraints.nil?
+	time_constraints_array = []
+	time_constraints_array = time_constraints.split("__|__") unless time_constraints.nil?
+
+
   	conn = Blacklight.default_index.connection
   	doc = { 
 			'id' => self.id,
@@ -28,13 +43,15 @@ class Card < ActiveRecord::Base
 			'title_ssi' => title,
 			'short_description_tsi' => short_description,
 			'prev_work_tsi' => prev_work,
-			'accomplish_tsim' => accomplish,
-			'benefits_tsim' => benefits,
-			'oal_alignment_tsim' => goal_alignment,
-			'at_stake_tsim' => at_stake,
-			'ext_pressure_tsim' => ext_pressure,
-			'non_tech_tsim' => non_tech,
-			'time_constraints_tsim' => time_constraints,
+
+			'accomplish_ssim' => accomplish_array,
+			'benefits_ssim' => benefits_array,
+			'at_stake_ssim' => at_stake_array,
+			'ext_pressure_ssim' => ext_pressure_array,
+			'non_tech_ssim' => non_tech_array,
+			'time_constraints_ssim' => time_constraints_array,
+
+			'goal_alignment_tsim' => goal_alignment,
 			'priority_ssi' => priority,
 			'sponsor_ssim' => sponsor,
 			'more_info_tsm' => more_info,
@@ -57,7 +74,8 @@ class Card < ActiveRecord::Base
 		}
 
 	  conn.add doc
-	  conn.commit
+	  conn.commit			
+
 	
     # SolrService.add(self.to_solr)
     # SolrService.commit

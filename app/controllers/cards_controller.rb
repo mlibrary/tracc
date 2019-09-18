@@ -11,7 +11,7 @@ class CardsController < ApplicationController
   # GET /cards/1
   # GET /cards/1.json
   def show
-    @one_card = Card.find( params[:id] )   
+    @one_card = Card.find( params[:id] ) 
   end
 
   def import
@@ -185,7 +185,48 @@ class CardsController < ApplicationController
   def update
 
     @card = Card.find( params[:id] )
-   
+
+    if params[:card][:at_stake].nil?
+      params[:card][:at_stake] =""
+    else
+        params[:card][:at_stake] = params[:card][:at_stake]*"__|__" 
+    end
+    params[:card][:at_stake_details] = params[:card][:at_stake_details]*"__|__" unless params[:card][:at_stake_details].nil?
+
+    if params[:card][:accomplish].nil?
+      params[:card][:accomplish] =""
+    else
+        params[:card][:accomplish] = params[:card][:accomplish]*"__|__" 
+    end
+    params[:card][:accomplish_details] = params[:card][:accomplish_details]*"__|__" unless params[:card][:accomplish_details].nil?
+
+    if params[:card][:non_tech].nil?
+      params[:card][:non_tech] =""
+    else
+        params[:card][:non_tech] = params[:card][:non_tech]*"__|__" 
+    end
+    params[:card][:non_tech_details] = params[:card][:non_tech_details]*"__|__"  unless params[:card][:non_tech_details].nil?
+
+    if params[:card][:time_constraints].nil?
+      params[:card][:time_constraints] =""
+    else
+        params[:card][:time_constraints] = params[:card][:time_constraints]*"__|__" 
+    end
+    params[:card][:time_constraints_details] = params[:card][:time_constraints_details]*"__|__" unless params[:card][:time_constraints_details].nil?
+
+    if params[:card][:ext_pressure].nil?
+      params[:card][:ext_pressure] =""
+    else
+        params[:card][:ext_pressure] = params[:card][:ext_pressure]*"__|__" 
+    end
+    params[:card][:ext_pressure_details] = params[:card][:ext_pressure_details]*"__|__" unless params[:card][:ext_pressure_details].nil?
+
+    if params[:card][:benefits].nil?
+      params[:card][:benefits] =""
+    else
+        params[:card][:benefits] = params[:card][:benefits]*"__|__" 
+    end
+    params[:card][:benefits_details] = params[:card][:benefits_details]*"__|__" unless params[:card][:benefits_details].nil?
 
     respond_to do |format|
       if @card.update(card_params)
@@ -254,7 +295,8 @@ class CardsController < ApplicationController
         row_hash[:short_description] = row_hash.delete "Q3"
         row_hash[:prev_work] = row_hash.delete "Q4"
 
-        row_hash["Q5"].gsub!( /\s+/, " " ) unless row_hash["Q5"].nil?        
+        row_hash["Q5"].gsub!( /\s+/, " " ) unless row_hash["Q5"].nil?   
+        row_hash["Q5"].gsub!( /,\w+/, "__|__" ) unless row_hash["Q5"].nil?                
         row_hash[:accomplish] = row_hash.delete "Q5"
         
         details = Array.new
@@ -272,6 +314,7 @@ class CardsController < ApplicationController
         row_hash.delete "Q5_5_TEXT"
         
         row_hash["Q6"].gsub!( /\s+/, " " ) unless row_hash["Q6"].nil?
+        row_hash["Q6"].gsub!( /,\w+/, "__|__" ) unless row_hash["Q6"].nil? 
         row_hash[:benefits] = row_hash.delete "Q6"
         #Array.new
         details = []
@@ -296,6 +339,7 @@ class CardsController < ApplicationController
         row_hash[:goal_alignment] = row_hash.delete "Q7"
 
         row_hash["Q8"].gsub!( /\s+/, " " ) unless row_hash["Q8"].nil?
+        row_hash["Q8"].gsub!( /,\w+/, "__|__" ) unless row_hash["Q8"].nil?
         row_hash[:at_stake] = row_hash.delete "Q8"
         details = []
         details[0] = row_hash["Q8_1_TEXT"]
@@ -310,7 +354,8 @@ class CardsController < ApplicationController
         row_hash.delete "Q8_3_TEXT"
         row_hash.delete "Q8_4_TEXT"
        
-        row_hash["Q9"].gsub!( /\s+/, " " )  unless row_hash["Q9"].nil?     
+        row_hash["Q9"].gsub!( /\s+/, " " )  unless row_hash["Q9"].nil? 
+        row_hash["Q9"].gsub!( /,\w+/, "__|__" ) unless row_hash["Q9"].nil?    
         row_hash[:ext_pressure] = row_hash.delete "Q9"
         details = []
         details[0] = row_hash["Q9_1_TEXT"]
@@ -330,6 +375,7 @@ class CardsController < ApplicationController
         row_hash.delete "Q9_6_TEXT"
 
         row_hash["Q10"].gsub!( /\s+/, " " ) unless row_hash["Q10"].nil?
+        row_hash["Q10"].gsub!( /,\w+/, "__|__" ) unless row_hash["Q10"].nil?
         row_hash[:non_tech] = row_hash.delete "Q10" 
         details = []
         details[0] = row_hash["Q10_1_TEXT"]
@@ -349,6 +395,7 @@ class CardsController < ApplicationController
         
 
         row_hash["Q11"].gsub!( /\s+/, " " ) unless row_hash["Q11"].nil?
+        row_hash["Q11"].gsub!( /,\w+/, "__|__" ) unless row_hash["Q11"].nil?
         row_hash[:time_constraints] = row_hash.delete "Q11"
         details = []
         details[0] = row_hash["Q11_1_TEXT"]
