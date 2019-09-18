@@ -162,6 +162,50 @@ class CardsController < ApplicationController
    
 
     @card = Card.find( params[:id] )
+    if @card.at_stake.nil?
+      @card.at_stake =""
+    end 
+    if @card.at_stake_details.nil?
+      @card.at_stake_details =""
+    end 
+
+    if @card.non_tech.nil?
+      @card.non_tech =""
+    end 
+    if @card.non_tech_details.nil?
+      @card.non_tech_details =""
+    end 
+
+    if @card.accomplish.nil?
+      @card.accomplish =""
+    end 
+    if @card.accomplish_details.nil?
+      @card.accomplish_details =""
+    end 
+
+    if @card.time_constraints.nil?
+      @card.time_constraints =""
+    end 
+    if @card.time_constraints_details.nil?
+      @card.time_constraints_details =""
+    end 
+
+    if @card.ext_pressure.nil?
+      @card.ext_pressure =""
+    end 
+    if @card.ext_pressure_details.nil?
+      @card.ext_pressure_details =""
+    end  
+
+    if @card.benefits.nil?
+      @card.benefits =""
+    end 
+    if @card.benefits_details.nil?
+      @card.benefits_details =""
+    end  
+
+
+
   end
 
   # POST /cards
