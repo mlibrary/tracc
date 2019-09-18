@@ -54,6 +54,39 @@
                   <% :axis_labels => label2, %>
                   <% ) %>
 
+  <% test_data2 = Gchart.line( %>
+                  <% :size => '600x400', %>
+                  <% :bar_colors => ['0088FF'], %>
+                  <% :title => "Work Status", %>
+                  <% :bg => 'EFEFEF', %>
+                  <% :legend => data_array_1, %>
+                  <% :data => [[1, 2, 3, 4, 5], [5, 4, 3, 2, 1] ], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => 10, %>
+                  <% :min_value => 0, %>
+                  <% :bar_width_and_spacing => [70,6], %>
+                  <% :axis_labels => label2, %>
+                  <% ) %>                
+
+<% test_data3 = Gchart.pie( %>
+                  <% :size => '600x400', %>
+                  <% :bar_colors => ['0088FF',:red, :blue, :orange, :green, :yellow], %>
+                  <% :title => "", %>
+                  <% :bg => 'EFEFEF', %>
+                  <% :legend => ['On-Hold','In-Progress','Done','Waiting','Behind Sch','Archived'], %>
+                  <% :data => [data_array_2], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => 50, %>
+                  <% :min_value => 0, %>
+                  <% :bar_width_and_spacing => [70,6], %>
+                  <% :axis_labels => ['On-Hold | In-Progress  | Done | Waiting | Behind Sch | Archived'] %>
+                  <% ) %>
+
+
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -74,13 +107,13 @@
     <div class="card-header" id="headingTwo">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Stats: Work Status
+          Complexity and Impact
         </button>
       </h5>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
-        <%= image_tag test_data %>
+        <%= image_tag test_data2 %>
       </div>
     </div>
   </div>
@@ -88,18 +121,18 @@
     <div class="card-header" id="headingThree">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Stats: Requests per Cycles
+          Stats: Work Status
         </button>
       </h5>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
-        <%= image_tag test_data %>
+        <%= image_tag test_data3 %>
       </div>
     </div>
   </div>
   <div class="card">
-    <div class="card-header" id="headingThree">
+    <div class="card-header" id="headingFour">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
           Recently updated In-Progress Cards
@@ -109,7 +142,10 @@
 
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
       <div class="card-body">
-        <div class="card" >
+      <div class="card" >
+
+
+
        <ul class="list-group list-group-flush">
    
         <% 
