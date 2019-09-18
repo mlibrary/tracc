@@ -1,11 +1,11 @@
 
-<h4><b><%= @one_card.i_or_p %>: <%= @one_card.title %></b></h4>
+<h4><b></b></h4>
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
     	<h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          Basic Info
+          <%= @one_card.i_or_p %>: <%= @one_card.title %>
         </button>
       </h5>
     </div>
