@@ -30,6 +30,12 @@ class Card < ActiveRecord::Base
 	time_constraints_array = []
 	time_constraints_array = time_constraints.split("__|__") unless time_constraints.nil?
 
+	# using gitle_tesim for search becasue according to Bill ti will:
+	# The deafult blacklight dynamic fields will interpret that as “string, stored, indexed”, so you’re not 
+	# going to get any tokenization, so the only searches that will work will be exact and full string 
+	# matches (including, e.g., punctuation and capitalization). 
+	# This is the case with title_ssi
+	# But with title_tesim you will get tokenization.
 
   	conn = Blacklight.default_index.connection
   	doc = { 
@@ -41,9 +47,10 @@ class Card < ActiveRecord::Base
 			'requester_div_ssim' => requester_div,
 			'contact_names_ssim' => contact_names,
 			'title_ssi' => title,
+			'title_tesim' => title,
+
 			'short_description_tsi' => short_description,
 			'prev_work_tsi' => prev_work,
-
 			'accomplish_ssim' => accomplish_array,
 			'benefits_ssim' => benefits_array,
 			'at_stake_ssim' => at_stake_array,
@@ -75,8 +82,7 @@ class Card < ActiveRecord::Base
 
 	  conn.add doc
 	  conn.commit			
-
-	
+      
     # SolrService.add(self.to_solr)
     # SolrService.commit
   end

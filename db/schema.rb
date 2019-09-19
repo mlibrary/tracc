@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_155309) do
     t.string "enthusiasm"
     t.string "knowledge"
     t.string "resource"
+    t.string "s_comments"
     t.string "investigation_scope"
     t.string "tech_knowledge"
     t.string "team_scope"
