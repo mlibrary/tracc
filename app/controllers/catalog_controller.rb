@@ -221,11 +221,19 @@ class CatalogController < ApplicationController
     #   }
     # end
 
-     config.add_search_field('title') do |field|
+    # using title_tesim for search becasue according to Bill ti will:
+    # The deafult blacklight dynamic fields will interpret that as “string, stored, indexed”, so you’re not 
+    # going to get any tokenization, so the only searches that will work will be exact and full string 
+    # matches (including, e.g., punctuation and capitalization). 
+    # This is the case with title_ssi
+    # But with title_tesim you will get tokenization.
+
+     config.add_search_field('title_ssi') do |field|
+       field.label = "Title"
        field.solr_parameters = {
          'spellcheck.dictionary': 'title',
-         qf: '${title_qf}',
-         pf: '${title_pf}'
+         qf: 'title_tesim',
+         pf: 'title_tesim'
        }
      end
 
