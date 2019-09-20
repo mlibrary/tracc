@@ -8,12 +8,17 @@ Rails.application.routes.draw do
       post :import_cycle_review, :export_cycle_review 
     end
   end  
-  resources :cards do
 
+  resources :cards do
     collection do
       get :import, :import_card, :import_complexity, :import_impact
     end
+  end
 
+  resources :assessment do
+    collection do
+      get :import
+    end
   end
 
   mount Blacklight::Engine => '/'
@@ -28,6 +33,7 @@ Rails.application.routes.draw do
   post 'cards/import_new_cards'
   post 'cards/import_complexity_ratings'
   post 'cards/import_impact_ratings'
+  post 'assessment/import_assessment'
 
 
   devise_for :users

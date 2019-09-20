@@ -127,7 +127,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
 
     # Card index fields
-    config.add_index_field 'title_ssi', label: 'Title'
+    #config.add_index_field 'title_ssi', label: 'Title'
     config.add_index_field 'short_name_ssi', label: 'Short Name'
     config.add_index_field 'requester_name_ssim', label: 'Requester'
     config.add_index_field 'request_type_ssi', label: 'Request Type'

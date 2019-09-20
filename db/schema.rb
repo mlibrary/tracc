@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_155309) do
+ActiveRecord::Schema.define(version: 2019_09_20_154012) do
+
+  create_table "assessments", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "q1"
+    t.string "q2"
+    t.string "q3"
+    t.string "q4"
+    t.string "q5"
+    t.string "q6"
+    t.string "q7"
+    t.string "q8"
+    t.string "user_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_assessments_on_card_id"
+  end
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
