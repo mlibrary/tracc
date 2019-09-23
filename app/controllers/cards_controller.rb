@@ -72,7 +72,7 @@ class CardsController < ApplicationController
     csv.each do |row|
      
     row_hash = row.to_hash
-    byebug
+    
 
     if (row_hash["Requests: INVESTIGATIONS"]) != nil
       title = row_hash["Requests: INVESTIGATIONS"]
