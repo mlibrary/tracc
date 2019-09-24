@@ -11,13 +11,20 @@ Rails.application.routes.draw do
 
   resources :cards do
     collection do
-      get :import, :import_card, :import_complexity, :import_impact
+      get :import, :import_card, :import_complexity, :import_impact, :advance_search
     end
   end
 
   resources :assessment do
     collection do
       get :import
+    end
+  end
+
+  resources :complexity do
+    collection do
+      get :index
+     
     end
   end
 
@@ -34,7 +41,7 @@ Rails.application.routes.draw do
   post 'cards/import_complexity_ratings'
   post 'cards/import_impact_ratings'
   post 'assessment/import_assessment'
-
+  post 'complexity/update'
 
   devise_for :users
   concern :exportable, Blacklight::Routes::Exportable.new
