@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :cards do
     collection do
-      get :import, :import_card, :import_complexity, :import_impact
+      get :import, :import_card, :import_complexity, :import_impact, :advance_search
     end
   end
 
@@ -35,7 +35,6 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
-    get :advance_search
   end
 
   post 'cards/import_new_cards'
