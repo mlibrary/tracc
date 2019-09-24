@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h4> Add/Update Complexity Rating </h4>
+
+<%= form_tag("update", :enctype =>"multipart/form-data") do %>
+
+<% cname = Cycle.all %>
+<% atype = ["Investigation", "Project"] %>
+<div class="row">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name")  %>
+  
+   </div>
+</div>
+<div class="row">
+    <div class="field">
+     <%= select_tag "activity_type", options_for_select([ "Investigations", "Projects" ], "Projects") %>
+  
+   </div>
+</div>
+   <div class="row">
+   <div class="actions">
+      <%= submit_tag 'Next' %>
+   </div>
+</div>
+<% end %>

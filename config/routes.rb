@@ -21,6 +21,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :complexity do
+    collection do
+      get :index
+     
+    end
+  end
+
   mount Blacklight::Engine => '/'
   concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
   root to: "catalog#index"
@@ -28,13 +35,14 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
+    get :advance_search
   end
 
   post 'cards/import_new_cards'
   post 'cards/import_complexity_ratings'
   post 'cards/import_impact_ratings'
   post 'assessment/import_assessment'
-
+  post 'complexity/update'
 
   devise_for :users
   concern :exportable, Blacklight::Routes::Exportable.new

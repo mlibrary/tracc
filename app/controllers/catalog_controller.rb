@@ -8,6 +8,7 @@ class CatalogController < ApplicationController
     @one_card = Card.find( params[:id] )   
   end
   
+   
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository

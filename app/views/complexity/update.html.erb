@@ -1,0 +1,22 @@
+<h4> Add/Update Complexity Rating </h4>
+
+
+
+<h5>Cycle: <%= params["cycle"] %></h5>
+<h5>Total found: <%= @all_cards.count %></h5>
+
+<div class="card">
+  <ul class="list-group list-group-flush">
+  <% @all_cards.each do |one_card| %>
+  <li class="list-group-item">
+  <div class="row">
+    <div class="col-sm-4"><%=one_card.title%></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"></div>
+  </div>
+  </li>
+ <% end  %>
+</ul>
+</div>
