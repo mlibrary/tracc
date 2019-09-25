@@ -14,6 +14,8 @@ ActiveRecord::Schema.define(version: 2019_09_20_154012) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
+    t.string "assessment_type"
+    t.string "cycle"
     t.string "q1"
     t.string "q2"
     t.string "q3"

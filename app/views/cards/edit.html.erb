@@ -1,7 +1,7 @@
 <div class="card edit">
 <h2>Update Card</h2>
 
-<%= form_for(@card) do |f| %>
+<%= form_for(@card_one) do |f| %>
   <table summamry="Card form fields" border="1" cellpadding="10px" cellspacing="5px">
   	
 	<tr>
@@ -97,7 +97,7 @@
 	  <td><%= f.text_field(:comments, size: 60) %></td>
 	</tr>
 
-<% details = @card.at_stake_details.split("__|__") %>
+<% details = @card_one.at_stake_details.split("__|__") %>
 <% count = 0 %>
 
 	<tr>
@@ -105,7 +105,7 @@
 	  <td>
         <% @at_stake_list.each do | value | %>
         <div>
-          <%= check_box_tag("card[at_stake][]", value, @card.at_stake.include?(value) ) %>
+          <%= check_box_tag("card[at_stake][]", value, @card_one.at_stake.include?(value) ) %>
           <%= value %>
          </div>
          <div>
@@ -116,7 +116,7 @@
       </td>
 	</tr>
 
-<% details = @card.non_tech_details.split("__|__") %>
+<% details = @card_one.non_tech_details.split("__|__") %>
 <% count = 0 %>
 
 	<tr>
@@ -124,7 +124,7 @@
 	  <td>
         <% @non_tech_list.each do | value | %>
         <div>
-          <%= check_box_tag("card[non_tech][]", value, @card.non_tech.include?(value) ) %>
+          <%= check_box_tag("card[non_tech][]", value, @card_one.non_tech.include?(value) ) %>
           <%= value %>
          </div>
          <div>
@@ -136,7 +136,7 @@
 	</tr>
 	
 	
-<% details = @card.accomplish_details.split("__|__") %>
+<% details = @card_one.accomplish_details.split("__|__") %>
 <% count = 0 %>
 
 	<tr>
@@ -144,7 +144,7 @@
 	  <td>
         <% @accomplish_list.each do | value | %>
         <div>
-          <%= check_box_tag("card[accomplish][]", value, @card.accomplish.include?(value) ) %>
+          <%= check_box_tag("card[accomplish][]", value, @card_one.accomplish.include?(value) ) %>
           <%= value %>
          </div>
          <div>
@@ -159,7 +159,7 @@
 	
 
 
-<% details = @card.time_constraints_details.split("__|__") %>
+<% details = @card_one.time_constraints_details.split("__|__") %>
 <% count = 0 %>
 
 	<tr>
@@ -167,7 +167,7 @@
 	  <td>
         <% @time_constraints_list.each do | value | %>
         <div>
-          <%= check_box_tag("card[time_constraints][]", value, @card.time_constraints.include?(value) ) %>
+          <%= check_box_tag("card[time_constraints][]", value, @card_one.time_constraints.include?(value) ) %>
           <%= value %>
          </div>
          <div>
@@ -178,7 +178,7 @@
       </td>
 	</tr>
 
-<% details = @card.ext_pressure_details.split("__|__") %>
+<% details = @card_one.ext_pressure_details.split("__|__") %>
 <% count = 0 %>
 
 	<tr>
@@ -186,7 +186,7 @@
 	  <td>
         <% @ext_pressure_list.each do | value | %>
         <div>
-          <%= check_box_tag("card[ext_pressure][]", value, @card.ext_pressure.include?(value) ) %>
+          <%= check_box_tag("card[ext_pressure][]", value, @card_one.ext_pressure.include?(value) ) %>
           <%= value %>
          </div>
          <div>
@@ -198,7 +198,7 @@
 	</tr>
 
 
-<% details = @card.benefits_details.split("__|__") %>
+<% details = @card_one.benefits_details.split("__|__") %>
 <% count = 0 %>
 
 	<tr>
@@ -206,7 +206,7 @@
 	  <td>
         <% @benefits_list.each do | value | %>
         <div>
-          <%= check_box_tag("card[benefits][]", value, @card.benefits.include?(value) ) %>
+          <%= check_box_tag("card[benefits][]", value, @card_one.benefits.include?(value) ) %>
           <%= value %>
          </div>
          <div>
@@ -228,5 +228,5 @@
 
 <% end %>
 </div>
-<%= link_to 'Show', @card %> |
+<%= link_to 'Show', @card_one %> |
 <%= link_to 'Back', cards_path %>
