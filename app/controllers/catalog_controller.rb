@@ -4,8 +4,100 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
 
-   def show
-    @one_card = Card.find( params[:id] )   
+  def setup_for_display
+
+    @at_stake_list = Array.new
+    @at_stake_list << "It will place the Library at risk"
+    @at_stake_list << "It will leave the Library at a competitive disadvantage"
+    @at_stake_list << "It will create or perpetuate a gap or a less efficient workaround"
+    @at_stake_list << "Other"
+
+    @accomplish_list = Array.new
+    @accomplish_list << "Advance Library/campus strategic initiative"
+    @accomplish_list << "Improve outward-facing Library services or processes"
+    @accomplish_list << "Improve internal operational efficiency"
+    @accomplish_list << "Enhance the Library's reputation"
+    @accomplish_list << "Other"
+
+    @benefits_list = Array.new
+    @benefits_list << "Students"
+    @benefits_list << "Faculty & Researchers"
+    @benefits_list << "UM Library Staff" 
+    @benefits_list << "Stakeholders of other UM campus units"           
+    @benefits_list << "External partners"   
+    @benefits_list << "Researchers and Students beyond UM"
+    @benefits_list << "Other"
+
+    @ext_pressure_list = Array.new
+    @ext_pressure_list << "Political"
+    @ext_pressure_list << "Reputation & Integrity"
+    @ext_pressure_list << "Timeliness"
+    @ext_pressure_list << "Financial"    
+    @ext_pressure_list << "Legal"
+    @ext_pressure_list << "Other"
+
+    @non_tech_list = Array.new
+    @non_tech_list << "Service model change"
+    @non_tech_list << "New workflows, processes, or other organizational changes"
+    @non_tech_list << "Hard to get people on board"
+    @non_tech_list << "Need for new training programs and documentation"
+    @non_tech_list << "Other"
+
+    @time_constraints_list = Array.new
+    @time_constraints_list << "Grant or award"
+    @time_constraints_list << "University or department mandate"
+    @time_constraints_list << "External collaborations"
+    @time_constraints_list << "Compliance"
+    @time_constraints_list << "None/Other"
+   
+    @card_one = Card.find( params[:id] )
+    if @card_one.at_stake.nil?
+      @card_one.at_stake =""
+    end 
+    if @card_one.at_stake_details.nil?
+      @card_one.at_stake_details =""
+    end 
+
+    if @card_one.non_tech.nil?
+      @card_one.non_tech =""
+    end 
+    if @card_one.non_tech_details.nil?
+      @card_one.non_tech_details =""
+    end 
+
+    if @card_one.accomplish.nil?
+      @card_one.accomplish =""
+    end 
+    if @card_one.accomplish_details.nil?
+      @card_one.accomplish_details =""
+    end 
+
+    if @card_one.time_constraints.nil?
+      @card_one.time_constraints =""
+    end 
+    if @card_one.time_constraints_details.nil?
+      @card_one.time_constraints_details =""
+    end 
+
+    if @card_one.ext_pressure.nil?
+      @card_one.ext_pressure =""
+    end 
+    if @card_one.ext_pressure_details.nil?
+      @card_one.ext_pressure_details =""
+    end  
+
+    if @card_one.benefits.nil?
+      @card_one.benefits =""
+    end 
+    if @card_one.benefits_details.nil?
+      @card_one.benefits_details =""
+    end  
+
+  end
+
+  def show
+    @one_card = Card.find( params[:id] ) 
+    setup_for_display  
   end
   
    
