@@ -1,22 +1,96 @@
+<h4></h4>
 <h4> Add/Update Complexity Rating </h4>
 
+<% cnt=0 
+#   cost <%=one_card.operational     
+
+%>
+
+<% if (params['activity_type'] == "Investigations") %>
+<h5> <%= params["cycle"] %> Investigations: </h5>
+   <div class="table">
+    <table class="table-bordered">
+      <thead><th width="33%">Title</th>
+        <th width="7%">Investigation<br>Scope</th>
+        <th width="7%">Technical <br>Knowledge/Expertise</th>
+        <th width="7%">Team Scope</th>
+        <th width="7%">Total Complexity Score</th>
+        <th width="7%">Cost</th>
+        <th width="7%">Divergence from Platform</th>
+        <th width="7%">Total Cost Score</th>
+        <th width="7%">Weighted Effort Score</th>
+      </thead>
+      <% 
+        cnt = 0
+        @all_cards.each do |one_card|
+        if (one_card.i_or_p == "Investigation")
+          cnt+=1
+      %>
+        <tr>
+          <td width="30%"><%= cnt %>. <%=one_card.title%></td>
+          <td width="7%"><%=one_card.investigation_scope %></td>
+          <td width="7%"><%=one_card.tech_knowledge %></td>
+          <td width="7%"><%=one_card.team_scope %></td>
+          <td width="7%"><%=one_card.total_complexity_score %></td>
+          <td width="7%"><%=one_card.cost %></td>
+          <td width="7%"><%=one_card.divergence %></td>
+          <td width="7%"><%=one_card.total_cost_score %></td>
+          <td width="7%"><%=one_card.weighted_score %></td>
+        </tr>
+        <%end%>
+      <% end %>
+
+   </table>
+   </div>
+
+<% else %>
 
 
-<h5>Cycle: <%= params["cycle"] %></h5>
-<h5>Total found: <%= @all_cards.count %></h5>
+  <h5> <%= params["cycle"] %> Projects: </h5> 
+  
+    <div class="table">
+    <table class="table-bordered">
+      <thead><th width="33%">Title</th>
+        <th width="7%">Infra-<br>structure</th>
+        <th width="7%">Applica-<br>tion</th>
+        <th width="7%">Front <br>End <br>Dev/Design</th>
+        <th width="7%">Data & Content</th>
+        <th width="7%">Team Scope</th>
+        <th width="7%">Total Complexity Score</th>
+        <th width="7%">Staff<br> Resour-<br>ces</th>
+        <th width="7%">Diver-<br>gence from Platform</th>
+        <th width="7%">Money</th>
+        <th width="7%">Opera-<br>tional</th>
+        <th width="7%">Total Cost Score</th>
+        <th width="7%">Weighted Effort Score</th>
+      </thead>
+      <% 
+        cnt = 0
+        @all_cards.each do |one_card|
+        if (one_card.i_or_p == "Project")
+          cnt+=1
+      %>
+        <tr>
+          <td width="30%"><%= cnt %>. <%=one_card.title%></td>
+          <td width="7%"><%=one_card.infrastructure %></td>
+          <td width="7%"><%=one_card.application %></td>
+          <td width="7%"><%=one_card.front_end %></td>
+          <td width="7%"><%=one_card.data_content %></td>
+          <td width="7%"><%=one_card.team_scope %></td>
+          <td width="7%"><%=one_card.total_complexity_score %></td>
+          <td width="7%"><%=one_card.staff_resources %></td>
+          <td width="7%"><%=one_card.divergence %></td>
+          <td width="7%"><%=one_card.money %></td>
+          <td width="7%"><%=one_card.operational %></td>
+          <td width="7%"><%=one_card.total_cost_score %></td>
+          <td width="7%"><%=one_card.weighted_score %></td>
+        </tr>
+        <%end%>
+      <% end %>
 
-<div class="card">
-  <ul class="list-group list-group-flush">
-  <% @all_cards.each do |one_card| %>
-  <li class="list-group-item">
-  <div class="row">
-    <div class="col-sm-4"><%=one_card.title%></div>
-    <div class="col-sm-2"></div>
-    <div class="col-sm-2"></div>
-    <div class="col-sm-2"></div>
-    <div class="col-sm-2"></div>
-  </div>
-  </li>
- <% end  %>
-</ul>
-</div>
+   </table>
+   </div>
+  
+
+<%end%>
+
