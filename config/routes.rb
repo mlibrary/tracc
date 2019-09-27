@@ -23,8 +23,14 @@ Rails.application.routes.draw do
 
   resources :complexity do
     collection do
-      get :index
-     
+      get :index  
+    end
+  end
+
+  resources :reports do
+    collection do
+      get :index  
+      post :generate 
     end
   end
 

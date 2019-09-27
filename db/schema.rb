@@ -10,12 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_20_154012) do
+ActiveRecord::Schema.define(version: 2019_09_26_183428) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
-    t.string "assessment_type"
-    t.string "cycle"
     t.string "q1"
     t.string "q2"
     t.string "q3"
@@ -170,6 +168,11 @@ ActiveRecord::Schema.define(version: 2019_09_20_154012) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_impacts_on_card_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "searches", force: :cascade do |t|
