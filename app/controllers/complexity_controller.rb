@@ -1,4 +1,5 @@
 class ComplexityController < ApplicationController
+	protect_from_forgery with: :null_session
 
 	def edit
 		cycle =  params["cycle"]
