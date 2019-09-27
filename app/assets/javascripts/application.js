@@ -22,4 +22,6 @@
 //= require bootstrap
 //= require blacklight/blacklight
 
+//= require misc
+
 //= require_tree .
