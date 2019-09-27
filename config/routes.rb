@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   post 'cards/import_complexity_ratings'
   post 'cards/import_impact_ratings'
   post 'assessment/import_assessment'
+  post 'complexity/edit'
   post 'complexity/update'
 
   devise_for :users
