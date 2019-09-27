@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
+<h5>Reports: Charts</h5>
 
-<h4> Add/Update Complexity Rating </h4>
+
 
 <% cname = Cycle.all %>
-<% atype = ["Investigation", "Project"] %>
+
 
 <div class="card">
-  <h2></h2>
+	<h2></h2>
 
-<%= form_tag("complexity/edit", :enctype =>"multipart/form-data") do %>
+<%= form_tag("reports/generate", :enctype =>"multipart/form-data") do %>
   <div class="form-group">
     <label class="control-label col-sm-2" for="email">Cycle:</label>
     <div class="col-sm-10">
@@ -24,14 +24,9 @@
   
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary">Next</button>
+      <button type="submit" class="btn btn-primary">Generate</button>
     </div>
   </div>
-</form>
+
 </div>
-<%end%>
-
-
-
-
-
+<% end %>
