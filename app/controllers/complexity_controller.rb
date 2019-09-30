@@ -6,7 +6,7 @@ class ComplexityController < ApplicationController
 
 	def edit
 		cycle =  params["cycle"]
-		#@all_cards = Card.where( "in_cycle LIKE ?",cycle) 
+		@all_cards = Card.where( "in_cycle LIKE ?",cycle) 
 		
 		#For testing this is useful in cases where there is no value in_cycle field.
 		#@all_cards = Card.all 
