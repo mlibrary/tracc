@@ -31,14 +31,16 @@
       %>
         <tr>
           <td width="30%"><%= cnt %>. <%=one_card.title%></td>
-          <td width="7%"><%= select_tag "investigation_scope_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.investigation_scope) %></td>
-          <td width="7%"><%= select_tag "tech_knowledge_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.tech_knowledge) %></td>
-          <td width="7%"><%= select_tag "team_scope_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.team_scope) %></td>
+          <% proc = "update_score(" + one_card.id.to_s  + ")" %>
+          <td width="7%"><%= select_tag "investigation_scope_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.investigation_scope), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "tech_knowledge_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.tech_knowledge), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "team_scope_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.team_scope), :onchange => proc %></td>
 
-          <td width="7%"><%=one_card.total_complexity_score %></td>
+          <% type = "total_complexity_score_" +  one_card.id.to_s %>
+          <td id="<%=type%>" width="7%"><%=one_card.total_complexity_score %></td>
           <td width="7%"><%=one_card.cost %></td>
 
-          <td width="7%"><%= select_tag "divergence_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.divergence) %></td>  
+          <td width="7%"><%= select_tag "divergence_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.divergence), :onchange => proc %></td>  
 
           <td width="7%"><%=one_card.total_cost_score %></td>
           <td width="7%"><%=one_card.weighted_score %></td>
@@ -84,18 +86,20 @@
         <tr>
           <td width="30%"><%= cnt %>. <%=one_card.title%></td>
 
-          <td width="7%"><%= select_tag "infrastructure_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.infrastructure) %></td>
-          <td width="7%"><%= select_tag "application_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.application) %></td>
-          <td width="7%"><%= select_tag "front_end_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.front_end) %></td>
-          <td width="7%"><%= select_tag "data_content_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.data_content) %></td>
-          <td width="7%"><%= select_tag "team_scope_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.team_scope) %></td>
+          <% proc = "update_score(" + one_card.id.to_s  + ")" %>
+          <td width="7%"><%= select_tag "infrastructure_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.infrastructure), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "application_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.application), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "front_end_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.front_end), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "data_content_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.data_content), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "team_scope_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.team_scope), :onchange => proc %></td>
 
-          <td width="7%"><%=one_card.total_complexity_score %></td>
+          <% type = "total_complexity_score_" +  one_card.id.to_s %>
+          <td id="<%=type%>" width="7%"><%=one_card.total_complexity_score %></td>
           
-          <td width="7%"><%= select_tag "staff_resources_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.staff_resources) %></td>
-          <td width="7%"><%= select_tag "divergence_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.divergence) %></td>
-          <td width="7%"><%= select_tag "money_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.money) %></td>
-          <td width="7%"><%= select_tag "operational_" +  one_card.id.to_s, options_for_select(['', 'low-medium', 'low', 'medium-high', 'high'], one_card.operational) %></td>
+          <td width="7%"><%= select_tag "staff_resources_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.staff_resources), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "divergence_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.divergence), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "money_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.money), :onchange => proc %></td>
+          <td width="7%"><%= select_tag "operational_" +  one_card.id.to_s, options_for_select([['',0], ['low', 1], ['low-medium', 2], ['medium', 3], ['medium-high', 4], ['high', 5]], one_card.operational), :onchange => proc %></td>
           
 
           <td width="7%"><%=one_card.total_cost_score %></td>
