@@ -40,7 +40,7 @@
 
   <% test_data = Gchart.bar( %>
                   <% :size => '600x400', %>
-                  <% :bar_colors => ['0088FF'], %>
+                  <% :bar_colors => ['ec8f6e'], %>
                   <% :title => "Cycles and Requests", %>
                   <% :bg => 'EFEFEF', %>
                   <% :legend => data_array_1, %>
@@ -56,7 +56,7 @@
 
   <% test_data2 = Gchart.line( %>
                   <% :size => '600x400', %>
-                  <% :bar_colors => ['0088FF'], %>
+                  <% :bar_colors => ['ec8f6e'], %>
                   <% :title => "Work Status", %>
                   <% :bg => 'EFEFEF', %>
                   <% :legend => data_array_1, %>
@@ -70,11 +70,11 @@
                   <% :axis_labels => label2, %>
                   <% ) %>                
 
-<% test_data3 = Gchart.pie( %>
+<% test_data3 = Gchart.pie_3d( %>
                   <% :size => '600x400', %>
-                  <% :bar_colors => ['0088FF',:red, :blue, :orange, :green, :yellow], %>
-                  <% :title => "", %>
-                  <% :bg => 'EFEFEF', %>
+                  <% :title => "Work Status", %>
+                  <% :bar_colors => ['ec8f6e'], %>
+                  <% :bg => 'ffffff', %>
                   <% :legend => ['On-Hold','In-Progress','Done','Waiting','Behind Sch','Archived'], %>
                   <% :data => [data_array_2], %>
                   <% :stacked => false, %>
