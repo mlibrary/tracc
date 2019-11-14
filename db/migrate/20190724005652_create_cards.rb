@@ -3,6 +3,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
     create_table :cards do |t|
 
       t.string :request_type
+      t.string :card_type # strategic, grant funder and more
       t.string :i_or_p
       t.string :requester_name
       t.string :requester_fname
