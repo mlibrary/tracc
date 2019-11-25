@@ -5,6 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+User.create(name:'Nabeela Jaffer',email:'njaffer@umich.edu',password: 'topsecret')
+
+
 Cycle.create(cycle_name:'FY18:1',start:'July 2017',end:'Oct 2017',current_cycle:0)
 Cycle.create(cycle_name:'FY18:2',start:'Nov 2017',end:'Feb 2018',current_cycle:0)
 Cycle.create(cycle_name:'FY18:3',start:'Mar 2018',end:'Jun 2018',current_cycle:0)
@@ -121,7 +126,6 @@ Card.create(title:'Millennium Project websites',short_name:'Millennium websites'
 Card.create(title:'Non-HLB Expertise',short_name:'Non-HLB expertise',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'none')
 Card.create(title:'Catalog Search Holdings Redesign',short_name:'Catalog Search Holdings',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'none')
 #Card.create(title:'',short_name:'Common Libraries',i_or_p:'Project',in_cycle:'FY20:1',start_cycle:'')
-
 
 
 
