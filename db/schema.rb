@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_26_183428) do
+ActiveRecord::Schema.define(version: 2019_11_22_173156) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -173,6 +173,15 @@ ActiveRecord::Schema.define(version: 2019_09_26_183428) do
     t.index ["card_id"], name: "index_impacts_on_card_id"
   end
 
+  create_table "milestones", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "milestone"
+    t.integer "status"
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reports", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -201,6 +210,7 @@ ActiveRecord::Schema.define(version: 2019_09_26_183428) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

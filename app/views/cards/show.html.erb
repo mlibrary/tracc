@@ -1,5 +1,11 @@
-
+#cards/show
 <h4><b></b></h4>
+
+<div class="row">
+  <div class="col-lg-8">one</div>
+  <div class="col-lg-4">tow</div>
+</div>
+
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -16,6 +22,7 @@
        
        <li class="list-group-item"> Request Type: <%= @card_one.request_type %></li> 
        <li class="list-group-item">Requester: <%= @card_one.requester_name%> Division: <%=@card_one.requester_div%> Email:  <%= @card_one.requester_email  %></li>
+     </ul>
      </div>
    </div>
     <div class="card">
@@ -30,7 +37,7 @@
       <div class="card-body">
          <ul class="list-group list-group-flush">
   	   <li class="list-group-item">Description: <%= @card_one.short_description %></li>	
-
+       </ul>
 
   <table summamry="Card form fields" border="5" cellpadding="10px" cellspacing="5px">
   <% details = @card_one.at_stake_details.split("__|__") %>
@@ -253,6 +260,12 @@
     </div>
   </div>
 </div>
+
+  
+
+
+
+
 
 
       
