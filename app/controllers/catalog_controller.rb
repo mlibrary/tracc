@@ -105,7 +105,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'lit_dept_ssim', label: 'Card LIT Dept', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'service_lead_ssim', label: 'Card Service Lead', limit: true, index_range: 'A'..'Z'
 
-    config.add_facet_field 'accomplish_ssim', label: 'Accomplished', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'accomplish_ssim', label: 'Accomplished', limit: true, index_range: 'A'..'Z'
     #config.add_facet_field 'benefits_ssim', label: 'Benefits', limit: true, index_range: 'A'..'Z'
     #config.add_facet_field 'at_stake_ssim', label: 'At Stake', limit: true, index_range: 'A'..'Z'
     #config.add_facet_field 'ext_pressure_sism', label: 'External Pressure', limit: true, index_range: 'A'..'Z'

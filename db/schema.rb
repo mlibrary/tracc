@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_22_173156) do
+ActiveRecord::Schema.define(version: 2019_12_03_142221) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_173156) do
   create_table "milestones", force: :cascade do |t|
     t.integer "card_id"
     t.string "milestone"
+    t.string "cycle"
     t.integer "status"
     t.datetime "recorded_on"
     t.datetime "created_at", null: false
@@ -194,6 +195,15 @@ ActiveRecord::Schema.define(version: 2019_11_22_173156) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.integer "status_id"
+    t.string "status"
+    t.string "cycle"
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "strategic_sortings", force: :cascade do |t|

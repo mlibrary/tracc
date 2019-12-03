@@ -1,232 +1,157 @@
-<div class="card edit">
-<h2>Update Card</h2>
 
+
+
+ 
 <%= form_for(@card_one) do |f| %>
-  <table summamry="Card form fields" border="1" cellpadding="10px" cellspacing="5px">
-  	
-	<tr>
-	  <th>request_type</th>
-	  <td><%= f.text_field(:request_type, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>i_or_p</th>
-	  <td><%= f.text_field(:i_or_p, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>requester_name</th>
-	  <td><%= f.text_field(:requester_name, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>requester_email</th>
-	  <td><%= f.text_field(:requester_email, size: 60) %></td>
-	</tr>	
-	<tr>
-	  <th>requester_div</th>
-	  <td><%= f.text_field(:requester_div, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>contact_names</th>
-	  <td><%= f.text_field(:contact_names, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>title</th>
-	  <td><%= f.text_field(:title, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>short_description</th>
-	  <td><%= f.text_field(:short_description, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>prev_work</th>
-	  <td><%= f.text_field(:prev_work, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>goal_alignment</th>
-	  <td><%= f.text_field(:goal_alignment, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>priority</th>
-	  <td><%= f.text_field(:priority, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>sponsor</th>
-	  <td><%= f.text_field(:sponsor, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>more_info</th>
-	  <td><%= f.text_field(:more_info, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>short_name</th>
-	  <td><%= f.text_field(:short_name, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>in_cycle</th>
-	  <td><%= f.text_field(:in_cycle, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>start_cycle</th>
-	  <td><%= f.text_field(:start_cycle, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>done_cycle</th>
-	  <td><%= f.text_field(:done_cycle, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>card_status</th>
-	  <td><%= f.text_field(:card_status, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>ext_link</th>
-	  <td><%= f.text_field(:ext_link, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>lit_lead</th>
-	  <td><%= f.text_field(:lit_lead, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>service_lead</th>
-	  <td><%= f.text_field(:service_lead, size: 60) %></td>
-	</tr>
-	<tr>
-	  <th>other_contacts</th>
-	  <td><%= f.text_field(:other_contacts, size: 60) %></td>
-	</tr>
-    <tr>
-	  <th>comments</th>
-	  <td><%= f.text_field(:comments, size: 60) %></td>
-	</tr>
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <p><strong>Edit Card:  <%= @card_one.short_name %></strong></p>
+      <p> [<%= link_to 'Show Card Info', @card_one %> | <%= link_to 'Back To All Cards', cards_path %>]</p>
+      <p style="margin-top: 20px;">Title<br><%= f.text_field(:title, size: 100) %></p>
+      <p>Short Name:<br><%= f.text_field(:short_name, size: 60) %></p>
+      <p>Description: <br><%= f.text_area(:short_description,  cols: "100", rows: "5") %></p>
 
-<% details = @card_one.at_stake_details.split("__|__") %>
-<% count = 0 %>
-
-	<tr>
-	  <th>at_stake</th>
-	  <td>
-        <% @at_stake_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[at_stake][]", value, @card_one.at_stake.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[at_stake_details][]", details[count], cols: 60, rows: 4 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
-      </td>
-	</tr>
-
-<% details = @card_one.non_tech_details.split("__|__") %>
-<% count = 0 %>
-
-	<tr>
-	  <th>non_tech</th>
-	  <td>
-        <% @non_tech_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[non_tech][]", value, @card_one.non_tech.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[non_tech_details][]", details[count], cols: 60, rows: 4 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
-      </td>
-	</tr>
-	
+      <p>Status: <br><%= f.text_field(:card_status, size: 100) %></p>
+      <p>LIT Contact:<br><%= f.text_field(:lit_lead, size: 100) %></p>
+      <p>Service Lead: <br><%= f.text_field(:service_lead, size: 100) %></p>
+      <p>Request Type<i>[New Service, Service Improvement, Consultation, Other]</i><br> <%= f.text_field(:request_type, size: 100) %></p>
+      <p>Activity Type: <i>[Investigation, Project, TASC Investigation]</i><br> <%= f.text_field(:i_or_p, size: 100) %></p>
+	  <p>In Cycle: <br><%= f.text_field(:in_cycle, size: 100) %></p>
+	  <p>Start Cycle:<br><%= f.text_field(:start_cycle, size: 100) %></p>
+      <p>Done Cycle:<br><%= f.text_field(:done_cycle, size: 100) %></p>
+	</div>
+	<div class="card-body">
+		<div class="row"><div class="col-lg-12">
+			<p><strong>DETAILS:</strong></p>
+		</div></div>
+		<p>Requester Name:</br><%= f.text_field(:requester_name, size: 100) %></p>
+		<p>Requester Email:<br> <%= f.text_field(:requester_email, size: 100) %></p>
+		<p>Requester Division:<br><%= f.text_field(:requester_div, size: 100) %></p>
+		<p>Main Contact:<br><%= f.text_field(:contact_names, size: 100) %></p>
+		<p>Addiotnal Contacts:<br><%= f.text_field(:other_contacts, size: 100) %></p>
+		
+		<p>List any previous work:<br><%= f.text_field(:prev_work, size: 100) %>
+		<p>Goal Alignment:<br><%= f.text_field(:goal_alignment, size: 100) %></p>
+		<p>Priority:<br><%= f.text_field(:priority, size: 100) %></p>
+		<p>Sponsor:<br><%= f.text_field(:sponsor, size: 100) %></p>
+		<p>Link:<br><%= f.text_field(:ext_link, size: 100) %></p>
+		<%#<p>Additional Comments:<br><%= f.text_field(:comments, size: 100) %>
+		<p>Additional Comments:<br><%= f.text_field(:more_info, size: 100) %></p>
 	
 <% details = @card_one.accomplish_details.split("__|__") %>
 <% count = 0 %>
 
-	<tr>
-	  <th>accomplish</th>
-	  <td>
+	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What do you hope to accomplish with this proposal?* Fill in the text boxes when relevant</strong></div></div>
+	
         <% @accomplish_list.each do | value | %>
         <div>
           <%= check_box_tag("card[accomplish][]", value, @card_one.accomplish.include?(value) ) %>
           <%= value %>
          </div>
          <div>
-	        <%= text_area_tag("card[accomplish_details][]", details[count], cols: 60, rows: 4 ) %>        	
+	        <%= text_area_tag("card[accomplish_details][]", details[count], cols: 100, rows: 2 ) %>        	
          </div>
          <% count = count + 1 %>
         <% end %>
-      </td>
-	</tr>
-
-
 	
-
-
-<% details = @card_one.time_constraints_details.split("__|__") %>
-<% count = 0 %>
-
-	<tr>
-	  <th>time_constraints</th>
-	  <td>
-        <% @time_constraints_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[time_constraints][]", value, @card_one.time_constraints.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[time_constraints_details][]", details[count], cols: 60, rows: 4 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
-      </td>
-	</tr>
-
-<% details = @card_one.ext_pressure_details.split("__|__") %>
-<% count = 0 %>
-
-	<tr>
-	  <th>ext_pressure</th>
-	  <td>
-        <% @ext_pressure_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[ext_pressure][]", value, @card_one.ext_pressure.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[ext_pressure_details][]", details[count], cols: 60, rows: 4 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
-      </td>
-	</tr>
-
-
 <% details = @card_one.benefits_details.split("__|__") %>
 <% count = 0 %>
-
-	<tr>
-	  <th>benefits</th>
-	  <td>
+ 
+	<div class="row" style="margin-top:20px;margin-bottom:10px;"><div class="col-lg-12"><strong>Who will this work directly benefit?* Fill in the text boxes when relevant</strong></div></div>
+	  
         <% @benefits_list.each do | value | %>
         <div>
           <%= check_box_tag("card[benefits][]", value, @card_one.benefits.include?(value) ) %>
           <%= value %>
          </div>
          <div>
-	        <%= text_area_tag("card[benefits_details][]", details[count], cols: 60, rows: 4 ) %>        	
+	        <%= text_area_tag("card[benefits_details][]", details[count], cols: 100, rows: 2 ) %>        	
          </div>
          <% count = count + 1 %>
         <% end %>
-      </td>
-	</tr>		
+
+<% details = @card_one.at_stake_details.split("__|__") %>
+<% count = 0 %>
+
+	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What is at stake if we do not do this work?* Fill in the text boxes when relevant</strong></div></div>
+	  
+        <% @at_stake_list.each do | value | %>
+
+        <div>
+          <%= check_box_tag("card[at_stake][]", value, @card_one.at_stake.include?(value) ) %>
+          <%= value %>
+         </div>
+         <div>
+	        <%= text_area_tag("card[at_stake_details][]", details[count], cols: 100, rows: 2 ) %>        	
+         </div>
+         <% count = count + 1 %>
+        <% end %>
+    
+<% details = @card_one.ext_pressure_details.split("__|__") %>
+<% count = 0 %>
+
+	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What external pressures are weighing on this proposal?* Fill in the text boxes when relevant</strong></div></div>
+	  
+        <% @ext_pressure_list.each do | value | %>
+        <div>
+          <%= check_box_tag("card[ext_pressure][]", value, @card_one.ext_pressure.include?(value) ) %>
+          <%= value %>
+         </div>
+         <div>
+	        <%= text_area_tag("card[ext_pressure_details][]", details[count], cols: 100, rows: 2 ) %>        	
+         </div>
+         <% count = count + 1 %>
+        <% end %>
+    
+
+
+<% details = @card_one.non_tech_details.split("__|__") %>
+<% count = 0 %>
+
+	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What non-technical needs might affect this work?* Fill in the text boxes when relevant</strong></div></div>
+	  
+        <% @non_tech_list.each do | value | %>
+        <div>
+          <%= check_box_tag("card[non_tech][]", value, @card_one.non_tech.include?(value) ) %>
+          <%= value %>
+         </div>
+         <div>
+	        <%= text_area_tag("card[non_tech_details][]", details[count], cols: 100, rows: 2 ) %>        	
+         </div>
+         <% count = count + 1 %>
+        <% end %>
+     
+	
+	
+
+    
+
+<% details = @card_one.time_constraints_details.split("__|__") %>
+<% count = 0 %>
+
+	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>Are there any time constraints?* Fill in the text boxes when relevant</strong></div></div>
+	
+        <% @time_constraints_list.each do | value | %>
+        <div>
+          <%= check_box_tag("card[time_constraints][]", value, @card_one.time_constraints.include?(value) ) %>
+          <%= value %>
+         </div>
+         <div>
+	        <%= text_area_tag("card[time_constraints_details][]", details[count], cols: 100, rows:2 ) %>        	
+         </div>
+         <% count = count + 1 %>
+        <% end %>
+    
 
 
 
-
-  </table>
-
+   
   <div class="form-buttons">
     <%= f.submit("Update Card") %>
   </div>
 
 <% end %>
 </div>
-<%= link_to 'Show', @card_one %> |
-<%= link_to 'Back', cards_path %>
+</div>
+
+
