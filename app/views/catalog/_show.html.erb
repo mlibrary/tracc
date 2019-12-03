@@ -1,0 +1,18 @@
+
+<% doc_presenter = show_presenter(document) %>
+<div class="card">
+    <div class="card-header">
+      <h2 class="mb-0 h6">Details:</h2>
+    </div>
+    <div class="card-body">
+
+<%# default partial to display solr document fields in catalog show view -%>
+
+    <% doc_presenter.fields_to_render.each do |field_name, field| -%>
+    <div class="row" style="margin-bottom:20px;">
+      <div class="col-md-3"><%= render_document_show_field_label document, field: field_name %></div>
+      <div class="col-md-9"><%= doc_presenter.field_value field %></div>
+    </div>
+    <% end -%>
+  </div>
+</div>
