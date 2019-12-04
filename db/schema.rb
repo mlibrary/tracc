@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_142221) do
+ActiveRecord::Schema.define(version: 2019_12_03_193244) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -163,6 +163,14 @@ ActiveRecord::Schema.define(version: 2019_12_03_142221) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dependencies", force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "dependent_on"
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "impacts", force: :cascade do |t|
     t.integer "card_id"
     t.string "status"
@@ -184,6 +192,14 @@ ActiveRecord::Schema.define(version: 2019_12_03_142221) do
   end
 
   create_table "reports", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "resources"
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

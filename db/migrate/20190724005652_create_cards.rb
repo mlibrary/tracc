@@ -41,7 +41,8 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :rationale
       t.string :ext_link
       t.string :lit_lead
-      t.string :lit_depts    
+      t.string :lit_depts   
+      t.string :primary_dept 
       t.string :service_lead
       t.string :other_contacts
       t.string :comments
