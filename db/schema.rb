@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_12_03_193244) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
     t.string "assessment_type"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.index ["card_id"], name: "index_assessments_on_card_id"
   end
 
-  create_table "bookmarks", force: :cascade do |t|
+  create_table "bookmarks", id: :serial, force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "user_type"
     t.string "document_id"
@@ -83,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.string "ext_link"
     t.string "lit_lead"
     t.string "lit_depts"
+    t.string "primary_dept"
     t.string "service_lead"
     t.string "other_contacts"
     t.string "comments"
@@ -117,7 +121,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.string "impact_notes"
     t.datetime "card_since"
     t.datetime "last_update_comment"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -126,7 +130,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.integer "card_id"
     t.string "uemail"
     t.string "comment_txt"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -135,7 +139,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.integer "card_id"
     t.string "status"
     t.string "comments"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_complexities_on_card_id"
@@ -166,7 +170,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
   create_table "dependencies", force: :cascade do |t|
     t.integer "card_id"
     t.integer "dependent_on"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -175,7 +179,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.integer "card_id"
     t.string "status"
     t.string "comments"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_impacts_on_card_id"
@@ -186,7 +190,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.string "milestone"
     t.string "cycle"
     t.integer "status"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -199,12 +203,12 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
   create_table "resources", force: :cascade do |t|
     t.integer "card_id"
     t.string "resources"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "searches", force: :cascade do |t|
+  create_table "searches", id: :serial, force: :cascade do |t|
     t.binary "query_params"
     t.integer "user_id"
     t.string "user_type"
@@ -217,7 +221,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.integer "status_id"
     t.string "status"
     t.string "cycle"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -229,7 +233,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.string "knowledge"
     t.string "resource"
     t.string "comments"
-    t.datetime "recorded_on"
+    t.datetime "recorded_on", default: -> { "now()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_strategic_sortings_on_card_id"
