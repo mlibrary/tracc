@@ -1,25 +1,34 @@
 <%#= link_to 'Edit', edit_card_path(@card) %> 
 <%#= link_to 'Back', cards_path %>
-<h4> Import Cards </h4>
+
+
 
 <%= form_tag("import_new_cards", :enctype =>"multipart/form-data") do %>
-   <div class="row">
+<div class="card">
+  <div class="card-header">
+    <h4> Import Cards </h4>
+  </div>
+  <div class="card-body">  
+   <div class="row ml-1">
    <div class="field">
      <%= label_tag :file %>
      <%= file_field_tag :file,  :required => true  %>
    </div>
 </div>
 <% cname = Cycle.all %>
-<div class="row">
+<div class="row ml-1">
     <div class="field">
      <%= label_tag :cycle %>
      <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name")  %>
   
    </div>
 </div>
-   <div class="row">
+</div>
+
+   <div class="card-footer">
    <div class="actions">
       <%= submit_tag 'Next' %>
    </div>
+</div>
 </div>
 <% end %>

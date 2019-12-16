@@ -1,6 +1,8 @@
 class CycleReviewController < ApplicationController
  protect_from_forgery with: :null_session	
 
+  def index
+  end  
   def import_cycle_review
   
   #filename=\"NewService20-1.csv\"\r\nContent-Type: text/csv\r\n">, "cycle"=>"FY18:1", "review_type"=>"1" (mid cycle)

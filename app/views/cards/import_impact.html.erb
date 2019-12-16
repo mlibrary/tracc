@@ -1,21 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<%#= link_to 'Edit', edit_card_path(@card) %> 
-<%#= link_to 'Back', cards_path %>
-
-<p> import impact </p>
 
 <%= form_tag("import_impact_ratings", :enctype =>"multipart/form-data") do %>
-   <div class="row">
+<div class="card">
+<div class="card-header">
+	<h4> Import Impact Sheet</h4>
+</div>
+<div class="card-body">	
+   <div class="row ml-1">
    <div class="field">
      <%= label_tag :file %>
      <%= file_field_tag :file,  :required => true  %>
    </div>
 </div>
 
-   <div class="row">
+   <div class="row ml-1">
    <div class="actions">
       <%= submit_tag 'Next' %>
    </div>
+   </div>
+</div>   
 </div>
 <% end %>

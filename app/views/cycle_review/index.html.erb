@@ -1,21 +1,13 @@
-<p id="notice"><%= notice %></p>
 
 
-
-<%= form_tag("import_cycle_review", :enctype =>"multipart/form-data") do %>
+<%= form_tag("update_cycle_review", :enctype =>"multipart/form-data") do %>
+   
+<% cname = Cycle.all %>
 <div class="card">
   <div class="card-header">
-    <h4> Import Cycle Review </h4>
-  </div>
-  <div class="card-body">    
-   <div class="row ml-1">
-   <div class="field">
-     <%= label_tag :file %>
-     <%= file_field_tag :file,  :required => true  %>
-   </div>
-</div>
-
-<% cname = Cycle.all %>
+    <h4> Update Cycle Review Sheet</h4>
+  </div>  
+<div class="card-body">  
 <div class="row ml-1">
     <div class="field">
      <%= label_tag :cycle %>
@@ -32,9 +24,13 @@
 </div>
 </div>
    <div class="card-footer">
+   
    <div class="actions">
       <%= submit_tag 'Next' %>
    </div>
+ 
+  
 </div>
 </div>
 <% end %>
+
