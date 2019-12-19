@@ -1,8 +1,10 @@
 
 
-<%= form_tag("update_cycle_review", :enctype =>"multipart/form-data") do %>
+<%= form_tag(cycle_review_index_path, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
+<% statuses = Status.all %>
+
 <div class="card">
   <div class="card-header">
     <h4> Update Cycle Review Sheet</h4>
@@ -22,11 +24,26 @@
   
    </div>
 </div>
+
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :status %>
+     <ul>
+     <% statuses.each do |status| %>
+     <li>
+     <%= check_box_tag 'status_ids[]', status.id -%>
+        <%=  status.status -%>
+      </li>
+     <% end %>
+     </ul>
+   </div>
+</div>
+
 </div>
    <div class="card-footer">
    
    <div class="actions">
-      <%= submit_tag 'Next' %>
+      <%= submit_tag 'Generate Sheet' %>
    </div>
  
   

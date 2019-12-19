@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_193244) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2019_12_16_184545) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -33,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.index ["card_id"], name: "index_assessments_on_card_id"
   end
 
-  create_table "bookmarks", id: :serial, force: :cascade do |t|
+  create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "user_type"
     t.string "document_id"
@@ -121,7 +118,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.string "impact_notes"
     t.datetime "card_since"
     t.datetime "last_update_comment"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -130,7 +127,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.integer "card_id"
     t.string "uemail"
     t.string "comment_txt"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -139,7 +136,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.integer "card_id"
     t.string "status"
     t.string "comments"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_complexities_on_card_id"
@@ -170,7 +167,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
   create_table "dependencies", force: :cascade do |t|
     t.integer "card_id"
     t.integer "dependent_on"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -179,7 +176,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.integer "card_id"
     t.string "status"
     t.string "comments"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_impacts_on_card_id"
@@ -190,7 +187,15 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.string "milestone"
     t.string "cycle"
     t.integer "status"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rationales", force: :cascade do |t|
+    t.integer "rationale_id"
+    t.string "rationale"
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -203,12 +208,12 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
   create_table "resources", force: :cascade do |t|
     t.integer "card_id"
     t.string "resources"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "searches", id: :serial, force: :cascade do |t|
+  create_table "searches", force: :cascade do |t|
     t.binary "query_params"
     t.integer "user_id"
     t.string "user_type"
@@ -220,8 +225,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
   create_table "statuses", force: :cascade do |t|
     t.integer "status_id"
     t.string "status"
-    t.string "cycle"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -233,7 +237,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_193244) do
     t.string "knowledge"
     t.string "resource"
     t.string "comments"
-    t.datetime "recorded_on", default: -> { "now()" }
+    t.datetime "recorded_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_strategic_sortings_on_card_id"

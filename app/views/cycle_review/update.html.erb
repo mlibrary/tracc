@@ -1,0 +1,48 @@
+
+
+<% r = Rationale.all %>
+<% s = Status.all %>
+
+<% i = 1 %>
+<% cycle = params["cycle"] %>
+<% review_type = params["review_type"] #1=mid, 2=end 
+if (review_type==1)
+  caption = " Mid Cycle Review"
+else
+  caption = " End of Cycle Review"   
+end
+%>
+
+<h2><%=cycle%> <%=caption%> </h2>
+<%= form_tag(add_cycle_review_index_path, :enctype =>"multipart/form-data") do %>
+<table >
+ <thead>
+    <tr>
+      <th >#</th>
+      <th >Short Name and Title</th>
+      <th >Status</th>
+      <th >Rationale</th>
+      <th >Comments</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% @cards.each do |card| %>
+      <%= fields_for "cards[]", card do |cd| %>
+      <tr>
+        <td> <%= i %><% i+=1 %></td>
+        <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)</td>
+        <td><%= card.card_status %></td>
+        <td> <%= select_tag "rationale", options_from_collection_for_select(r, "rationale", "rationale")  %></td>
+        <td><%= cd.text_field(:comments, size: 40) %></td>
+        
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+   <div class="actions">
+      <%= submit_tag 'Next' %>
+   </div>
+<% end %>

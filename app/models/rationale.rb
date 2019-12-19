@@ -1,0 +1,2 @@
+class Rationale < ApplicationRecord
+end
