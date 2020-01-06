@@ -14,7 +14,7 @@ Status.create(status:'In-Progress') ;
 Status.create(status:'Done') ;
 Status.create(status:'Stopped') ;
 Status.create(status:'Not-Started') ;
-Status.create(status:'Not Picked up') ;
+Status.create(status:'Not Pickedup') ;
 Status.create(status:'Behind Schedule') ;
 Status.create(status:'On-Hold') ;
 Status.create(status:'Other') ;

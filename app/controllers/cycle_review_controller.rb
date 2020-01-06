@@ -16,11 +16,14 @@ class CycleReviewController < ApplicationController
       id = card.id.to_s
 
       if ( params["cards"][id]!= nil)
+        
+        s = params["cards"][id][:card_status]
         r = params["cards"][id][:rationale]
         c = params["cards"][id][:comments]
      
         card.rationale = r 
         card.comments = c
+        card.card_status = s 
         card.save!
       end
     end  
@@ -59,6 +62,7 @@ class CycleReviewController < ApplicationController
    end 
 
    @cards = Card.where(str) 
+   
   end 
 
   def import_cycle_review

@@ -21,7 +21,7 @@ status_array = ["Any", "In-Progress", "Continue", "on-Hold", "Behind Schedule", 
  <div class="form-group">
     <div  class="col-sm-2">Chart:</div>
     <div class="col-sm-10">
-      <%= select_tag "chart", options_for_select(["Requests vs Cycle","Work Status vs Cycle","Complexity and Impact vs Cycle","Assessment vs Cycle"], "Requests vs Cycle")  %>
+      <%= select_tag "chart", options_for_select(["Requests","Work Status","Complexity","Impact","Mid-Cycle Review","End-Cycle Review"], "Requests")  %>
     </div>
   </div>
 

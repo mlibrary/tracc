@@ -1,17 +1,77 @@
-Generate
 
-<% data = Gchart.bar( :data => [[1,2,4,67,100,41,234],[45,23,67,12,67,300, 250]], 
-            :title => 'SD Ruby Fu level', 
-            :legend => ['matt','patrick'], 
+<%# data = Gchart.bar( :data => [[1,2,4,67,100,41,234],[45,23,67,12,67,300, 250]], 
+            :title => 'FY20:1 Cycle Review', 
+            :legend => ['Mid Cycle','End Cycle'], 
             :bg => {:color => '76A4FB', :type => 'gradient'}, 
             :bar_colors => 'ff0000,00ff00')
 
-%>
+
  <div class="card">
  <div class="card-header">
- 	<h5><%=params["chart"] %></h5>
+ 	<h5><%=params["chart"] %>
+ 		<%#</h5>
  </div>	
  <div class="card-body">
         <%= image_tag data %>
- </div>
-</div>
+ <%#</div>
+</div> %>
+<% 
+no = 'Countr'
+dataArray = Array.new
+dataArray << ['US', 16768100]
+dataArray << ['China', 9181204]
+dataArray << ['Japan', 4898532]
+dataArray << ['Germany', 3730261]
+dataArray << ['France', 2678455]
+%>
+
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages:['corechart']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+        function drawStuff() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Country');
+          data.addColumn('number', 'GDP');
+          data.addRows([[<%= no %>, 16768100],
+            ['China', 9181204],
+            ['Japan', 4898532],
+            ['Germany', 3730261],
+            ['France', 2678455]
+          ]);
+
+         var options = {
+           title: 'GDP of selected countries, in US $millions',
+           width: 500,
+           height: 300,
+           legend: 'none',
+           bar: {groupWidth: '95%'},
+           vAxis: { gridlines: { count: 4 } }
+         };
+
+         var chart = new google.visualization.ColumnChart(document.getElementById('number_format_chart'));
+         chart.draw(data, options);
+
+         document.getElementById('format-select').onchange = function() {
+           options['vAxis']['format'] = this.value;
+           chart.draw(data, options);
+         };
+      };
+    </script>
+  </head>
+  <body>
+    <select id="format-select">
+      <option value="">none</option>
+      <option value="decimal" selected>decimal</option>
+      <option value="scientific">scientific</option>
+      <option value="percent">percent</option>
+      <option value="currency">currency</option>
+      <option value="short">short</option>
+      <option value="long">long</option>
+    </select>
+    <div id="number_format_chart">
+  </body>
+</html>
