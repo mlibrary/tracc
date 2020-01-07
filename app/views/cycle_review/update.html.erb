@@ -1,0 +1,64 @@
+
+
+<% r = Rationale.all %>
+<% s = Status.all %>
+
+<% i = 1 %>
+<% cycle = params["cycle"] %>
+<% review_type = params["review_type"] #1=mid, 2=end 
+
+if (review_type == "1")
+  caption = " Mid Cycle Review"
+else
+  caption = " End of Cycle Review"   
+end
+params["review_type"] = review_type
+params["cycle"] = cycle
+%>
+
+
+   
+  <%= form_tag(add_cycle_review_index_path, :enctype =>"multipart/form-data") do %>
+  <div class="card">
+  <div class="card-header">
+    <h2><%=cycle%> <%=caption%> </h2>
+     <%= submit_tag 'Save' %> 
+  </div>
+  <div class="card-body"> 
+  <table  class="table table-striped">
+    <thead>
+      <tr>
+        <th >#</th>
+        <th >Short Name and Title</th>
+        <th >Status</th>
+        <th >Rationale</th>
+        <th >Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= hidden_field_tag "review_type", review_type %>
+      <%= hidden_field_tag "cycle", cycle %>
+
+      <% @cards.each do |card| %>
+      <%= fields_for "cards[]", card do |cd| %>
+      <tr>
+        <td> <%= i %><% i+=1 %></td>
+        <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)</td>
+        <td><%= cd.select :card_status, options_from_collection_for_select(s, "status", "status",:selected=>card.card_status)  %></td>
+        <td> <%= cd.select :rationale, options_from_collection_for_select(r, "rationale", "rationale",:selected=>card.rationale)  %></td>
+        <td><%= cd.text_field(:comments, size: 40) %></td>
+        
+      </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="card-footer">
+   <div class="actions">
+      <%= submit_tag 'Save' %>
+   </div>
+ </div>  
+</div>
+  <% end %>
+

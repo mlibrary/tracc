@@ -11,11 +11,17 @@
 
 <% cycles = Array.new  %>
 <% cards.each do | value |   %>
- 
     <%  cycles <<  value.in_cycle %>
-  
-
 <% end  %>
+
+<% status = Status.all %>
+<% wstatus = Array.new  %>
+<% data_work_status = Array.new %>
+<% status.each do | value |   %>
+  <% wstatus <<  value.status %>
+  <% card = Card.where("card_status LIKE ?", value.status) %>
+  <% data_work_status << card.count %>
+ <% end  %>
 
 <% cycle_hash = {}  %>
 <% cycles.uniq.each{|e| cycle_hash[e]= cycles.count(e)}  %>
@@ -70,20 +76,19 @@
                   <% :axis_labels => label2, %>
                   <% ) %>                
 
-<% test_data3 = Gchart.pie_3d( %>
-                  <% :size => '600x400', %>
+<% test_data3 = Gchart.bar( %>
+                  <% :size => '700x400', %>
                   <% :title => "Work Status", %>
-                  <% :bar_colors => ['ec8f6e'], %>
+                  <% :bar_colors => 'ec8f6f,0000ee,ec800e,0ff000,00ffee,ec8fff,ff0000,000000', %>
                   <% :bg => 'ffffff', %>
-                  <% :legend => ['On-Hold','In-Progress','Done','Waiting','Behind Sch','Archived'], %>
-                  <% :data => [data_array_2], %>
+                  <% :data => [data_work_status], %>
                   <% :stacked => false, %>
                   <% :legend_position => 'bottom', %>
                   <% :axis_with_labels => [['x'], ['y']], %>
-                  <% :max_value => 50, %>
+                  <% :max_value => 100, %>
                   <% :min_value => 0, %>
-                  <% :bar_width_and_spacing => [70,6], %>
-                  <% :axis_labels => ['On-Hold | In-Progress  | Done | Waiting | Behind Sch | Archived'] %>
+                  <% :bar_width_and_spacing => [80,6], %>
+                  <% :axis_labels => [wstatus] %>
                   <% ) %>
 
 
@@ -121,7 +126,7 @@
     <div class="card-header" id="headingThree">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Stats: Work Status
+          Stats: Current Work Status
         </button>
       </h5>
     </div>

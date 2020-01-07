@@ -2,7 +2,92 @@ class CycleReviewController < ApplicationController
  protect_from_forgery with: :null_session	
 
   def index
+    
   end  
+
+  def edit
+
+  end  
+
+  def add
+ 
+    review_type = params["review_type"]
+    cycle = params["cycle"]
+
+    cards = Card.all
+    cards.each do |card|
+      id = card.id.to_s
+
+      if ( params["cards"][id]!= nil)
+        
+        s = params["cards"][id][:card_status]
+        r = params["cards"][id][:rationale]
+        c = params["cards"][id][:comments]
+     
+        card.rationale = r 
+        card.comments = c
+        card.card_status = s 
+        card.save!
+        
+        cr1 = CycleReview.where("card_id=? AND review_type=? AND cycle=?",id,review_type,cycle)
+        cr = cr1.first
+        
+        if (cr ==nil)
+          cr = CycleReview.new
+        end
+        
+        byebug
+        cr.card_id = id
+        cr.status = s
+        cr.rationale = r
+        cr.notes = c 
+        cr.cycle = cycle
+        cr.review_type = review_type
+        cr.save!
+
+      end
+    end  
+    
+
+  end
+    
+  def update
+
+   a = params["status_ids"] 
+   cycle = params["cycle"]
+
+   str = "card_status LIKE ''"
+
+   if (a.to_s.include?('1'))
+    str = str + " OR card_status LIKE 'In-Progress'" 
+   end 
+   if (a.to_s.include?('2'))
+    str = str + " OR card_status LIKE 'Done'" 
+   end 
+   if (a.to_s.include?('3'))
+    str = str + " OR card_status LIKE 'Stopped'" 
+   end 
+   if (a.to_s.include?('4'))
+    str = str + " OR card_status LIKE 'Not-Started'" 
+   end 
+   if (a.to_s.include?('5'))
+    str = str + " OR card_status LIKE 'Not Picked up' " 
+   end 
+   if (a.to_s.include?('6'))
+    str = str + " OR card_status LIKE 'Behind Schedule'" 
+   end 
+   if (a.to_s.include?('7'))
+    str = str + " OR card_status LIKE 'On-Hold'" 
+   end 
+   if (a.to_s.include?('8'))
+    str = str + " OR card_status LIKE 'Other'" 
+   end 
+
+   #str = str + " AND in_cycle >= '"+cycle+"'"
+   @cards = Card.where(str) 
+   
+  end 
+
   def import_cycle_review
   
   #filename=\"NewService20-1.csv\"\r\nContent-Type: text/csv\r\n">, "cycle"=>"FY18:1", "review_type"=>"1" (mid cycle)

@@ -1,5 +1,5 @@
 
-<h5>Reports: Charts</h5>
+
 
 <% cname = Cycle.all 
 
@@ -15,13 +15,13 @@ status_array = ["Any", "In-Progress", "Continue", "on-Hold", "Behind Schedule", 
 
  <div class="card">
   <div class="card-header">
-    Chart Type:
+    <h5>Reports: Charts</h5>
   </div>  
   <div class="card-body">
  <div class="form-group">
     <div  class="col-sm-2">Chart:</div>
     <div class="col-sm-10">
-      <%= select_tag "chart", options_for_select(["Requests vs Cycle","Work Status vs Cycle","Complexity and Impact vs Cycle","Assessment vs Cycle"], "Requests vs Cycle")  %>
+      <%= select_tag "chart", options_for_select(["Requests","Work Status","Complexity","Impact","Mid-Cycle Review","End-Cycle Review", "Cycle Review"], "Requests")  %>
     </div>
   </div>
 
@@ -32,7 +32,7 @@ status_array = ["Any", "In-Progress", "Continue", "on-Hold", "Behind Schedule", 
     </div>
   </div>
 
-</div>
+
 
  <div class="card-header">
     Filter Data:
