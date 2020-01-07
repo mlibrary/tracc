@@ -1,91 +1,68 @@
 
-<h5>Reports: Charts</h5>
+
 
 <% cname = Cycle.all 
 
 cname_array = ["All"]
+
 cname.each do |cycle| 
  cname_array << cycle.cycle_name
 end
 
-
+status = Status.all
+status_array = Array.new
+status.each do |one|
+  status_array << one.status
+end   
 %>
 
-<%= form_tag("reports/generate", :enctype =>"multipart/form-data") do %>
+<%= form_tag("reports/export", :enctype =>"multipart/form-data") do %>
 
  <div class="card">
   <div class="card-header">
+    <h5>Reports: View & Export</h5>
+  </div>  
+  <div class="card-body">
  <div class="form-group">
-    <div  class="col-sm-2">Chart:</div>
-    <div class="col-sm-10">
-      <%= select_tag "cycle", options_for_select(["Requests vs Cycle","Work Status vs Cycle","Complexity and Impact vs Cycle","Assessment vs Cycle"], "Requests vs Cycle")  %>
-    </div>
-  </div>
-
-  <div class="form-group">
     <div  class="col-sm-2">Type:</div>
     <div class="col-sm-10">
-      <%= select_tag "cycle", options_for_select(["Bar","Line","Pie","Scatter"], "Bar")  %>
+      <%= select_tag "chart", options_for_select(["Requests","Work Status","Complexity","Impact","Mid-Cycle Review","End-Cycle Review"], "Requests")  %>
     </div>
   </div>
 
-</div>
-</div>
+ 
 
-<div class="card">
-	
-    
-   
-<div class="card-header">
-  <div class="row">
-    <div class="col-sm-6" ><h5>X-axix: <%= select_tag "xaxis", options_for_select(cname_array, "All")  %></h5></div>
-    <div class="col-sm-6" ><h5>Y-axis</h5></div>
-  </div>  
-</div>  
+ <div class="card-header">
+    Filter Data:
+  </div> 
 <div class="card-body">
-<div class="row">
- <div class="col-sm-6">
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="cycle">Cycle:</label>
-    <div class="col-sm-10">
-      <%= select_tag "cycle", options_for_select(cname_array, "All")  %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="activity_type">Type:</label>
-    <div class="col-sm-10">
-      <%= select_tag "activity_type", options_for_select([ "All", "Projects","Investigations","TASC Investigations" ], "All") %>
-    </div>
-  </div>
- </div>
 
-
- <div class="col-sm-6"> 
   <div class="form-group">
-    <label class="control-label col-sm-2" for="cycle">Cycle:</label>
+    <label class="control-label col-sm-2" for="status">Status:</label>
     <div class="col-sm-10">
-      <%= select_tag "cycle", options_for_select(cname_array, "All")  %>
+      <%= select_tag "status", options_for_select(status_array, "Any")  %>
     </div>
   </div>
+
   <div class="form-group">
     <label class="control-label col-sm-2" for="activity_type">Type:</label>
     <div class="col-sm-10">
       <%= select_tag "activity_type", options_for_select([ "All", "Projects","Investigations","TASC Investigations" ], "All") %>
     </div>
   </div>
-
-
- </div>
-</div>
-<div class = "row">
-<div class="col-sm-12">  
+ 
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cycle">Cycle:</label>
+    <div class="col-sm-10">
+      <%= select_tag "cycle", options_for_select(cname_array, "All")  %>
+    </div>
+  </div>
+  
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary">Generate</button>
+      <button type="submit" class="btn btn-primary">View & Export</button>
     </div>
   </div>
-</div>
-</div>
-</div>
+ </div>
 </div>
 <% end %>

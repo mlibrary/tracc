@@ -1,0 +1,28 @@
+ <table  class="table table-striped">
+    <thead>
+      <tr>
+        <th >#</th>
+        <th >Short Name and Title</th>
+        <th >Status</th>
+        <th >Rationale</th>
+        <th >Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% i = 1 
+        @cards.each do |card| %>
+       <tr>
+        <td> <%= i %><% i+=1 %></td>
+        <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)<br>
+          <b>Description:</b> <%= card.short_description %></td>
+        <td><%= card.card_status %></td>
+        <td> <%= card.rationale  %></td>
+        <td><%= card.comments %></td>
+        
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+
+  <%# Card id: 9, request_type: nil, card_type: nil, i_or_p: "Project", requester_name: nil, requester_fname: nil, requester_lname: nil, requester_email: nil, requester_div: nil, contact_names: nil, title: "Develop bidirectional workflow between HTRC Workse...", short_description: nil, prev_work: nil, accomplish: nil, accomplish_details: nil, benefits: nil, benefits_details: nil, goal_alignment: nil, at_stake: nil, at_stake_details: nil, ext_pressure: nil, ext_pressure_details: nil, non_tech: nil, non_tech_details: nil, time_constraints: nil, time_constraints_details: nil, priority: nil, sponsor: nil, more_info: nil, short_name: "HT workflow", in_cycle: "FY18:3", start_cycle: "FY18:3", done_cycle: nil, exp_start_month: nil, exp_end_month: nil, lib_divisions: nil, card_status: "In-Progress", rationale: nil, ext_link: nil, lit_lead: nil, lit_depts: nil, primary_dept: nil, service_lead: nil, other_contacts: nil, comments: nil, domain: nil, enthusiasm: nil, knowledge: nil, resource: nil, s_comments: nil, investigation_scope: nil, tech_knowledge: nil, team_scope: nil, infrastructure: nil, application: nil, front_end: nil, data_content: nil, total_complexity_score: nil, cost: nil, divergence: nil, staff_resources: nil, money: nil, operational: nil, total_cost_score: nil, weighted_score: nil, complexity_notes: nil, benefit_score: nil, accomplish_score: nil, at_stake_score: nil, pressures_score: nil, change_score: nil, impact_score: nil, gut_check: nil, impact_notes: nil, card_since: nil, last_update_comment: nil, recorded_on: "2020-01-07 19:19:41", created_at: "2020-01-07 19:19:41", updated_at: "2020-01-07 19:19:41"> %>
+  

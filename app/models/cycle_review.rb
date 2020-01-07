@@ -1,6 +1,6 @@
 class CycleReview < ApplicationRecord
 	belongs_to :card
-    after_save :index_record
+    #after_save :index_record
 
   def index_record
 	# conn = Blacklight.default_index.connection

@@ -11,6 +11,9 @@ class CycleReviewController < ApplicationController
 
   def add
  
+    review_type = params["review_type"]
+    cycle = params["cycle"]
+
     cards = Card.all
     cards.each do |card|
       id = card.id.to_s
@@ -25,6 +28,23 @@ class CycleReviewController < ApplicationController
         card.comments = c
         card.card_status = s 
         card.save!
+        
+        cr1 = CycleReview.where("card_id=? AND review_type=? AND cycle=?",id,review_type,cycle)
+        cr = cr1.first
+        
+        if (cr ==nil)
+          cr = CycleReview.new
+        end
+        
+        byebug
+        cr.card_id = id
+        cr.status = s
+        cr.rationale = r
+        cr.notes = c 
+        cr.cycle = cycle
+        cr.review_type = review_type
+        cr.save!
+
       end
     end  
     
@@ -34,6 +54,8 @@ class CycleReviewController < ApplicationController
   def update
 
    a = params["status_ids"] 
+   cycle = params["cycle"]
+
    str = "card_status LIKE ''"
 
    if (a.to_s.include?('1'))
@@ -46,7 +68,7 @@ class CycleReviewController < ApplicationController
     str = str + " OR card_status LIKE 'Stopped'" 
    end 
    if (a.to_s.include?('4'))
-    str = str + " OR card_status LIKE 'Not Started'" 
+    str = str + " OR card_status LIKE 'Not-Started'" 
    end 
    if (a.to_s.include?('5'))
     str = str + " OR card_status LIKE 'Not Picked up' " 
@@ -61,6 +83,7 @@ class CycleReviewController < ApplicationController
     str = str + " OR card_status LIKE 'Other'" 
    end 
 
+   #str = str + " AND in_cycle >= '"+cycle+"'"
    @cards = Card.where(str) 
    
   end 

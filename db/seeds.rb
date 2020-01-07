@@ -10,14 +10,17 @@
 User.create(name:'Nabeela Jaffer',email:'njaffer@umich.edu',password: 'topsecret')
 
 
-Status.create(status:'In-Progress') ;
+
+Status.create(status:'New') ;
 Status.create(status:'Done') ;
 Status.create(status:'Stopped') ;
+Status.create(status:'In-Progress') ;
 Status.create(status:'Not-Started') ;
 Status.create(status:'Not Pickedup') ;
 Status.create(status:'Behind Schedule') ;
 Status.create(status:'On-Hold') ;
 Status.create(status:'Other') ;
+
 
 Rationale.create(rationale: 'As-Expected') ;
 Rationale.create(rationale: 'Waiting on SH') ;
@@ -32,8 +35,8 @@ Cycle.create(cycle_name:'FY18:3',start:'Mar 2018',end:'Jun 2018',current_cycle:0
 Cycle.create(cycle_name:'FY19:1',start:'July 2018',end:'Oct 2018',current_cycle:0)
 Cycle.create(cycle_name:'FY19:2',start:'Nov 2018',end:'Feb 2019',current_cycle:0)
 Cycle.create(cycle_name:'FY19:3',start:'Mar 2019',end:'Jun 2019',current_cycle:0)
-Cycle.create(cycle_name:'FY20:1',start:'July 2019',end:'Oct 2019',current_cycle:1)
-Cycle.create(cycle_name:'FY20:2',start:'Nov 2019',end:'Feb 2020',current_cycle:0)
+Cycle.create(cycle_name:'FY20:1',start:'July 2019',end:'Oct 2019',current_cycle:0)
+Cycle.create(cycle_name:'FY20:2',start:'Nov 2019',end:'Feb 2020',current_cycle:1)
 Cycle.create(cycle_name:'FY20:3',start:'Mar 2020',end:'Jun 2020',current_cycle:0)
 Cycle.create(cycle_name:'FY21:1',start:'July 2020',end:'Oct 2020',current_cycle:1)
 Cycle.create(cycle_name:'FY21:2',start:'Nov 2020',end:'Feb 2021',current_cycle:0)

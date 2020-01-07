@@ -6,11 +6,14 @@
 <% i = 1 %>
 <% cycle = params["cycle"] %>
 <% review_type = params["review_type"] #1=mid, 2=end 
-if (review_type==1)
+
+if (review_type == "1")
   caption = " Mid Cycle Review"
 else
   caption = " End of Cycle Review"   
 end
+params["review_type"] = review_type
+params["cycle"] = cycle
 %>
 
 
@@ -33,6 +36,9 @@ end
       </tr>
     </thead>
     <tbody>
+      <%= hidden_field_tag "review_type", review_type %>
+      <%= hidden_field_tag "cycle", cycle %>
+
       <% @cards.each do |card| %>
       <%= fields_for "cards[]", card do |cd| %>
       <tr>
