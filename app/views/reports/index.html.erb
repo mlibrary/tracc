@@ -11,12 +11,13 @@ end
 
 status = Status.all
 status_array = Array.new
+status_array = ["All"]
 status.each do |one|
   status_array << one.status
 end   
 %>
 
-<%= form_tag("reports/export", :enctype =>"multipart/form-data") do %>
+<%= form_tag("reports/export.csv", :enctype =>"multipart/form-data", :method => :get ) do %>
 
  <div class="card">
   <div class="card-header">

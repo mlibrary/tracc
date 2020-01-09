@@ -8,6 +8,16 @@ class Card < ActiveRecord::Base
 
   attr_accessor  :lit_dept
  
+  def self.to_csv
+  
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |result|
+        csv << result.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   def remove_from_index
   	conn = Blacklight.default_index.connection
     conn.delete_by_id self.id

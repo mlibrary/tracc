@@ -29,8 +29,8 @@ Rails.application.routes.draw do
 
   resources :reports do
     collection do
-      get :index, :charts
-      post :generate, :export
+      get :index, :charts, :export
+      post :generate 
     end
   end
 

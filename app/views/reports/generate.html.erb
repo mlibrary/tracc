@@ -1,77 +1,94 @@
 
-<%# data = Gchart.bar( :data => [[1,2,4,67,100,41,234],[45,23,67,12,67,300, 250]], 
-            :title => 'FY20:1 Cycle Review', 
-            :legend => ['Mid Cycle','End Cycle'], 
-            :bg => {:color => '76A4FB', :type => 'gradient'}, 
-            :bar_colors => 'ff0000,00ff00')
+<% #cards = Card.all %>
+<% cycles = Array.new  %>
+<% @cards.each do | value |   %>
+    <%  cycles <<  value.in_cycle %>
+<% end  %>
+<% cycle_hash = {}  %>
+<% cycles.uniq.each{|e| cycle_hash[e]= cycles.count(e)}  %>
 
+<% data_array_1 = Array.new  %>
+<% data_array_2 = Array.new  %>
+<% cycle_hash.each do | cycle, count |  %>
+<%  data_array_1 << cycle  %>
+<%  data_array_2 << count %>
+<% end %>
 
- <div class="card">
- <div class="card-header">
- 	<h5><%=params["chart"] %>
- 		<%#</h5>
- </div>	
- <div class="card-body">
-        <%= image_tag data %>
- <%#</div>
-</div> %>
-<% 
-no = 'Countr'
-dataArray = Array.new
-dataArray << ['US', 16768100]
-dataArray << ['China', 9181204]
-dataArray << ['Japan', 4898532]
-dataArray << ['Germany', 3730261]
-dataArray << ['France', 2678455]
-%>
+<% labels = "" %>
+<% data_array_1.each do | value |  %>
+<%  labels << value + "|"  %>
+<% end %>
+<%# labels.slice!(labels.length-1,labels.length) %>
 
+<% label = Array.new %>
+<% label << labels %>
+<% label2 = Array.new %>
+<% label2 << label %>
+
+ <% test_data = Gchart.bar( %>
+                  <% :size => '600x400', %>
+                  <% :bar_colors => ['ec8f6e'], %>
+                  <% :title => "Cycles and Requests", %>
+                  <% :bg => 'EFEFEF', %>
+                  <% :legend => data_array_1, %>
+                  <% :data => [data_array_2], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => 50, %>
+                  <% :min_value => 0, %>
+                  <% :bar_width_and_spacing => [70,6], %>
+                  <% :axis_labels => label2, %>
+                  <% ) %>
 <html>
   <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {packages:['corechart']});
-      google.charts.setOnLoadCallback(drawStuff);
-
-        function drawStuff() {
-          var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Country');
-          data.addColumn('number', 'GDP');
-          data.addRows([[<%= no %>, 16768100],
-            ['China', 9181204],
-            ['Japan', 4898532],
-            ['Germany', 3730261],
-            ['France', 2678455]
-          ]);
-
-         var options = {
-           title: 'GDP of selected countries, in US $millions',
-           width: 500,
-           height: 300,
-           legend: 'none',
-           bar: {groupWidth: '95%'},
-           vAxis: { gridlines: { count: 4 } }
-         };
-
-         var chart = new google.visualization.ColumnChart(document.getElementById('number_format_chart'));
-         chart.draw(data, options);
-
-         document.getElementById('format-select').onchange = function() {
-           options['vAxis']['format'] = this.value;
-           chart.draw(data, options);
-         };
-      };
-    </script>
+   
   </head>
   <body>
-    <select id="format-select">
-      <option value="">none</option>
-      <option value="decimal" selected>decimal</option>
-      <option value="scientific">scientific</option>
-      <option value="percent">percent</option>
-      <option value="currency">currency</option>
-      <option value="short">short</option>
-      <option value="long">long</option>
-    </select>
-    <div id="number_format_chart">
+   <div class="accordion" id="accordionExample">
+  
+   <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Graph
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        <%= image_tag test_data %>
+      </div>
+    </div>
+  </div>
+
+   <div class="card">
+    <table  class="table table-striped">
+    <thead>
+      <tr>
+        <th >#</th>
+        <th >Short Name and Title</th>
+        <th >Status</th>
+        <th >Rationale</th>
+        <th >Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% i = 1 
+        @cards.each do |card| %>
+       <tr>
+        <td> <%= i %><% i+=1 %></td>
+        <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)<br>
+          <b>Description:</b> <%= card.short_description %></td>
+        <td><%= card.card_status %></td>
+        <td> <%= card.rationale  %></td>
+        <td><%= card.comments %></td>
+        
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+</div>
   </body>
 </html>

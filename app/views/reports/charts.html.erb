@@ -8,7 +8,12 @@ cname.each do |cycle|
  cname_array << cycle.cycle_name
 end
 
-status_array = ["Any", "In-Progress", "Continue", "on-Hold", "Behind Schedule", "Done"]
+status = Status.all
+status_array = Array.new
+status_array = ["All"]
+status.each do |one|
+  status_array << one.status
+end   
 %>
 
 <%= form_tag("generate", :enctype =>"multipart/form-data") do %>
