@@ -20,20 +20,13 @@ end
 
  <div class="card">
   <div class="card-header">
-    <h5>Reports: Charts</h5>
+    <h5>Reports: View</h5>
   </div>  
   <div class="card-body">
  <div class="form-group">
-    <div  class="col-sm-2">Chart:</div>
-    <div class="col-sm-10">
-      <%= select_tag "chart", options_for_select(["Requests","Work Status","Complexity","Impact","Mid-Cycle Review","End-Cycle Review", "Cycle Review"], "Requests")  %>
-    </div>
-  </div>
-
-  <div class="form-group">
     <div  class="col-sm-2">Type:</div>
     <div class="col-sm-10">
-      <%= select_tag "chart_type", options_for_select(["Bar","Line","Pie","Scatter"], "Bar")  %>
+      <%= select_tag "chart", options_for_select(["Requests","Complexity","Impact","Mid-Cycle Review","End-Cycle Review", "Cycle Review"], "Requests")  %>
     </div>
   </div>
 

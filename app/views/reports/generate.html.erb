@@ -1,18 +1,23 @@
 
-<% #cards = Card.all %>
+<% if (@cards.nil?)
+else %>
 <% cycles = Array.new  %>
 <% @cards.each do | value |   %>
     <%  cycles <<  value.in_cycle %>
 <% end  %>
-<% cycle_hash = {}  %>
-<% cycles.uniq.each{|e| cycle_hash[e]= cycles.count(e)}  %>
 
+<% cycle_hash = {}  %>
+<% cycles.uniq.each{|e| cycle_hash[e]= cycles.count(e)}  
+cycle_hash = cycle_hash.sort 
+%>
 <% data_array_1 = Array.new  %>
 <% data_array_2 = Array.new  %>
 <% cycle_hash.each do | cycle, count |  %>
 <%  data_array_1 << cycle  %>
 <%  data_array_2 << count %>
-<% end %>
+<% end 
+byebug
+%>
 
 <% labels = "" %>
 <% data_array_1.each do | value |  %>
@@ -25,9 +30,20 @@
 <% label2 = Array.new %>
 <% label2 << label %>
 
- <% test_data = Gchart.bar( %>
+<% status = Status.all
+status_array = Array.new
+#status_array = ["All"]
+status.each do |one|
+  status_array << one.status
+end 
+
+%>
+
+ <% 
+ if (params["chart"] == "Requests")
+ test_data = Gchart.bar( %>
                   <% :size => '600x400', %>
-                  <% :bar_colors => ['ec8f6e'], %>
+                  <% :bar_colors => '81b0df' , %>
                   <% :title => "Cycles and Requests", %>
                   <% :bg => 'EFEFEF', %>
                   <% :legend => data_array_1, %>
@@ -35,29 +51,68 @@
                   <% :stacked => false, %>
                   <% :legend_position => 'bottom', %>
                   <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => false, %>
+                  <% :min_value => false, %>
+                  <% :bar_width_and_spacing => [70,6], %>
+                  <% :axis_labels => label2, %>
+                  <% ) 
+
+  end %>
+
+ <% 
+ if (params["status"] == "All")
+ #one = two = three = four = five = six = seven = eight = nine = Array.new
+ one_new =    [0,0,0,0,0,0]
+ two_done =   [0,0,0,0,0,0]
+ three_stp  = [1,0,0,0,0,0]
+ four_inp  =  [2,0,0,0,0,0]
+ five_not  =  [0,0,0,0,0,0]
+ six_notp  =  [0,0,0,0,0,0]
+ seven_beh  = [15,0,0,0,0,0]
+ eight_hld = [0,0,0,0,0,0]
+ nine_other =  [0,0,0,0,0,0] 
+ #["New", "Done", "Stopped", "In-Progress", "Not-Started", "Not Pickedup", "Behind Schedule", "On-Hold", "Other"]
+ test_data = Gchart.bar( %>
+                  <% :size => '600x400', %>
+                  <% :bar_colors => '81b0df,adcb62,c6a52a,b60068,4b001d,347e9d,dfd2e5,c5c00e,b9dad7' , %>
+                  <% :title => "Cycles and Requests", %>
+                  <% :bg => 'EFEFEF', %>
+                  <% :legend => status_array, %>
+                  <% :data => [one_new,two_done,three_stp,four_inp,five_not,six_notp,seven_beh,eight_hld,nine_other], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
                   <% :max_value => 50, %>
                   <% :min_value => 0, %>
                   <% :bar_width_and_spacing => [70,6], %>
                   <% :axis_labels => label2, %>
-                  <% ) %>
+                  <% ) 
+
+  end 
+  end %>
 <html>
   <head>
    
   </head>
   <body>
+    <h4>Report Type: <%= params["chart"] %></h4>
+    <h5>Total Found: <%= @cards.count %></h5>
+    
    <div class="accordion" id="accordionExample">
   
    <div class="card">
     <div class="card-header" id="headingTwo">
       <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
           Graph
         </button>
       </h5>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
+        <% if (!@cards.nil?) %>
         <%= image_tag test_data %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -75,6 +130,9 @@
     </thead>
     <tbody>
       <% i = 1 
+        if (@cards == nil) 
+
+        else  
         @cards.each do |card| %>
        <tr>
         <td> <%= i %><% i+=1 %></td>
@@ -85,6 +143,7 @@
         <td><%= card.comments %></td>
         
       </tr>
+      <%end%>
       <%end%>
     </tbody>
   </table>

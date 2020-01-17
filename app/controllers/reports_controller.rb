@@ -11,6 +11,7 @@ class ReportsController < ApplicationController
 	  type = params["chart"]
 	  cycle = params["cycle"]
       
+     if type=="Requests" 
       str = "card_status LIKE ''"
 
       if (status != "All")
@@ -22,7 +23,26 @@ class ReportsController < ApplicationController
       if (cycle != "All")
         str = str + " AND in_cycle='"+cycle+"'"
       end
-	  @cards = Card.where(str) 
+      
+	    @cards = Card.where(str).order(:card_status, :in_cycle) 
+
+     elsif type=="Cycle Review" 
+      str = "card_status LIKE ''"
+
+      if (status != "All")
+        str= str+ " OR card_status='"+status+"'"
+      else 
+        str = str + "OR card_status LIKE '%'"   
+      end
+      
+      if (cycle != "All")
+        str = str + " AND in_cycle='"+cycle+"'"
+      end
+      
+      @cards = Card.where(str).order(:card_status) 
+     end 
+         
+     
 		
 		
 	end	
