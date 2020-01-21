@@ -1,70 +1,71 @@
 class ReportsController < ApplicationController
 	protect_from_forgery with: :null_session
 
-    def show
+  def show
 
-    end	
+  end	
+
 	def generate
 # "cycle"=>"All", "status"=>"Any", "activity_type"=>"All", "chart"=>"Requests vs Cycle", "chart_type"=>"Bar",
-      status = params["status"]
+    status = params["status"]
 	  atype = params["activity_type"]
 	  type = params["chart"]
 	  cycle = params["cycle"]
-      
-     if type=="Requests" 
-      str = "card_status LIKE ''"
 
+    str = "card_status LIKE ''"
+         
+    case type
+    when "Requests"
       if (status != "All")
-      	str= str+ " OR card_status='"+status+"'"
+        str += " OR card_status='"+status+"'"
       else 
-        str = str + "OR card_status LIKE '%'"   
+        str += "OR card_status LIKE '%'"   
       end
       
       if (cycle != "All")
-        str = str + " AND in_cycle='"+cycle+"'"
+        str += " AND in_cycle='"+cycle+"'"
       end
       
-	    @cards = Card.where(str).order(:card_status, :in_cycle) 
+      @cards = Card.where(str).order(:card_status, :in_cycle)
 
-     elsif type=="Cycle Review" 
-      str = "card_status LIKE ''"
-
+    when "Complexity"
+    when "Impact"
+    when "Mid-Cycle Review"
+    when "End-Cycle Review"
+    when "Cycle Review"
       if (status != "All")
-        str= str+ " OR card_status='"+status+"'"
+        str += " OR card_status='"+status+"'"
       else 
-        str = str + "OR card_status LIKE '%'"   
+        str += "OR card_status LIKE '%'"   
       end
       
       if (cycle != "All")
-        str = str + " AND in_cycle='"+cycle+"'"
+        str += " AND in_cycle='"+cycle+"'"
       end
       
       @cards = Card.where(str).order(:card_status) 
-     end 
-         
-     
-		
-		
+      
+   end 
 	end	
 
 	def export
 		 
-      status = params["status"]
+    status = params["status"]
 	  atype = params["activity_type"]
 	  type = params["chart"]
 	  cycle = params["cycle"]
       
-      str = "card_status LIKE ''"
+    str = "card_status LIKE ''"
 
-      if (status != "All")
-      	str= str+ " OR card_status='"+status+"'"
-      else 
-        str = str + "OR card_status LIKE '%'"  
-      end
-      
-      if (cycle != "All")
-        str = str + " AND in_cycle='"+cycle+"'"  
-      end
+    if (status != "All")
+    	str += " OR card_status='"+status+"'"
+    else 
+      str += "OR card_status LIKE '%'"  
+    end
+    
+    if (cycle != "All")
+      str += " AND in_cycle='"+cycle+"'"  
+    end
 
     
 	  @cards = Card.where(str) 
@@ -75,7 +76,4 @@ class ReportsController < ApplicationController
   end
  end
 
- 
-
-	
 end
