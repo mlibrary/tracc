@@ -36,7 +36,6 @@ class CycleReviewController < ApplicationController
           cr = CycleReview.new
         end
         
-        byebug
         cr.card_id = id
         cr.status = s
         cr.rationale = r
@@ -57,34 +56,54 @@ class CycleReviewController < ApplicationController
    cycle = params["cycle"]
 
    str = "card_status LIKE ''"
+   str1 = "card_status LIKE ''"
 
    if (a.to_s.include?('1'))
-    str = str + " OR card_status LIKE 'In-Progress'" 
+    str = str + " OR cycle_reviews.status LIKE 'New'" 
+    str1 = str1 + " OR card_status LIKE 'New'" 
    end 
    if (a.to_s.include?('2'))
-    str = str + " OR card_status LIKE 'Done'" 
+    str = str + " OR cycle_reviews.status LIKE 'Done'" 
+    str1 = str1 + " OR card_status LIKE 'Done'" 
    end 
    if (a.to_s.include?('3'))
-    str = str + " OR card_status LIKE 'Stopped'" 
+    str = str + " OR cycle_reviews.status LIKE 'Stopped'" 
+    str1 = str1 + " OR card_status LIKE 'Stopped'" 
    end 
    if (a.to_s.include?('4'))
-    str = str + " OR card_status LIKE 'Not-Started'" 
+    str = str + " OR cycle_reviews.status LIKE 'In-Progress'"
+    str1 = str1 + " OR card_status LIKE 'In-Progress'" 
    end 
    if (a.to_s.include?('5'))
-    str = str + " OR card_status LIKE 'Not Picked up' " 
+    str = str + " OR cycle_reviews.status LIKE 'Not-Started' " 
+    str1 = str1 + " OR card_status LIKE 'Not-Started' " 
    end 
    if (a.to_s.include?('6'))
-    str = str + " OR card_status LIKE 'Behind Schedule'" 
+    str = str + " OR cycle_reviews.status LIKE 'Not Picked up'" 
+    str1 = str1 + " OR card_status LIKE 'Not Picked up'"     
    end 
    if (a.to_s.include?('7'))
-    str = str + " OR card_status LIKE 'On-Hold'" 
+    str = str + " OR cycle_reviews.status LIKE 'Behind Schedule'" 
+    str1 = str1 + " OR card_status LIKE 'Behind Schedule'" 
    end 
    if (a.to_s.include?('8'))
-    str = str + " OR card_status LIKE 'Other'" 
+    str = str + " OR cycle_reviews.status LIKE 'On-Hold'" 
+    str1 = str1 + " OR card_status LIKE 'On-Hold'" 
+   end 
+   if (a.to_s.include?('9'))
+    str = str + " OR cycle_reviews.status LIKE 'Other' " 
+    str1 = str1 + " OR card_status LIKE 'Other' " 
    end 
 
-   #str = str + " AND in_cycle >= '"+cycle+"'"
-   @cards = Card.where(str) 
+   str = str + "AND cycle='"+cycle+"'"
+   
+   
+
+   @cards = Card.joins(:cycle_review).where(str).order(:in_cycle) 
+   if (@cards.first.nil?)
+    str1 = str1 + " AND in_cycle <= '"+cycle+"'"
+    @cards = Card.where(str1).order(:in_cycle)
+   end 
    
   end 
 

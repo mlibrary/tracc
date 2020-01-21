@@ -41,11 +41,23 @@ params["cycle"] = cycle
 
       <% @cards.each do |card| %>
       <%= fields_for "cards[]", card do |cd| %>
+          
+      <%    cr1 = CycleReview.where("card_id=? AND review_type=? AND cycle=?",card.id,review_type,cycle)
+          cr = cr1.first
+          
+          if (cr.nil?)
+            saved_status = card.card_status
+            saved_r = card.rationale
+          else
+            saved_status = cr.status
+            saved_r = cr.rationale
+          end    
+      %>
       <tr>
         <td> <%= i %><% i+=1 %></td>
         <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)</td>
-        <td><%= cd.select :card_status, options_from_collection_for_select(s, "status", "status",:selected=>card.card_status)  %></td>
-        <td> <%= cd.select :rationale, options_from_collection_for_select(r, "rationale", "rationale",:selected=>card.rationale)  %></td>
+        <td><%= cd.select :card_status, options_from_collection_for_select(s, "status", "status",:selected=>saved_status)  %></td>
+        <td> <%= cd.select :rationale, options_from_collection_for_select(r, "rationale", "rationale",:selected=>saved_r)  %></td>
         <td><%= cd.text_field(:comments, size: 40) %></td>
         
       </tr>
