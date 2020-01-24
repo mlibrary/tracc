@@ -79,11 +79,11 @@ end
  nine_other = Array.new
  cyc_labels = Array.new 
 
- crds = Card.all
+ #crds = Card.all
  cyc = Cycle.all
  cyc = cyc.sort
  
- crds.each do | value |  
+ @cards.each do | value |  
  
     if (value.card_status == "New") 
       one <<  value.in_cycle 
@@ -198,7 +198,7 @@ cyc_labels << labels
           <b>Description:</b> <%= card.short_description %></td>
         <td><%= card.card_status %></td>
         <td> <%= card.rationale  %></td>
-        <td><%= card.comments %></td>
+        <td><%#= card.comments %></td>
         
       </tr>
       <%end%>
