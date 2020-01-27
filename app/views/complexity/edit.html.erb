@@ -26,7 +26,7 @@
       <% 
         cnt = 0
         @all_cards.each do |one_card|
-        if (one_card.i_or_p == "Investigation")
+        if (one_card.activity_type == "Investigation")
           cnt+=1
       %>
         <tr>
@@ -89,7 +89,7 @@
       <% 
         cnt = 0
         @all_cards.each do |one_card|
-        if (one_card.i_or_p == "Project")
+        if (one_card.activity_type == "Project")
           cnt+=1
       %>
         <tr>
