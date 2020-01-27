@@ -131,17 +131,80 @@ puts "label2 is #{label2}"
 
 
  <% 
- if  false #(params["status"] == "All")
- #one = two = three = four = five = six = seven = eight = nine = Array.new
- one_new =    [0,0,0,0,0,0]
- two_done =   [0,0,0,0,0,0]
- three_stp  = [1,0,0,0,0,0]
- four_inp  =  [2,0,0,0,0,0]
- five_not  =  [0,0,0,0,0,0]
- six_notp  =  [0,0,0,0,0,0]
- seven_beh  = [15,0,0,0,0,0]
- eight_hld =  [0,0,0,0,0,0]
- nine_other = [0,0,0,0,0,0] 
+
+ if ( (params["status"] == "All") && (params["cycle"] == "All") && (params["chart"] == "Requests") )
+ # six cycles 
+ one = Array.new
+ two = Array.new
+ three = Array.new
+ four = Array.new
+ five = Array.new
+ six = Array.new
+ seven = Array.new
+ eight = Array.new
+ nine = Array.new
+ one_new = Array.new
+ two_done = Array.new
+ three_stp = Array.new
+ four_inp = Array.new
+ five_not = Array.new
+ six_notp = Array.new
+ seven_beh = Array.new
+ eight_hld = Array.new
+ nine_other = Array.new
+ cyc_labels = Array.new 
+
+ #crds = Card.all
+ cyc = Cycle.all
+ cyc = cyc.sort
+ 
+ @cards.each do | value |  
+ 
+    if (value.card_status == "New") 
+      one <<  value.in_cycle 
+    elsif (value.card_status == "Done")
+      two <<  value.in_cycle
+    elsif (value.card_status == "Stopped")
+      three <<  value.in_cycle
+    elsif (value.card_status == "In-Progress")
+      four <<  value.in_cycle
+    elsif (value.card_status == "Not Started")
+      five <<  value.in_cycle
+    elsif (value.card_status == "Not Pickedup")
+      six <<  value.in_cycle
+    elsif (value.card_status == "Behind Schedule")
+      seven <<  value.in_cycle
+    elsif (value.card_status == "On-Hold")
+      eight <<  value.in_cycle
+    else
+      nine << value.in_cycle      
+    end  
+ end
+ 
+ cyc.each do |value|
+
+  one_new <<    one.count(value.cycle_name)
+  two_done << two.count(value.cycle_name)
+  three_stp  << three.count(value.cycle_name)
+  four_inp  << four.count(value.cycle_name)
+  five_not << five.count(value.cycle_name)
+  six_notp  << six.count(value.cycle_name)
+  seven_beh  << seven.count(value.cycle_name)
+  eight_hld << eight.count(value.cycle_name)
+  nine_other << nine.count(value.cycle_name)
+  cyc_labels << value.cycle_name
+ end 
+ 
+labels = "" 
+cyc_labels.each do | value |  
+labels << value + "|"  
+end 
+
+cyc_labels = []
+cyc_labels << labels
+
+
+
  #["New", "Done", "Stopped", "In-Progress", "Not-Started", "Not Pickedup", "Behind Schedule", "On-Hold", "Other"]
  test_data = Gchart.bar( %>
                   <% :size => '600x400', %>
@@ -155,8 +218,8 @@ puts "label2 is #{label2}"
                   <% :axis_with_labels => [['x'], ['y']], %>
                   <% :max_value => 50, %>
                   <% :min_value => 0, %>
-                  <% :bar_width_and_spacing => [70,6], %>
-                  <% :axis_labels => label2, %>
+                  <% :bar_width_and_spacing => [50,6], %>
+                  <% :axis_labels => cyc_labels, %>
                   <% ) 
 
   end 
@@ -225,5 +288,40 @@ end
       </table>
     </div>
   </div>
+
+
+   <div class="card">
+    <table  class="table table-striped">
+    <thead>
+      <tr>
+        <th >#</th>
+        <th >Short Name and Title</th>
+        <th >Status</th>
+        <th >Rationale</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <% i = 1 
+        if (@cards == nil) 
+
+        else  
+        @cards.each do |card| %>
+       <tr>
+        <td> <%= i %><% i+=1 %></td>
+        <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)<br>
+          <b>Description:</b> <%= card.short_description %></td>
+        <td><%= card.card_status %></td>
+        <td> <%= card.rationale  %></td>
+      
+        
+      </tr>
+      <%end%>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+</div>
+
   </body>
 </html>

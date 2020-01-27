@@ -18,15 +18,18 @@ class ReportsController < ApplicationController
     when "Requests"
       if (status != "All")
         str += " OR card_status='"+status+"'"
+         @cards = Card.where(str).order(:card_status, :in_cycle)
       else 
         str += "OR card_status LIKE '%'"   
+         @cards = Card.where(str).order(:in_cycle)
       end
       
       if (cycle != "All")
         str += " AND in_cycle='"+cycle+"'"
+         @cards = Card.where(str).order(:card_status)
       end
       
-      @cards = Card.where(str).order(:card_status, :in_cycle)
+     
 
     when "Complexity"
     when "Impact"
