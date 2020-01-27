@@ -1,62 +1,137 @@
-
-<% if (@cards.nil?)
-else %>
-<% cycles = Array.new  %>
-<% @cards.each do | value |   %>
-    <%  cycles <<  value.in_cycle %>
-<% end  %>
-
-<% cycle_hash = {}  %>
-<% cycles.uniq.each{|e| cycle_hash[e]= cycles.count(e)}  
-cycle_hash = cycle_hash.sort 
+<% 
+  puts "From params: type: #{params['chart']}, status: #{params['status']}, atype: #{params['activity_type']}, cycle: #{params['cycle']}"
 %>
-<% data_array_1 = Array.new  %>
-<% data_array_2 = Array.new  %>
-<% cycle_hash.each do | cycle, count |  %>
-<%  data_array_1 << cycle  %>
-<%  data_array_2 << count %>
-<% end %>
 
-<% labels = "" %>
-<% data_array_1.each do | value |  %>
-<%  labels << value + "|"  %>
-<% end %>
+<% 
+# Collect cycles across all existing cards
+if (@cards.nil?)
+  puts "@card were nil!"
+  return
+else
+  cycles = Array.new
+  @cards.each do | value |
+    cycles <<  value.in_cycle
+end  
+# puts "cycles is #{cycles}"
+cycles_sort = Array.new
+cycles_sort = cycles.uniq.sort
+puts "cycles_sort is #{cycles_sort}"
+
+# Get max number of cycle items in any cycle
+cycles_max = 0
+cycles_sort.each do |cy| 
+  if !cycles.count(cy).nil?
+    cycles_max = cycles.count(cy) if cycles.count(cy) > cycles_max
+  end
+end
+puts "cycles_max is #{cycles_max}"
+%>
+
+<%
+# Get status keys
+status = Status.all
+status_keys = []
+#status_array = ["All"]
+status.each do |st|
+  status_keys << st.status
+end 
+puts "status_keys is #{status_keys}"
+
+
+# Set up cycle groups
+cycle_hash = {}
+# Create two level hash to combine cycle and status data
+# Question: do we want empty columns for cycles with no data?
+# Here we only account for cycles with existing data in @cards
+cycles_sort.each do |cy| 
+  cycle_hash[cy] = Hash.new
+  status_keys.each do |ky|
+    cycle_hash[cy][ky] = 0
+  end
+end
+
+# Sort card data into cycle_hash values
+@cards.each do | cd |
+  cycle_hash[cd.in_cycle][cd.card_status] += 1
+  #puts "card id: #{cd.id} is in cycle: #{cd.in_cycle} with status: #{cd.card_status}"
+end
+
+# Create data array for google charts
+data_array = []
+cycles_sort.each do |cy| 
+  cycle_array = Array.new
+  status_keys.each do |ky|
+    cycle_array << cycle_hash[cy][ky]
+  end
+  puts "cycle_array for cycle #{cy} is #{cycle_array}"
+  data_array << cycle_array
+end
+puts "data_array for google chart is #{data_array}"
+
+
+# Create labels for google charts
+labels_array = []
+labels = ""
+cycles_sort.each do |cy|
+  labels_array << cy
+  labels <<  "#{cy}|"
+end
+
+puts "labels_array is #{labels_array}"
+
+label = []
+label << labels 
+label2 = []
+label2 << label
+
+puts "label2 is #{label2}"
+%>
+
 <%# labels.slice!(labels.length-1,labels.length) %>
 
-<% label = Array.new %>
-<% label << labels %>
-<% label2 = Array.new %>
-<% label2 << label %>
-
-<% status = Status.all
-status_array = Array.new
-#status_array = ["All"]
-status.each do |one|
-  status_array << one.status
-end 
-%>
-
- <% 
- if (params["chart"] == "Requests")
- test_data = Gchart.bar( %>
-                  <% :size => '600x400', %>
-                  <% :bar_colors => '81b0df' , %>
-                  <% :title => "Cycles and Requests", %>
-                  <% :bg => 'EFEFEF', %>
-                  <% :legend => data_array_1, %>
-                  <% :data => [data_array_2], %>
-                  <% :stacked => false, %>
-                  <% :legend_position => 'bottom', %>
-                  <% :axis_with_labels => [['x'], ['y']], %>
-                  <% :max_value => false, %>
-                  <% :min_value => false, %>
-                  <% :bar_width_and_spacing => [70,6], %>
-                  <% :axis_labels => label2, %>
-                  <% ) 
+ <% # if (params["chart"] == "Requests")
+ # test_data = Gchart.bar( %>
+                  <%# :size => '600x400', %>
+                  <%# :bar_colors => '81b0df' , %>
+                  <%# :title => "Cycles and Requests", %>
+                  <%# :bg => 'EFEFEF', %>
+                  <%# :legend => label2, %>
+                  <%# :data => [data_array], %>
+                  <%# :stacked => false, %>
+                  <%# :legend_position => 'bottom', %>
+                  <%# :axis_with_labels => [['x'], ['y']], %>
+                  <%# :max_value => false, %>
+                  <%# :min_value => false, %>
+                  <%# :bar_width_and_spacing => [70,6], %>
+                  <%# :axis_labels => label2, %>
+                  <%# ) 
 
   end %>
 
+<%
+ if (params["chart"] == "Requests")
+ test_data = Gchart.bar( 
+                  :size => '600x400',
+                  :bar_colors => '81b0df,adcb62,c6a52a,b60068,4b001d,347e9d,dfd2e5,c5c00e,b9dad7' ,
+                  :title => "Requests by Cycle",
+                  :bg => {:color => 'EFEFEF'},
+                  :legend => status_keys,
+                  :data => data_array,
+                  :stacked => false,
+                  :legend_position => 'bottom',
+                  :axis_with_labels => [['x'], ['y']],
+                  :max_value => (cycles_max),
+                  :min_value => 0,
+                  :bar_width_and_spacing => [70,6],
+                  :axis_labels => label2,
+                   ) 
+
+  end 
+%>
+
+
  <% 
+
  if ( (params["status"] == "All") && (params["cycle"] == "All") && (params["chart"] == "Requests") )
  # six cycles 
  one = Array.new
@@ -129,6 +204,7 @@ cyc_labels = []
 cyc_labels << labels
 
 
+
  #["New", "Done", "Stopped", "In-Progress", "Not-Started", "Not Pickedup", "Behind Schedule", "On-Hold", "Other"]
  test_data = Gchart.bar( %>
                   <% :size => '600x400', %>
@@ -147,7 +223,10 @@ cyc_labels << labels
                   <% ) 
 
   end 
-  end %>
+
+end 
+%>
+
 <html>
   <head>
    
@@ -156,24 +235,60 @@ cyc_labels << labels
     <h4>Report Type: <%= params["chart"] %></h4>
     <h5>Total Found: <%= @cards.count %></h5>
     
-   <div class="accordion" id="accordionExample">
+    <div class="accordion" id="accordionExample">
   
-   <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Graph
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        <% if (!@cards.nil?) %>
-        <%= image_tag test_data %>
-        <% end %>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Graph
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+          <div class="card-body">
+            <% if (@cards.nil?) %>
+              <% puts "!!!!!!CARDS ARE NIL" %>
+            <% else %>
+              <%= image_tag test_data %>
+            <% end %>
+          </div>
+        </div>
       </div>
+
+     <div class="card">
+      <table  class="table table-striped">
+        <thead>
+          <tr>
+            <th >#</th>
+            <th >Short Name and Title</th>
+            <th >Status</th>
+            <th >Rationale</th>
+            <th >Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% i = 1 
+          if (@cards == nil) 
+
+          else  
+            @cards.each do |card| %>
+              <tr>
+                <td> <%= i %><% i+=1 %></td>
+                <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)<br>
+                  <b>Description:</b> <%= card.short_description %></td>
+                <td><%= card.card_status %></td>
+                <td> <%= card.rationale  %></td>
+                <td><%= card.comments %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
+
 
    <div class="card">
     <table  class="table table-striped">
@@ -183,7 +298,7 @@ cyc_labels << labels
         <th >Short Name and Title</th>
         <th >Status</th>
         <th >Rationale</th>
-        <th >Comments</th>
+      
       </tr>
     </thead>
     <tbody>
@@ -198,7 +313,7 @@ cyc_labels << labels
           <b>Description:</b> <%= card.short_description %></td>
         <td><%= card.card_status %></td>
         <td> <%= card.rationale  %></td>
-        <td><%#= card.comments %></td>
+      
         
       </tr>
       <%end%>
@@ -207,5 +322,6 @@ cyc_labels << labels
   </table>
 </div>
 </div>
+
   </body>
 </html>
