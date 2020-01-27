@@ -10,27 +10,55 @@ class ReportsController < ApplicationController
     status = params["status"]
 	  atype = params["activity_type"]
 	  type = params["chart"]
-	  cycle = params["cycle"]
+    cycle_from = params["cycle_from"]
+    cycle_to = params["cycle_to"]
 
     str = "card_status LIKE ''"
+
+    # Switch values if cycle_from is later than cycle_to
+    if cycle_from > cycle_to
+      temp = cycle_to
+      cycle_to = cycle_from
+      cycle_from = temp
+    end
+
+    cycle_str = " AND in_cycle>='"+cycle_from+"' "  
+    cycle_str += " AND in_cycle<='"+cycle_to+"' "
+
+  
+     case atype
+     when "Projects"
+      atype = 'Project'
+
+     when "Investigations"
+      atype = 'Investigation'
+
+     when "TASC Investigations"
+      atype = "TASC Investigation"
+
+     end
+
+
+    if (atype == "All")
+      activity_str = ' '
+    else
+      activity_str = " AND activity_type LIKE'"+atype+"' "
+    end
          
     case type
     when "Requests"
       if (status != "All")
-        str += " OR card_status='"+status+"'"
+        str += " OR card_status='"+status+"' "
+        str += cycle_str + activity_str
+        puts "filtering string is #{str}"
          @cards = Card.where(str).order(:card_status, :in_cycle)
       else 
-        str += "OR card_status LIKE '%'"   
+        str += "OR card_status LIKE '%' "
+        str += cycle_str + activity_str
+        puts "filtering string is #{str}"
          @cards = Card.where(str).order(:in_cycle)
-      end
-      
-      if (cycle != "All")
-        str += " AND in_cycle='"+cycle+"'"
-         @cards = Card.where(str).order(:card_status)
-      end
-      
+      end    
      
-
     when "Complexity"
     when "Impact"
     when "Mid-Cycle Review"
@@ -42,9 +70,8 @@ class ReportsController < ApplicationController
         str += "OR card_status LIKE '%'"   
       end
       
-      if (cycle != "All")
-        str += " AND in_cycle='"+cycle+"'"
-      end
+      str += cycle_str + activity_str
+
       
       @cards = Card.where(str).order(:card_status) 
       
@@ -56,8 +83,25 @@ class ReportsController < ApplicationController
     status = params["status"]
 	  atype = params["activity_type"]
 	  type = params["chart"]
-	  cycle = params["cycle"]
+    cycle_from = params["cycle_from"]
+    cycle_to = params["cycle_to"]
       
+    # Switch values if cycle_from is later than cycle_to
+    if cycle_from > cycle_to
+      temp = cycle_to
+      cycle_to = cycle_from
+      cycle_from = temp
+    end
+
+    cycle_str = " AND in_cycle>='"+cycle_from+"' "  
+    cycle_str += " AND in_cycle<='"+cycle_to+"' " 
+
+    if (atype == "All")
+      activity_str = ' '
+    else
+      activity_str = " AND request_type='"+atype+"' "
+    end
+
     str = "card_status LIKE ''"
 
     if (status != "All")
@@ -66,9 +110,7 @@ class ReportsController < ApplicationController
       str += "OR card_status LIKE '%'"  
     end
     
-    if (cycle != "All")
-      str += " AND in_cycle='"+cycle+"'"  
-    end
+    str += cycle_str + activity_str
 
     
 	  @cards = Card.where(str) 
