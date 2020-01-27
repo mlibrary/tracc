@@ -91,7 +91,7 @@ class CatalogController < ApplicationController
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
     config.add_facet_field 'request_type_ssi', label: 'Request Type', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'i_or_p_ssi', label: 'Activity Type'
+    config.add_facet_field 'activity_type_ssi', label: 'Activity Type'
     config.add_facet_field 'requester_name_ssim', label: 'Requester Name', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'requester_div_ssim', label: 'Requester Divison', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'in_cycle_ssi', label: 'Request Cycle', limit: true, index_range: 'A'..'Z'
@@ -134,7 +134,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'short_name_ssi', label: 'Short Name'
     config.add_index_field 'requester_name_ssim', label: 'Requester'
     config.add_index_field 'request_type_ssi', label: 'Request Type'
-    config.add_index_field 'i_or_p_ssi', label: 'Activity Type'
+    config.add_index_field 'activity_type_ssi', label: 'Activity Type'
     config.add_index_field 'priority_ssi', label: 'Priority'
     config.add_index_field 'requester_div_ssim', label: 'Requester Divison'
     config.add_index_field 'status_ssi', label: 'Progress Status'
@@ -149,7 +149,7 @@ class CatalogController < ApplicationController
     # Card show fields
    
     config.add_show_field 'request_type_ssi', label: 'Request Type'
-    config.add_show_field 'i_or_p_ssi', label: 'Activity Type'
+    config.add_show_field 'activity_type_ssi', label: 'Activity Type'
     config.add_show_field 'requester_name_ssim', label: 'Requester'
     config.add_show_field 'requester_email_ssim', label: 'Requester Email'
     config.add_show_field 'requester_div_ssim', label: 'Requester Divison'
