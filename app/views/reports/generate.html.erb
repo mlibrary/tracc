@@ -211,7 +211,7 @@ cyc_labels << labels
                   <% :bar_colors => '81b0df,adcb62,c6a52a,b60068,4b001d,347e9d,dfd2e5,c5c00e,b9dad7' , %>
                   <% :title => "Cycles and Requests", %>
                   <% :bg => 'EFEFEF', %>
-                  <% :legend => status_array, %>
+                  <% :legend => status_keys, %>
                   <% :data => [one_new,two_done,three_stp,four_inp,five_not,six_notp,seven_beh,eight_hld,nine_other], %>
                   <% :stacked => false, %>
                   <% :legend_position => 'bottom', %>
@@ -232,29 +232,30 @@ end
    
   </head>
   <body>
-    <h4>Report Type: <%= params["chart"] %></h4>
-    <h5>Total Found: <%= @cards.count %></h5>
+    
     
     <div class="accordion" id="accordionExample">
   
       <div class="card">
         <div class="card-header" id="headingTwo">
           <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Graph
-            </button>
+           
+            <h4>Report Type: <%= params["chart"] %></h4>
+            <h5>Total Found: <%= @cards.count %></h5>
+          
           </h5>
         </div>
 
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        
           <div class="card-body">
             <% if (@cards.nil?) %>
               <% puts "!!!!!!CARDS ARE NIL" %>
+              <%= No record found %>
             <% else %>
               <%= image_tag test_data %>
             <% end %>
           </div>
-        </div>
+   
       </div>
 
      <div class="card">
@@ -265,7 +266,7 @@ end
             <th >Short Name and Title</th>
             <th >Status</th>
             <th >Rationale</th>
-            <th >Comments</th>
+           
           </tr>
         </thead>
         <tbody>
@@ -280,7 +281,7 @@ end
                   <b>Description:</b> <%= card.short_description %></td>
                 <td><%= card.card_status %></td>
                 <td> <%= card.rationale  %></td>
-                <td><%= card.comments %></td>
+              
               </tr>
             <% end %>
           <% end %>
