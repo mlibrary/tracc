@@ -51,7 +51,7 @@ class Card < ActiveRecord::Base
   	doc = { 
 			'id' => self.id,
 			'request_type_ssi' => request_type,
-			'i_or_p_ssi' => i_or_p,
+			'activity_type_ssi' => activity_type,
 			'requester_name_ssim' => requester_name,
 			'requester_email_ssim' => requester_email,
 			'requester_div_ssim' => requester_div,

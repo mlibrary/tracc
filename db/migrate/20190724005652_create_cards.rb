@@ -4,7 +4,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
 
       t.string :request_type
       t.string :card_type # strategic, grant funder and more
-      t.string :i_or_p
+      t.string :activity_type
       t.string :requester_name
       t.string :requester_fname
       t.string :requester_lname     
