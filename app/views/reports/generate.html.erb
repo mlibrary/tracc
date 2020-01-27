@@ -216,7 +216,7 @@ cyc_labels << labels
                   <% :stacked => false, %>
                   <% :legend_position => 'bottom', %>
                   <% :axis_with_labels => [['x'], ['y']], %>
-                  <% :max_value => 50, %>
+                  <% :max_value => 60, %>
                   <% :min_value => 0, %>
                   <% :bar_width_and_spacing => [50,6], %>
                   <% :axis_labels => cyc_labels, %>
@@ -258,37 +258,7 @@ end
    
       </div>
 
-     <div class="card">
-      <table  class="table table-striped">
-        <thead>
-          <tr>
-            <th >#</th>
-            <th >Short Name and Title</th>
-            <th >Status</th>
-            <th >Rationale</th>
-           
-          </tr>
-        </thead>
-        <tbody>
-          <% i = 1 
-          if (@cards == nil) 
-
-          else  
-            @cards.each do |card| %>
-              <tr>
-                <td> <%= i %><% i+=1 %></td>
-                <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)<br>
-                  <b>Description:</b> <%= card.short_description %></td>
-                <td><%= card.card_status %></td>
-                <td> <%= card.rationale  %></td>
-              
-              </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+ 
 
 
    <div class="card">
