@@ -1,8 +1,9 @@
 <% 
-  puts "From params: type: #{params['chart']}, status: #{params['status']}, atype: #{params['activity_type']}, cycle: #{params['cycle']}"
+  puts "From params: type: #{params['chart']}, status: #{params['status']}, atype: #{params['activity_type']}, cycle: #{params['cycle']}, cycle_from: #{params['cycle_from']}, cycle_to: #{params['cycle_to']}"
 %>
 
 <% 
+
 # Collect cycles across all existing cards
 if (@cards.nil?)
   puts "@card were nil!"
@@ -11,23 +12,13 @@ else
   cycles = Array.new
   @cards.each do | value |
     cycles <<  value.in_cycle
-end  
+end
+
 # puts "cycles is #{cycles}"
 cycles_sort = Array.new
 cycles_sort = cycles.uniq.sort
 puts "cycles_sort is #{cycles_sort}"
 
-# Get max number of cycle items in any cycle
-cycles_max = 0
-cycles_sort.each do |cy| 
-  if !cycles.count(cy).nil?
-    cycles_max = cycles.count(cy) if cycles.count(cy) > cycles_max
-  end
-end
-puts "cycles_max is #{cycles_max}"
-%>
-
-<%
 # Get status keys
 status = Status.all
 status_keys = []
@@ -37,102 +28,8 @@ status.each do |st|
 end 
 puts "status_keys is #{status_keys}"
 
-
-# Set up cycle groups
-cycle_hash = {}
-# Create two level hash to combine cycle and status data
-# Question: do we want empty columns for cycles with no data?
-# Here we only account for cycles with existing data in @cards
-cycles_sort.each do |cy| 
-  cycle_hash[cy] = Hash.new
-  status_keys.each do |ky|
-    cycle_hash[cy][ky] = 0
-  end
-end
-
-# Sort card data into cycle_hash values
-@cards.each do | cd |
-  cycle_hash[cd.in_cycle][cd.card_status] += 1
-  #puts "card id: #{cd.id} is in cycle: #{cd.in_cycle} with status: #{cd.card_status}"
-end
-
-# Create data array for google charts
-data_array = []
-cycles_sort.each do |cy| 
-  cycle_array = Array.new
-  status_keys.each do |ky|
-    cycle_array << cycle_hash[cy][ky]
-  end
-  puts "cycle_array for cycle #{cy} is #{cycle_array}"
-  data_array << cycle_array
-end
-puts "data_array for google chart is #{data_array}"
-
-
-# Create labels for google charts
-labels_array = []
-labels = ""
-cycles_sort.each do |cy|
-  labels_array << cy
-  labels <<  "#{cy}|"
-end
-
-puts "labels_array is #{labels_array}"
-
-label = []
-label << labels 
-label2 = []
-label2 << label
-
-puts "label2 is #{label2}"
-%>
-
-<%# labels.slice!(labels.length-1,labels.length) %>
-
- <% # if (params["chart"] == "Requests")
- # test_data = Gchart.bar( %>
-                  <%# :size => '600x400', %>
-                  <%# :bar_colors => '81b0df' , %>
-                  <%# :title => "Cycles and Requests", %>
-                  <%# :bg => 'EFEFEF', %>
-                  <%# :legend => label2, %>
-                  <%# :data => [data_array], %>
-                  <%# :stacked => false, %>
-                  <%# :legend_position => 'bottom', %>
-                  <%# :axis_with_labels => [['x'], ['y']], %>
-                  <%# :max_value => false, %>
-                  <%# :min_value => false, %>
-                  <%# :bar_width_and_spacing => [70,6], %>
-                  <%# :axis_labels => label2, %>
-                  <%# ) 
-
-  end %>
-
-<%
- if (params["chart"] == "Requests")
- test_data = Gchart.bar( 
-                  :size => '600x400',
-                  :bar_colors => '81b0df,adcb62,c6a52a,b60068,4b001d,347e9d,dfd2e5,c5c00e,b9dad7' ,
-                  :title => "Requests by Cycle",
-                  :bg => {:color => 'EFEFEF'},
-                  :legend => status_keys,
-                  :data => data_array,
-                  :stacked => false,
-                  :legend_position => 'bottom',
-                  :axis_with_labels => [['x'], ['y']],
-                  :max_value => (cycles_max),
-                  :min_value => 0,
-                  :bar_width_and_spacing => [70,6],
-                  :axis_labels => label2,
-                   ) 
-
-  end 
-%>
-
-
- <% 
-
- if ( (params["status"] == "All") && (params["cycle"] == "All") && (params["chart"] == "Requests") )
+ #if ( (params["status"] == "All") && (params["cycle"] == "All") && (params["chart"] == "Requests") )
+ if ( (params["status"] == "All") && (params["chart"] == "Requests") )
  # six cycles 
  one = Array.new
  two = Array.new
@@ -157,6 +54,15 @@ puts "label2 is #{label2}"
  #crds = Card.all
  cyc = Cycle.all
  cyc = cyc.sort
+
+ # puts "cyc os #{cyc}"
+ # puts "cyc class is #{cyc.class}"
+
+ # Remove cyc elements that are not in cycles_sort
+ cyc.delete_if { | value | !cycles_sort.include? value.cycle_name} 
+ 
+ # puts "cyc class is #{cyc.class}"
+
  
  @cards.each do | value |  
  
@@ -203,13 +109,31 @@ end
 cyc_labels = []
 cyc_labels << labels
 
+puts ">>>>> cycles_sort.count is #{cycles_sort.count} and params['activity_type'] is #{params['activity_type']}"
+
+
+if (params['activity_type'] != "All") 
+  if (cycles_sort.count >= 3)
+    title = "Cycles and Requests for #{params['activity_type']}"
+  else
+    title = "_                         Cycles and Requests for #{params['activity_type']}"
+  end
+end
+
+if (params['activity_type'] == "All") 
+  if (cycles_sort.count < 3)
+    title = "_         Cycles and Requests"
+  else
+    title = "Cycles and Requests"
+  end
+end
 
 
  #["New", "Done", "Stopped", "In-Progress", "Not-Started", "Not Pickedup", "Behind Schedule", "On-Hold", "Other"]
  test_data = Gchart.bar( %>
                   <% :size => '600x400', %>
                   <% :bar_colors => '81b0df,adcb62,c6a52a,b60068,4b001d,347e9d,dfd2e5,c5c00e,b9dad7' , %>
-                  <% :title => "Cycles and Requests", %>
+                  <% :title => title, %>
                   <% :bg => 'EFEFEF', %>
                   <% :legend => status_keys, %>
                   <% :data => [one_new,two_done,three_stp,four_inp,five_not,six_notp,seven_beh,eight_hld,nine_other], %>
