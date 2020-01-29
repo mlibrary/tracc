@@ -62,7 +62,15 @@ class ReportsController < ApplicationController
     when "Complexity"
     when "Impact"
     when "Mid-Cycle Review"
+      str = "review_type=1 AND cycle >= '"+params['cycle_from']+"' AND cycle <='"+params['cycle_to']+"'"
+      @cards = CycleReview.where(str)
+     
+      #Card.joins(:cycle_review).where(str)
+
     when "End-Cycle Review"
+        str = "review_type=2 AND cycle >= '"+params['cycle_from']+"' AND cycle <='"+params['cycle_to']+"'"
+      @cards = CycleReview.where(str)
+     
     when "Cycle Review"
       if (status != "All")
         str += " OR card_status='"+status+"'"

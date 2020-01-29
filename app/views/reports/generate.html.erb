@@ -1,17 +1,20 @@
 <% 
   puts "From params: type: #{params['chart']}, status: #{params['status']}, atype: #{params['activity_type']}, cycle: #{params['cycle']}, cycle_from: #{params['cycle_from']}, cycle_to: #{params['cycle_to']}"
-%>
-
-<% 
 
 # Collect cycles across all existing cards
 if (@cards.nil?)
   puts "@card were nil!"
-  return
-else
+  
+elsif (params["chart"] =="Requests")
   cycles = Array.new
   @cards.each do | value |
     cycles <<  value.in_cycle
+  end  
+else
+  cycles = Array.new
+  @cards.each do | value |
+    cycles <<  value.cycle
+  end  
 end
 
 # puts "cycles is #{cycles}"
@@ -28,10 +31,7 @@ status.each do |st|
 end 
 puts "status_keys is #{status_keys}"
 
- #if ( (params["status"] == "All") && (params["cycle"] == "All") && (params["chart"] == "Requests") )
- if ( (params["status"] == "All") && (params["chart"] == "Requests") )
- # six cycles 
- one = Array.new
+one = Array.new
  two = Array.new
  three = Array.new
  four = Array.new
@@ -50,6 +50,9 @@ puts "status_keys is #{status_keys}"
  eight_hld = Array.new
  nine_other = Array.new
  cyc_labels = Array.new 
+ #if ( (params["status"] == "All") && (params["cycle"] == "All") && (params["chart"] == "Requests") )
+  # six cycles 
+ 
 
  #crds = Card.all
  cyc = Cycle.all
@@ -63,7 +66,8 @@ puts "status_keys is #{status_keys}"
  
  # puts "cyc class is #{cyc.class}"
 
- 
+ if ( (params["status"] == "All") && (params["chart"] == "Requests") )
+
  @cards.each do | value |  
  
     if (value.card_status == "New") 
@@ -74,7 +78,7 @@ puts "status_keys is #{status_keys}"
       three <<  value.in_cycle
     elsif (value.card_status == "In-Progress")
       four <<  value.in_cycle
-    elsif (value.card_status == "Not Started")
+    elsif (value.card_status == "Not-Started")
       five <<  value.in_cycle
     elsif (value.card_status == "Not Pickedup")
       six <<  value.in_cycle
@@ -146,9 +150,75 @@ end
                   <% :axis_labels => cyc_labels, %>
                   <% ) 
 
-  end 
+  
 
 end 
+
+if ( (params["status"] == "All") && (params["chart"] != "Requests") )
+ 
+ 
+@cards.each do | value |  
+    
+    if (value.status == "New") 
+      one <<  value.cycle 
+    elsif (value.status == "Done")
+      two <<  value.cycle
+    elsif (value.status == "Stopped")
+      three <<  value.cycle
+    elsif (value.status == "In-Progress")
+      four <<  value.cycle
+    elsif (value.status == "Not-Started")
+      five <<  value.cycle
+    elsif (value.status == "Not Pickedup")
+      six <<  value.cycle
+    elsif (value.status == "Behind Schedule")
+      seven <<  value.cycle
+    elsif (value.status == "On-Hold")
+      eight <<  value.cycle
+    else
+      nine << value.cycle      
+    end  
+ end
+ 
+ cyc.each do |value|
+
+  one_new <<    one.count(value.cycle_name)
+  two_done << two.count(value.cycle_name)
+  three_stp  << three.count(value.cycle_name)
+  four_inp  << four.count(value.cycle_name)
+  five_not << five.count(value.cycle_name)
+  six_notp  << six.count(value.cycle_name)
+  seven_beh  << seven.count(value.cycle_name)
+  eight_hld << eight.count(value.cycle_name)
+  nine_other << nine.count(value.cycle_name)
+  cyc_labels << value.cycle_name
+ end 
+ 
+labels = "" 
+cyc_labels.each do | value |  
+labels << value + "|" 
+end
+
+cyc_labels = []
+cyc_labels << labels
+
+
+test_data = Gchart.bar( %>
+                  <% :size => '600x400', %>
+                  <% :bar_colors => '81b0df,adcb62,c6a52a,b60068,4b001d,347e9d,dfd2e5,c5c00e,b9dad7' , %>
+                  <% :title => title, %>
+                  <% :bg => 'EFEFEF', %>
+                  <% :legend => status_keys, %>
+                  <% :data => [one_new,two_done,three_stp,four_inp,five_not,six_notp,seven_beh,eight_hld,nine_other], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => 60, %>
+                  <% :min_value => 0, %>
+                  <% :bar_width_and_spacing => [50,6], %>
+                  <% :axis_labels => cyc_labels, %>
+                  <% ) 
+end
 %>
 
 <html>
@@ -184,7 +254,7 @@ end
 
  
 
-
+<% if (params["chart"] == "Requests") %>
    <div class="card">
     <table  class="table table-striped">
     <thead>
@@ -216,6 +286,50 @@ end
     </tbody>
   </table>
 </div>
+<% else %>
+ <div class="card">
+    <table  class="table table-striped">
+    <thead>
+      <tr>
+        <th >#</th>
+        <th >Cycle</th>
+        <th >Short Name and Title</th>
+        <th >Status</th>
+        <th >Rationale</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <% i = 1 
+        if (@cards == nil) 
+
+        else  
+        @cards.each do |card| %>
+       <tr>
+        <td> <%= i %><% i+=1 %></td>
+        <% 
+        c = Card.where("id=?",card.card_id) 
+        if !c.first.nil?
+          c = c.first
+        end  
+        %>
+        <td> <%= card.cycle %>
+        <td><%= c.title %>(<%= c.short_name %>, <%= c.in_cycle %>)<br>
+          <b>Description:</b> <%= c.short_description %></td>
+
+        <td><%= card.status %></td>
+        <td> <%= card.rationale  %></td>
+      
+        
+      </tr>
+      <%end%>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+
+<% end %>
+
 </div>
 
   </body>
