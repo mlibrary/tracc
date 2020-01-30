@@ -1,11 +1,19 @@
 <ul class="navbar-nav">
 
   <li class="nav-item"><%#= link_to "Cards", {  :controller => "cards", :action => "index" }, class: 'nav-link' %>
-    
   </li>
 
+  <% access_level = check_current_access %>
+  <% action_count = 0 %>
+  
   <%= render_nav_actions do |config, action|%>
-    <li class="lead"><%= action %></li>
+    <% action_count += 1 %>
+    <%# Everyone can see the tools menu %>
+    <% if action_count == 1 %>
+      <li class="lead"><%= action %></li>
+    <% elsif access_level >= 2 %>
+      <li class="lead"><%= action %></li>
+    <% end %>
   <% end %>
 
   <% if has_user_authentication_provider? %>
