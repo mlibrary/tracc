@@ -7,8 +7,8 @@ module ApplicationHelper
     # 3=LIT Project/Teach Leads Guest
     # 9=view options only
 
-    puts ">>>>> user_signed_in? is #{user_signed_in?}"
-    puts ">>>>> current_user is #{current_user}" if user_signed_in?
+    # puts ">>>>> user_signed_in? is #{user_signed_in?}"
+    # puts ">>>>> current_user is #{current_user}" if user_signed_in?
 
     return 9 unless user_signed_in?
 

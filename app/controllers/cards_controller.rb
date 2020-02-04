@@ -1,11 +1,17 @@
 class CardsController < ApplicationController
+  include ApplicationHelper
   protect_from_forgery with: :null_session
   before_action :set_card, only: [:show, :edit, :update, :destroy]
 
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    access_level = check_current_access
+    if (access_level == 0 || access_level == 1)
+      @cards = Card.all
+    else
+      flash.now[:notice] = "Sorry, you aren't allowed to do that. Try searching!"
+    end
   end
 
   def setup_for_display
