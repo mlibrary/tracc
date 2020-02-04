@@ -1,19 +1,24 @@
 module ApplicationHelper
   def check_current_access
-    # access levels
-    # 0=view only; 1=view plus search; 2=view, search, modify cards; 3= super user/dev
+    # access levels - See wiki https://github.com/mlibrary/tracc/wiki/Permissions
+    # 0=super user
+    # 1=Cycle Planning Coordinator and the team Admin
+    # 2=LIT Coordinating Group User
+    # 3=LIT Project/Teach Leads Guest
+    # 9=view options only
 
     puts ">>>>> user_signed_in? is #{user_signed_in?}"
     puts ">>>>> current_user is #{current_user}" if user_signed_in?
 
-    return 0 unless user_signed_in?
+    return 9 unless user_signed_in?
 
-    case current_user.email
-    when 'gordonl@lit.edu', 'gordonl@umich.edu', 'njaffer@umich.edu'
-      return 3
-    else
-      return 0
-    end
+    str = "email='" + current_user.email + "'"
+    perm = Permit.where(str)
+
+    # Handle case of no record
+    return 9 if perm.first.nil?
+
+    return perm.first.level
 
   end
 
