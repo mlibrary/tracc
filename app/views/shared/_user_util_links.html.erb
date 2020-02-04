@@ -29,7 +29,7 @@
       <li class="lead"><%= action %></li>
     <% elsif (menu_count == 3 && access_level.zero?) %>
       <li class="lead"><%= action %></li>
-    <% elsif (menu_count == 4 && access_level <= 9) %>
+    <% elsif (menu_count == 4 && access_level < 9) %>
       <li class="lead"><%= action %></li>
     <% end %>
   <% end %>
