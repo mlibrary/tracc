@@ -3,15 +3,33 @@
   <li class="nav-item"><%#= link_to "Cards", {  :controller => "cards", :action => "index" }, class: 'nav-link' %>
   </li>
 
+  <%
+    # access levels - See wiki https://github.com/mlibrary/tracc/wiki/Permissions
+    # 0=super user
+    # 1=Cycle Planning Coordinator and the team Admin
+    # 2=LIT Coordinating Group User
+    # 3=LIT Project/Teach Leads Guest
+    # 9=view options only
+
+    # menu numbers
+    # 1=Tools
+    # 2=Import
+    # 3=Update
+    # 4=Reports
+  %>
+
   <% access_level = check_current_access %>
-  <% action_count = 0 %>
+  <% menu_count = 0 %>
   
   <%= render_nav_actions do |config, action|%>
-    <% action_count += 1 %>
-    <%# Everyone can see the tools menu %>
-    <% if action_count == 1 %>
+    <% menu_count += 1 %>
+    <% if menu_count == 1 %>
       <li class="lead"><%= action %></li>
-    <% elsif access_level >= 2 %>
+    <% elsif (menu_count == 2 && (access_level == 0 || access_level == 1)) %>
+      <li class="lead"><%= action %></li>
+    <% elsif (menu_count == 3 && access_level.zero?) %>
+      <li class="lead"><%= action %></li>
+    <% elsif (menu_count == 4 && access_level <= 9) %>
       <li class="lead"><%= action %></li>
     <% end %>
   <% end %>
