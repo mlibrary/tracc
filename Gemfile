@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+group :production do
+  gem 'mysql2'
+end
 
 gem 'googlecharts'
 
