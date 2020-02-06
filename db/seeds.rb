@@ -10,6 +10,7 @@
 User.create(name:'Nabeela Jaffer',email:'njaffer@umich.edu',password: 'topsecret')
 User.create(name:'Gordon Leacock',email:'gordonl@umich.edu',password: '123456')
 User.create(name:'Gordon Leacock',email:'gordonl@lit.edu',password: '123456')
+User.create(name:'View Only User',email:'view@umich.edu',password: '123456')
 
 
 Permit.create(email:'njaffer@umich.edu', level: 0)
