@@ -1,6 +1,9 @@
 <% 
 access_level = check_current_access
 super_or_admin = (access_level == 0 || access_level == 1) ? true : false
+
+mstones  = Milestone.where("card_id='" + @document.id + "'")
+comments = Comment.where("card_id='" + @document.id + "'")
 %>
 
 <div class="card show-tools" style="margin-top: 100px;">
@@ -11,56 +14,49 @@ super_or_admin = (access_level == 0 || access_level == 1) ? true : false
       <% end %>
     </div>
 
+    <%# List milestones for this card %>
     <ul class="list-group list-group-flush">
-     
-        <li class="list-group-item">
-          one
-        </li>
 
+      <% if mstones.first.nil?%>
         <li class="list-group-item">
-          one
+          <em>No milestones</em>
         </li>
+      <% else %>
+        <% mstones.each do |stone| %>
+          <li class="list-group-item">
+            <%= stone.milestone %>
+          </li>
+        <% end %>
+      <% end %>
 
-        <li class="list-group-item">
-          one
-        </li>
-
-        <li class="list-group-item">
-          one
-        </li>
-     
     </ul>
+
 </div>
 
-<div class="card show-tools">
+<div class="card show-tools" style="margin-top: 30px;">
     <div class="card-header">
       <h2 class="mb-0 h6 d-inline-block">Comments:</h2>
       <% if super_or_admin %>
         <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block">Edit</button>
       <% end %>
     </div>
-
-    <ul class="list-group list-group-flush">
      
-        <li class="list-group-item">
-          one
-        </li>
+    <%# List comments for this card %>
+    <ul class="list-group list-group-flush">
 
+      <% if comments.first.nil?%>
         <li class="list-group-item">
-          one
+          <em>No comments</em>
         </li>
+      <% else %>
+        <% comments.each do |comm| %>
+          <li class="list-group-item">
+            <%= comm.comment_txt%>
+          </li>
+        <% end %>
+      <% end %>
 
-        <li class="list-group-item">
-          one
-        </li>
-
-        <li class="list-group-item">
-          one
-        </li>
-
-        <li class="list-group-item">
-          one
-        </li>
+    </ul>
      
     </ul>
 </div>
