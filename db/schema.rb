@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_214512) do
+ActiveRecord::Schema.define(version: 2020_02_06_193424) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -185,6 +185,16 @@ ActiveRecord::Schema.define(version: 2020_02_03_214512) do
   create_table "milestones", force: :cascade do |t|
     t.integer "card_id"
     t.string "milestone"
+    t.string "cycle"
+    t.integer "status"
+    t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "objectives", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "objective"
     t.string "cycle"
     t.integer "status"
     t.datetime "recorded_on"

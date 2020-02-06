@@ -4,14 +4,12 @@ super_or_admin = (access_level == 0 || access_level == 1) ? true : false
 
 mstones  = Milestone.where("card_id='" + @document.id + "'")
 comments = Comment.where("card_id='" + @document.id + "'")
+objectives = Objective.where("card_id='" + @document.id + "'")
 %>
 
 <div class="card show-tools" style="margin-top: 100px;">
-    <div class="card-header">
+    <div class="card-header mstones">
       <h2 class="mb-0 h6 d-inline-block">Milestones:</h2>
-      <% if super_or_admin %>
-        <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block">Edit</button>
-      <% end %>
     </div>
 
     <%# List milestones for this card %>
@@ -29,16 +27,17 @@ comments = Comment.where("card_id='" + @document.id + "'")
         <% end %>
       <% end %>
 
+        <% if super_or_admin %>
+          <li class="list-group-item"><button type="button" class="btn btn-outline-secondary btn-sm d-inline-block add-milestone">Add</button></li>
+        <% end %>
+
     </ul>
 
 </div>
 
 <div class="card show-tools" style="margin-top: 30px;">
-    <div class="card-header">
+    <div class="card-header comments">
       <h2 class="mb-0 h6 d-inline-block">Comments:</h2>
-      <% if super_or_admin %>
-        <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block">Edit</button>
-      <% end %>
     </div>
      
     <%# List comments for this card %>
@@ -54,9 +53,40 @@ comments = Comment.where("card_id='" + @document.id + "'")
             <%= comm.comment_txt%>
           </li>
         <% end %>
+        <% end %>
+
+        <% if super_or_admin %>
+          <li class="list-group-item"><button type="button" class="btn btn-outline-secondary btn-sm d-inline-block add-comment">Add</button></li>
       <% end %>
 
     </ul>
+     
+    </ul>
+</div>
+
+<div class="card show-tools" style="margin-top: 30px;">
+    <div class="card-header objectives">
+      <h2 class="mb-0 h6 d-inline-block">Objectives:</h2>
+    </div>
+     
+    <%# List comments for this card %>
+    <ul class="list-group list-group-flush">
+
+      <% if objectives.first.nil?%>
+        <li class="list-group-item">
+          <em>No objectives</em>
+        </li>
+      <% else %>
+        <% objectives.each do |obj| %>
+          <li class="list-group-item">
+            <%= obj.objective%>
+          </li>
+        <% end %>
+      <% end %>
+
+      <% if super_or_admin %>
+        <li class="list-group-item"><button type="button" class="btn btn-outline-secondary btn-sm d-inline-block add-objective">Add</button></li>
+      <% end %>
      
     </ul>
 </div>
