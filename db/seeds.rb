@@ -160,9 +160,10 @@ Card.create(title:'Non-HLB Expertise',short_name:'Non-HLB expertise',activity_ty
 Card.create(title:'Catalog Search Holdings Redesign',short_name:'Catalog Search Holdings',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
 #Card.create(title:'',short_name:'Common Libraries',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'')
 
+Milestone.create(card_id: '129', milestone: 'Project started.', cycle: 'FY20:1', status: '', recorded_on: '')
+Milestone.create(card_id: '129', milestone: 'Project staffed.', cycle: 'FY20:1', status: '', recorded_on: '')
 
-
-
+Comment.create(card_id: '129', uemail: '', comment_txt: 'Great idea!', recorded_on: '')
 
 
 
