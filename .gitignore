@@ -11,6 +11,7 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /db/tracc_development
+db/tracc_development
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -30,3 +31,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore mac directory files
+*/.DS_Store
+.DS_Store
