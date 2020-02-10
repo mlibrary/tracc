@@ -1,0 +1,3 @@
+function addMilestone(){
+	alert("clicked!")
+}

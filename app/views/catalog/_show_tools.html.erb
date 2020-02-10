@@ -1,3 +1,11 @@
+<script>
+$(document).on('ready page:load', function(){
+  $(".add-milestone").click(function(){
+    alert("I am an alert box!");
+    });
+});
+</script>
+
 <% 
 access_level = check_current_access
 super_or_admin = (access_level == 0 || access_level == 1) ? true : false
@@ -28,6 +36,10 @@ objectives = Objective.where("card_id='" + @document.id + "'")
       <% end %>
 
         <% if super_or_admin %>
+          <!-- Material input -->
+          <!-- Default input -->
+          <label for="exampleForm2">New Milestone</label>
+          <input type="text" id="exampleForm2" class="form-control">
           <li class="list-group-item"><button type="button" class="btn btn-outline-secondary btn-sm d-inline-block add-milestone">Add</button></li>
         <% end %>
 
@@ -90,4 +102,3 @@ objectives = Objective.where("card_id='" + @document.id + "'")
      
     </ul>
 </div>
-
