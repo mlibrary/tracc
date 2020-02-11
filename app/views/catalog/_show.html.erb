@@ -17,7 +17,6 @@ super_or_admin = (access_level == 0 || access_level == 1) ? true : false
 <%# default partial to display solr document fields in catalog show view -%>
 
     <% doc_presenter.fields_to_render.each do |field_name, field| -%>
-    <% puts ">>>>> field_name: #{field_name}, field: #{field}" %>
     <div class="row" style="margin-bottom:20px;">
       <div class="col-md-3"><%= render_document_show_field_label document, field: field_name %></div>
       <div class="col-md-9"><%= doc_presenter.field_value field %></div>
