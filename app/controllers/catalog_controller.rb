@@ -4,7 +4,6 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
 
-
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository
@@ -273,6 +272,41 @@ class CatalogController < ApplicationController
     # default 'mySuggester', uncomment and provide it below
     # config.autocomplete_suggester = 'mySuggester'
 
+  end
+
+  def add_milestone
+    ms = Milestone.new
+    ms["card_id"] = params["card_id"]
+    ms["milestone"] = params["mstone"]
+    ms["cycle"] = params["in_cycle"]
+    ms["recorded_on"] = params["recorded_on"]
+    ms["status"] = 0
+    ms.save
+    flash[:notice] = "Milestone '#{ms["milestone"]}' saved."
+    redirect_back(fallback_location: root_path)
+  end
+
+  def add_comment
+    cm = Comment.new
+    cm["card_id"] = params["card_id"]
+    cm["comment_txt"] = params["comment_txt"]
+    cm["uemail"] = params["uemail"]
+    cm["recorded_on"] = params["recorded_on"]
+    cm.save
+    flash[:notice] = "Comment '#{cm["comment_txt"]}' saved."
+    redirect_back(fallback_location: root_path)
+  end
+
+  def add_objective
+    ob = Objective.new
+    ob["card_id"] = params["card_id"]
+    ob["objective"] = params["objective"]
+    ob["cycle"] = params["cycle"]
+    ob["status"] = 0
+    ob["recorded_on"] = params["recorded_on"]
+    ob.save
+    flash[:notice] = "Objective '#{ob["objective"]}' saved."
+    redirect_back(fallback_location: root_path)
   end
 
 end

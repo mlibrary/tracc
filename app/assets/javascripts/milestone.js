@@ -1,3 +1,1 @@
-function addMilestone(){
-	alert("clicked!")
-}
+

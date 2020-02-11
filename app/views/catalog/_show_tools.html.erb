@@ -1,10 +1,16 @@
-<script>
+<!-- <script>
 $(document).on('ready page:load', function(){
   $(".add-milestone").click(function(){
-    alert("I am an alert box!");
+    var mst;
+    mst = $("#mstone-entry").val();
+    cid = ", id:" + $("#card_id").val();
+    cyc = ", cycle:" + $("#in_cycle").val();
+    rec = ", recorded:" + $("#recorded_on").val();
+    alert("Content: " + mst + cid + cyc + rec);
+    form = document.querySelector('form');
     });
 });
-</script>
+</script> -->
 
 <% 
 access_level = check_current_access
@@ -13,6 +19,9 @@ super_or_admin = (access_level == 0 || access_level == 1) ? true : false
 mstones  = Milestone.where("card_id='" + @document.id + "'")
 comments = Comment.where("card_id='" + @document.id + "'")
 objectives = Objective.where("card_id='" + @document.id + "'")
+docid = @document.id
+puts ">>>>> document.id is #{docid}"
+debug @document
 %>
 
 <div class="card show-tools" style="margin-top: 100px;">
@@ -35,12 +44,22 @@ objectives = Objective.where("card_id='" + @document.id + "'")
         <% end %>
       <% end %>
 
+        <%# if super or admin allow adding of items %>
         <% if super_or_admin %>
-          <!-- Material input -->
-          <!-- Default input -->
-          <label for="exampleForm2">New Milestone</label>
-          <input type="text" id="exampleForm2" class="form-control">
-          <li class="list-group-item"><button type="button" class="btn btn-outline-secondary btn-sm d-inline-block add-milestone">Add</button></li>
+          <!--Material textarea-->
+          <%= form_tag("add_milestone", :enctype =>"multipart/form-data", :method => :post ) do %>
+            <li class="list-group-item">
+              <div class="mstone-entry-group">
+                <div class="md-form form-group purple-border">
+                  <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
+                  <input type="hidden" id="in_cycle" name="in_cycle" value=<%= @document["in_cycle_ssi"] %>  />
+                  <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
+                  <label for="mstone">New milestone</label>
+                  <input type="text" id="mstone" name="mstone" class="form-control" />
+                </div>
+              </div>
+            <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block add-milestone">Save</button></li>
+          <% end %>
         <% end %>
 
     </ul>
@@ -67,11 +86,23 @@ objectives = Objective.where("card_id='" + @document.id + "'")
         <% end %>
         <% end %>
 
+        <%# if super or admin allow adding of items %>
         <% if super_or_admin %>
-          <li class="list-group-item"><button type="button" class="btn btn-outline-secondary btn-sm d-inline-block add-comment">Add</button></li>
-      <% end %>
-
-    </ul>
+          <!--Material textarea-->
+          <%= form_tag("add_comment", :enctype =>"multipart/form-data", :method => :post ) do %>
+            <li class="list-group-item">
+              <div class="comment-entry-group">
+                <div class="md-form form-group purple-border">
+                  <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
+                  <input type="hidden" id="uemail" name="uemail" value=<%= @document["uemail"] %>  />
+                  <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
+                  <label for="comment_txt">New comment</label>
+                  <input type="text" id="comment_txt" name="comment_txt" class="form-control" />
+                </div>
+              </div>
+            <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block add-comment">Save</button></li>
+          <% end %>
+        <% end %>
      
     </ul>
 </div>
@@ -96,9 +127,24 @@ objectives = Objective.where("card_id='" + @document.id + "'")
         <% end %>
       <% end %>
 
-      <% if super_or_admin %>
-        <li class="list-group-item"><button type="button" class="btn btn-outline-secondary btn-sm d-inline-block add-objective">Add</button></li>
-      <% end %>
-     
+        <%# if super or admin allow adding of items %>
+        <% if super_or_admin %>
+          <!--Material textarea-->
+          <%= form_tag("add_objective", :enctype =>"multipart/form-data", :method => :post ) do %>
+            <li class="list-group-item">
+              <div class="objective-entry-group">
+                <div class="md-form form-group purple-border">
+                  <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
+                  <input type="hidden" id="cycle" name="cycle" value=<%= @document["in_cycle_ssi"] %>  />
+                  <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
+                  <label for="objective">New objective</label>
+                  <input type="text" id="objective" name="objective" class="form-control" />
+                </div>
+              </div>
+            <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block add-comment">Save</button></li>
+          <% end %>
+        <% end %>
+
     </ul>
+
 </div>
