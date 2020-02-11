@@ -6,9 +6,6 @@ super_or_admin = (access_level == 0 || access_level == 1) ? true : false
 mstones  = Milestone.where("card_id='" + @document.id + "'")
 comments = Comment.where("card_id='" + @document.id + "'")
 objectives = Objective.where("card_id='" + @document.id + "'")
-docid = @document.id
-puts ">>>>> document.id is #{docid}"
-debug @document
 %>
 
 <div class="card show-tools" style="margin-top: 100px;">
