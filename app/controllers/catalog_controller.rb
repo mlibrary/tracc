@@ -275,12 +275,14 @@ class CatalogController < ApplicationController
   end
 
   def add_milestone
+    byebug
     ms = Milestone.new
     ms["card_id"] = params["card_id"]
     ms["milestone"] = params["mstone"]
     ms["cycle"] = params["in_cycle"]
     ms["recorded_on"] = params["recorded_on"]
-    chk_status = (params["status"] = "on") ? 1 : 0
+    chk_status = (params["status"] == "on") ? 1 : 0
+    chk_status = 0 if params["status"].nil?
     ms["status"] = chk_status
     ms.save
     flash[:notice] = "Milestone '#{ms["milestone"]}' saved."
