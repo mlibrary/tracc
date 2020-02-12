@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2020_02_06_193424) do
     t.string "request_type"
     t.string "card_type"
     t.string "activity_type"
+    t.string "epic"
     t.string "requester_name"
     t.string "requester_fname"
     t.string "requester_lname"

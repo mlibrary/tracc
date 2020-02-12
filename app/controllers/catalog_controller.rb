@@ -275,12 +275,15 @@ class CatalogController < ApplicationController
   end
 
   def add_milestone
+    byebug
     ms = Milestone.new
     ms["card_id"] = params["card_id"]
     ms["milestone"] = params["mstone"]
     ms["cycle"] = params["in_cycle"]
     ms["recorded_on"] = params["recorded_on"]
-    ms["status"] = 0
+    chk_status = (params["status"] == "on") ? 1 : 0
+    chk_status = 0 if params["status"].nil?
+    ms["status"] = chk_status
     ms.save
     flash[:notice] = "Milestone '#{ms["milestone"]}' saved."
     redirect_back(fallback_location: root_path)
@@ -309,4 +312,19 @@ class CatalogController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def update_milestone_check
+    ms = Milestone.find( params[:mstone_id] )
+    # flip status on click
+    ms["status"] = (ms["status"] == 1) ? 0 : 1
+    ms.save
+    flash[:notice] = "Milestone '#{params["mstone_milestone"]}' status updated."
+    redirect_back(fallback_location: root_path)
+  end
+
+  private
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def milestone_params
+    params.permit(:id, :card_id, :milestone, :cycle, :recorded_on, :status)
+  end
 end
