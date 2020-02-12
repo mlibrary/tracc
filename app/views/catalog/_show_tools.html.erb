@@ -1,7 +1,17 @@
+<script type="text/javascript">
+$(document).on('ready page:load', function(){
+
+  $(".mstone-checkbox").on("click", function (){
+    // alert("checkbox clicked");
+    $(".mstone-form").submit();
+  });
+});
+</script>
 
 <% 
 access_level = check_current_access
 super_or_admin = (access_level == 0 || access_level == 1) ? true : false
+disable_str = super_or_admin ? " " : "disabled"
 
 mstones  = Milestone.where("card_id='" + @document.id + "'")
 comments = Comment.where("card_id='" + @document.id + "'")
@@ -23,7 +33,16 @@ objectives = Objective.where("card_id='" + @document.id + "'")
       <% else %>
         <% mstones.each do |stone| %>
           <li class="list-group-item">
-            <%= stone.milestone %>
+            <%= form_tag("update_milestone_check", :enctype =>"multipart/form-data", :class => "mstone-form", :method => :post ) do %>
+              <div class="form-check pl-0" >
+                <label class="checkbox-inline">
+                  <% chk_status = (stone.status == 1) ? "checked" : "" %>
+                  <input type="hidden" id="mstone_id" name="mstone_id" value=<%= stone.id %> />
+                  <input type="hidden" id="mstone_milestone" name="mstone_milestone" value=<%= stone.milestone %> />
+                 <input type="checkbox" class="mstone-checkbox" value="status" <%= chk_status %> <%= disable_str %> >  <%= stone.milestone %>
+                </label>
+              </div>
+            <% end %>
           </li>
         <% end %>
       <% end %>
@@ -40,6 +59,9 @@ objectives = Objective.where("card_id='" + @document.id + "'")
                   <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
                   <label for="mstone">New milestone</label>
                   <input type="text" id="mstone" name="mstone" class="form-control" />
+
+                  <label class="checkbox-inline">
+                  <input type="checkbox" id="status" name="status">  Already done</label>
                 </div>
               </div>
             <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block add-milestone">Save</button></li>

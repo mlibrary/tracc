@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
     collection do
-      post :add_milestone, :add_comment, :add_objective
+      post :add_milestone, :add_comment, :add_objective, :update_milestone_check, :update_objective_check
     end
   end
 
