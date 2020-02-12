@@ -281,7 +281,6 @@ class CatalogController < ApplicationController
   end
 
   def add_milestone
-    byebug
     ms = Milestone.new
     ms["card_id"] = params["card_id"]
     ms["milestone"] = params["mstone"]
