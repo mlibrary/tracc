@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-	before_action :authenticate_user!
+	#before_action :authenticate_user!
 
   # Adds a few additional behaviors into the application controller
   include Blacklight::Controller
