@@ -150,17 +150,16 @@ Card.create(title:'Deep Blue Data Upgrade To Hyrax 2.0',short_name:'DBD Upgrade'
 Card.create(title:'DSpace to Hyrax data migration',short_name:'DSpace 2 Hyrax',activity_type:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'In-Progress')
 
 #FY20:1
-#Card.create(title:'Create common libraries to deal with search/advanced search',short_name:'Common Libraries',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'Other')
+Card.create(title:'Campus LTI PageBuilder Implementation',short_name:'Canvas',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'Other',card_type: 'Other')
 Card.create(title:'Retire Debian 8',short_name:'Retire Debian 8',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress', card_type: 'Other')
 Card.create(title:'Migrate SCRC and Clements Aeon to Atlas hosting',short_name:'Aeon hosting',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress', card_type: 'Other')
-#Card.create(title:'Migrate Fulcrum to an isolated hosting environment',short_name:'Fulcrum hosting',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
-#Card.create(title:'Footprints succession',short_name:'Footprints succession',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
-#Card.create(title:'Millennium Project websites',short_name:'Millennium websites',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress')
+Card.create(title:'Migrate Fulcrum to an isolated hosting environment',short_name:'Fulcrum hosting',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
+Card.create(title:'Footprints succession',short_name:'Footprints succession',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
+Card.create(title:'Millennium Project websites',short_name:'Millennium websites',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress')
 Card.create(title:'Non-HLB Expertise',short_name:'Non-HLB expertise',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress', card_type: 'Other')
 Card.create(title:'Deep Blue Data',short_name:'DB Data',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress', card_type: 'Strategic', epic: 'Deep Blues')
-
-#Card.create(title:'Catalog Search Holdings Redesign',short_name:'Catalog Search Holdings',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
-#Card.create(title:'',short_name:'Common Libraries',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'')
+Card.create(title:'Catalog Search Holdings Redesign',short_name:'Catalog Search Holdings',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'Other', card_type: 'Strategic', epic: 'Search')
+Card.create(title:'Create common libraries to deal with search/advanced search',short_name:'Common Libraries',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'')
 
 #Milestone.create(card_id: '129', milestone: 'Project started.', cycle: 'FY20:1', status: '', recorded_on: '')
 #Milestone.create(card_id: '129', milestone: 'Project staffed.', cycle: 'FY20:1', status: '', recorded_on: '')
