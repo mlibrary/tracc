@@ -150,22 +150,40 @@ Card.create(title:'Deep Blue Data Upgrade To Hyrax 2.0',short_name:'DBD Upgrade'
 Card.create(title:'DSpace to Hyrax data migration',short_name:'DSpace 2 Hyrax',activity_type:'Project',in_cycle:'FY19:1',start_cycle:'FY19:1',card_status:'In-Progress')
 
 #FY20:1
-Card.create(title:'Create common libraries to deal with search/advanced search',short_name:'Common Libraries',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
-Card.create(title:'Retire Debian 8',short_name:'Retire Debian 8',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
-Card.create(title:'Migrate SCRC and Clements Aeon to Atlas hosting',short_name:'Aeon hosting',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
-Card.create(title:'Migrate Fulcrum to an isolated hosting environment',short_name:'Fulcrum hosting',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
-Card.create(title:'Footprints succession',short_name:'Footprints succession',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
-Card.create(title:'Millennium Project websites',short_name:'Millennium websites',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress')
-Card.create(title:'Non-HLB Expertise',short_name:'Non-HLB expertise',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress')
-Card.create(title:'Catalog Search Holdings Redesign',short_name:'Catalog Search Holdings',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
+#Card.create(title:'Create common libraries to deal with search/advanced search',short_name:'Common Libraries',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'Other')
+Card.create(title:'Retire Debian 8',short_name:'Retire Debian 8',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress', card_type: 'Other')
+Card.create(title:'Migrate SCRC and Clements Aeon to Atlas hosting',short_name:'Aeon hosting',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress', card_type: 'Other')
+#Card.create(title:'Migrate Fulcrum to an isolated hosting environment',short_name:'Fulcrum hosting',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
+#Card.create(title:'Footprints succession',short_name:'Footprints succession',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
+#Card.create(title:'Millennium Project websites',short_name:'Millennium websites',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress')
+Card.create(title:'Non-HLB Expertise',short_name:'Non-HLB expertise',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress', card_type: 'Other')
+Card.create(title:'Deep Blue Data',short_name:'DB Data',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'',card_status:'In-Progress', card_type: 'Strategic', epic: 'Deep Blues')
+
+#Card.create(title:'Catalog Search Holdings Redesign',short_name:'Catalog Search Holdings',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'FY20:1',card_status:'In-Progress')
 #Card.create(title:'',short_name:'Common Libraries',activity_type:'Project',in_cycle:'FY20:1',start_cycle:'')
 
-Milestone.create(card_id: '129', milestone: 'Project started.', cycle: 'FY20:1', status: '', recorded_on: '')
-Milestone.create(card_id: '129', milestone: 'Project staffed.', cycle: 'FY20:1', status: '', recorded_on: '')
+#Milestone.create(card_id: '129', milestone: 'Project started.', cycle: 'FY20:1', status: '', recorded_on: '')
+#Milestone.create(card_id: '129', milestone: 'Project staffed.', cycle: 'FY20:1', status: '', recorded_on: '')
 
-Comment.create(card_id: '129', uemail: '', comment_txt: 'Great idea!', recorded_on: '')
+#Comment.create(card_id: '129', uemail: '', comment_txt: 'Great idea!', recorded_on: '')
 
+#FY20:2
+Card.create(title:'Transfer & Graduate Student Interative Game',short_name:'Interactive Game',activity_type:'Project',in_cycle:'FY20:2',start_cycle:'',card_status:'Other', card_type: 'Other')
+Card.create(title:'Deep Blue Unity',short_name:'DBU',activity_type:'Project',in_cycle:'FY20:2',start_cycle:'',card_status:'Other', card_type: 'Strategic',epic: 'Deep Blues')
+Card.create(title:'ArchiveSpace PUI Implementation for SCRC',short_name:'ArchiveSpace PUI',activity_type:'Project',in_cycle:'FY20:2',start_cycle:'',card_status:'Other', card_type: 'Other')
+Card.create(title:'Update mechanism through which record metadata is provided to the Library searchuser interface',short_name:'Lib Search-Rec Metadata',activity_type:'Project',in_cycle:'FY20:2',start_cycle:'',card_status:'Other', card_type: 'Strategic', epic:'Search')
+Card.create(title:'Cycle Planning Tool - Phase 2',short_name:'tracc',activity_type:'Project',in_cycle:'FY20:2',start_cycle:'',card_status:'Other', card_type: 'Other')
+Card.create(title:'Workflow and Communication Tool Pilot',short_name:'Workflow Tool',activity_type:'Project',in_cycle:'FY20:2',start_cycle:'',card_status:'Other', card_type: 'Other')
+Card.create(title:'DSpace Upgrade',short_name:'DSpace Upgrade',activity_type:'Project',in_cycle:'FY20:2',start_cycle:'',card_status:'Other', card_type: 'Strategic', epic: 'Deep Blues')
+Card.create(title:'Hyrax Working Group',short_name:'Hyrax WG',activity_type:'Project',in_cycle:'FY20:2',start_cycle:'',card_status:'Other', card_type: 'Strategic', epic: 'Deep Blues')
 
+#FY20:3
+Card.create(title:'Creating a User interface for the New Digital Collections Platform: Phase 3',short_name:'UI for DCP',activity_type:'Project',in_cycle:'FY20:3',start_cycle:'',card_status:'New', card_type: 'Strategic',epic: 'DCP')
+Card.create(title:'ArcLight Solution Investigation',short_name:'ArcLight',activity_type:'Project',in_cycle:'FY20:3',start_cycle:'',card_status:'Other', card_type: 'Strategic', epic: 'DCP')
+Card.create(title:'Campus Map Extension-DBRRDS partnerships',short_name:'Campus Map',activity_type:'Project',in_cycle:'FY20:3',start_cycle:'',request_type: 'Consultation', card_status:'New', card_type: 'Strategic', epic: 'Deep Blues')
+Card.create(title:'Campus Partnership Map Extension-Mapping Deposits made to Deep Blue and Deep Blue Data',short_name:'Readership Map',activity_type:'Project',in_cycle:'FY20:3',start_cycle:'', request_type: 'Consultation',card_status:'New', card_type: 'Strategic',epic: 'Deep Blues')
+Card.create(title:'Building ObjectClass (FY20:3 Phase)',short_name:'ObjectClass',activity_type:'Project',in_cycle:'FY20:3',start_cycle:'',card_status:'New', card_type: 'Strategic', epic: 'DCP')
+Card.create(title:'Rationalize application hosting - Phase 1',short_name:'App Hosting',activity_type:'Project',in_cycle:'FY20:3',start_cycle:'',card_status:'New', card_type: 'Other')
 
 
 

@@ -2,9 +2,10 @@ class CreateCards < ActiveRecord::Migration[5.2]
   def change
     create_table :cards do |t|
 
-      t.string :request_type
+      t.string :request_type #consultation, new service, service improvement, other
       t.string :card_type # strategic, grant funder and more
-      t.string :activity_type
+      t.string :activity_type #project, investigation, TASC investigation
+      t.string :epic #name of the strategic project 
       t.string :requester_name
       t.string :requester_fname
       t.string :requester_lname     
