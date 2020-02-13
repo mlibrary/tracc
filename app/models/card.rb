@@ -53,7 +53,7 @@ class Card < ActiveRecord::Base
 			'request_type_ssi' => request_type,
 			'activity_type_ssi' => activity_type,
 			'card_type_ssi' => card_type,
-			'epic_ssi' => epic_type,
+			'epic_ssi' => epic,
 			'requester_name_ssim' => requester_name,
 			'requester_email_ssim' => requester_email,
 			'requester_div_ssim' => requester_div,
