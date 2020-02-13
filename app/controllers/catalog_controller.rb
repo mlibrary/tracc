@@ -326,6 +326,16 @@ class CatalogController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+
+  def update_objective_check
+    ob = Objective.find( params[:objective_id] )
+    # flip status on click
+    ob["status"] = (ob["status"] == 1) ? 0 : 1
+    ob.save
+    flash[:notice] = "Objective '#{params["objtv_objective"]}' status updated."
+    redirect_back(fallback_location: root_path)
+  end  
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.

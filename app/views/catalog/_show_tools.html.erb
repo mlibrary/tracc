@@ -5,6 +5,11 @@ $(document).on('ready page:load', function(){
     // alert("checkbox clicked");
     $(".mstone-form").submit();
   });
+
+    $(".objtv-checkbox").on("click", function (){
+    // alert("checkbox clicked");
+    $(".objtv-form").submit();
+  });
 });
 </script>
 
@@ -126,9 +131,18 @@ objectives = Objective.where("card_id='" + @document.id + "'")
           <em>No objectives</em>
         </li>
       <% else %>
-        <% objectives.each do |obj| %>
+        <% objectives.each do |objtv| %>
           <li class="list-group-item">
-            <%= obj.objective%>
+            <%= form_tag("update_objective_check", :enctype =>"multipart/form-data", :class => "objtv-form", :method => :post ) do %>
+              <div class="form-check pl-0" >
+                <label class="checkbox-inline">
+                  <% chk_status = (objtv.status == 1) ? "checked" : "" %>
+                  <input type="hidden" id="mstone_id" name="mstone_id" value=<%= objtv.id %> />
+                  <input type="hidden" id="objtv_objective" name="objtv_objective" value=<%= objtv.objective %> />
+                 <input type="checkbox" class="objtv-checkbox" value="status" <%= chk_status %> <%= disable_str %> >  <%= objtv.objective %>
+                </label>
+              </div>
+            <% end %>
           </li>
         <% end %>
       <% end %>
