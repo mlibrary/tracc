@@ -1,15 +1,63 @@
 <script type="text/javascript">
-$(document).on('ready page:load', function(){
+$(document).on('ready page:load', function() {
+
+  // handle return key inside save text boxes
+  $("input.entry").keypress(function(event){
+  
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13') {
+      if ( ! ( $(this).hasClass("mstone") || $(this).hasClass("comment_txt") || $(this).hasClass("objective") ) ) {
+          return;
+      } 
+
+      // check for empty entry
+      if (not_empty(this)) {
+          $(this).parents('form').submit();
+      } else {
+        alert("You may not submit an empty entry.")
+      }
+    }
+  });
+
+
+  // handle save button events
+  $(".form-button").click(function() {
+    var classes = $(this).attr('class')
+    var entry_el = ""
+    if ( $(this).hasClass("add-milestone") ) {
+          entry_el = ".mstone"; }
+    else if ( $(this).hasClass("add-comment") ) {
+          entry_el = ".comment_txt"; 
+        }
+    else if ( $(this).hasClass("add-objective") ) {
+          entry_el = ".objective"; 
+        }
+    else {
+      return;
+    }
+
+    // check for empty entry
+    if (not_empty(entry_el)) {
+        $(this).parents('form').submit();
+      } else {
+        alert("You may not submit an empty entry.")
+      }
+  });
 
   $(".mstone-checkbox").on("click", function (){
-    // alert("checkbox clicked");
-    $(".mstone-form").submit();
+    $(this).parents('form').submit();
   });
 
     $(".objtv-checkbox").on("click", function (){
-    // alert("checkbox clicked");
-    $(".objtv-form").submit();
+    $(this).parents('form').submit();
   });
+
+  function not_empty(el) {
+    str = $(el).val();
+    str = $.trim(str);
+    return (str.length > 0)
+  }
+
 });
 </script>
 
@@ -63,13 +111,13 @@ objectives = Objective.where("card_id='" + @document.id + "'")
                   <input type="hidden" id="in_cycle" name="in_cycle" value=<%= @document["in_cycle_ssi"] %>  />
                   <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
                   <label for="mstone">New milestone</label>
-                  <input type="text" id="mstone" name="mstone" class="form-control" />
+                  <input type="text" id="mstone" name="mstone" class="entry mstone form-control" />
 
                   <label class="checkbox-inline">
                   <input type="checkbox" id="status" name="status">  Already done</label>
                 </div>
               </div>
-            <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block add-milestone">Save</button></li>
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block form-button add-milestone">Save</button></li>
           <% end %>
         <% end %>
 
@@ -108,10 +156,10 @@ objectives = Objective.where("card_id='" + @document.id + "'")
                   <input type="hidden" id="uemail" name="uemail" value=<%= @document["uemail"] %>  />
                   <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
                   <label for="comment_txt">New comment</label>
-                  <input type="text" id="comment_txt" name="comment_txt" class="form-control" />
+                  <input type="text" id="comment_txt" name="comment_txt" class="entry comment_txt form-control" />
                 </div>
               </div>
-            <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block add-comment">Save</button></li>
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block form-button add-comment">Save</button></li>
           <% end %>
         <% end %>
      
@@ -137,7 +185,8 @@ objectives = Objective.where("card_id='" + @document.id + "'")
               <div class="form-check pl-0" >
                 <label class="checkbox-inline">
                   <% chk_status = (objtv.status == 1) ? "checked" : "" %>
-                  <input type="hidden" id="mstone_id" name="mstone_id" value=<%= objtv.id %> />
+                  <p>objective id: <%= objtv.id %> </p>
+                  <input type="hidden" id="objective_id" name="objective_id" value=<%= objtv.id %> />
                   <input type="hidden" id="objtv_objective" name="objtv_objective" value=<%= objtv.objective %> />
                  <input type="checkbox" class="objtv-checkbox" value="status" <%= chk_status %> <%= disable_str %> >  <%= objtv.objective %>
                 </label>
@@ -158,10 +207,13 @@ objectives = Objective.where("card_id='" + @document.id + "'")
                   <input type="hidden" id="cycle" name="cycle" value=<%= @document["in_cycle_ssi"] %>  />
                   <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
                   <label for="objective">New objective</label>
-                  <input type="text" id="objective" name="objective" class="form-control" />
+                  <input type="text" id="objective" name="objective" class="entry objective form-control" />
+                  <label class="checkbox-inline">
+                    
+                  <input type="checkbox" id="status" name="status">  Already done</label>
                 </div>
               </div>
-            <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-block add-comment">Save</button></li>
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block form-button add-objective">Save</button></li>
           <% end %>
         <% end %>
 
