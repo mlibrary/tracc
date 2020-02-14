@@ -312,12 +312,17 @@ class CatalogController < ApplicationController
     ob["cycle"] = params["cycle"]
     ob["status"] = 0
     ob["recorded_on"] = params["recorded_on"]
+    chk_status = (params["status"] == "on") ? 1 : 0
+    chk_status = 0 if params["status"].nil?
+    ob["status"] = chk_status
     ob.save
     flash[:notice] = "Objective '#{ob["objective"]}' saved."
     redirect_back(fallback_location: root_path)
   end
 
+  # flip status on click
   def update_milestone_check
+    puts "milestone id: #{params[:mstone_id]}"
     ms = Milestone.find( params[:mstone_id] )
     # flip status on click
     ms["status"] = (ms["status"] == 1) ? 0 : 1
@@ -326,10 +331,14 @@ class CatalogController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  private
+  # flip status on click
+  def update_objective_check
+    puts "objective id: #{params[:objective_id]}"
+    ob = Objective.find( params[:objective_id] )
+    ob["status"] = (ob["status"] == 1) ? 0 : 1
+    ob.save
+    flash[:notice] = "Objective '#{params["objtv_objective"]}' status updated."
+    redirect_back(fallback_location: root_path)
+  end  
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def milestone_params
-    params.permit(:id, :card_id, :milestone, :cycle, :recorded_on, :status)
-  end
 end
