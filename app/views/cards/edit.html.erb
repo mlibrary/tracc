@@ -3,22 +3,56 @@
 
  
 <%= form_for(@card_one) do |f| %>
+
   <div class="card">
     <div class="card-header" id="headingOne">
       <p><strong>Edit Card:  <%= @card_one.short_name %></strong></p>
-      <p> [<%= link_to 'Show Card Info', @card_one %> | <%= link_to 'Back To All Cards', cards_path %>]</p>
+      <div class="form-buttons">
+        <%= f.submit("Update Card") %>
+      </div>
+      <p style="margin-top: 20px;"> [<%= link_to 'Show Card Info', @card_one %> | <%= link_to 'Back To All Cards', cards_path %>] </p>
       <p style="margin-top: 20px;">Title<br><%= f.text_field(:title, size: 100) %></p>
       <p>Short Name:<br><%= f.text_field(:short_name, size: 60) %></p>
       <p>Description: <br><%= f.text_area(:short_description,  cols: "100", rows: "5") %></p>
 
-      <p>Status: <br><%= f.text_field(:card_status, size: 100) %></p>
+      <p>Status:<br>
+        <%# Get status keys %>
+        <% status = Status.all  %>
+        <select class="custom-select custom-select-sm card_status">
+          <option selected>Select Card Status</option>
+          <% status.each do |st|  %>
+            <% selected_str = (@card_one.card_status == st.status) ? "selected" : "" %>
+            <option value=<%= st.status %> <%= selected_str %> ><%= st.status %></option>
+          <% end  %>
+        </select>
+      </p>
+
       <p>LIT Contact:<br><%= f.text_field(:lit_lead, size: 100) %></p>
       <p>Service Lead: <br><%= f.text_field(:service_lead, size: 100) %></p>
       <p>Request Type<i>[New Service, Service Improvement, Consultation, Other]</i><br> <%= f.text_field(:request_type, size: 100) %></p>
       <p>Activity Type: <i>[Investigation, Project, TASC Investigation]</i><br> <%= f.text_field(:activity_type, size: 100) %></p>
-	  <p>In Cycle: <br><%= f.text_field(:in_cycle, size: 100) %></p>
-	  <p>Start Cycle:<br><%= f.text_field(:start_cycle, size: 100) %></p>
+  	  <p>In Cycle: <br><%= f.text_field(:in_cycle, size: 100) %></p>
+  	  <p>Start Cycle:<br><%= f.text_field(:start_cycle, size: 100) %></p>
       <p>Done Cycle:<br><%= f.text_field(:done_cycle, size: 100) %></p>
+      <p>Card Type:<br><%= f.text_field(:card_type, size: 100) %></p>
+      <p>Epic:<br><%= f.text_field(:epic, size: 100) %></p>
+      <% months_select_arr = [ "Select Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ] %>
+      <p>Expected Start Month:<br>
+        <select class="custom-select custom-select-sm exp_start_month">
+          <% (0..12).each do |month_num|  %>
+            <% selected_str = (@card_one.exp_start_month == month_num) ? "selected" : "" %>
+            <option value=<%= month_num %> <%= selected_str %> ><%= months_select_arr[month_num] %></option>
+          <% end  %>
+        </select>
+      </p>
+      <p>Expected End Month:<br>
+        <select class="custom-select custom-select-sm exp_end_month">
+          <% (0..12).each do |month_num|  %>
+            <% selected_str = (@card_one.exp_end_month == month_num) ? "selected" : "" %>
+            <option value=<%= month_num %> <%= selected_str %> ><%= months_select_arr[month_num] %></option>
+          <% end  %>
+        </select>
+      </p>
 	</div>
 	<div class="card-body">
 		<div class="row"><div class="col-lg-12">
