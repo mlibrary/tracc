@@ -339,6 +339,11 @@ class CatalogController < ApplicationController
     ob.save
     flash[:notice] = "Objective '#{params["objtv_objective"]}' status updated."
     redirect_back(fallback_location: root_path)
-  end  
+  end
+
+  # plain redirect_back
+  def redirect_cat_show
+    redirect_back(fallback_location: root_path)
+  end
 
 end

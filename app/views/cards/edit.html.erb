@@ -13,7 +13,6 @@ $(document).on('ready page:load', function() {
 });
 </script>
 
- 
 <%= form_for(@card_one) do |f| %>
 
   <div class="card">
@@ -22,7 +21,7 @@ $(document).on('ready page:load', function() {
       <div class="form-buttons" style="margin-top: 20px;">
         <%= f.submit("Update Card") %>
       </div>
-      <p style="margin-top: 20px;"> [<%= link_to 'Show Card Info', @card_one %> | <%= link_to 'Back To All Cards', cards_path %>] </p>
+      <p style="margin-top: 20px;"> [<%= link_to 'Show Card Info', @card_one %> | <%= link_to 'Back To All Cards', cards_path %> | <%= link_to 'Back to Catalog Show', '#' %>] </p>
       <p style="margin-top: 20px;">Title<br><%= f.text_field(:title, size: 100) %></p>
       <p>Short Name:<br><%= f.text_field(:short_name, size: 60) %></p>
       <p>Description: <br><%= f.text_area(:short_description,  cols: "100", rows: "5") %></p>
@@ -52,7 +51,11 @@ $(document).on('ready page:load', function() {
       <p>Expected Start Month:<br>
         <select class="custom-select custom-select-sm exp_start_month">
           <% (0..12).each do |month_num|  %>
-            <% selected_str = (@card_one.exp_start_month == month_num) ? "selected" : "" %>
+            <% 
+            selected_str = ''
+            selected_str = 'selected' if (@card_one.exp_start_month == month_num.to_s)
+            selected_str = 'selected' if (@card_one.exp_start_month == months_select_arr[month_num])
+            %>
             <option value=<%= month_num %> <%= selected_str %> ><%= months_select_arr[month_num] %></option>
           <% end  %>
         </select>
@@ -60,7 +63,11 @@ $(document).on('ready page:load', function() {
       <p>Expected End Month:<br>
         <select class="custom-select custom-select-sm exp_end_month">
           <% (0..12).each do |month_num|  %>
-            <% selected_str = (@card_one.exp_end_month == month_num) ? "selected" : "" %>
+            <% 
+            selected_str = ''
+            selected_str = 'selected' if (@card_one.exp_end_month == month_num.to_s)
+            selected_str = 'selected' if (@card_one.exp_end_month == months_select_arr[month_num])
+            %>            
             <option value=<%= month_num %> <%= selected_str %> ><%= months_select_arr[month_num] %></option>
           <% end  %>
         </select>
