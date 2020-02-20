@@ -57,7 +57,7 @@ $(document).ready(function () {
           year_select_arr << "Select Year"
           (base_year..final_year).each { |yr| year_select_arr << yr.to_s }
           # Default array indexes
-          start_month = end_month = start_year = end_year = 0
+          start_month = end_month = start_year = end_year = "0"
 
           # Parse out db values if they exist
           unless (@card_one.exp_start_month.nil? || @card_one.exp_start_month == '')
@@ -68,36 +68,20 @@ $(document).ready(function () {
           unless (@card_one.exp_end_month.nil? || @card_one.exp_end_month == '')
             end_month = @card_one.exp_end_month.split(" ")[0]
             end_year = @card_one.exp_end_month.split(" ")[1]
-
           end
       %>
 
-
-<p><%= "@card_one.exp_start_month: #{@card_one.exp_start_month}" %></p>
-<p><%= "@card_one.exp_start_month.split(" "): #{@card_one.exp_start_month.split(" ")}" %></p>
-<p><%= "@card_one.exp_start_month.split(" ")[0]: #{@card_one.exp_start_month.split(" ")[0]}" %></p>
-<p><%= "@card_one.exp_start_month.split(" ")[1]: #{@card_one.exp_start_month.split(" ")[1]}" %></p>
-      <p><%= year_select_arr %></p>
-      <p><%= months_select_arr %></p>
-      <p><%= @card_one.id %></p>
-      <p><%= @card_one.exp_start_month %></p>
+      <p><%= "year_select_arr: #{year_select_arr}" %></p>
+      <p><%= "months_select_arr: #{months_select_arr}" %></p>
+      <p><%= "card.id: #{@card_one.id}" %></p>
+      <p><%= "card_one.exp_start_month: #{@card_one.exp_start_month}" %></p>
       <p><%= "start_month: #{start_month}" %></p>
       <p><%= "start_year: #{start_year}" %></p>
-      <p><%= @card_one.exp_end_month %></p>
+      <p><%= "card_one.exp_end_month: #{@card_one.exp_end_month}" %></p>
       <p><%= "end_month: #{end_month}" %></p>
       <p><%= "end_year: #{end_year}" %></p>
 
       <p>Expected Start:<br>
-        <select class="custom-select custom-select-sm w-50" id="exp_start_month_year" name="exp_start_month_year">
-          <% year_select_arr.each do |yr_str|  %>
-            <% 
-            selected_str = ''
-            selected_str = 'selected' if (start_year == yr_str)
-            %>
-            <option value=<%= yr_str %> <%= selected_str %> ><%= yr_str %></option>
-          <% end  %>
-        </select>
-     
         <select class="custom-select custom-select-sm w-50" id="exp_start_month_month" name="exp_start_month_month">
           <% months_select_arr.each do |month_str|  %>
             <% 
@@ -107,9 +91,29 @@ $(document).ready(function () {
             <option value=<%= month_str %> <%= selected_str %> ><%= month_str %></option>
           <% end  %>
         </select>
-      </p>
 
+        <select class="custom-select custom-select-sm w-50" id="exp_start_month_year" name="exp_start_month_year">
+          <% year_select_arr.each do |yr_str|  %>
+            <% 
+            selected_str = ''
+            selected_str = 'selected' if (start_year == yr_str)
+            %>
+            <option value=<%= yr_str %> <%= selected_str %> ><%= yr_str %></option>
+          <% end  %>
+        </select>
+      </p>
+     
       <p>Expected End:<br>
+        <select class="custom-select custom-select-sm w-50" id="exp_end_month_month" name="exp_end_month_month">
+            <% months_select_arr.each do |month_str|  %>
+            <% 
+            selected_str = ''
+            selected_str = 'selected' if (end_month == month_str)
+            %>
+            <option value=<%= month_str %> <%= selected_str %> ><%= month_str %></option>
+          <% end  %>
+        </select>
+
         <select class="custom-select custom-select-sm w-50" id="exp_end_month_year" name="exp_end_month_year">
           <% year_select_arr.each do |yr_str|  %>
             <% 
@@ -120,15 +124,6 @@ $(document).ready(function () {
           <% end  %>
         </select>
       
-        <select class="custom-select custom-select-sm w-50" id="exp_end_month_month" name="exp_end_month_month">
-            <% months_select_arr.each do |month_str|  %>
-            <% 
-            selected_str = ''
-            selected_str = 'selected' if (end_month == month_str)
-            %>
-            <option value=<%= month_str %> <%= selected_str %> ><%= month_str %></option>
-          <% end  %>
-        </select>
       </p>
 
 	</div>
