@@ -6,7 +6,7 @@
     <div class="card-header" id="headingOne">
     	<h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          <%= @card_one.activity_type %>: <%= @card_one.title %> (<%= link_to 'Edit Card', edit_card_path(@card_one) %>)
+          <%= @card_one.activity_type %>: <%= @card_one.title %> (<%= link_to 'Edit Card', edit_card_path(@card_one) %>  | <%= link_to 'Go to Catalog Show', "/catalog/#{@card_one.id}" %>)
         </button>
       </h5>
     </div>
