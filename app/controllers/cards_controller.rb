@@ -283,16 +283,16 @@ class CardsController < ApplicationController
     end
     params[:card][:benefits_details] = params[:card][:benefits_details]*"__|__" unless params[:card][:benefits_details].nil?
 
-    if (params[:card][:exp_start_month_month].nil? || params[:card][:exp_start_month_year].nil?)
+    if (params[:exp_start_month_month].nil? || params[:exp_start_month_year].nil?)
       params[:card][:exp_start_month] = ""
     else
-      params[:card][:exp_start_month] = params[:card][:exp_start_month_month] + " " + params[:card][:exp_start_month_year]*"__|__"
+      params[:card][:exp_start_month] = params[:exp_start_month_month] + " " + params[:exp_start_month_year]
     end
 
-    if (params[:card][:exp_end_month_month].nil? || params[:card][:exp_end_month_year].nil?)
+    if (params[:exp_end_month_month].nil? || params[:exp_end_month_year].nil?)
       params[:card][:exp_end_month] = ""
     else
-      params[:card][:exp_end_month] = params[:card][:exp_end_month_month] + " " + params[:card][:exp_end_month_year]*"__|__"
+      params[:card][:exp_end_month] = params[:exp_end_month_month] + " " + params[:exp_end_month_year]
     end
 
     respond_to do |format|
