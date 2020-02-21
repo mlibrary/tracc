@@ -1,157 +1,255 @@
+<script type="text/javascript">
+$(document).ready(function () { 
 
+  $("div.hideable").hide();
+  $("span#triangle-down").hide();
 
+  $("#headingTwo").click(function () {
+    $("div.hideable").toggle("slow");
+    $("span#triangle-down").toggle("fast");
+    $("span#triangle-right").toggle("fast");
+  });  
 
- 
+});
+</script>
+
 <%= form_for(@card_one) do |f| %>
+
   <div class="card">
     <div class="card-header" id="headingOne">
-      <p><strong>Edit Card:  <%= @card_one.short_name %></strong></p>
-      <p> [<%= link_to 'Show Card Info', @card_one %> | <%= link_to 'Back To All Cards', cards_path %>]</p>
+      <h5 class="panel-title">Edit Card:  <em><%= @card_one.short_name %></em></h5>
+      <div class="form-buttons" style="margin-top: 20px;">
+        <%= f.submit("Update Card") %>
+      </div>
+      <p style="margin-top: 20px;"> [<%= link_to 'Show Card Info', @card_one %> | <%= link_to 'Back To All Cards', cards_path %>] </p>
       <p style="margin-top: 20px;">Title<br><%= f.text_field(:title, size: 100) %></p>
       <p>Short Name:<br><%= f.text_field(:short_name, size: 60) %></p>
       <p>Description: <br><%= f.text_area(:short_description,  cols: "100", rows: "5") %></p>
 
-      <p>Status: <br><%= f.text_field(:card_status, size: 100) %></p>
+      <p>Status:<br>
+        <%# Get status keys %>
+        <% status = Status.all  %>
+        <select class="custom-select custom-select-sm card_status">
+          <option selected>Select Card Status</option>
+          <% status.each do |st|  %>
+            <% selected_str = (@card_one.card_status == st.status) ? "selected" : "" %>
+            <option value=<%= st.status %> <%= selected_str %> ><%= st.status %></option>
+          <% end  %>
+        </select>
+      </p>
+
       <p>LIT Contact:<br><%= f.text_field(:lit_lead, size: 100) %></p>
       <p>Service Lead: <br><%= f.text_field(:service_lead, size: 100) %></p>
       <p>Request Type<i>[New Service, Service Improvement, Consultation, Other]</i><br> <%= f.text_field(:request_type, size: 100) %></p>
       <p>Activity Type: <i>[Investigation, Project, TASC Investigation]</i><br> <%= f.text_field(:activity_type, size: 100) %></p>
-	  <p>In Cycle: <br><%= f.text_field(:in_cycle, size: 100) %></p>
-	  <p>Start Cycle:<br><%= f.text_field(:start_cycle, size: 100) %></p>
+  	  <p>In Cycle: <br><%= f.text_field(:in_cycle, size: 100) %></p>
+  	  <p>Start Cycle:<br><%= f.text_field(:start_cycle, size: 100) %></p>
       <p>Done Cycle:<br><%= f.text_field(:done_cycle, size: 100) %></p>
-	</div>
-	<div class="card-body">
-		<div class="row"><div class="col-lg-12">
-			<p><strong>DETAILS:</strong></p>
-		</div></div>
-		<p>Requester Name:</br><%= f.text_field(:requester_name, size: 100) %></p>
-		<p>Requester Email:<br> <%= f.text_field(:requester_email, size: 100) %></p>
-		<p>Requester Division:<br><%= f.text_field(:requester_div, size: 100) %></p>
-		<p>Main Contact:<br><%= f.text_field(:contact_names, size: 100) %></p>
-		<p>Addiotnal Contacts:<br><%= f.text_field(:other_contacts, size: 100) %></p>
-		
-		<p>List any previous work:<br><%= f.text_field(:prev_work, size: 100) %>
-		<p>Goal Alignment:<br><%= f.text_field(:goal_alignment, size: 100) %></p>
-		<p>Priority:<br><%= f.text_field(:priority, size: 100) %></p>
-		<p>Sponsor:<br><%= f.text_field(:sponsor, size: 100) %></p>
-		<p>Link:<br><%= f.text_field(:ext_link, size: 100) %></p>
-		<%#<p>Additional Comments:<br><%= f.text_field(:comments, size: 100) %>
-		<p>Additional Comments:<br><%= f.text_field(:more_info, size: 100) %></p>
-	
-<% details = @card_one.accomplish_details.split("__|__") %>
-<% count = 0 %>
+      <p>Card Type:<br><%= f.text_field(:card_type, size: 100) %></p>
+      <p>Epic:<br><%= f.text_field(:epic, size: 100) %></p>
+      <%  
+          # Set up month and year arrays
+          months_select_arr = [ "Select Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ] 
+          now = Time.current 
+          base_year = (now.year - 2)
+          final_year = (now.year + 5)
+          year_select_arr = []
+          year_select_arr << "Select Year"
+          (base_year..final_year).each { |yr| year_select_arr << yr.to_s }
+          # Default array indexes
+          start_month = end_month = start_year = end_year = "0"
 
-	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What do you hope to accomplish with this proposal?* Fill in the text boxes when relevant</strong></div></div>
-	
-        <% @accomplish_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[accomplish][]", value, @card_one.accomplish.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[accomplish_details][]", details[count], cols: 100, rows: 2 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
-	
-<% details = @card_one.benefits_details.split("__|__") %>
-<% count = 0 %>
- 
-	<div class="row" style="margin-top:20px;margin-bottom:10px;"><div class="col-lg-12"><strong>Who will this work directly benefit?* Fill in the text boxes when relevant</strong></div></div>
-	  
-        <% @benefits_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[benefits][]", value, @card_one.benefits.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[benefits_details][]", details[count], cols: 100, rows: 2 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
+          # Parse out db values if they exist
+          unless (@card_one.exp_start_month.nil? || @card_one.exp_start_month == '')
+            start_month = @card_one.exp_start_month.split(" ")[0]
+            start_year = @card_one.exp_start_month.split(" ")[1]
+          end
+          unless (@card_one.exp_end_month.nil? || @card_one.exp_end_month == '')
+            end_month = @card_one.exp_end_month.split(" ")[0]
+            end_year = @card_one.exp_end_month.split(" ")[1]
+          end
+      %>
 
-<% details = @card_one.at_stake_details.split("__|__") %>
-<% count = 0 %>
+<!--       <p><%#= "year_select_arr: #{year_select_arr}" %></p>
+      <p><%#= "months_select_arr: #{months_select_arr}" %></p>
+      <p><%#= "card.id: #{@card_one.id}" %></p>
+      <p><%#= "card_one.exp_start_month: #{@card_one.exp_start_month}" %></p>
+      <p><%#= "start_month: #{start_month}" %></p>
+      <p><%#= "start_year: #{start_year}" %></p>
+      <p><%#= "card_one.exp_end_month: #{@card_one.exp_end_month}" %></p>
+      <p><%#= "end_month: #{end_month}" %></p>
+      <p><%#= "end_year: #{end_year}" %></p> -->
 
-	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What is at stake if we do not do this work?* Fill in the text boxes when relevant</strong></div></div>
-	  
-        <% @at_stake_list.each do | value | %>
+      <p>Expected Start:<br>
+        <select class="custom-select custom-select-sm w-50" id="exp_start_month_month" name="exp_start_month_month">
+          <% months_select_arr.each do |month_str|  %>
+            <% 
+            selected_str = ''
+            selected_str = 'selected' if (start_month == month_str)
+            %>
+            <option value=<%= month_str %> <%= selected_str %> ><%= month_str %></option>
+          <% end  %>
+        </select>
 
-        <div>
-          <%= check_box_tag("card[at_stake][]", value, @card_one.at_stake.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[at_stake_details][]", details[count], cols: 100, rows: 2 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
-    
-<% details = @card_one.ext_pressure_details.split("__|__") %>
-<% count = 0 %>
-
-	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What external pressures are weighing on this proposal?* Fill in the text boxes when relevant</strong></div></div>
-	  
-        <% @ext_pressure_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[ext_pressure][]", value, @card_one.ext_pressure.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[ext_pressure_details][]", details[count], cols: 100, rows: 2 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
-    
-
-
-<% details = @card_one.non_tech_details.split("__|__") %>
-<% count = 0 %>
-
-	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What non-technical needs might affect this work?* Fill in the text boxes when relevant</strong></div></div>
-	  
-        <% @non_tech_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[non_tech][]", value, @card_one.non_tech.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[non_tech_details][]", details[count], cols: 100, rows: 2 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
+        <select class="custom-select custom-select-sm w-50" id="exp_start_month_year" name="exp_start_month_year">
+          <% year_select_arr.each do |yr_str|  %>
+            <% 
+            selected_str = ''
+            selected_str = 'selected' if (start_year == yr_str)
+            %>
+            <option value=<%= yr_str %> <%= selected_str %> ><%= yr_str %></option>
+          <% end  %>
+        </select>
+      </p>
      
-	
-	
+      <p>Expected End:<br>
+        <select class="custom-select custom-select-sm w-50" id="exp_end_month_month" name="exp_end_month_month">
+            <% months_select_arr.each do |month_str|  %>
+            <% 
+            selected_str = ''
+            selected_str = 'selected' if (end_month == month_str)
+            %>
+            <option value=<%= month_str %> <%= selected_str %> ><%= month_str %></option>
+          <% end  %>
+        </select>
 
-    
+        <select class="custom-select custom-select-sm w-50" id="exp_end_month_year" name="exp_end_month_year">
+          <% year_select_arr.each do |yr_str|  %>
+            <% 
+            selected_str = ''
+            selected_str = 'selected' if (end_year == yr_str)
+            %>
+            <option value=<%= yr_str %> <%= selected_str %> ><%= yr_str %></option>
+          <% end  %>
+        </select>
+      
+      </p>
 
-<% details = @card_one.time_constraints_details.split("__|__") %>
-<% count = 0 %>
+	</div>
 
-	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>Are there any time constraints?* Fill in the text boxes when relevant</strong></div></div>
-	
-        <% @time_constraints_list.each do | value | %>
-        <div>
-          <%= check_box_tag("card[time_constraints][]", value, @card_one.time_constraints.include?(value) ) %>
-          <%= value %>
-         </div>
-         <div>
-	        <%= text_area_tag("card[time_constraints_details][]", details[count], cols: 100, rows:2 ) %>        	
-         </div>
-         <% count = count + 1 %>
-        <% end %>
-    
+  <div class="card-header" id="headingTwo">
+    <h5 class="panel-title">
+      Details <span id="triangle-right">&#9654;</span><span id="triangle-down">&#9660;</span>
+    </h5>
+    </div>
+	<div class="card-body hideable">
+		<div class="row">
+      <div class="col-lg-12">
+    		<p>Requester Name:</br><%= f.text_field(:requester_name, size: 100) %></p>
+    		<p>Requester Email:<br> <%= f.text_field(:requester_email, size: 100) %></p>
+    		<p>Requester Division:<br><%= f.text_field(:requester_div, size: 100) %></p>
+    		<p>Main Contact:<br><%= f.text_field(:contact_names, size: 100) %></p>
+    		<p>Addiotnal Contacts:<br><%= f.text_field(:other_contacts, size: 100) %></p>
+    		
+    		<p>List any previous work:<br><%= f.text_field(:prev_work, size: 100) %>
+    		<p>Goal Alignment:<br><%= f.text_field(:goal_alignment, size: 100) %></p>
+    		<p>Priority:<br><%= f.text_field(:priority, size: 100) %></p>
+    		<p>Sponsor:<br><%= f.text_field(:sponsor, size: 100) %></p>
+    		<p>Link:<br><%= f.text_field(:ext_link, size: 100) %></p>
+    		<%#<p>Additional Comments:<br><%= f.text_field(:comments, size: 100) %>
+    		<p>Additional Comments:<br><%= f.text_field(:more_info, size: 100) %></p>
+    	
+        <% details = @card_one.accomplish_details.split("__|__") %>
+        <% count = 0 %>
 
+      	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What do you hope to accomplish with this proposal?* Fill in the text boxes when relevant</strong></div></div>
+      	
+              <% @accomplish_list.each do | value | %>
+              <div>
+                <%= check_box_tag("card[accomplish][]", value, @card_one.accomplish.include?(value) ) %>
+                <%= value %>
+               </div>
+               <div>
+      	        <%= text_area_tag("card[accomplish_details][]", details[count], cols: 100, rows: 2 ) %>        	
+               </div>
+               <% count = count + 1 %>
+              <% end %>
+      	
+        <% details = @card_one.benefits_details.split("__|__") %>
+        <% count = 0 %>
+ 
+      	<div class="row" style="margin-top:20px;margin-bottom:10px;"><div class="col-lg-12"><strong>Who will this work directly benefit?* Fill in the text boxes when relevant</strong></div></div>
+      	  
+              <% @benefits_list.each do | value | %>
+              <div>
+                <%= check_box_tag("card[benefits][]", value, @card_one.benefits.include?(value) ) %>
+                <%= value %>
+               </div>
+               <div>
+      	        <%= text_area_tag("card[benefits_details][]", details[count], cols: 100, rows: 2 ) %>        	
+               </div>
+               <% count = count + 1 %>
+              <% end %>
 
+        <% details = @card_one.at_stake_details.split("__|__") %>
+        <% count = 0 %>
 
-   
-  <div class="form-buttons">
-    <%= f.submit("Update Card") %>
-  </div>
+      	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What is at stake if we do not do this work?* Fill in the text boxes when relevant</strong></div></div>
+      	  
+              <% @at_stake_list.each do | value | %>
 
-<% end %>
-</div>
-</div>
+              <div>
+                <%= check_box_tag("card[at_stake][]", value, @card_one.at_stake.include?(value) ) %>
+                <%= value %>
+               </div>
+               <div>
+      	        <%= text_area_tag("card[at_stake_details][]", details[count], cols: 100, rows: 2 ) %>        	
+               </div>
+               <% count = count + 1 %>
+              <% end %>
+          
+        <% details = @card_one.ext_pressure_details.split("__|__") %>
+        <% count = 0 %>
 
+      	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What external pressures are weighing on this proposal?* Fill in the text boxes when relevant</strong></div></div>
+      	  
+              <% @ext_pressure_list.each do | value | %>
+              <div>
+                <%= check_box_tag("card[ext_pressure][]", value, @card_one.ext_pressure.include?(value) ) %>
+                <%= value %>
+               </div>
+               <div>
+      	        <%= text_area_tag("card[ext_pressure_details][]", details[count], cols: 100, rows: 2 ) %>        	
+               </div>
+               <% count = count + 1 %>
+              <% end %>
 
+        <% details = @card_one.non_tech_details.split("__|__") %>
+        <% count = 0 %>
+
+      	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>What non-technical needs might affect this work?* Fill in the text boxes when relevant</strong></div></div>
+      	  
+              <% @non_tech_list.each do | value | %>
+              <div>
+                <%= check_box_tag("card[non_tech][]", value, @card_one.non_tech.include?(value) ) %>
+                <%= value %>
+               </div>
+               <div>
+      	        <%= text_area_tag("card[non_tech_details][]", details[count], cols: 100, rows: 2 ) %>        	
+               </div>
+               <% count = count + 1 %>
+              <% end %>
+
+        <% details = @card_one.time_constraints_details.split("__|__") %>
+        <% count = 0 %>
+
+      	<div class="row"><div class="col-lg-12" style="margin-top:20px;margin-bottom:10px;"><strong>Are there any time constraints?* Fill in the text boxes when relevant</strong></div></div>
+      	
+              <% @time_constraints_list.each do | value | %>
+              <div>
+                <%= check_box_tag("card[time_constraints][]", value, @card_one.time_constraints.include?(value) ) %>
+                <%= value %>
+               </div>
+               <div>
+      	        <%= text_area_tag("card[time_constraints_details][]", details[count], cols: 100, rows:2 ) %>        	
+               </div>
+               <% count = count + 1 %>
+              <% end %>
+
+        <br />
+        <div class="form-buttons" style="display:block;">
+          <%= f.submit("Update Card") %>
+        </div>
+      </div>
+    </div>
+  <% end %>

@@ -9,9 +9,10 @@ super_or_admin = (access_level == 0 || access_level == 1) ? true : false
   <div class="card-header">
     <h2 class="mb-0 h6 d-inline-block">Details:</h2>
     <% if super_or_admin %>
-      <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block float-right">Edit</button>
+      <% @card_one = Card.find( document.id ) %>
+      <a href=<%= edit_card_path(@card_one) %> class="btn btn-outline-secondary btn-sm d-inline-block float-right" style="color:inherit;" role="button">Edit</a>
     <% end %>
-  </div>
+    </div>
   <div class="card-body">
 
 <%# default partial to display solr document fields in catalog show view -%>
