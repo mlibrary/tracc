@@ -48,9 +48,7 @@ $(document).on('ready page:load', function() {
     $(this).parents('form').submit();
   });
 
-    $(".objtv-checkbox").on("click", function (){
-    $(this).parents('form').submit();
-  });
+  
 
   function not_empty(el) {
     str = $(el).val();
@@ -71,7 +69,49 @@ comments = Comment.where("card_id='" + @document.id + "'")
 objectives = Objective.where("card_id='" + @document.id + "'")
 %>
 
-<div class="card show-tools" style="margin-top: 100px;">
+<div class="card show-tools" style="margin-top: 30px;">
+    <div class="card-header objectives">
+      <h2 class="mb-0 h6 d-inline-block">Objectives:</h2>
+    </div>
+     
+    <%# List comments for this card %>
+    <ul class="list-group list-group-flush">
+
+      <% if objectives.first.nil?%>
+        <li class="list-group-item">
+          <em>No objectives</em>
+        </li>
+      <% else %>
+        <% objectives.each do |objtv| %>
+          <li class="list-group-item">
+             <%= objtv.objective %>
+          </li>
+        <% end %>
+      <% end %>
+
+        <%# if super or admin allow adding of items %>
+        <% if super_or_admin %>
+          <!--Material textarea-->
+          <%= form_tag("add_objective", :enctype =>"multipart/form-data", :method => :post ) do %>
+            <li class="list-group-item">
+              <div class="objective-entry-group">
+                <div class="md-form form-group purple-border">
+                  <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
+                  <input type="hidden" id="cycle" name="cycle" value=<%= @document["in_cycle_ssi"] %>  />
+                  <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
+                  <label for="objective">Add an objective</label>
+                  <input type="text" id="objective" name="objective" class="entry objective form-control" />
+                </div>
+              </div>
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block form-button add-objective">Save</button></li>
+          <% end %>
+        <% end %>
+
+    </ul>
+
+</div>
+
+<div class="card show-tools" style="margin-top: 20px;">
     <div class="card-header mstones">
       <h2 class="mb-0 h6 d-inline-block">Milestones:</h2>
     </div>
@@ -110,7 +150,7 @@ objectives = Objective.where("card_id='" + @document.id + "'")
                   <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
                   <input type="hidden" id="in_cycle" name="in_cycle" value=<%= @document["in_cycle_ssi"] %>  />
                   <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
-                  <label for="mstone">New milestone</label>
+                  <label for="mstone">Add a milestone</label>
                   <input type="text" id="mstone" name="mstone" class="entry mstone form-control" />
 
                   <label class="checkbox-inline">
@@ -125,7 +165,7 @@ objectives = Objective.where("card_id='" + @document.id + "'")
 
 </div>
 
-<div class="card show-tools" style="margin-top: 30px;">
+<div class="card show-tools" style="margin-top: 20px;">
     <div class="card-header comments">
       <h2 class="mb-0 h6 d-inline-block">Comments:</h2>
     </div>
@@ -155,7 +195,7 @@ objectives = Objective.where("card_id='" + @document.id + "'")
                   <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
                   <input type="hidden" id="uemail" name="uemail" value=<%= @document["uemail"] %>  />
                   <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
-                  <label for="comment_txt">New comment</label>
+                  <label for="comment_txt">Add a comment</label>
                   <input type="text" id="comment_txt" name="comment_txt" class="entry comment_txt form-control" />
                 </div>
               </div>
@@ -166,57 +206,3 @@ objectives = Objective.where("card_id='" + @document.id + "'")
     </ul>
 </div>
 
-<div class="card show-tools" style="margin-top: 30px;">
-    <div class="card-header objectives">
-      <h2 class="mb-0 h6 d-inline-block">Objectives:</h2>
-    </div>
-     
-    <%# List comments for this card %>
-    <ul class="list-group list-group-flush">
-
-      <% if objectives.first.nil?%>
-        <li class="list-group-item">
-          <em>No objectives</em>
-        </li>
-      <% else %>
-        <% objectives.each do |objtv| %>
-          <li class="list-group-item">
-            <%= form_tag("update_objective_check", :enctype =>"multipart/form-data", :class => "objtv-form", :method => :post ) do %>
-              <div class="form-check pl-0" >
-                <label class="checkbox-inline">
-                  <% chk_status = (objtv.status == 1) ? "checked" : "" %>
-                  <p>objective id: <%= objtv.id %> </p>
-                  <input type="hidden" id="objective_id" name="objective_id" value=<%= objtv.id %> />
-                  <input type="hidden" id="objtv_objective" name="objtv_objective" value=<%= objtv.objective %> />
-                 <input type="checkbox" class="objtv-checkbox" value="status" <%= chk_status %> <%= disable_str %> >  <%= objtv.objective %>
-                </label>
-              </div>
-            <% end %>
-          </li>
-        <% end %>
-      <% end %>
-
-        <%# if super or admin allow adding of items %>
-        <% if super_or_admin %>
-          <!--Material textarea-->
-          <%= form_tag("add_objective", :enctype =>"multipart/form-data", :method => :post ) do %>
-            <li class="list-group-item">
-              <div class="objective-entry-group">
-                <div class="md-form form-group purple-border">
-                  <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
-                  <input type="hidden" id="cycle" name="cycle" value=<%= @document["in_cycle_ssi"] %>  />
-                  <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
-                  <label for="objective">New objective</label>
-                  <input type="text" id="objective" name="objective" class="entry objective form-control" />
-                  <label class="checkbox-inline">
-                    
-                  <input type="checkbox" id="status" name="status">  Already done</label>
-                </div>
-              </div>
-            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block form-button add-objective">Save</button></li>
-          <% end %>
-        <% end %>
-
-    </ul>
-
-</div>

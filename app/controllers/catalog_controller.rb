@@ -306,6 +306,7 @@ class CatalogController < ApplicationController
   end
 
   def add_objective
+    byebug
     ob = Objective.new
     ob["card_id"] = params["card_id"]
     ob["objective"] = params["objective"]
