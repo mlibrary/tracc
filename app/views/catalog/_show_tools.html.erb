@@ -185,7 +185,6 @@ objectives = Objective.where("card_id='" + @document.id + "'")
               <div class="form-check pl-0" >
                 <label class="checkbox-inline">
                   <% chk_status = (objtv.status == 1) ? "checked" : "" %>
-                  <p>objective id: <%= objtv.id %> </p>
                   <input type="hidden" id="objective_id" name="objective_id" value=<%= objtv.id %> />
                   <input type="hidden" id="objtv_objective" name="objtv_objective" value=<%= objtv.objective %> />
                  <input type="checkbox" class="objtv-checkbox" value="status" <%= chk_status %> <%= disable_str %> >  <%= objtv.objective %>
