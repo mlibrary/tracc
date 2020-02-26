@@ -2,6 +2,9 @@
 <% 
 access_level = check_current_access
 super_or_admin = (access_level == 0 || access_level == 1) ? true : false
+disable_str = super_or_admin ? " " : "disabled"
+
+comments = Comment.where("card_id='" + @document.id + "'")
 %>
 
 <% doc_presenter = show_presenter(document) %>
@@ -24,4 +27,45 @@ super_or_admin = (access_level == 0 || access_level == 1) ? true : false
     </div>
     <% end -%>
   </div>
+</div>
+
+<div class="card show-tools" style="margin-top: 30px;">
+    <div class="card-header comments">
+      <h2 class="mb-0 h6 d-inline-block">Comments:</h2>
+    </div>
+     
+    <%# List comments for this card %>
+    <ul class="list-group list-group-flush">
+
+      <% if comments.first.nil?%>
+        <li class="list-group-item">
+          <em>No comments</em>
+        </li>
+      <% else %>
+        <% comments.each do |comm| %>
+          <li class="list-group-item">
+            <%= comm.comment_txt%>
+          </li>
+        <% end %>
+        <% end %>
+
+        <%# if super or admin allow adding of items %>
+        <% if super_or_admin %>
+          <!--Material textarea-->
+          <%= form_tag("add_comment", :enctype =>"multipart/form-data", :method => :post ) do %>
+            <li class="list-group-item">
+              <div class="comment-entry-group">
+                <div class="md-form form-group purple-border">
+                  <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
+                  <input type="hidden" id="uemail" name="uemail" value=<%= @document["uemail"] %>  />
+                  <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
+                  <label for="comment_txt">Add a comment:</label>
+                  <input type="text" id="comment_txt" name="comment_txt" class="entry comment_txt form-control" />
+                </div>
+              </div>
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block form-button add-comment">Save</button></li>
+          <% end %>
+        <% end %>
+     
+    </ul>
 </div>
