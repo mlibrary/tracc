@@ -144,7 +144,7 @@ objectives = Objective.where("card_id='" + @document.id + "'")
             <%= form_tag("update_milestone_check", :enctype =>"multipart/form-data", :class => "mstone-form", :method => :post ) do %>
               <div class="form-check pl-0" >
                 <label class="checkbox-inline">
-                  <%# chk_status = (stone.status == 1) ? "checked" : "" %>
+                  <% chk_status = (stone.status == 1) ? "checked" : "" %>
                   <input type="hidden" id="mstone_id" name="mstone_id" value=<%= stone.id %> />
                   <input type="hidden" id="mstone_milestone" name="mstone_milestone" value=<%= stone.milestone %> />
                  <input type="checkbox" class="mstone-checkbox" value="status" <%= chk_status %> <%= disable_str %> >  <%= stone.milestone %>
