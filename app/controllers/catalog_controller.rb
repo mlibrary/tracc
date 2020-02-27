@@ -159,7 +159,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'requester_email_ssim', label: 'Requester Email'
     config.add_show_field 'requester_div_ssim', label: 'Requester Divison'
     config.add_show_field 'contact_names_ssim', label: 'Contact Names'
-    config.add_show_field 'short_description_ssi', label: 'Short Description'
+    config.add_show_field 'short_description_tsi', label: 'Short Description'
     config.add_show_field 'prev_work_tsim', label: 'Previous Work'
 
     config.add_show_field 'accomplish_tsim', label: 'Accomplished'
@@ -178,16 +178,16 @@ class CatalogController < ApplicationController
     
     config.add_show_field 'start_cycle_ssi', label: 'Start Cycle'
     config.add_show_field 'done_cycle_ssi', label: 'Done Cycle'
-    config.add_show_field 'status_tsi', label: 'Card Status'
+    config.add_show_field 'status_ssi', label: 'Card Status'
     config.add_show_field 'ext_link_tsm', label: 'External Link'
-    config.add_show_field 'lit_lead_tsim' , label: 'LIT Lead'
+    config.add_show_field 'lit_lead_ssim' , label: 'LIT Lead'
     config.add_show_field 'lit_dept_tsim', label: 'LIT Dept'
-    config.add_show_field 'service_lead_tsim', label: 'Service Lead'
+    config.add_show_field 'service_lead_ssim', label: 'Service Lead'
     config.add_show_field 'other_contacts_tsm', label: 'Other Contacts'
     config.add_show_field 'comments_tsim', label: 'Comments'
     config.add_show_field 'recorded_on_dtsi', label: 'Recorded Date'
     config.add_show_field 'created_at_dtsi', label: 'Created Date'
-    config.add_show_field 'updated_at_dtsi', label: 'Updated Data'
+    # config.add_show_field 'updated_at_dtsi', label: 'Updated Data'
 
 
     # "fielded" search configuration. Used by pulldown among other places.
