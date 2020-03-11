@@ -11,7 +11,7 @@ For contribution to code development:
   b. createuser -P -d tracc (Enter a password, and use the same password in the next step)
   c. echo 'export tracc_DATABASE_PASSWORD="PostgreSQL_Role_Password"' >> ~/.bash_profile
   d. source ~/.bash_profile
-4. Create the db: bundle exec rails db:create
+4. Create the db: bundle exec rake db:create
 5. Run the migrations: bundle exec rails db:migrate
 6. bundle exec solr_wrapper
 7. Seed the data: bundle exec rake db:seed
