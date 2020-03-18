@@ -4,7 +4,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
 
       t.string :request_type #consultation, new service, service improvement, other
       t.string :card_type # strategic, grant funder and more
-      t.string :activity_type #project, investigation, TASC investigation
+      t.string :activity_type #project, investigation, TASC investigation, Epic
       t.string :epic #name of the strategic project 
       t.string :requester_name
       t.string :requester_fname

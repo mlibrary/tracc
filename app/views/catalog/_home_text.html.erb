@@ -46,6 +46,42 @@
             
             <% end %>
         </ul>
+
+        <div class="card">
+          <div class="card-header">Capacity Allocated: 30%, 2 FTE </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Name 1: 0.5 FTE</li>
+              <li class="list-group-item">Name 2: 0.25 FTE</li>
+            </ul>  
+          </div>
+        </div>
+
+       <div class="card">
+          <div class="card-header">Objectives </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">obj 1: 
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                </div>
+              </div>
+              
+ 
+              </li>
+             
+            </ul>  
+          </div>
+        </div>
+<div class="card">
+          <div class="card-header">Status </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Completed: </li>
+              <li class="list-group-item">Left to do: </li>
+            </ul>  
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -121,8 +157,9 @@
 
     <div id="ext2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
       <div class="card-body">
-          <ul class="list-group list-group-flush">
-   
+        
+        <ul class="list-group list-group-flush">
+        
         <% 
           @card_db.all.each do |c| 
           cstatus = c.card_status
@@ -134,6 +171,9 @@
             
             <% end %>
         </ul>
+
+
+
       </div>
     </div>
   </div>
