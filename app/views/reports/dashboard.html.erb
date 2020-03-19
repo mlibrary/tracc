@@ -1,28 +1,32 @@
  <div class="container">
-  <div class="row">
+<% color1 = "" #neutral 100
+   color2 = "" #blue-300
+
+   color3 = "" 
+   color4 = ""
+    
+%>
+<%#row1 %>
+<h3> Dashboard: Strategic Projects </h3>
+ <div class="row" style="padding-top: 20px">
     <div class="col-md">
-    	<div class="card">
-  		<div class="card-header">
-    		<h5>LSP</h5>
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+
+    		<h5 >LSP</h5>
+    		
   		</div>  
  		<div class="card-body">
- 			  <div class="card">
-          <div class="card-header">Capacity Allocated: 30%, 2 FTE </div>
-          <div class="card-body">
-            <ul  class="list-group list-group-flush">
-              <li class="list-group-item">Name 1: 0.5 FTE</li>
-              <li class="list-group-item">Name 2: 0.25 FTE</li>
-            </ul>  
-          </div>
-        </div>
-
+ 			  
+<h6 > Capacity Allocated: 30%, 2 FTE</h6>
+    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
        <div class="card">
-          <div class="card-header">Objectives </div>
+          <div class="card-header">Progress</div>
           <div class="card-body">
             <ul  class="list-group list-group-flush">
-              <li class="list-group-item">obj 1: 
+              <li class="list-group-item">LSP: 
               <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
                 </div>
               </div>
               
@@ -48,37 +52,309 @@
  		</div>  		 
   		</div>
     </div>
-    <div class="col-md">
-    	<div class="card">
-  		<div class="card-header">
-    		<h5>Catalog Search</h5>
-  		</div>  
- 		<div class="card-body"></div>  		 
-  		</div>
 
+    <div class="col-md">
+    	<div class="card" style="background: <%=color3 %>">
+  		<div class="card-header" style="background: <%= color4 %>">
+    		<h5 >Catalog Search </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			  <h6 >Capacity Allocated: 30%, 2 FTE</h6>
+    		<p> Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
+
+       <div class="card">
+          <div class="card-header">Objectives </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">obj 1: 
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                </div>
+              </div>
+              
+ 
+              </li>
+             
+            </ul>  
+          </div>
+        </div>
+<div class="card">
+          <div class="card-header">Status </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Completed: </li>
+              <li class="list-group-item">Left to do: </li>
+            </ul>  
+          </div>
+        </div>
+
+
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Library Search </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			<h6 >Capacity Allocated: 30%, 2 FTE</h6>
+    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
+
+       <div class="card">
+          <div class="card-header">Objectives </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">obj 1: 
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                </div>
+              </div>
+              
+ 
+              </li>
+             
+            </ul>  
+          </div>
+        </div>
+<div class="card">
+          <div class="card-header">Status </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Completed: </li>
+              <li class="list-group-item">Left to do: </li>
+            </ul>  
+          </div>
+        </div>
+
+
+
+ 		</div>  		 
+  		</div>
     </div>
   </div>
-  <div class="row">
-  	<br>
-  </div>	
-  <div class="row">
+
+  <%# row2 %>
+
+  <div class="row" style="padding-top: 20px">
     <div class="col-md">
-    	<div class="card">
-  		<div class="card-header">
-    		<h5>Library Search</h5>
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Deep Blue</h5>
   		</div>  
- 		<div class="card-body"></div>  		 
+ 		<div class="card-body">
+ 			<h6 > Capacity Allocated: 30%, 2 FTE</h6>
+    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
+
+       <div class="card">
+          <div class="card-header">Progress: </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">DSpace Upgrade
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%
+                </div>
+              </div>
+              </li>
+               <li class="list-group-item">Data Features
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%
+                </div>
+              </div>
+              </li>
+               <li class="list-group-item">Deep Blue (Unity)
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%
+                </div>
+              </div>
+              </li>
+            </ul>  
+          </div>
+        </div>
+		<div class="card">
+          <div class="card-header">Status </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Completed: </li>
+              <li class="list-group-item">Left to do: </li>
+            </ul>  
+          </div>
+        </div>
+
+
+
+ 		</div>  		 
   		</div>
     </div>
+
     <div class="col-md">
-    	<div class="card">
-  		<div class="card-header">
-    		<h5>Deep Blue</h5>
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Digital Collection Platform: </h5>
   		</div>  
- 		<div class="card-body"></div>  		 
+ 		<div class="card-body">
+ 			  <h6 >Capacity Allocated: 30%, 2 FTE</h6>
+    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
+
+       <div class="card">
+          <div class="card-header">Objectives </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">obj 1: 
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                </div>
+              </div>
+              
+ 
+              </li>
+             
+            </ul>  
+          </div>
+        </div>
+<div class="card">
+          <div class="card-header">Status </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Completed: </li>
+              <li class="list-group-item">Left to do: </li>
+            </ul>  
+          </div>
+        </div>
+
+
+
+ 		</div>  		 
   		</div>
     </div>
-    
+
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5>Fulcrum </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			  
+<h6 >Capacity Allocated: 30%, 2 FTE</h6>
+    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
+       <div class="card">
+          <div class="card-header">Objectives </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">obj 1: 
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                </div>
+              </div>
+              
+ 
+              </li>
+             
+            </ul>  
+          </div>
+        </div>
+<div class="card">
+          <div class="card-header">Status </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Completed: </li>
+              <li class="list-group-item">Left to do: </li>
+            </ul>  
+          </div>
+        </div>
+
+
+ 		</div>  		 
+  		</div>
+    </div>
+  </div>
+ <%# row 3%>
+
+
+  <div class="row" style="padding-top: 20px">
+    <div class="col-md">
+    <div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5>Website Redesign</h5>
+  		</div>  
+ 		<div class="card-body">
+ 			<h6 > Capacity Allocated: 30%, 2 FTE</h6>
+    		<p >  Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
+
+       <div class="card">
+          <div class="card-header">Objectives </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">obj 1: 
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                </div>
+              </div>
+              
+ 
+              </li>
+             
+            </ul>  
+          </div>
+        </div>
+<div class="card">
+          <div class="card-header">Status </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Completed: </li>
+              <li class="list-group-item">Left to do: </li>
+            </ul>  
+          </div>
+        </div>
+
+
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5>Hathi Trust </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			  <h6 >Capacity Allocated: 30%, 2 FTE</h6>
+    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
+
+       <div class="card">
+          <div class="card-header">Objectives </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">obj 1: 
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                </div>
+              </div>
+              
+ 
+              </li>
+             
+            </ul>  
+          </div>
+        </div>
+<div class="card">
+          <div class="card-header">Status </div>
+          <div class="card-body">
+            <ul  class="list-group list-group-flush">
+              <li class="list-group-item">Completed: </li>
+              <li class="list-group-item">Left to do: </li>
+            </ul>  
+          </div>
+        </div>
+
+
+
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md"></div>
   </div>
   
 </div>
