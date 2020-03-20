@@ -1,6 +1,9 @@
 class ReportsController < ApplicationController
   protect_from_forgery with: :null_session
 
+  def dashboard
+  end
+    
   def show
 
   end 

@@ -1,17 +1,17 @@
 <%
 
-@card_search = Card.where("epic LIKE 'Search'")
-@card_other = Card.where("epic LIKE 'Other' ")
-@card_dcp = Card.where("epic LIKE 'DCP'")
-@card_db = Card.where("epic LIKE 'Deep Blues' ")
-@card_lsp = Card.where("epic LIKE 'LSP'")
-@card_fulcrum = Card.where("epic LIKE 'Fulcrum' ")
-@card_dp = Card.where("epic LIKE 'DP' ")
+
+@card_paused = Card.where("epic LIKE '' ")
+@card_active = Card.where("epic LIKE '' ")
+@card_epic = Card.where("activity_type LIKE 'Epic' ")
 
 %>
 
 
-<div class="jumbotron text-center">
+
+<div class="jumbotron text-center" style="padding-top: 50px;" >
+
+
   
   <p class="lead"> LIT Cycle Management Tool: Track work from intake to close</p>
   <p class="lead">Take - Rate - Assess - Communicate - Close </p>
@@ -21,12 +21,15 @@
   </p>
 </div>
 
+<div style="padding-bottom: 20px;">
+<%= render_search_bar  %>
+</div>
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          LSP
+          Strategic Projects
         </button>
       </h5>
     </div>
@@ -36,7 +39,7 @@
           <ul class="list-group list-group-flush">
    
         <% 
-          @card_lsp.all.each do |c| 
+          @card_epic.all.each do |c| 
           cstatus = c.card_status
          
               id = c.id 
@@ -46,15 +49,15 @@
             
             <% end %>
         </ul>
-      </div>
-    </div>
-  </div>
 
+  
+</div>
+</div>
   <div class="card">
     <div class="card-header" id="heading1">
       <h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext1" aria-expanded="false" aria-controls="ext1">
-          Search - Catalog Search
+          Tactical Projects - Active
         </button>
       </h5>
     </div>
@@ -65,7 +68,7 @@
          <ul class="list-group list-group-flush">
    
         <% 
-          @card_search.all.each do |c| 
+          @card_active.all.each do |c| 
           cstatus = c.card_status
          
               id = c.id 
@@ -84,7 +87,7 @@
     <div class="card-header" id="heading11">
       <h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext11" aria-expanded="false" aria-controls="ext11">
-          Search - Library Search
+          Tactical Projects - Paused
         </button>
       </h5>
     </div>
@@ -95,7 +98,7 @@
          <ul class="list-group list-group-flush">
    
         <% 
-          @card_search.all.each do |c| 
+          @card_paused.all.each do |c| 
           cstatus = c.card_status
          
               id = c.id 
@@ -114,146 +117,22 @@
     <div class="card-header" id="heading2">
       <h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext2" aria-expanded="false" aria-controls="ext2">
-          Deep Blues
+          Operational Work
         </button>
       </h5>
     </div>
 
     <div id="ext2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
       <div class="card-body">
-          <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_db.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Digital Collection Platform
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-          <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_dcp.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Digital Preservation
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-          <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_dp.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="card">
-    <div class="card-header" id="heading3">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext3" aria-expanded="false" aria-controls="ext3">
-          Fulcrum
-        </button>
-      </h5>
-    </div>
-
-    <div id="ext3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
-      <div class="card-body">
-          <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_fulcrum.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="headingFour">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          Small to Mid Sized Projects
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-      <div class="card-body">
-      <div class="card" >
-      <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_other.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
+        
        
-       </div> 
+
+
       </div>
-
- 
-
     </div>
   </div>
-</div>
+
+
+
 
 
