@@ -17,6 +17,7 @@
 %>
 <%#row1 %>
 <h3> Dashboard: Strategic Projects </h3>
+<a href="strategic">View Details</a>
  <div class="row" style="padding-top: 20px">
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
@@ -26,7 +27,7 @@
     		
   		</div>  
  		<div class="card-body"> 			  
-      <h6 > Capacity Allocated: 30%, 2 FTE</h6>
+      <h6 > <strong>Capacity Allocated:</strong> 30%, 2 FTE</h6>
     		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
          <hr>
          <h6><strong>Progress</strong></h6>
@@ -86,8 +87,10 @@
     		<h5 >Library Search </h5>
   		</div>  
  		<div class="card-body">
- 			<h6 >Capacity Allocated: 30%, 2 FTE</h6>
+ 			<h6 ><strong>Capacity Allocated: </strong>30%, 2 FTE</h6>
     		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
+        <hr>
+         <h6><strong>Progress</strong></h6>
          <%  @track_ls.all.each do |t| 
                     track = t.track
                     tstatus = t.status
@@ -118,6 +121,8 @@
  		<div class="card-body">
  			<h6><strong> Capacity Allocated:</strong> 30%, 2 FTE</h6>
     		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
+        <hr>
+         <h6><strong>Progress</strong></h6>
               <%  @track_db.all.each do |t| 
                     track = t.track
                     tstatus = t.status
@@ -143,28 +148,26 @@
     		<h5 >Digital Collection Platform: </h5>
   		</div>  
  		<div class="card-body">
- 			  <h6 >Capacity Allocated: 30%, 2 FTE</h6>
+ 			  <h6 ><strong>Capacity Allocated:</strong> 30%, 2 FTE</h6>
     		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
-
-            <ul  class="list-group list-group-flush">
+        <hr>
+        <h6><strong>Progress</strong></h6> 
+       
               <%  @track_dcp.all.each do |t| 
                     track = t.track
                     tstatus = t.status
                %>     
-              <li class="list-group-item"><%=track%>
+             <p><%=track%></p>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
-              </li>
+           
               <% end %>
-            </ul>  
-       
-
-            <ul  class="list-group list-group-flush">
-              <li class="list-group-item">Completed: </li>
-              <li class="list-group-item">Left to do: </li>
-            </ul>  
+              <hr>
+           <h6><strong>Status</strong></h6>
+             <p>Completed: </p>
+             <p>Left to do: </p> 
  		</div>  		 
   		</div>
     </div>
@@ -176,22 +179,26 @@
   		</div>  
  		<div class="card-body">
  			  
-<h6 >Capacity Allocated: 30%, 2 FTE</h6>
+<h6 ><strong>Capacity Allocated:</strong> 30%, 2 FTE</h6>
     		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
-         <ul  class="list-group list-group-flush">
+         <hr>
+          <h6><strong>Progress</strong></h6>
               <%  @track_f.all.each do |t| 
                     track = t.track
                     tstatus = t.status
                %>     
-              <li class="list-group-item"><%=track%>
+             <p><%=track%></p>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-            
-              </li>
+                </div>
+              </div>
+             
               <% end %>
-            </ul>  
-          </div>
-        </div>
+              <hr>
+               <h6><strong>Status</strong></h6>
+             <p>Completed: </p>
+             <p>Left to do: </p>
+        
 
 
  		</div>  		 
@@ -208,22 +215,25 @@
     		<h5>Website Redesign</h5>
   		</div>  
  		<div class="card-body">
- 			<h6 > Capacity Allocated: 30%, 2 FTE</h6>
+ 			<h6 > <strong>Capacity Allocated: </strong>30%, 2 FTE</h6>
     		<p >  Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
-
-         <ul  class="list-group list-group-flush">
+        <hr>
+         <h6><strong>Progress</strong></h6>
               <%  @track_w.all.each do |t| 
                     track = t.track
                     tstatus = t.status
                %>     
-              <li class="list-group-item"><%=track%>
+              <%=track%>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
-              </li>
+          
               <% end %>
-            </ul>   
+              <hr>
+               <h6><strong>Status</strong></h6>
+             <p>Completed: </p>
+             <p>Left to do: </p>
  
 
  		</div>  		 
@@ -236,23 +246,27 @@
     		<h5>Hathi Trust </h5>
   		</div>  
  		<div class="card-body">
- 			  <h6 >Capacity Allocated: 30%, 2 FTE</h6>
+ 			  <h6 ><strong>Capacity Allocated: </strong>30%, 2 FTE</h6>
     		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
-
-            <ul  class="list-group list-group-flush">
+        <hr>
+         <h6><strong>Progress</strong></h6>
+           
               <%  @track_ht.all.each do |t| 
                     track = t.track
                     tstatus = t.status
                %>     
-              <li class="list-group-item"><%=track%>
+              <p><%=track%></p>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
-              </li>
+          
               <% end %>
-            </ul>  
-         
+        
+              <hr>
+               <h6><strong>Status</strong></h6>
+             <p>Completed: </p>
+             <p>Left to do: </p>
 
 
 
