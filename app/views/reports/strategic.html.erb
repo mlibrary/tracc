@@ -1,0 +1,246 @@
+ <div class="container">
+<% color1 = "" #neutral 100
+   color2 = "" #blue-300
+
+   color3 = "" 
+   color4 = ""
+    
+  @o_lsp = Objective.where("card_id= '99' ")
+  @o_cs = Objective.where("card_id= '100'  ")
+  @o_db = Objective.where("card_id= '102'  ")
+  @o_ls = Objective.where("card_id= '101'  ")
+  @o_dcp = Objective.where("card_id= '103'  ")
+  @o_f = Objective.where("card_id= '104'  ")
+  @o_w = Objective.where("card_id= '105'  ")
+  @o_ht = Objective.where("card_id= '106'  ")
+  
+%>
+<%#row1 %>
+<h3> Dashboard Details: Strategic Projects  </h3>
+<a href="dashboard">Back to Stats Dashboard</a>
+ <div class="row" style="padding-top: 20px">
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+
+    		<h5 >LSP</h5>
+    		
+  		</div>  
+ 		<div class="card-body"> 			  
+      <h6 ><strong> Objectives</strong></h6>
+    	<% cnt = 0
+         @o_lsp.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <p><%=cnt.to_s %>. <%= obj%></p>
+      <%end%>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong></p>
+        <p><strong>April 2020:</strong></p>
+        <p><strong>May 2020:</strong></p>
+        <p><strong>June 2020:</strong></p>
+        
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md">
+    	<div class="card" style="background: <%=color3 %>">
+  		<div class="card-header" style="background: <%= color4 %>">
+    		<h5 >Catalog Search </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			  <h6 ><strong> Objectives</strong></h6>
+      <% cnt = 0
+         @o_cs.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <p><%=cnt.to_s %>. <%= obj%></p>
+      <%end%>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong></p>
+        <p><strong>April 2020:</strong></p>
+        <p><strong>May 2020:</strong></p>
+        <p><strong>June 2020:</strong></p>
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Library Search </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			 <h6 ><strong> Objectives</strong></h6>
+      <% cnt = 0
+         @o_ls.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <p><%=cnt.to_s %>. <%= obj%></p>
+      <%end%>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong></p>
+        <p><strong>April 2020:</strong></p>
+        <p><strong>May 2020:</strong></p>
+        <p><strong>June 2020:</strong></p>
+ 		</div>  		 
+  		</div>
+    </div>
+  </div>
+
+  <%# row2 %>
+
+  <div class="row" style="padding-top: 20px">
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Deep Blue</h5>
+  		</div>  
+ 		<div class="card-body">
+ 			 <h6 ><strong> Objectives</strong></h6>
+      <% cnt = 0
+         @o_db.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <p><%=cnt.to_s %>. <%= obj%></p>
+      <%end%>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong></p>
+        <p><strong>April 2020:</strong></p>
+        <p><strong>May 2020:</strong></p>
+        <p><strong>June 2020:</strong></p>
+
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Digital Collection Platform: </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			  <h6 ><strong> Objectives</strong></h6>
+      <% cnt = 0
+         @o_dcp.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <p><%=cnt.to_s %>. <%= obj%></p>
+      <%end%>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong></p>
+        <p><strong>April 2020:</strong></p>
+        <p><strong>May 2020:</strong></p>
+        <p><strong>June 2020:</strong></p>
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5>Fulcrum </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			   <h6 ><strong> Objectives</strong></h6>
+      <% cnt = 0
+         @o_f.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <p><%=cnt.to_s %>. <%= obj%></p>
+      <%end%>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong></p>
+        <p><strong>April 2020:</strong></p>
+        <p><strong>May 2020:</strong></p>
+        <p><strong>June 2020:</strong></p>
+
+          </div>
+        </div>
+
+
+ 		</div>  		 
+  		</div>
+    </div>
+  </div>
+ <%# row 3%>
+
+
+  <div class="row" style="padding-top: 20px">
+    <div class="col-md">
+    <div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5>Website Redesign</h5>
+  		</div>  
+ 		<div class="card-body">
+ 			
+ <h6 ><strong> Objectives</strong></h6>
+      <% cnt = 0
+         @o_w.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <p><%=cnt.to_s %>. <%= obj%></p>
+      <%end%>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong></p>
+        <p><strong>April 2020:</strong></p>
+        <p><strong>May 2020:</strong></p>
+        <p><strong>June 2020:</strong></p>
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5>Hathi Trust </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			 
+ <h6 ><strong> Objectives</strong></h6>
+      <% cnt = 0
+         @o_ht.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <p><%=cnt.to_s %>. <%= obj%></p>
+      <%end%>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong></p>
+        <p><strong>April 2020:</strong></p>
+        <p><strong>May 2020:</strong></p>
+        <p><strong>June 2020:</strong></p>
+
+
+ 		</div>  		 
+  		</div>
+    </div>
+
+    <div class="col-md"></div>
+  </div>
+  
+</div>

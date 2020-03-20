@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   resources :reports do
     collection do
-      get :index, :charts, :export, :dashboard
+      get :index, :charts, :export, :dashboard, :strategic 
       post :generate 
     end
   end
