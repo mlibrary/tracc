@@ -131,7 +131,6 @@ class CardsController < ApplicationController
     @track_epic.all.each do |t| 
       track = t.track
       t.status = params[track]
-      byebug
       t.save!
     end   
   end  
