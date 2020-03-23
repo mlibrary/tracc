@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :cards do
     collection do
       get :import, :import_card, :import_complexity, :import_impact, :advance_search, :progress
-      post :update
+      post :update, :progress2, :save_progress
     end
   end
 

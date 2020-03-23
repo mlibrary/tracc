@@ -1,9 +1,9 @@
 <h5></h5>
 
-<%= form_tag(card_progress_path, :enctype =>"multipart/form-data") do %>
+<%= form_tag("progress2", :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
-<% @card_epic = Card.where("activity_type LIKE 'Epic' ") %>
+<% card_epic = Card.where("activity_type LIKE 'Epic' ") %>
 
 <div class="card">
   <div class="card-header">
@@ -27,13 +27,6 @@
    </div>
 </div>
 
-<div class="row ml-1">
-    <div class="field">
-     <%= label_tag :type %>
-     <%= select_tag "type", options_for_select([['Add a Comment', 1], ['Progress on Objectives', 2]]) %>
-  
-   </div>
-</div>
 
 
 
