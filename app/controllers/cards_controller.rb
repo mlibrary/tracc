@@ -113,6 +113,28 @@ class CardsController < ApplicationController
     setup_for_display 
   end
 
+  def progress2
+    cycle= params["cycle"]
+    epic=  params["epic"]
+   
+    str = "epic_title LIKE '" + epic + "'"   
+    @track_epic = Track.where(str) 
+
+  end
+
+  def save_progress
+  #"LSP"=>"20", "epic"=>"LSP", "comment1"=>"one", "comment2"=>"one2", "comment3"=>"one3", "comment4"=>"one4", "commit"=>"Save", "controller"=>"cards", "action"=>"save_progress"} permitted: true>
+    epic=  params["epic"]
+    str = "epic_title LIKE '" + epic + "'"   
+    @track_epic = Track.where(str) 
+
+    @track_epic.all.each do |t| 
+      track = t.track
+      t.status = params[track]
+      t.save!
+    end   
+  end  
+    
   def import
   end
 
