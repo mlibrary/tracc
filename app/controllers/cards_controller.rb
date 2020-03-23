@@ -113,6 +113,9 @@ class CardsController < ApplicationController
     setup_for_display 
   end
 
+  def progress
+  end
+    
   def import
   end
 
