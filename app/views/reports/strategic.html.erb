@@ -13,6 +13,17 @@
   @o_f = Objective.where("card_id= '104'  ")
   @o_w = Objective.where("card_id= '105'  ")
   @o_ht = Objective.where("card_id= '106'  ")
+
+
+  @c_lsp = TrackComment.where("card_id= '99' ")
+  @c_cs = TrackComment.where("card_id= '100'  ")
+  @c_db = TrackComment.where("card_id= '102'  ")
+  @c_ls = TrackComment.where("card_id= '101'  ")
+  @c_dcp = TrackComment.where("card_id= '103'  ")
+  @c_f = TrackComment.where("card_id= '104'  ")
+  @c_w = TrackComment.where("card_id= '105'  ")
+  @c_ht = TrackComment.where("card_id= '106'  ")
+   
   
 %>
 <%#row1 %>
@@ -31,6 +42,7 @@
       <p>Jon Rothman</p>
       <h6 ><strong> Objectives:</strong></h6>
     	<% cnt = 0
+         one = @c_lsp.first
          @o_lsp.all.each do |o| 
             obj = o.objective
             ostatus = o.status
@@ -40,10 +52,10 @@
       <%end%>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong></p>
-        <p><strong>April 2020:</strong></p>
-        <p><strong>May 2020:</strong></p>
-        <p><strong>June 2020:</strong></p>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
         
  		</div>  		 
   		</div>
@@ -59,6 +71,7 @@
       <p>John Weise</p>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
+         one = @c_cs.first 
          @o_cs.all.each do |o| 
             obj = o.objective
             ostatus = o.status
@@ -68,10 +81,10 @@
       <%end%>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong></p>
-        <p><strong>April 2020:</strong></p>
-        <p><strong>May 2020:</strong></p>
-        <p><strong>June 2020:</strong></p>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
  		</div>  		 
   		</div>
     </div>
@@ -86,6 +99,7 @@
       <p></p>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
+         one = @c_ls.first
          @o_ls.all.each do |o| 
             obj = o.objective
             ostatus = o.status
@@ -95,10 +109,10 @@
       <%end%>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong></p>
-        <p><strong>April 2020:</strong></p>
-        <p><strong>May 2020:</strong></p>
-        <p><strong>June 2020:</strong></p>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
  		</div>  		 
   		</div>
     </div>
@@ -117,6 +131,7 @@
       <p>Nabeela Jaffer</p>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
+         one = @c_db.first
          @o_db.all.each do |o| 
             obj = o.objective
             ostatus = o.status
@@ -126,10 +141,10 @@
       <%end%>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong></p>
-        <p><strong>April 2020:</strong></p>
-        <p><strong>May 2020:</strong></p>
-        <p><strong>June 2020:</strong></p>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
 
  		</div>  		 
   		</div>
@@ -145,6 +160,7 @@
       <p>Kat Hagedorn</p>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
+         one = @c_dcp.first
          @o_dcp.all.each do |o| 
             obj = o.objective
             ostatus = o.status
@@ -154,10 +170,10 @@
       <%end%>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong></p>
-        <p><strong>April 2020:</strong></p>
-        <p><strong>May 2020:</strong></p>
-        <p><strong>June 2020:</strong></p>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
  		</div>  		 
   		</div>
     </div>
@@ -172,6 +188,7 @@
       <p>Jeremy Morse</p>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
+         one = @c_f.first
          @o_f.all.each do |o| 
             obj = o.objective
             ostatus = o.status
@@ -181,11 +198,10 @@
       <%end%>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong></p>
-        <p><strong>April 2020:</strong></p>
-        <p><strong>May 2020:</strong></p>
-        <p><strong>June 2020:</strong></p>
-
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
           </div>
         </div>
 
@@ -208,6 +224,7 @@
       <p>Heidi Burkhardt</p>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
+         one = @c_w.first
          @o_w.all.each do |o| 
             obj = o.objective
             ostatus = o.status
@@ -217,10 +234,10 @@
       <%end%>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong></p>
-        <p><strong>April 2020:</strong></p>
-        <p><strong>May 2020:</strong></p>
-        <p><strong>June 2020:</strong></p>
+       <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
  		</div>  		 
   		</div>
     </div>
@@ -235,6 +252,7 @@
       <p>Aaron Elkiss</p>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
+         one = @c_ht.first
          @o_ht.all.each do |o| 
             obj = o.objective
             ostatus = o.status
@@ -244,10 +262,10 @@
       <%end%>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong></p>
-        <p><strong>April 2020:</strong></p>
-        <p><strong>May 2020:</strong></p>
-        <p><strong>June 2020:</strong></p>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
 
 
  		</div>  		 

@@ -117,8 +117,12 @@ class CardsController < ApplicationController
     cycle= params["cycle"]
     epic=  params["epic"]
    
+   byebug
     str = "epic_title LIKE '" + epic + "'"   
     @track_epic = Track.where(str) 
+
+    @comment = TrackComment.where(str)
+    
 
   end
 
@@ -127,6 +131,15 @@ class CardsController < ApplicationController
     epic=  params["epic"]
     str = "epic_title LIKE '" + epic + "'"   
     @track_epic = Track.where(str) 
+    @comment = TrackComment.where(str)
+    one = @comment.first
+
+    one.comment1 = params["comment1"]
+    one.comment2 = params["comment2"]
+    one.comment3 = params["comment3"]
+    one.comment4 = params["comment4"]
+    
+    one.save!
 
     @track_epic.all.each do |t| 
       track = t.track
