@@ -1,8 +1,8 @@
 <%
 
 
-@card_paused = Card.where("epic LIKE '' ")
-@card_active = Card.where("epic LIKE '' ")
+@card_paused = Card.where("epic LIKE 'Paused' ")
+@card_active = Card.where("activity_type LIKE 'Tactical' ")
 @card_epic = Card.where("activity_type LIKE 'Epic' ")
 
 %>

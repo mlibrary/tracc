@@ -117,28 +117,36 @@ class CardsController < ApplicationController
     cycle= params["cycle"]
     epic=  params["epic"]
    
-   byebug
     str = "epic_title LIKE '" + epic + "'"   
     @track_epic = Track.where(str) 
 
+    str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
     @comment = TrackComment.where(str)
-    
+    if (@comment.first == nil)
+     TrackComment.create(epic_title: epic,cycle:cycle)
+     @comment = TrackComment.where(str)
+    end  
 
   end
 
   def save_progress
   #"LSP"=>"20", "epic"=>"LSP", "comment1"=>"one", "comment2"=>"one2", "comment3"=>"one3", "comment4"=>"one4", "commit"=>"Save", "controller"=>"cards", "action"=>"save_progress"} permitted: true>
     epic=  params["epic"]
+    cycle = params["cycle"]
+
     str = "epic_title LIKE '" + epic + "'"   
     @track_epic = Track.where(str) 
     @comment = TrackComment.where(str)
     one = @comment.first
 
+    if (one==nil)
+
+    end  
     one.comment1 = params["comment1"]
     one.comment2 = params["comment2"]
     one.comment3 = params["comment3"]
     one.comment4 = params["comment4"]
-    
+    one.cycle = cycle
     one.save!
 
     @track_epic.all.each do |t| 

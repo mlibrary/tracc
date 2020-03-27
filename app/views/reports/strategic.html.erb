@@ -24,11 +24,12 @@
   @c_w = TrackComment.where("card_id= '105'  ")
   @c_ht = TrackComment.where("card_id= '106'  ")
    
-  
+ flag = true
+
 %>
 <%#row1 %>
-<h3> Dashboard Details: Strategic Projects  </h3>
-<a href="dashboard">Back to Stats Dashboard</a>
+<h3> LIT STRATEGIC PROJECTS </h3>
+
  <div class="row" style="padding-top: 20px">
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
@@ -50,13 +51,14 @@
       %>  
       <p><%=cnt.to_s %>. <%= obj%></p>
       <%end%>
+      <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
         <p><strong>March 2020:</strong><br><%=one.comment1%></p>
         <p><strong>April 2020:</strong><br><%=one.comment2%></p>
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-        
+      <%end%>  
  		</div>  		 
   		</div>
     </div>
@@ -79,12 +81,14 @@
       %>  
       <p><%=cnt.to_s %>. <%= obj%></p>
       <%end%>
-         <hr>
+        <% if (flag) %>
+        <hr>
         <h6 > <strong>Comments:</strong></h6>
         <p><strong>March 2020:</strong><br><%=one.comment1%></p>
         <p><strong>April 2020:</strong><br><%=one.comment2%></p>
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
  		</div>  		 
   		</div>
     </div>
@@ -107,13 +111,16 @@
       %>  
       <p><%=cnt.to_s %>. <%= obj%></p>
       <%end%>
+        
+          <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
         <p><strong>March 2020:</strong><br><%=one.comment1%></p>
         <p><strong>April 2020:</strong><br><%=one.comment2%></p>
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
- 		</div>  		 
+      <%end%> 
+        </div>  		 
   		</div>
     </div>
   </div>
@@ -139,13 +146,14 @@
       %>  
       <p><%=cnt.to_s %>. <%= obj%></p>
       <%end%>
+          <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
         <p><strong>March 2020:</strong><br><%=one.comment1%></p>
         <p><strong>April 2020:</strong><br><%=one.comment2%></p>
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-
+      <%end%> 
  		</div>  		 
   		</div>
     </div>
@@ -168,13 +176,16 @@
       %>  
       <p><%=cnt.to_s %>. <%= obj%></p>
       <%end%>
+          <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
         <p><strong>March 2020:</strong><br><%=one.comment1%></p>
         <p><strong>April 2020:</strong><br><%=one.comment2%></p>
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
- 		</div>  		 
+      <%end%> 
+
+        	</div>  		 
   		</div>
     </div>
 
@@ -196,12 +207,16 @@
       %>  
       <p><%=cnt.to_s %>. <%= obj%></p>
       <%end%>
+      <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
         <p><strong>March 2020:</strong><br><%=one.comment1%></p>
         <p><strong>April 2020:</strong><br><%=one.comment2%></p>
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
+
+
           </div>
         </div>
 
@@ -232,12 +247,15 @@
       %>  
       <p><%=cnt.to_s %>. <%= obj%></p>
       <%end%>
+         <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-       <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
         <p><strong>April 2020:</strong><br><%=one.comment2%></p>
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
+
  		</div>  		 
   		</div>
     </div>
@@ -260,13 +278,14 @@
       %>  
       <p><%=cnt.to_s %>. <%= obj%></p>
       <%end%>
+         <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
         <p><strong>March 2020:</strong><br><%=one.comment1%></p>
         <p><strong>April 2020:</strong><br><%=one.comment2%></p>
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-
+      <%end%> 
 
  		</div>  		 
   		</div>
