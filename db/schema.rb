@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_194837) do
+ActiveRecord::Schema.define(version: 2020_03_30_130214) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 2020_03_23_194837) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_assessments_on_card_id"
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "chips"
+    t.string "uniqname"
+    t.string "type"
+    t.string "role"
+    t.string "trackname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bookmarks", force: :cascade do |t|
@@ -120,6 +131,25 @@ ActiveRecord::Schema.define(version: 2020_03_23_194837) do
     t.datetime "card_since"
     t.datetime "last_update_comment"
     t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chips", force: :cascade do |t|
+    t.string "fname"
+    t.string "lname"
+    t.string "uniqname"
+    t.integer "project"
+    t.integer "project_dev"
+    t.integer "project_mgr"
+    t.integer "project_design"
+    t.integer "project_support"
+    t.integer "project_data"
+    t.integer "ops"
+    t.integer "ops_dev"
+    t.integer "ops_mgr"
+    t.integer "project_ops"
+    t.string "dept"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
