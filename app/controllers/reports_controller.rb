@@ -6,9 +6,19 @@ class ReportsController < ApplicationController
     
   def dashboard
   end
+
+  def overview
+    
+  end
+  
+  def tactical
+  end
+
+  def tactical_stats
+  end
+
     
   def show
-
   end 
 
   def generate

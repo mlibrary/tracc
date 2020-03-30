@@ -4,13 +4,19 @@
 
 <div class="card">
   <div class="card-header">
-    <h4> Update Progress for: <%=params["epic"]%></h4>
+    <h4> <%=params["cycle"]%> Update Progress for: <%=params["epic"]%></h4>
   </div>  
 <div class="card-body">  
 
  
 <h6> Track Progress:</h6>
- <% @track_epic.all.each do |t| 
+
+  
+
+ <% 
+   one = @comment.first
+
+   @track_epic.all.each do |t| 
       track = t.track
       tstatus = t.status
  %>  
@@ -24,11 +30,12 @@
  
 <h6>Comments:</h6>
 <%= hidden_field_tag 'epic', params["epic"] %>
+<%= hidden_field_tag 'cycle', params["cycle"] %>
 
-<p>March:<br><%= text_area_tag 'comment1',  "one" %></p>
-<p>April:<br><%= text_area_tag 'comment2',  "one2" %></p>
-<p>May:<br><%= text_area_tag 'comment3',  "one3" %></p>
-<p>June:<br><%= text_area_tag 'comment4',  "one4" %></p>
+<p>March:<br><%= text_area_tag 'comment1',  one.comment1 %></p>
+<p>April:<br><%= text_area_tag 'comment2',  one.comment2 %></p>
+<p>May:<br><%= text_area_tag 'comment3',  one.comment3 %></p>
+<p>June:<br><%= text_area_tag 'comment4',  one.comment4 %></p>
 
 </div>
   <div class="card-footer"> 
