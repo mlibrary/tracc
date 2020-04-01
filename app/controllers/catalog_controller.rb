@@ -91,20 +91,20 @@ class CatalogController < ApplicationController
 
     config.add_facet_field 'request_type_ssi', label: 'Request Type', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'activity_type_ssi', label: 'Activity Type'
-    config.add_facet_field 'card_type_ssi', label: 'Card Type'
+    #config.add_facet_field 'card_type_ssi', label: 'Card Type'
     config.add_facet_field 'epic_ssi', label: 'Epic'
-    config.add_facet_field 'requester_name_ssim', label: 'Requester Name', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'requester_div_ssim', label: 'Requester Divison', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'requester_name_ssim', label: 'Requester Name', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'requester_div_ssim', label: 'Requester Divison', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'in_cycle_ssi', label: 'Request Cycle', limit: true, index_range: 'A'..'Z'
     
-    config.add_facet_field 'start_cycle_ssi', label: 'Start Cycle', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'done_cycle_ssi', label: 'Done Cycle', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'start_cycle_ssi', label: 'Start Cycle', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'done_cycle_ssi', label: 'Done Cycle', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'status_ssi', label: 'Card Status', limit: true, index_range: 'A'..'Z'
     config.add_facet_field 'rationale_ssi', label: 'Rationale', limit: true, index_range: 'A'..'Z'
    
-    config.add_facet_field 'lit_lead_ssim', label: 'Card LIT Lead', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'lit_dept_ssim', label: 'Card LIT Dept', limit: true, index_range: 'A'..'Z'
-    config.add_facet_field 'service_lead_ssim', label: 'Card Service Lead', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'lit_lead_ssim', label: 'Card LIT Lead', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'lit_dept_ssim', label: 'Card LIT Dept', limit: true, index_range: 'A'..'Z'
+    #config.add_facet_field 'service_lead_ssim', label: 'Card Service Lead', limit: true, index_range: 'A'..'Z'
 
     #config.add_facet_field 'accomplish_ssim', label: 'Accomplished', limit: true, index_range: 'A'..'Z'
     #config.add_facet_field 'benefits_ssim', label: 'Benefits', limit: true, index_range: 'A'..'Z'
