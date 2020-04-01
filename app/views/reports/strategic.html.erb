@@ -24,23 +24,23 @@
   @c_w = TrackComment.where("card_id= '105'  ")
   @c_ht = TrackComment.where("card_id= '106'  ")
    
- flag = true
+ flag = false
 
 %>
 <%#row1 %>
-<h3> LIT STRATEGIC PROJECTS </h3>
+<h3> FY20:3 Library IT STRATEGIC PROJECTS </h3>
 
  <div class="row" style="padding-top: 20px">
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
 
-    		<h5 >LSP</h5>
+    		<h5 >LSP Migration(Alma)</h5>
     		
   		</div>  
  		<div class="card-body"> 			  
-      <h6 ><strong> Project Lead:</strong></h6>
-      <p>Jon Rothman</p>
+      <%#<h6 ><strong> Project Lead:</strong></h6> 
+      <p>Jon Rothman</p>%>
       <h6 ><strong> Objectives:</strong></h6>
     	<% cnt = 0
          one = @c_lsp.first
@@ -59,8 +59,10 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%>  
+      <p style="padding-top: 35px"></p>
  		</div>  		 
   		</div>
+
     </div>
 
     <div class="col-md">
@@ -69,8 +71,8 @@
     		<h5 >Catalog Search </h5>
   		</div>  
  		<div class="card-body">
- 			<h6 ><strong> Project Lead:</strong></h6>
-      <p>John Weise</p>
+ 		<%#	<h6 ><strong> Project Lead:</strong></h6>
+      <p>John Weise</p> %>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
          one = @c_cs.first 
@@ -99,8 +101,8 @@
     		<h5 >Library Search </h5>
   		</div>  
  		<div class="card-body">
- 			<h6 ><strong> Project Lead:</strong></h6>
-      <p></p>
+ 		<%#	<h6 ><strong> Project Lead:</strong></h6>
+      <p></p> %>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
          one = @c_ls.first
@@ -120,6 +122,7 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%> 
+      <p style="padding-top: 20px"></p>
         </div>  		 
   		</div>
     </div>
@@ -134,8 +137,8 @@
     		<h5 >Deep Blue</h5>
   		</div>  
  		<div class="card-body">
- 			<h6 ><strong> Project Lead:</strong></h6>
-      <p>Nabeela Jaffer</p>
+ 		<%#	<h6 ><strong> Project Lead:</strong></h6>
+      <p>Nabeela Jaffer</p> %>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
          one = @c_db.first
@@ -154,6 +157,7 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%> 
+      <p style="padding-top: 20px"></p>
  		</div>  		 
   		</div>
     </div>
@@ -164,8 +168,8 @@
     		<h5 >Digital Collection Platform: </h5>
   		</div>  
  		<div class="card-body">
- 			<h6 ><strong> Project Lead:</strong></h6>
-      <p>Kat Hagedorn</p>
+ 			<%#<h6 ><strong> Project Lead:</strong></h6>
+      <p>Kat Hagedorn</p> %>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
          one = @c_dcp.first
@@ -184,7 +188,7 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%> 
-
+<p style="padding-top: 20px"></p>
         	</div>  		 
   		</div>
     </div>
@@ -195,8 +199,8 @@
     		<h5>Fulcrum </h5>
   		</div>  
  		<div class="card-body">
- 			<h6 ><strong> Project Lead:</strong></h6>
-      <p>Jeremy Morse</p>
+ 			<%#<h6 ><strong> Project Lead:</strong></h6>
+      <p>Jeremy Morse</p> %>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
          one = @c_f.first
@@ -219,24 +223,20 @@
 
           </div>
         </div>
-
-
- 		</div>  		 
+		 
   		</div>
     </div>
-  </div>
  <%# row 3%>
-
 
   <div class="row" style="padding-top: 20px">
     <div class="col-md">
     <div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>Website Redesign</h5>
-  		</div>  
- 		<div class="card-body">
- 			<h6 ><strong> Project Lead:</strong></h6>
-      <p>Heidi Burkhardt</p>
+      <div class="card-header" style="background: <%= color2 %>">
+        <h5>Website Redesign</h5>
+      </div>  
+    <div class="card-body">
+      <%#<h6 ><strong> Project Lead:</strong></h6>
+      <p>Heidi Burkhardt</p>%>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
          one = @c_w.first
@@ -255,19 +255,19 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%> 
-
- 		</div>  		 
-  		</div>
+        <p style="padding-top: 25px"></p>
+    </div>       
+      </div>
     </div>
 
     <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>Hathi Trust </h5>
-  		</div>  
- 		<div class="card-body">
- 		  <h6 ><strong> Project Lead:</strong></h6>
-      <p>Aaron Elkiss</p>
+      <div class="card" style="background: <%=color1 %>">
+      <div class="card-header" style="background: <%= color2 %>">
+        <h5>Hathi Trust </h5>
+      </div>  
+    <div class="card-body">
+     <%# <h6 ><strong> Project Lead:</strong></h6>
+      <p>Aaron Elkiss</p>%>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
          one = @c_ht.first
@@ -286,9 +286,9 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%> 
-
- 		</div>  		 
-  		</div>
+      
+    </div>       
+      </div>
     </div>
 
     <div class="col-md"></div>

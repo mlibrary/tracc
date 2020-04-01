@@ -1,8 +1,8 @@
 <%
 
 
-@card_paused = Card.where("epic LIKE 'Paused' ")
-@card_active = Card.where("activity_type LIKE 'Tactical' ")
+@card_paused = Card.where("activity_type LIKE 'Paused%' ")
+@card_active = Card.where("activity_type LIKE 'Active' ")
 @card_epic = Card.where("activity_type LIKE 'Epic' ")
 
 %>
@@ -103,8 +103,9 @@
          
               id = c.id 
               url ="catalog/" + id.to_s
+              ctype = c.activity_type
         %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
+         <li class="list-group-item"><%=ctype%>: <a href=<%=url%> ><%= c.title %></a></li>
             
             <% end %>
         </ul>
