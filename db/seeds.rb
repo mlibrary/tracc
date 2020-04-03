@@ -25,6 +25,7 @@ Permit.create(email:'view@umich.edu', level: 9)
 
 Status.create(status:'New') ;
 Status.create(status:'Done') ;
+Status.create(status:'Active') ;
 Status.create(status:'Stopped') ;
 Status.create(status:'In-Progress') ;
 Status.create(status:'Not-Started') ;

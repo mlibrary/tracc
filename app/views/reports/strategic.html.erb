@@ -5,37 +5,37 @@
    color3 = "" 
    color4 = ""
     
-  @o_lsp = Objective.where("card_id= '99' ")
-  @o_cs = Objective.where("card_id= '100'  ")
-  @o_db = Objective.where("card_id= '102'  ")
-  @o_ls = Objective.where("card_id= '101'  ")
-  @o_dcp = Objective.where("card_id= '103'  ")
-  @o_f = Objective.where("card_id= '104'  ")
-  @o_w = Objective.where("card_id= '105'  ")
-  @o_ht = Objective.where("card_id= '106'  ")
+  @o_lsp = Objective.where("card_id= '1' ")
+  @o_cs = Objective.where("card_id= '2'  ")
+  @o_db = Objective.where("card_id= '4'  ")
+  @o_ls = Objective.where("card_id= '3'  ")
+  @o_dcp = Objective.where("card_id= '5'  ")
+  @o_f = Objective.where("card_id= '6'  ")
+  @o_w = Objective.where("card_id= '7'  ")
+  @o_ht = Objective.where("card_id= '8'  ")
 
 
-  @c_lsp = TrackComment.where("card_id= '99' ")
-  @c_cs = TrackComment.where("card_id= '100'  ")
-  @c_db = TrackComment.where("card_id= '102'  ")
-  @c_ls = TrackComment.where("card_id= '101'  ")
-  @c_dcp = TrackComment.where("card_id= '103'  ")
-  @c_f = TrackComment.where("card_id= '104'  ")
-  @c_w = TrackComment.where("card_id= '105'  ")
-  @c_ht = TrackComment.where("card_id= '106'  ")
+  @c_lsp = TrackComment.where("card_id= '1' ")
+  @c_cs = TrackComment.where("card_id= '2'  ")
+  @c_db = TrackComment.where("card_id= '4'  ")
+  @c_ls = TrackComment.where("card_id= '3'  ")
+  @c_dcp = TrackComment.where("card_id= '5'  ")
+  @c_f = TrackComment.where("card_id= '6'  ")
+  @c_w = TrackComment.where("card_id= '7'  ")
+  @c_ht = TrackComment.where("card_id= '8'  ")
    
  flag = false
 
 %>
 <%#row1 %>
-<h3> FY20:3 Library IT STRATEGIC PROJECTS </h3>
+<h3> FY20:3 (March-June) Library IT STRATEGIC PROJECTS </h3>
 
  <div class="row" style="padding-top: 20px">
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
 
-    		<h5 >LSP Migration(Alma)</h5>
+    		<h5 >LSP Migration (Alma)</h5>
     		
   		</div>  
  		<div class="card-body"> 			  
@@ -157,7 +157,7 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%> 
-      <p style="padding-top: 20px"></p>
+    <p style="padding-top: 160px"></p>
  		</div>  		 
   		</div>
     </div>
@@ -165,7 +165,7 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Digital Collection Platform: </h5>
+    		<h5 >Digital Collections Platform </h5>
   		</div>  
  		<div class="card-body">
  			<%#<h6 ><strong> Project Lead:</strong></h6>
@@ -219,7 +219,7 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%> 
-
+<p style="padding-top: 125px"></p>
 
           </div>
         </div>
@@ -255,7 +255,7 @@
         <p><strong>May 2020:</strong><br><%=one.comment3%></p>
         <p><strong>June 2020:</strong><br><%=one.comment4%></p>
       <%end%> 
-        <p style="padding-top: 25px"></p>
+        
     </div>       
       </div>
     </div>
@@ -263,11 +263,12 @@
     <div class="col-md">
       <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
-        <h5>Hathi Trust </h5>
+        <h5>HathiTrust </h5>
       </div>  
     <div class="card-body">
+      <p>LIT supports technical objectives that align to the <a href="https://www.hathitrust.org/charting-hathitrusts-strategic-directions"><u>HathiTrust strategic plan</u></a>, which are presently tracked in a separate document.</p>
      <%# <h6 ><strong> Project Lead:</strong></h6>
-      <p>Aaron Elkiss</p>%>
+      <p>Aaron Elkiss</p>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
          one = @c_ht.first
@@ -275,17 +276,11 @@
             obj = o.objective
             ostatus = o.status
             cnt = cnt+1
-      %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
+      %>
+      <%#  
+      <p><%=cnt.to_s %> <%#. <%= obj</p>
       <%end%>
-         <% if (flag) %>
-         <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%> 
+         <p style="padding-top: 105px"></p>
       
     </div>       
       </div>
