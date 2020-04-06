@@ -1,0 +1,55 @@
+ <% str = "card_id = '" + params['card_id'] + "'" 
+    tracks = Track.where(str) 
+
+    chips = Chip.order(:uniqname)
+    
+%>
+
+<div class="card">
+  <div class="card-header">
+    <h4> <%=params["cycle"]%> Add a Resources To: <%=params["epic"]%></h4>
+  </div>  
+<div class="card-body">  
+
+<%= form_tag("save_resources", :enctype =>"multipart/form-data") do  %>
+
+ <div class="row ml-1">
+    <div class="field">
+     Track: 
+     <%= select_tag "track", options_from_collection_for_select(tracks, "track", "track")  %>
+   </div>
+</div>
+
+ <div class="row ml-1">
+    <div class="field">
+     Uniqname:
+     <%= select_tag "uniqname", options_from_collection_for_select(chips, "uniqname", "uniqname")  %>
+   </div>
+</div>
+
+ <div class="row ml-1">
+    <div class="field">
+     Number of chips:
+     <%= text_field_tag 'num_chips', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+
+      <div class="actions">
+        <%= hidden_field_tag 'epic', params["epic"] %>
+        <%= hidden_field_tag 'cycle', params["cycle"] %>
+        <%= submit_tag 'Save' %>
+      </div>
+
+     <% 
+       end 
+     %>
+     
+   
+ 
+</div>
+
+  <div class="card-footer"> 
+   
+  </div>
+</div>

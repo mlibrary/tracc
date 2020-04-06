@@ -1,0 +1,2 @@
+class ChipAssignmentController < ApplicationController
+end

@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
   resources :cards do
     collection do
-      get :import, :import_card, :import_complexity, :import_impact, :advance_search, :progress
-      post :update, :progress2, :save_progress
+      get :import, :import_card, :import_complexity, :import_impact, :advance_search, :progress, :resources
+      post :update, :progress2, :save_progress, :resources2, :save_resources, :update_resources, :add_resource
     end
   end
 
@@ -30,8 +30,8 @@ Rails.application.routes.draw do
 
   resources :reports do
     collection do
-      get :index, :charts, :export, :dashboard, :strategic , :tactical_stats, :tactical, :overview, :paused
-      post :generate 
+      get :index, :charts, :export, :cycledashboard , :tactical_stats, :tactical, :overview, :paused
+      post :generate, :dashboard, :strategic 
     end
   end
 

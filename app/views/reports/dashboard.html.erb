@@ -5,37 +5,36 @@
    color3 = "" 
    color4 = ""
     
-  @track_lsp = Track.where("epic_title LIKE 'LSP' ")
-  @track_db = Track.where("epic_title LIKE 'Deep%' ")
-  @track_dcp = Track.where("epic_title LIKE 'Digital%' ")
-  @track_cs = Track.where("epic_title LIKE 'Catalog%' ")
-  @track_ls = Track.where("epic_title LIKE 'Library%' ")
-  @track_f = Track.where("epic_title LIKE 'Fulcrum%' ")
-  @track_w = Track.where("epic_title LIKE 'Website%' ")
-  @track_ht = Track.where("epic_title LIKE 'Hathi%' ")
+ 
+  @track_lsp = Objective.where("card_id= '1' ")
+  @track_cs = Objective.where("card_id= '2'  ")
+  @track_db = Objective.where("card_id= '4'  ")
+  @track_ls = Objective.where("card_id= '3'  ")
+  @track_dcp = Objective.where("card_id= '5'  ")
+  @track_f = Objective.where("card_id= '6'  ")
+  @track_w = Objective.where("card_id= '7'  ")
+  @track_ht = Objective.where("card_id= '8'  ")
   
 %>
 <%#row1 %>
-<h3> LIT STRATEGIC PROJECTS  </h3>
+<h3> FY20:3 (March-June) Library IT STRATEGIC PROJECTS  </h3>
 
  <div class="row" style="padding-top: 20px">
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
 
-    		<h5 >LSP</h5>
+    		<h5 >LSP Migration (Alma)</h5>
     		
   		</div>  
  		<div class="card-body"> 			  
-      <h6 > <strong>Capacity Allocated:</strong> 30%, 2 FTE</h6>
-    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
-         <hr>
+    
          <h6><strong>Progress</strong></h6>
             <%  
               total = 0
               i = 0 
               @track_lsp.all.each do |t| 
-                    track = t.track
+                    track = t.objective
                     tstatus = t.status
                     total+=tstatus
                     i = i+ 1 ;
@@ -67,15 +66,13 @@
     		<h5 >Catalog Search </h5>
   		</div>  
  		<div class="card-body">
- 			  <h6><strong>Capacity Allocated: </strong>30%, 2 FTE</h6>
-    		<p> Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
-        <hr>
+ 			 
        <h6><strong>Progress</strong></h6>
              
               <%  total = 0
                   i = 0
                   @track_cs.all.each do |t| 
-                    track = t.track
+                    track = t.objective
                     tstatus = t.status
                     total+=tstatus
                     i = i+ 1 ;
@@ -107,14 +104,12 @@
     		<h5 >Library Search </h5>
   		</div>  
  		<div class="card-body">
- 			<h6 ><strong>Capacity Allocated: </strong>30%, 2 FTE</h6>
-    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
-        <hr>
+ 			
          <h6><strong>Progress</strong></h6>
          <%  total = 0 
              i = 0 
              @track_ls.all.each do |t| 
-                    track = t.track
+                    track = t.objective
                     tstatus = t.status
                     total+=tstatus
                     i = i+ 1 ;
@@ -149,14 +144,12 @@
     		<h5 >Deep Blue</h5>
   		</div>  
  		<div class="card-body">
- 			<h6><strong> Capacity Allocated:</strong> 30%, 2 FTE</h6>
-    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
-        <hr>
+ 		
          <h6><strong>Progress</strong></h6>
               <%  total = 0 
                   i = 0 
                   @track_db.all.each do |t| 
-                    track = t.track
+                    track = t.objective
                     tstatus = t.status
                      total+=tstatus
                     i = i+ 1 ;
@@ -185,18 +178,16 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Digital Collection Platform: </h5>
+    		<h5 >Digital Collections Platform: </h5>
   		</div>  
  		<div class="card-body">
- 			  <h6 ><strong>Capacity Allocated:</strong> 30%, 2 FTE</h6>
-    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
-        <hr>
+ 			 
         <h6><strong>Progress</strong></h6> 
        
               <%  total = 0 
                   i = 0 
                   @track_dcp.all.each do |t| 
-                    track = t.track
+                    track = t.objective
                     tstatus = t.status
                      total+=tstatus
                     i = i+ 1 ;
@@ -233,14 +224,12 @@
     		<h5>Website Redesign</h5>
   		</div>  
  		<div class="card-body">
- 			<h6 > <strong>Capacity Allocated: </strong>30%, 2 FTE</h6>
-    		<p >  Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>  
-        <hr>
+ 			
          <h6><strong>Progress</strong></h6>
               <%  total = 0 
                   i = 0 
                   @track_w.all.each do |t| 
-                    track = t.track
+                    track = t.objective
                     tstatus = t.status
                      total+=tstatus
                     i = i+ 1 ;
@@ -272,14 +261,12 @@
       </div>  
     <div class="card-body">
         
-<h6 ><strong>Capacity Allocated:</strong> 30%, 2 FTE</h6>
-        <p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
-         <hr>
+
           <h6><strong>Progress</strong></h6>
               <%  total = 0
                   i = 0 
                   @track_f.all.each do |t| 
-                    track = t.track
+                    track = t.objective
                     tstatus = t.status
                      total+=tstatus
                     i = i+ 1 ;
@@ -307,18 +294,16 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>Hathi Trust </h5>
+    		<h5>HathiTrust </h5>
   		</div>  
  		<div class="card-body">
- 			  <h6 ><strong>Capacity Allocated: </strong>30%, 2 FTE</h6>
-    		<p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
-        <hr>
+ 			
          <h6><strong>Progress</strong></h6>
            
               <%  total = 0 
                   i = 0 
                   @track_ht.all.each do |t| 
-                    track = t.track
+                    track = t.objective
                     tstatus = t.status
                      total+=tstatus
                     i = i+ 1 ;

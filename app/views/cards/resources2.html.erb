@@ -1,0 +1,65 @@
+
+<% months = ['March','April','May','June'] %>
+
+<div class="card">
+  <div class="card-header">
+    <h4> <%=params["cycle"]%> Update Resources for: <%=params["epic"]%></h4>
+  </div>  
+<div class="card-body">  
+   <%= form_tag("add_resource", :enctype =>"multipart/form-data") do  %>
+     <%= hidden_field_tag 'epic', params["epic"] %>
+     <%= hidden_field_tag 'cycle', params["cycle"] %>
+     <%= hidden_field_tag 'card_id', @card_one.first.id %>
+     <%= submit_tag 'Add a Resource' %>
+   <% end %>
+  <% cols = @tracks.count 
+  i = 1 
+
+  @tracks.all.each do |t| 
+  %>  
+  <%= form_tag("update_resources", :enctype =>"multipart/form-data") do  %>
+
+   <h5 style="padding-top: 25px">Track: <%=t.track%></h5>
+   <%= hidden_field_tag 'epic', params["epic"] %>
+   <%= hidden_field_tag 'cycle', params["cycle"] %>
+   <%= hidden_field_tag 'track', t.track %>
+   <%= hidden_field_tag 'card_id', @card_one.first.id %>
+   
+   <%   row = 0
+    str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle='" + params["cycle"] +"'" 
+    @chips = ChipAssignment.where(str)
+
+      @chips.all.each do |chip| %>
+      <p>
+      <% if chip.chips != nil 
+           fte = (chip.chips/4.00)
+         else
+           fte = 0 
+         end   %>
+      <%= chip.uniqname %>: <%= fte %> FTE <br> <%= text_field_tag chip.uniqname, value=chip.chips %> chips
+      </p> 
+    
+     <hr>
+     <% 
+      end  
+      %>
+      <div class="actions">
+        <%= submit_tag 'Save' %>
+      </div>
+
+     <% end
+     i = i + 1 
+     end 
+     %>
+     
+   
+ 
+</div>
+
+
+
+</div>
+  <div class="card-footer"> 
+   
+  </div>
+</div>

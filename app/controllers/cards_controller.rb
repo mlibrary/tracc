@@ -113,12 +113,71 @@ class CardsController < ApplicationController
     setup_for_display 
   end
 
+  def resources2
+    cycle= params["cycle"]
+    epic=  params["epic"]
+
+    str = "short_name LIKE '" + epic + "%'"   
+    @card_one = Card.where(str)
+
+    str = "card_id = '" + @card_one.first.id.to_s + "'" 
+    @tracks = Track.where(str) 
+    
+  
+  end
+  
+  def save_resources
+
+     epic=  params["epic"]
+     cycle = params["cycle"]
+     track = params["track"]
+     uniqname = params["uniqname"]
+     chips = params["num_chips"]
+
+     str = "short_name LIKE '" + epic + "%'"   
+     @card_one = Card.where(str)
+
+     a = ChipAssignment.new
+     a.uniqname = uniqname
+     a.trackname = track
+     a.cycle = cycle
+     a.card_id = @card_one.first.id
+     a.chips = chips
+     a.save!
+
+  end
+    
+  def update_resources
+     epic=  params["epic"]
+     cycle = params["cycle"]
+     track = params["track"]
+
+    str = "short_name LIKE '" + epic + "%'"   
+    @card_one = Card.where(str)
+
+
+    str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '"+cycle+"'" 
+    @chips = ChipAssignment.where(str)
+
+     i =0 
+     @chips.all.each do |chip| 
+       chip.chips = params[chip.uniqname] 
+       chip.save!
+       i = i + 1
+
+     end 
+
+
+  end  
+
   def progress2
     cycle= params["cycle"]
     epic=  params["epic"]
-   
-    str = "epic_title LIKE '" + epic + "'"   
-    @track_epic = Track.where(str) 
+
+    str = "short_name LIKE '" + epic + "%'"   
+    one_card = Card.where(str)
+    str = "card_id = '" + one_card.first.id.to_s + "'" 
+    @track_epic = Objective.where(str) 
 
     str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
     @comment = TrackComment.where(str)
@@ -130,12 +189,16 @@ class CardsController < ApplicationController
   end
 
   def save_progress
+    
   #"LSP"=>"20", "epic"=>"LSP", "comment1"=>"one", "comment2"=>"one2", "comment3"=>"one3", "comment4"=>"one4", "commit"=>"Save", "controller"=>"cards", "action"=>"save_progress"} permitted: true>
     epic=  params["epic"]
     cycle = params["cycle"]
 
-    str = "epic_title LIKE '" + epic + "'"   
-    @track_epic = Track.where(str) 
+    #str = "epic_title LIKE '" + epic + "'"  
+    str = "short_name LIKE '" + epic + "%'"   
+    one_card = Card.where(str)
+    str = "card_id = '" + one_card.first.id.to_s + "'"  
+    @track_epic = Objective.where(str) 
     @comment = TrackComment.where(str)
     one = @comment.first
 
@@ -150,7 +213,7 @@ class CardsController < ApplicationController
     one.save!
 
     @track_epic.all.each do |t| 
-      track = t.track
+      track = t.objective
       t.status = params[track]
       t.save!
     end   

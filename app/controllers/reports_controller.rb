@@ -7,6 +7,9 @@ class ReportsController < ApplicationController
   def dashboard
   end
 
+  def cycledashboard
+  end  
+
   def overview
     
   end

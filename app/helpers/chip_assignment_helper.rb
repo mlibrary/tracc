@@ -1,0 +1,2 @@
+module ChipAssignmentHelper
+end

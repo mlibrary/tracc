@@ -1,0 +1,2 @@
+class ChipAssignment < ApplicationRecord
+end
