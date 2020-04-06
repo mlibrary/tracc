@@ -1,18 +1,13 @@
 <%
 
 
-@card_paused = Card.where("activity_type LIKE 'Paused%' ")
-@card_active = Card.where("activity_type LIKE 'Active' ")
-@card_epic = Card.where("activity_type LIKE 'Epic' ")
+@card_paused = Card.where("activity_type LIKE '%Paused%' ")
+@card_active = Card.where("activity_type LIKE '%Active%' ")
+@card_epic = Card.where("activity_type LIKE 'Strategic' ")
 
 %>
 
-
-
-<div class="jumbotron text-center" style="padding-top: 50px;" >
-
-
-  
+<div class="jumbotron text-center" style="padding-top: 50px;" >  
   <p class="lead"> LIT Cycle Management Tool: Track work from intake to close</p>
   <p class="lead">Take - Rate - Assess - Communicate - Close </p>
 
@@ -105,7 +100,7 @@
               url ="catalog/" + id.to_s
               ctype = c.activity_type
         %> 
-         <li class="list-group-item"><%=ctype%>: <a href=<%=url%> ><%= c.title %></a></li>
+         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
             
             <% end %>
         </ul>

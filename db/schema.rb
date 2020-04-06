@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_130214) do
+ActiveRecord::Schema.define(version: 2020_04_05_210526) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -131,6 +131,19 @@ ActiveRecord::Schema.define(version: 2020_03_30_130214) do
     t.datetime "card_since"
     t.datetime "last_update_comment"
     t.datetime "recorded_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chip_assignments", force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "chips"
+    t.string "uniqname"
+    t.string "type"
+    t.string "role"
+    t.string "trackname"
+    t.string "month"
+    t.string "cycle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

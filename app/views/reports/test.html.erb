@@ -1,0 +1,377 @@
+ <div class="container">
+<% color1 = "" #neutral 100
+   color2 = "" #blue-300
+
+   color3 = "" 
+   color4 = ""
+    
+  @o_lsp = Objective.where("card_id= '1' ")
+  @o_cs = Objective.where("card_id= '2'  ")
+  @o_db = Objective.where("card_id= '4'  ")
+  @o_ls = Objective.where("card_id= '3'  ")
+  @o_dcp = Objective.where("card_id= '5'  ")
+  @o_f = Objective.where("card_id= '6'  ")
+  @o_w = Objective.where("card_id= '7'  ")
+  @o_ht = Objective.where("card_id= '8'  ")
+
+
+  @c_lsp = TrackComment.where("card_id= '1' ")
+  @c_cs = TrackComment.where("card_id= '2'  ")
+  @c_db = TrackComment.where("card_id= '4'  ")
+  @c_ls = TrackComment.where("card_id= '3'  ")
+  @c_dcp = TrackComment.where("card_id= '5'  ")
+  @c_f = TrackComment.where("card_id= '6'  ")
+  @c_w = TrackComment.where("card_id= '7'  ")
+  @c_ht = TrackComment.where("card_id= '8'  ")
+   
+ flag = true
+
+%>
+
+<%#row1 %>
+<h3> FY20:3 (March-June) Library IT STRATEGIC PROJECTS - LIT BOARD </h3>
+
+ <div class="row" style="padding-top: 20px">
+   <div class="col-md-12">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+
+    		<h5 >LSP Migration (Alma)</h5>
+    		
+  		</div>  
+ 		<div class="card-body"> 			  
+        <h6 ><strong>Capacity Allocated: </strong>30%, 2 FTE</h6>
+        <p > Name 1: 0.5 FTE, Name 2: 0.25 FTE</p>
+        <hr>
+      <%#<h6 ><strong> Project Lead:</strong></h6> 
+      <p>Jon Rothman</p>%>
+
+      <h6 ><strong> Objectives:</strong></h6>
+    	<% cnt = 0
+         one = @c_lsp.first
+         @o_lsp.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      
+       <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+      <%end%>
+      <% if (flag) %>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%>  
+      
+ 		</div>  		 
+  		</div>
+    </div>
+    </div>
+
+     <div class="row" style="padding-top: 20px">
+       <div class="col-md-12">
+    	<div class="card" style="background: <%=color3 %>">
+  		<div class="card-header" style="background: <%= color4 %>">
+    		<h5 >Catalog Search </h5>
+  		</div>  
+ 		<div class="card-body">
+ 		<%#	<h6 ><strong> Project Lead:</strong></h6>
+      <p>John Weise</p> %>
+      <h6 ><strong> Objectives:</strong></h6>
+      <% cnt = 0
+         one = @c_cs.first 
+         @o_cs.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+       <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+      <%end%>
+        <% if (flag) %>
+        <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
+ 		</div>  		 
+  		</div>
+    </div>  
+    </div>
+
+    <div class="row" style="padding-top: 20px">
+       <div class="col-md-12">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Library Search </h5>
+  		</div>  
+ 		<div class="card-body">
+ 		<%#	<h6 ><strong> Project Lead:</strong></h6>
+      <p></p> %>
+      <h6 ><strong> Objectives:</strong></h6>
+      <% cnt = 0
+         one = @c_ls.first
+         @o_ls.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+       <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+      <%end%>
+        
+          <% if (flag) %>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
+   
+        </div>  		 
+  		</div>
+    </div>
+  </div>
+
+  <%# row2 %>
+
+  <div class="row" style="padding-top: 20px">
+       <div class="col-md-12">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Deep Blue</h5>
+  		</div>  
+ 		<div class="card-body">
+ 		<%#	<h6 ><strong> Project Lead:</strong></h6>
+      <p>Nabeela Jaffer</p> %>
+      <h6 ><strong> Objectives:</strong></h6>
+      <% cnt = 0
+         one = @c_db.first
+         @o_db.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+        <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+
+      
+      <%end%>
+          <% if (flag) %>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
+   
+ 		</div>  		 
+  		</div>
+    </div>
+  </div>
+
+     <div class="row" style="padding-top: 20px">
+       <div class="col-md-12">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5 >Digital Collections Platform </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			<%#<h6 ><strong> Project Lead:</strong></h6>
+      <p>Kat Hagedorn</p> %>
+      <h6 ><strong> Objectives:</strong></h6>
+      <% cnt = 0
+         one = @c_dcp.first
+         @o_dcp.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+      <%end%>
+          <% if (flag) %>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
+      </div>
+        	</div>  		 
+  		</div>
+    </div>
+
+     <div class="row" style="padding-top: 20px">
+       <div class="col-md-12">
+    	<div class="card" style="background: <%=color1 %>">
+  		<div class="card-header" style="background: <%= color2 %>">
+    		<h5>Fulcrum </h5>
+  		</div>  
+ 		<div class="card-body">
+ 			<%#<h6 ><strong> Project Lead:</strong></h6>
+      <p>Jeremy Morse</p> %>
+      <h6 ><strong> Objectives:</strong></h6>
+      <% cnt = 0
+         one = @c_f.first
+         @o_f.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+      <%end%>
+      <% if (flag) %>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
+          </div>
+        </div>
+		 </div>
+  		</div>
+    
+ <%# row 3%>
+
+  <div class="row" style="padding-top: 20px">
+     <div class="col-md-12">
+    <div class="card" style="background: <%=color1 %>">
+      <div class="card-header" style="background: <%= color2 %>">
+        <h5>Website Redesign</h5>
+      </div>  
+    <div class="card-body">
+      <%#<h6 ><strong> Project Lead:</strong></h6>
+      <p>Heidi Burkhardt</p>%>
+      <h6 ><strong> Objectives:</strong></h6>
+      <% cnt = 0
+         one = @c_w.first
+         @o_w.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+      <%end%>
+         <% if (flag) %>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
+        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
+        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
+        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+      <%end%> 
+     </div>   
+    </div>       
+      </div>
+    </div>
+
+  <div class="row" style="padding-top: 20px">
+     <div class="col-md-12">
+      <div class="card" style="background: <%=color1 %>">
+      <div class="card-header" style="background: <%= color2 %>">
+        <h5>HathiTrust </h5>
+      </div>  
+    <div class="card-body">
+      <p>LIT supports technical objectives that align to the <a href="https://www.hathitrust.org/charting-hathitrusts-strategic-directions"><u>HathiTrust strategic plan</u></a>, which are presently tracked in a separate document.</p>
+     <%# <h6 ><strong> Project Lead:</strong></h6>
+      <p>Aaron Elkiss</p> %>
+      <h6 ><strong> Objectives:</strong></h6>
+      <% cnt = 0
+         one = @c_ht.first
+         @o_ht.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>
+        
+       <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+      <%end%>
+         
+      </div>
+    </div>       
+      </div>
+    </div>
+
+   
+  
+  
+</div>

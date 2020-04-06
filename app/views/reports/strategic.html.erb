@@ -5,293 +5,124 @@
    color3 = "" 
    color4 = ""
     
-  @o_lsp = Objective.where("card_id= '99' ")
-  @o_cs = Objective.where("card_id= '100'  ")
-  @o_db = Objective.where("card_id= '102'  ")
-  @o_ls = Objective.where("card_id= '101'  ")
-  @o_dcp = Objective.where("card_id= '103'  ")
-  @o_f = Objective.where("card_id= '104'  ")
-  @o_w = Objective.where("card_id= '105'  ")
-  @o_ht = Objective.where("card_id= '106'  ")
+
+  @slist = Card.where("activity_type LIKE 'Strategic'")
+     
+  total_chips = Chip.sum(:project) *1.00
+
+  cycle = params["cycle"]
+ flag = true
 
 
-  @c_lsp = TrackComment.where("card_id= '99' ")
-  @c_cs = TrackComment.where("card_id= '100'  ")
-  @c_db = TrackComment.where("card_id= '102'  ")
-  @c_ls = TrackComment.where("card_id= '101'  ")
-  @c_dcp = TrackComment.where("card_id= '103'  ")
-  @c_f = TrackComment.where("card_id= '104'  ")
-  @c_w = TrackComment.where("card_id= '105'  ")
-  @c_ht = TrackComment.where("card_id= '106'  ")
-   
- flag = false
+#cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
 
 %>
-<%#row1 %>
-<h3> FY20:3 Library IT STRATEGIC PROJECTS </h3>
 
+<%#row1 %>
+<h3> <%=cycle%> Library IT STRATEGIC PROJECTS - LIT BOARD </h3>
+
+<% @slist.all.each do |strategic| 
+ card_id = strategic.id 
+ str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+ @ch_st = ChipAssignment.where(str)
+ @o_st = Objective.where(str) 
+ @c_st = TrackComment.where(str)
+
+ 
+%>
  <div class="row" style="padding-top: 20px">
-    <div class="col-md">
+   <div class="col-md-12">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
 
-    		<h5 >LSP Migration(Alma)</h5>
+    		<h5 ><%= strategic.title %></h5>
     		
   		</div>  
  		<div class="card-body"> 			  
+        <h6 ><strong>Capacity Allocated: </strong></h6>
+        <% 
+          total = 0 
+          @ch_st.all.each do |ch| %>
+        
+          <% 
+          if (ch.chips !=nil) 
+              fte = ch.chips/4.00
+              total = total + ch.chips
+             else
+              fte = 0 
+             end 
+
+             if (fte >0)
+              chipname = Chip.where("uniqname LIKE '"+ch.uniqname+"'")
+
+          %>
+            <p> <%= chipname.first.fname %> <%= chipname.first.lname %> (<%= ch.uniqname %>) : 
+                <%= fte %> FTE
+            </p>
+           <% end %> 
+        <% end %>
+        <strong>Total: <% totalp = (total/total_chips).ceil %> <% totalfte = total/4.00 %> <%= totalp %>%, <%= totalfte %>FTE  </strong>
+        <hr>
       <%#<h6 ><strong> Project Lead:</strong></h6> 
       <p>Jon Rothman</p>%>
+
       <h6 ><strong> Objectives:</strong></h6>
     	<% cnt = 0
-         one = @c_lsp.first
-         @o_lsp.all.each do |o| 
+         total = 0 
+         one = @c_st.first
+
+         @o_st.all.each do |o| 
             obj = o.objective
             ostatus = o.status
             cnt = cnt+1
+            if (ostatus != nil)
+              total+=ostatus
+            end
       %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
-      <%end%>
-      <% if (flag) %>
-         <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%>  
-      <p style="padding-top: 35px"></p>
- 		</div>  		 
-  		</div>
-
-    </div>
-
-    <div class="col-md">
-    	<div class="card" style="background: <%=color3 %>">
-  		<div class="card-header" style="background: <%= color4 %>">
-    		<h5 >Catalog Search </h5>
-  		</div>  
- 		<div class="card-body">
- 		<%#	<h6 ><strong> Project Lead:</strong></h6>
-      <p>John Weise</p> %>
-      <h6 ><strong> Objectives:</strong></h6>
-      <% cnt = 0
-         one = @c_cs.first 
-         @o_cs.all.each do |o| 
-            obj = o.objective
-            ostatus = o.status
-            cnt = cnt+1
-      %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
-      <%end%>
-        <% if (flag) %>
-        <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%> 
- 		</div>  		 
-  		</div>
-    </div>
-
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Library Search </h5>
-  		</div>  
- 		<div class="card-body">
- 		<%#	<h6 ><strong> Project Lead:</strong></h6>
-      <p></p> %>
-      <h6 ><strong> Objectives:</strong></h6>
-      <% cnt = 0
-         one = @c_ls.first
-         @o_ls.all.each do |o| 
-            obj = o.objective
-            ostatus = o.status
-            cnt = cnt+1
-      %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
-      <%end%>
-        
-          <% if (flag) %>
-         <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%> 
-      <p style="padding-top: 20px"></p>
-        </div>  		 
-  		</div>
-    </div>
-  </div>
-
-  <%# row2 %>
-
-  <div class="row" style="padding-top: 20px">
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Deep Blue</h5>
-  		</div>  
- 		<div class="card-body">
- 		<%#	<h6 ><strong> Project Lead:</strong></h6>
-      <p>Nabeela Jaffer</p> %>
-      <h6 ><strong> Objectives:</strong></h6>
-      <% cnt = 0
-         one = @c_db.first
-         @o_db.all.each do |o| 
-            obj = o.objective
-            ostatus = o.status
-            cnt = cnt+1
-      %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
-      <%end%>
-          <% if (flag) %>
-         <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%> 
-      <p style="padding-top: 20px"></p>
- 		</div>  		 
-  		</div>
-    </div>
-
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Digital Collection Platform: </h5>
-  		</div>  
- 		<div class="card-body">
- 			<%#<h6 ><strong> Project Lead:</strong></h6>
-      <p>Kat Hagedorn</p> %>
-      <h6 ><strong> Objectives:</strong></h6>
-      <% cnt = 0
-         one = @c_dcp.first
-         @o_dcp.all.each do |o| 
-            obj = o.objective
-            ostatus = o.status
-            cnt = cnt+1
-      %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
-      <%end%>
-          <% if (flag) %>
-         <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%> 
-<p style="padding-top: 20px"></p>
-        	</div>  		 
-  		</div>
-    </div>
-
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>Fulcrum </h5>
-  		</div>  
- 		<div class="card-body">
- 			<%#<h6 ><strong> Project Lead:</strong></h6>
-      <p>Jeremy Morse</p> %>
-      <h6 ><strong> Objectives:</strong></h6>
-      <% cnt = 0
-         one = @c_f.first
-         @o_f.all.each do |o| 
-            obj = o.objective
-            ostatus = o.status
-            cnt = cnt+1
-      %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
-      <%end%>
-      <% if (flag) %>
-         <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%> 
-
-
+      
+       <div class="row">
+        <div class="col-md-6">
+        <p><%=cnt.to_s %>. <%= obj%></p>
+       </div>
+        <div class="col-md-6">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
           </div>
         </div>
-		 
+       </div></div>
+      <%end%>
+       <hr> 
+       <% 
+          if (cnt>0) 
+            completed = total/cnt
+            left = 100 - completed 
+          else
+            completed = 0
+            left = 0 
+          end    
+          %>
+
+             <h6><strong>Project Status</strong></h6>
+             <p>Completed: <%=completed%>%</p>
+             <p>Left to do: <%=left%>%</p>
+
+      <% if (flag) %>
+         <hr>
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><% if one != nil %><%=one.comment1%><% end %></p>
+        <p><strong>April 2020:</strong><br><% if one != nil %><%=one.comment2%><% end %></p>
+        <p><strong>May 2020:</strong><br><% if one != nil %><%=one.comment3%><% end %></p>
+        <p><strong>June 2020:</strong><br><% if one != nil %><%=one.comment4%><% end %></p>
+      <%end%>  
+      
+ 		</div>  		 
   		</div>
     </div>
- <%# row 3%>
-
-  <div class="row" style="padding-top: 20px">
-    <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5>Website Redesign</h5>
-      </div>  
-    <div class="card-body">
-      <%#<h6 ><strong> Project Lead:</strong></h6>
-      <p>Heidi Burkhardt</p>%>
-      <h6 ><strong> Objectives:</strong></h6>
-      <% cnt = 0
-         one = @c_w.first
-         @o_w.all.each do |o| 
-            obj = o.objective
-            ostatus = o.status
-            cnt = cnt+1
-      %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
-      <%end%>
-         <% if (flag) %>
-         <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%> 
-        <p style="padding-top: 25px"></p>
-    </div>       
-      </div>
     </div>
+<% end %>
 
-    <div class="col-md">
-      <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5>Hathi Trust </h5>
-      </div>  
-    <div class="card-body">
-     <%# <h6 ><strong> Project Lead:</strong></h6>
-      <p>Aaron Elkiss</p>%>
-      <h6 ><strong> Objectives:</strong></h6>
-      <% cnt = 0
-         one = @c_ht.first
-         @o_ht.all.each do |o| 
-            obj = o.objective
-            ostatus = o.status
-            cnt = cnt+1
-      %>  
-      <p><%=cnt.to_s %>. <%= obj%></p>
-      <%end%>
-         <% if (flag) %>
-         <hr>
-        <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
-      <%end%> 
-      
-    </div>       
-      </div>
-    </div>
 
-    <div class="col-md"></div>
-  </div>
+   
+  
   
 </div>

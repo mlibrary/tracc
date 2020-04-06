@@ -7,17 +7,12 @@
     <h4> <%=params["cycle"]%> Update Progress for: <%=params["epic"]%></h4>
   </div>  
 <div class="card-body">  
-
- 
-<h6> Track Progress:</h6>
-
-  
-
+<h5><b>Objectives:</b></h5>
  <% 
    one = @comment.first
 
    @track_epic.all.each do |t| 
-      track = t.track
+      track = t.objective
       tstatus = t.status
  %>  
   <div class="row ml-1">
@@ -28,7 +23,7 @@
   </div>
   <%end %> 
  
-<h6>Comments:</h6>
+<h5><b>Comments:</b></h5>
 <%= hidden_field_tag 'epic', params["epic"] %>
 <%= hidden_field_tag 'cycle', params["cycle"] %>
 

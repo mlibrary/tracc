@@ -20,8 +20,8 @@ Objective.create(card_id:'3',objective: 'UI/UX Design (partially shared with CS)
 Objective.create(card_id:'3',objective: 'Evaluation of User Satisfaction', cycle: 'FY20:3',status: 0)
 
 Objective.create(card_id:'4',objective: 'Upgrade Dspace to 6.3',cycle: 'FY20:3', status: 0)
-Objective.create(card_id:'4',objective: 'Bring Custom features from Fulcrum to Deep Blue Data as appropriate',cycle: 'FY20:3', status: 0)
-Objective.create(card_id:'4',objective: 'Develop a vision for sharing with the community to gauge interest and find potential community partners',cycle: 'FY20:3', status: 0)
+Objective.create(card_id:'4',objective: 'Implement Custom features from Fulcrum to Deep Blue Data as appropriate',cycle: 'FY20:3', status: 0)
+Objective.create(card_id:'4',objective: 'Chimera: Develop a vision for sharing with the community to gauge interest and find potential community partners',cycle: 'FY20:3', status: 0)
 Objective.create(card_id:'4',objective: 'Develop a plan for providing unified user experience for Deep Blues',cycle: 'FY20:3', status: 0)
 
 Objective.create(card_id:'5',objective: 'Develop a vision statement & strategic plan for the Digtial Collection Platform and launch the initiative.',cycle: 'FY20:3', status: 0)
