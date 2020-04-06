@@ -11,14 +11,15 @@
   total_chips = Chip.sum(:project) *1.00
 
   cycle = params["cycle"]
- flag = false 
+ flag = true
 
 
+#cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
 
 %>
 
 <%#row1 %>
-<h3> <%=cycle%> (March-June) Library IT STRATEGIC PROJECTS - LIT BOARD </h3>
+<h3> <%=cycle%> Library IT STRATEGIC PROJECTS - LIT BOARD </h3>
 
 <% @slist.all.each do |strategic| 
  card_id = strategic.id 
@@ -26,6 +27,7 @@
  @ch_st = ChipAssignment.where(str)
  @o_st = Objective.where(str) 
  @c_st = TrackComment.where(str)
+
  
 %>
  <div class="row" style="padding-top: 20px">
@@ -66,13 +68,16 @@
 
       <h6 ><strong> Objectives:</strong></h6>
     	<% cnt = 0
-         
+         total = 0 
          one = @c_st.first
 
          @o_st.all.each do |o| 
             obj = o.objective
             ostatus = o.status
             cnt = cnt+1
+            if (ostatus != nil)
+              total+=ostatus
+            end
       %>  
       
        <div class="row">
@@ -86,13 +91,28 @@
         </div>
        </div></div>
       <%end%>
+       <hr> 
+       <% 
+          if (cnt>0) 
+            completed = total/cnt
+            left = 100 - completed 
+          else
+            completed = 0
+            left = 0 
+          end    
+          %>
+
+             <h6><strong>Project Status</strong></h6>
+             <p>Completed: <%=completed%>%</p>
+             <p>Left to do: <%=left%>%</p>
+
       <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><%=one.comment1%></p>
-        <p><strong>April 2020:</strong><br><%=one.comment2%></p>
-        <p><strong>May 2020:</strong><br><%=one.comment3%></p>
-        <p><strong>June 2020:</strong><br><%=one.comment4%></p>
+        <p><strong>March 2020:</strong><br><% if one != nil %><%=one.comment1%><% end %></p>
+        <p><strong>April 2020:</strong><br><% if one != nil %><%=one.comment2%><% end %></p>
+        <p><strong>May 2020:</strong><br><% if one != nil %><%=one.comment3%><% end %></p>
+        <p><strong>June 2020:</strong><br><% if one != nil %><%=one.comment4%><% end %></p>
       <%end%>  
       
  		</div>  		 

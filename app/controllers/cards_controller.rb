@@ -197,13 +197,14 @@ class CardsController < ApplicationController
     #str = "epic_title LIKE '" + epic + "'"  
     str = "short_name LIKE '" + epic + "%'"   
     one_card = Card.where(str)
-    str = "card_id = '" + one_card.first.id.to_s + "'"  
+    str = "card_id = '" + one_card.first.id.to_s + "' AND cycle LIKE '"+cycle+"'"  
     @track_epic = Objective.where(str) 
     @comment = TrackComment.where(str)
     one = @comment.first
 
     if (one==nil)
-
+     one = TrackComment.new
+     one.card_id = one_card.first.id.to_s
     end  
     one.comment1 = params["comment1"]
     one.comment2 = params["comment2"]

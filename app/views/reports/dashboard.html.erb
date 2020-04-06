@@ -5,19 +5,20 @@
    color3 = "" 
    color4 = ""
     
- 
-  @track_lsp = Objective.where("card_id= '1' ")
-  @track_cs = Objective.where("card_id= '2'  ")
-  @track_db = Objective.where("card_id= '4'  ")
-  @track_ls = Objective.where("card_id= '3'  ")
-  @track_dcp = Objective.where("card_id= '5'  ")
-  @track_f = Objective.where("card_id= '6'  ")
-  @track_w = Objective.where("card_id= '7'  ")
-  @track_ht = Objective.where("card_id= '8'  ")
+  cycle = params["cycle"]
+
+  @track_lsp = Objective.where("card_id= '1' AND cycle LIKE '"+cycle+"'")
+  @track_cs = Objective.where("card_id= '2'  AND cycle LIKE '"+cycle+"'")
+  @track_db = Objective.where("card_id= '4'  AND cycle LIKE '"+cycle+"'")
+  @track_ls = Objective.where("card_id= '3'  AND cycle LIKE '"+cycle+"'")
+  @track_dcp = Objective.where("card_id= '5' AND cycle LIKE '"+cycle+"'")
+  @track_f = Objective.where("card_id= '6'   AND cycle LIKE '"+cycle+"'")
+  @track_w = Objective.where("card_id= '7'  AND cycle LIKE '"+cycle+"'")
+  @track_ht = Objective.where("card_id= '8' AND cycle LIKE '"+cycle+"'")
   
 %>
 <%#row1 %>
-<h3> FY20:3 (March-June) Library IT STRATEGIC PROJECTS  </h3>
+<h3>  <%=cycle%> Library IT STRATEGIC PROJECTS  </h3>
 
  <div class="row" style="padding-top: 20px">
     <div class="col-md">
@@ -36,7 +37,9 @@
               @track_lsp.all.each do |t| 
                     track = t.objective
                     tstatus = t.status
-                    total+=tstatus
+                    if (tstatus != nil)
+                      total+=tstatus
+                    end  
                     i = i+ 1 ;
             %>     
           <p><%=track%>
@@ -47,9 +50,10 @@
           </p>
           <% end %>
           <%
-            i = i
+             if (i>0)
             completed = total/i
             left = 100 - completed 
+          end
           %>
           <hr> 
              <h6><strong>Status</strong></h6>
@@ -74,7 +78,9 @@
                   @track_cs.all.each do |t| 
                     track = t.objective
                     tstatus = t.status
-                    total+=tstatus
+                    if (tstatus != nil)
+                     total+=tstatus
+                    end 
                     i = i+ 1 ;
                %>     
                <p>
@@ -86,9 +92,10 @@
               </p>
               <% end %>
               <%
-            i = i
-            completed = total/i
-            left = 100 - completed 
+            if (i>0)
+              completed = total/i
+              left = 100 - completed 
+            end
           %>
           <hr> 
              <h6><strong>Status</strong></h6>
@@ -111,7 +118,9 @@
              @track_ls.all.each do |t| 
                     track = t.objective
                     tstatus = t.status
-                    total+=tstatus
+                    if (tstatus != nil)
+                      total+=tstatus
+                    end  
                     i = i+ 1 ;
                %>     
           <p><%=track %> 
@@ -122,9 +131,10 @@
             </p>
           <% end %>
           <%
-            i = i
+             if (i>0)
             completed = total/i
             left = 100 - completed 
+          end
           %>
           <hr> 
              <h6><strong>Status</strong></h6>
@@ -150,8 +160,11 @@
                   i = 0 
                   @track_db.all.each do |t| 
                     track = t.objective
-                    tstatus = t.status
+                    
+                     tstatus = t.status
+                     if (tstatus != nil)
                      total+=tstatus
+                    end
                     i = i+ 1 ;
                %>     
               <p><%=track%>
@@ -162,9 +175,10 @@
             </p>
               <% end %>
                <%
-            i = i
+             if (i>0)
             completed = total/i
             left = 100 - completed 
+          end
           %>
           <hr> 
              <h6><strong>Status</strong></h6>
@@ -189,7 +203,9 @@
                   @track_dcp.all.each do |t| 
                     track = t.objective
                     tstatus = t.status
+                    if (tstatus != nil)
                      total+=tstatus
+                    end 
                     i = i+ 1 ;
                %>     
              <p><%=track%>
@@ -200,9 +216,10 @@
            </p>
               <% end %>
           <%
-            i = i
+             if (i>0)
             completed = total/i
             left = 100 - completed 
+          end
           %>
           <hr> 
              <h6><strong>Status</strong></h6>
@@ -231,7 +248,9 @@
                   @track_w.all.each do |t| 
                     track = t.objective
                     tstatus = t.status
+                    if (tstatus != nil)
                      total+=tstatus
+                    end 
                     i = i+ 1 ;
                %>     
               <p><%=track%>
@@ -242,9 +261,10 @@
               </p>
               <% end %>
         <%
-            i = i
+             if (i>0)
             completed = total/i
             left = 100 - completed 
+          end
           %>
           <hr> 
              <h6><strong>Status</strong></h6>
@@ -268,7 +288,9 @@
                   @track_f.all.each do |t| 
                     track = t.objective
                     tstatus = t.status
+                    if (tstatus != nil)
                      total+=tstatus
+                    end 
                     i = i+ 1 ;
                %>     
              <p><%=track%>
@@ -279,9 +301,10 @@
              </p>
               <% end %>
             <%
-            i = i
+             if (i>0)
             completed = total/i
             left = 100 - completed 
+          end
           %>
           <hr> 
              <h6><strong>Status</strong></h6>
@@ -305,7 +328,9 @@
                   @track_ht.all.each do |t| 
                     track = t.objective
                     tstatus = t.status
+                    if (tstatus != nil)
                      total+=tstatus
+                    end 
                     i = i+ 1 ;
                %>     
               <p><%=track%>
@@ -316,9 +341,10 @@
               </p>
               <% end %>
           <%
-            i = i
+             if (i>0)
             completed = total/i
             left = 100 - completed 
+          end
           %>
           <hr> 
              <h6><strong>Status</strong></h6>
