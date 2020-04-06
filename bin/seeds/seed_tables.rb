@@ -33,12 +33,12 @@ Rationale.create(rationale: 'Lack of Resources') ;
 Rationale.create(rationale: 'Scope Altered') ;
 Rationale.create(rationale: 'Other') ;
 
-Cycle.create(cycle_name:'FY20:1',start:'July 2019',end:'Oct 2019',current_cycle:0)
-Cycle.create(cycle_name:'FY20:2',start:'Nov 2019',end:'Feb 2020',current_cycle:0)
-Cycle.create(cycle_name:'FY20:3',start:'Mar 2020',end:'Jun 2020',current_cycle:1)
-Cycle.create(cycle_name:'FY21:1',start:'July 2020',end:'Oct 2020',current_cycle:0)
-Cycle.create(cycle_name:'FY21:2',start:'Nov 2020',end:'Feb 2021',current_cycle:0)
-Cycle.create(cycle_name:'FY21:3',start:'Mar 2021',end:'Jun 2021',current_cycle:0)
-Cycle.create(cycle_name:'FY22:1',start:'July 2021',end:'Oct 2021',current_cycle:0)
-Cycle.create(cycle_name:'FY22:2',start:'Nov 2021',end:'Feb 2022',current_cycle:0)
-Cycle.create(cycle_name:'FY22:3',start:'Mar 2022',end:'Jun 2022',current_cycle:0)
+Cycle.create(cycle_name:'FY20:1',start:'2019-07-01',end:'',current_cycle:0)
+Cycle.create(cycle_name:'FY20:2',start:'2019-11-01',end:'',current_cycle:0)
+Cycle.create(cycle_name:'FY20:3',start:'2020-03-01',end:'',current_cycle:1)
+Cycle.create(cycle_name:'FY21:1',start:'2020-07-01',end:'',current_cycle:0)
+Cycle.create(cycle_name:'FY21:2',start:'2020-11-01',end:'',current_cycle:0)
+Cycle.create(cycle_name:'FY21:3',start:'2021-03-01',end:'',current_cycle:0)
+Cycle.create(cycle_name:'FY22:1',start:'2021-07-01',end:'',current_cycle:0)
+Cycle.create(cycle_name:'FY22:2',start:'2021-11-01',end:'',current_cycle:0)
+Cycle.create(cycle_name:'FY22:3',start:'2022-03-01',end:'',current_cycle:0)
