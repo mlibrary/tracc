@@ -13,13 +13,24 @@
   cycle = params["cycle"]
  flag = true
 
-
-#cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
-
+nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
+cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+s = cur_cycle.first.start.month
+stmonth = ""
+endmonth = ""
+if (s != nil)
+  stmonth = nameofmonths[s]
+  if s<=8
+    s = s +3
+  else
+    s = s+3 -12 
+  end  
+  endmonth = nameofmonths[s]
+end 
 %>
 
 <%#row1 %>
-<h3> <%=cycle%> Library IT STRATEGIC PROJECTS - LIT BOARD </h3>
+<h3> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT STRATEGIC PROJECTS - LIT BOARD </h3>
 
 <% @slist.all.each do |strategic| 
  card_id = strategic.id 

@@ -7,6 +7,22 @@
     
   cycle = params["cycle"]
 
+  nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
+  cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+  s = cur_cycle.first.start.month
+  stmonth = ""
+  endmonth = ""
+  if (s != nil)
+    stmonth = nameofmonths[s]
+    if s<=8
+      s = s +3
+    else
+      s = s+3 -12 
+    end  
+   endmonth = nameofmonths[s]
+  end 
+
+
   @track_lsp = Objective.where("card_id= '1' AND cycle LIKE '"+cycle+"'")
   @track_cs = Objective.where("card_id= '2'  AND cycle LIKE '"+cycle+"'")
   @track_db = Objective.where("card_id= '4'  AND cycle LIKE '"+cycle+"'")
@@ -18,7 +34,7 @@
   
 %>
 <%#row1 %>
-<h3>  <%=cycle%> Library IT STRATEGIC PROJECTS  </h3>
+<h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT STRATEGIC PROJECTS  </h3>
 
  <div class="row" style="padding-top: 20px">
     <div class="col-md">
