@@ -18,6 +18,7 @@ cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
 s = cur_cycle.first.start.month
 stmonth = ""
 endmonth = ""
+
 if (s != nil)
   stmonth = nameofmonths[s]
   if s<=8
@@ -27,6 +28,25 @@ if (s != nil)
   end  
   endmonth = nameofmonths[s]
 end 
+
+s = cur_cycle.first.start.month
+
+months = ['','','','','']
+i = 1
+while (i<=4) do
+  months[i] = nameofmonths[s]
+  i = i + 1
+  s = s+1 
+  if (s>12)
+    s= 1
+  end
+end 
+
+
+
+
+
+
 %>
 
 <%#row1 %>
@@ -35,8 +55,19 @@ end
 <% @slist.all.each do |strategic| 
  card_id = strategic.id 
  str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
- @ch_st = ChipAssignment.where(str)
+ 
+ total = 0 
+ cnt = 0
  @o_st = Objective.where(str) 
+
+  @o_st.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total = total/cnt      
  @c_st = TrackComment.where(str)
 
  
@@ -46,13 +77,25 @@ end
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
 
-    		<h5 ><%= strategic.title %></h5>
+    		<h5 ><%= strategic.title %> </h5><p>Cycle Progress: <%= total%>%</p>
     		
   		</div>  
  		<div class="card-body"> 			  
         <h6 ><strong>Capacity Allocated: </strong></h6>
+        <div class = "row">
+        <% 
+           cols = 0
+           while (cols <4) do
+            cols = cols+1 
+            month = months[cols] 
+         %>    
+          <div class="col-md-3">
+           <p> <strong><%=month %></strong></p>
         <% 
           total = 0 
+        
+          str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "' AND month LIKE '"+month + "'"
+          @ch_st = ChipAssignment.where(str)
           @ch_st.all.each do |ch| %>
         
           <% 
@@ -67,28 +110,28 @@ end
               chipname = Chip.where("uniqname LIKE '"+ch.uniqname+"'")
 
           %>
-            <p> <%= chipname.first.fname %> <%= chipname.first.lname %> (<%= ch.uniqname %>) : 
+            <p> <%= chipname.first.fname %> <%= chipname.first.lname %> : 
                 <%= fte %> FTE
             </p>
            <% end %> 
         <% end %>
-        <strong>Total: <% totalp = (total/total_chips).ceil %> <% totalfte = total/4.00 %> <%= totalp %>%, <%= totalfte %>FTE  </strong>
+        <strong>Total: <% totalp = (total/total_chips).ceil %> <% totalfte = total/4.00 %> <%= totalp %>%, <%= totalfte %> FTE  </strong>
+      </div>
+      <% end %>
+    </div>
         <hr>
       <%#<h6 ><strong> Project Lead:</strong></h6> 
       <p>Jon Rothman</p>%>
 
       <h6 ><strong> Objectives:</strong></h6>
     	<% cnt = 0
-         total = 0 
+        
          one = @c_st.first
 
          @o_st.all.each do |o| 
             obj = o.objective
             ostatus = o.status
             cnt = cnt+1
-            if (ostatus != nil)
-              total+=ostatus
-            end
       %>  
       
        <div class="row">
@@ -103,20 +146,9 @@ end
        </div></div>
       <%end%>
        <hr> 
-       <% 
-          if (cnt>0) 
-            completed = total/cnt
-            left = 100 - completed 
-          else
-            completed = 0
-            left = 0 
-          end    
-          %>
+   
 
-             <h6><strong>Project Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
-
+            
       <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>

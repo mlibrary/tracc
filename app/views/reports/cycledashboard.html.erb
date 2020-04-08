@@ -2,6 +2,7 @@
 
    
 <% cname = Cycle.all %>
+<% cur_cycle = Cycle.where("current_cycle =1") %>
 
 <div class="row" style="padding-top: 20px">
  <div class="col-md-6">
@@ -15,7 +16,7 @@
   <div class="row ml-1">
     <div class="field">
      <%= label_tag :cycle %>
-     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name")  %> 
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
    </div>
  </div>
  </div>
@@ -39,7 +40,7 @@
   <div class="row ml-1">
     <div class="field">
      <%= label_tag :cycle %>
-     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name")  %> 
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
    </div>
  </div>
  </div>
