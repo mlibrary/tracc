@@ -131,19 +131,67 @@ class CardsController < ApplicationController
      epic=  params["epic"]
      cycle = params["cycle"]
      track = params["track"]
-     uniqname = params["uniqname"]
-     chips = params["num_chips"]
+     uniqname1 = params["uniqname1"]
+     uniqname2 = params["uniqname2"]
+     uniqname3 = params["uniqname3"]
+     uniqname4 = params["uniqname4"]
+
+     chips1 = params["num_chips1"]
+     chips2 = params["num_chips2"]
+     chips3 = params["num_chips3"]
+     chips4 = params["num_chips4"]
+
+     month1 = params["month1"]
+     month2 = params["month2"]
+     month3 = params["month3"]
+     month4 = params["month4"]
+
 
      str = "short_name LIKE '" + epic + "%'"   
      @card_one = Card.where(str)
-
-     a = ChipAssignment.new
-     a.uniqname = uniqname
-     a.trackname = track
-     a.cycle = cycle
-     a.card_id = @card_one.first.id
-     a.chips = chips
-     a.save!
+   i =1 
+   while (i<=4) do
+    
+     
+     if (i==1 && month1.length >2 && uniqname1.length >2)
+       a = ChipAssignment.new
+       a.uniqname = uniqname1
+       a.chips = chips1
+       a.month = month1 
+       a.trackname = track
+       a.cycle = cycle
+       a.card_id = @card_one.first.id   
+       a.save!
+     elsif (i==2 && month2.length >2 && uniqname2.length >2)
+       a = ChipAssignment.new
+       a.uniqname = uniqname2
+       a.chips = chips2
+       a.month = month2 
+       a.trackname = track
+       a.cycle = cycle
+       a.card_id = @card_one.first.id   
+       a.save!
+     elsif (i==3 && month3.length >2 && uniqname3.length >2)
+       a = ChipAssignment.new
+       a.uniqname = uniqname3
+       a.chips = chips3
+       a.month = month3 
+       a.trackname = track
+       a.cycle = cycle
+       a.card_id = @card_one.first.id   
+       a.save!
+     elsif (month4.length >2 && uniqname4.length >2)
+       a = ChipAssignment.new
+       a.uniqname = uniqname4  
+       a.chips = chips4
+       a.month = month4 
+       a.trackname = track
+       a.cycle = cycle
+       a.card_id = @card_one.first.id   
+       a.save!
+     end                
+     i = i + 1
+   end
 
   end
     

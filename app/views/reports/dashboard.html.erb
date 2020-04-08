@@ -31,6 +31,95 @@
   @track_f = Objective.where("card_id= '6'   AND cycle LIKE '"+cycle+"'")
   @track_w = Objective.where("card_id= '7'  AND cycle LIKE '"+cycle+"'")
   @track_ht = Objective.where("card_id= '8' AND cycle LIKE '"+cycle+"'")
+
+
+ total = 0 
+ cnt = 0
+  @track_lsp.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total_lsp = total/cnt 
+
+  total = 0 
+ cnt = 0
+  @track_cs.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total_cs = total/cnt   
+
+  total = 0 
+ cnt = 0
+  @track_ls.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total_ls = total/cnt 
+
+  total = 0 
+ cnt = 0
+  @track_db.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total_db = total/cnt 
+
+  total = 0 
+ cnt = 0
+  @track_dcp.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total_dcp = total/cnt 
+
+  total = 0 
+ cnt = 0
+  @track_f.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total_f = total/cnt 
+
+  total = 0 
+ cnt = 0
+  @track_w.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total_w = total/cnt 
+
+  total = 0 
+ cnt = 0
+  @track_ht.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  total_ht = total/cnt 
   
 %>
 <%#row1 %>
@@ -41,12 +130,12 @@
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
 
-    		<h5 >LSP Migration (Alma)</h5>
+    		<h5 >LSP Migration (Alma)</h5><p>Cycle Progress: <%= total_lsp %>%</p>
     		
   		</div>  
  		<div class="card-body"> 			  
     
-         <h6><strong>Progress</strong></h6>
+         <h6><strong>Objectives</strong></h6>
             <%  
               total = 0
               i = 0 
@@ -71,10 +160,7 @@
             left = 100 - completed 
           end
           %>
-          <hr> 
-             <h6><strong>Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
+         
              <p style="padding-top: 120px"></p>
  		</div>  		 
   		</div>
@@ -83,11 +169,11 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color3 %>">
   		<div class="card-header" style="background: <%= color4 %>">
-    		<h5 >Catalog Search </h5>
+    		<h5 >Catalog Search </h5><p>Cycle Progress: <%= total_cs %>%</p>
   		</div>  
  		<div class="card-body">
  			 
-       <h6><strong>Progress</strong></h6>
+       <h6><strong>Objectives</strong></h6>
              
               <%  total = 0
                   i = 0
@@ -113,10 +199,7 @@
               left = 100 - completed 
             end
           %>
-          <hr> 
-             <h6><strong>Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
+         
  		</div>  		 
   		</div>
     </div>
@@ -124,7 +207,7 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Library Search </h5>
+    		<h5 >Library Search </h5><p>Cycle Progress: <%= total_ls %>%</p>
   		</div>  
  		<div class="card-body">
  			
@@ -152,10 +235,7 @@
             left = 100 - completed 
           end
           %>
-          <hr> 
-             <h6><strong>Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
+         
  		</div>  		 
   		</div>
     </div>
@@ -167,7 +247,7 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Deep Blue</h5>
+    		<h5 >Deep Blue</h5><p>Cycle Progress: <%= total_db %>%</p>
   		</div>  
  		<div class="card-body">
  		
@@ -191,15 +271,9 @@
             </p>
               <% end %>
                <%
-             if (i>0)
-            completed = total/i
-            left = 100 - completed 
-          end
+           
           %>
-          <hr> 
-             <h6><strong>Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
+         
 <p style="padding-top: 50px"></p>
  		</div>  		 
   		</div>
@@ -208,11 +282,11 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Digital Collections Platform: </h5>
+    		<h5 >Digital Collections Platform </h5>
   		</div>  
  		<div class="card-body">
  			 
-        <h6><strong>Progress</strong></h6> 
+        <h6><strong>Progress</strong></h6> <p>Cycle Progress: <%= total_dcp %>%</p>
        
               <%  total = 0 
                   i = 0 
@@ -237,10 +311,7 @@
             left = 100 - completed 
           end
           %>
-          <hr> 
-             <h6><strong>Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
+         
  		</div>  		 
   		</div>
     </div>
@@ -254,11 +325,11 @@
     <div class="col-md">
     <div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>Website Redesign</h5>
+    		<h5>Website Redesign</h5><p>Cycle Progress: <%= total_w %>%</p>
   		</div>  
  		<div class="card-body">
  			
-         <h6><strong>Progress</strong></h6>
+         <h6><strong>Objectives</strong></h6>
               <%  total = 0 
                   i = 0 
                   @track_w.all.each do |t| 
@@ -282,10 +353,7 @@
             left = 100 - completed 
           end
           %>
-          <hr> 
-             <h6><strong>Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
+         
  		</div>  		 
   		</div>
     </div>
@@ -293,12 +361,12 @@
     <div class="col-md">
       <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
-        <h5>Fulcrum </h5>
+        <h5>Fulcrum </h5><p>Cycle Progress: <%= total_f %>%</p>
       </div>  
     <div class="card-body">
         
 
-          <h6><strong>Progress</strong></h6>
+          <h6><strong>Objectives</strong></h6>
               <%  total = 0
                   i = 0 
                   @track_f.all.each do |t| 
@@ -322,10 +390,7 @@
             left = 100 - completed 
           end
           %>
-          <hr> 
-             <h6><strong>Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
+         
     </div>       
       </div>
     </div>
@@ -333,11 +398,11 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>HathiTrust </h5>
+    		<h5>HathiTrust </h5><%= total_ht %>%
   		</div>  
  		<div class="card-body">
  			
-         <h6><strong>Progress</strong></h6>
+         <h6><strong>Objectives</strong></h6>
            
               <%  total = 0 
                   i = 0 
@@ -362,10 +427,7 @@
             left = 100 - completed 
           end
           %>
-          <hr> 
-             <h6><strong>Status</strong></h6>
-             <p>Completed: <%=completed%>%</p>
-             <p>Left to do: <%=left%>%</p>
+         
  		</div>  		 
   		</div>
     </div>
