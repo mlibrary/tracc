@@ -27,10 +27,10 @@
 <%= hidden_field_tag 'epic', params["epic"] %>
 <%= hidden_field_tag 'cycle', params["cycle"] %>
 
-<p>March:<br><%= text_area_tag 'comment1',  one.comment1 %></p>
-<p>April:<br><%= text_area_tag 'comment2',  one.comment2 %></p>
-<p>May:<br><%= text_area_tag 'comment3',  one.comment3 %></p>
-<p>June:<br><%= text_area_tag 'comment4',  one.comment4 %></p>
+<p>March:<br><%= text_area_tag 'comment1',  one.comment1 , :rows => 5, :cols => 100%></p>
+<p>April:<br><%= text_area_tag 'comment2',  one.comment2, :rows => 5, :cols => 100 %></p>
+<p>May:<br><%= text_area_tag 'comment3',  one.comment3, :rows => 5, :cols => 100 %></p>
+<p>June:<br><%= text_area_tag 'comment4',  one.comment4, :rows => 5, :cols => 100 %></p>
 
 </div>
   <div class="card-footer"> 

@@ -152,10 +152,10 @@ end
       <% if (flag) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><% if one != nil %><%=one.comment1%><% end %></p>
-        <p><strong>April 2020:</strong><br><% if one != nil %><%=one.comment2%><% end %></p>
-        <p><strong>May 2020:</strong><br><% if one != nil %><%=one.comment3%><% end %></p>
-        <p><strong>June 2020:</strong><br><% if one != nil %><%=one.comment4%><% end %></p>
+        <p><strong>March 2020:</strong><br><% if one != nil %><%=one.comment1.html_safe%><% end %></p>
+        <p><strong>April 2020:</strong><br><% if one != nil %><%=one.comment2.html_safe%><% end %></p>
+        <p><strong>May 2020:</strong><br><% if one != nil %><%=one.comment3.html_safe%><% end %></p>
+        <p><strong>June 2020:</strong><br><% if one != nil %><%=one.comment4.html_safe%><% end %></p>
       <%end%>  
       
  		</div>  		 
