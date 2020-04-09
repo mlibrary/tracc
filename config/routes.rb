@@ -16,6 +16,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :chips do
+    collection do
+      get :resources, :edit
+      post :save_resources
+    end
+  end
+
   resources :assessment do
     collection do
       get :import
