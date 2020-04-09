@@ -73,7 +73,7 @@ cycle = cur_cycle.first.cycle_name
            	<%
            	   ch_a.each do |a|
            	   card_name=	Card.where("id='"+a.card_id.to_s+"'")
-           	   card_name = card_name.first.title
+           	   card_name = card_name.first.short_name
            	%>
            	 <p> <%= card_name %> (<%= a.month %>)</p>
            	<% end %>

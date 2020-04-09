@@ -6,10 +6,10 @@
     
 
   @slist = Card.where("activity_type LIKE 'Strategic'")
-     
+  @alist = Card.where("activity_type LIKE '%Active%' ")   
+
   total_chips = Chip.sum(:project) *1.00
 
-  cycle = params["cycle"]
  flag = true
 
 nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
@@ -94,12 +94,14 @@ end
           totalfte = totalfte/4
           if (card_id == 5)   
        %>
-         </div><div class="row">
+         </div><div class="row" style="padding-top: 20px" >
          <% end %>
 
-          <div class="col-md-3">  <h5 ><%= strategic.title %> </h5>
+          <div class="col-md-3">  <h5 ><%= strategic.short_name %> </h5>
             <p>Capacity Allocated: <%= totalfte.round(2) %>FTE</p>
-            <p>Cycle Progress: <%= total%>%</p>
+            <p>Progress: </p>
+              <div class="progress"> <div class="progress-bar bg-info" role="progressbar" style="width: <%=total%>%;" aria-valuenow="<%=total%>" aria-valuemin="0" aria-valuemax="100"> <%=total%>%
+          </div> </div>
           </div>
          <% end %>
          </div>
@@ -116,10 +118,24 @@ end
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse">
-      <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
+      <div class="card-body">
+        <div class="row" style="padding-top: 20px" >
+         <%
+         a_cnt = 0 
+         @alist.all.each do |active| 
+           card_id = active.id 
+           a_cnt = a_cnt + 1
+           if (a_cnt == 5) 
+           a_cnt = 1   
+         %>
+         </div><div class="row" style="padding-top: 20px" >        
+         <% end %>
+          <div class="col-md-3">
+         <%= active.short_name%>
+         </div>
+         <% end %> 
+         </div> 
+      </div>
     </div>
   </div>
 
