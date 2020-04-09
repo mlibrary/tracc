@@ -52,13 +52,17 @@ class CatalogController < ApplicationController
     #config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
     #config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
 
-    config.add_nav_action(:tools, partial: 'cards/tools')
+    
 
-    config.add_nav_action(:import, partial: 'cards/import')
+    #config.add_nav_action(:import, partial: 'cards/import')
+    config.add_nav_action(:import, partial: 'reports/dashboard')
+
+    config.add_nav_action(:reports, partial: 'cards/reports')
 
     config.add_nav_action(:update, partial: 'cards/update')
 
-    config.add_nav_action(:reports, partial: 'cards/reports')
+    
+    config.add_nav_action(:tools, partial: 'cards/tools')
 
     # solr field configuration for document/show views
     config.show.title_field = 'title_ssi'

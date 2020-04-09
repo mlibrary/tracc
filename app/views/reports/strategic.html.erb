@@ -80,8 +80,23 @@ end
     		<h5 ><%= strategic.title %> </h5><p>Cycle Progress: <%= total%>%</p>
     		
   		</div>  
- 		<div class="card-body"> 			  
-        <h6 ><strong>Capacity Allocated: </strong></h6>
+ 		<div class="card-body"> 
+    <%
+     totalfte = 0 
+     str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+     @ch_st = ChipAssignment.where(str)
+     @ch_st.all.each do |ch| 
+            
+            if (ch.chips !=nil) 
+              fte = ch.chips/4.00
+              totalfte = totalfte + fte
+             else
+              fte = 0 
+            end 
+          end
+          totalfte = totalfte/4
+    %>			  
+        <h6 ><strong>Capacity Allocated: <%= totalfte.round(2) %> FTE </strong></h6>
         <div class = "row">
         <% 
            cols = 0
@@ -96,9 +111,8 @@ end
         
           str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "' AND month LIKE '"+month + "'"
           @ch_st = ChipAssignment.where(str)
-          @ch_st.all.each do |ch| %>
-        
-          <% 
+          @ch_st.all.each do |ch| 
+
           if (ch.chips !=nil) 
               fte = ch.chips/4.00
               total = total + ch.chips
@@ -115,7 +129,9 @@ end
             </p>
            <% end %> 
         <% end %>
-        <strong>Total: <% totalp = (total/total_chips).ceil %> <% totalfte = total/4.00 %> <%= totalp %>%, <%= totalfte %> FTE  </strong>
+        <% totalp = (total/total_chips)*100 %>
+        <% totalfte = total/4.00 %>
+        <strong>Total: <%= totalp.round(2) %> %, <%= totalfte %> FTE  </strong>
       </div>
       <% end %>
     </div>
