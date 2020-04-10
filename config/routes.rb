@@ -2,17 +2,23 @@ Rails.application.routes.draw do
 
   #resources :strategic_sortings
 
+  #resources :users do
+  #  collection do
+  #    get :view
+  #  end
+  #end
+
   resources :cycle_review do
     collection do
       get :import
       post :import_cycle_review, :export_cycle_review, :update, :edit, :add
     end
   end  
-
+  
   resources :cards do
     collection do
-      get :import, :import_card, :import_complexity, :import_impact, :advance_search, :progress, :resources
-      post :update, :progress2, :save_progress, :resources2, :save_resources, :update_resources, :add_resource
+      get :import, :import_card, :import_complexity, :import_impact, :advance_search, :progress, :resources, :tactical_progress,  :tactical_resources
+      post :update, :progress2, :tactical_progress2,:save_progress, :resources2, :save_resources, :update_resources, :add_resource, :tactical_resources2
     end
   end
 
@@ -37,8 +43,8 @@ Rails.application.routes.draw do
 
   resources :reports do
     collection do
-      get :index, :charts, :export, :cycledashboard , :tactical_stats, :tactical, :overview, :paused
-      post :generate, :dashboard, :strategic 
+      get :index, :charts, :export, :cycledashboard , :tactical_dashboard, :overview, :paused
+      post :generate, :dashboard, :strategic, :tactical_stats, :tactical
     end
   end
 

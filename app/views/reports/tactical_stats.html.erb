@@ -4,203 +4,187 @@
 
    color3 = "" 
    color4 = ""
-%>   
+    
 
-<h3> FY20:3 TACTICAL PROJECTS  </h3>
+  @slist = Card.where("activity_type LIKE '%Active%'")
+     
+  total_chips = Chip.sum(:project) *1.00
 
+  cycle = params["cycle"]
+ flag = true
+
+nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
+cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+s = cur_cycle.first.start.month
+stmonth = ""
+endmonth = ""
+
+if (s != nil)
+  stmonth = nameofmonths[s]
+  if s<=8
+    s = s +3
+  else
+    s = s+3 -12 
+  end  
+  endmonth = nameofmonths[s]
+end 
+
+s = cur_cycle.first.start.month
+
+months = ['','','','','']
+i = 1
+while (i<=4) do
+  months[i] = nameofmonths[s]
+  i = i + 1
+  s = s+1 
+  if (s>12)
+    s= 1
+  end
+end 
+
+
+
+
+
+
+%>
+
+<%#row1 %>
+<h3> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Tactical Projects - LIT Board </h3>
+
+<% @slist.all.each do |active| 
+ card_id = active.id 
+ str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+ 
+ total = 0 
+ cnt = 0
+ @o_st = Objective.where(str) 
+
+  @o_st.all.each do |o|     
+            ostatus = o.status
+            cnt = cnt+1 
+            if (ostatus != nil)
+              total+=ostatus
+            end
+  end    
+  if (cnt>0)
+   total = total/cnt 
+  end
+  
+ @c_st = TrackComment.where(str)
+
+ 
+%>
  <div class="row" style="padding-top: 20px">
-   <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
+   <div class="col-md-12">
+      <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
-        <h5 >Infrastructure</h5>    
+
+        <h5 ><%= active.title %> </h5><p>Cycle Progress: <%= total%>%</p>
+        
+      </div>  
+    <div class="card-body"> 
+    <%
+     totalfte = 0 
+     str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+     @ch_st = ChipAssignment.where(str)
+     @ch_st.all.each do |ch| 
+            
+            if (ch.chips !=nil) 
+              fte = ch.chips/4.00
+              totalfte = totalfte + fte
+             else
+              fte = 0 
+            end 
+          end
+          totalfte = totalfte/4
+    %>        
+        <h6 ><strong>Capacity Allocated: <%= totalfte.round(2) %> FTE </strong></h6>
+        <div class = "row">
+        <% 
+           cols = 0
+           while (cols <4) do
+            cols = cols+1 
+            month = months[cols] 
+         %>    
+          <div class="col-md-3">
+           <p> <strong><%=month %></strong></p>
+        <% 
+          total = 0 
+        
+          str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "' AND month LIKE '"+month + "'"
+          @ch_st = ChipAssignment.where(str)
+          @ch_st.all.each do |ch| 
+
+          if (ch.chips !=nil) 
+              fte = ch.chips/4.00
+              total = total + ch.chips
+             else
+              fte = 0 
+             end 
+
+             if (fte >0)
+              chipname = Chip.where("uniqname LIKE '"+ch.uniqname+"'")
+
+          %>
+            <p> <%= chipname.first.fname %> <%= chipname.first.lname %> : 
+                <%= fte %> FTE
+            </p>
+           <% end %> 
+        <% end %>
+        <% totalp = (total/total_chips)*100 %>
+        <% totalfte = total/4.00 %>
+        <strong>Total: <%= totalp.round(2) %> %, <%= totalfte %> FTE  </strong>
       </div>
-      <div class="card-body">   
-        <h5 >Retire Debian 8</h5> 
-        <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>  
+      <% end %>
+    </div>
         <hr>
-        <h5 >Application Hosting</h5>    
-           <% tstatus = 30 %> 
+      <%#<h6 ><strong> Project Lead:</strong></h6> 
+      <p>Jon Rothman</p>%>
+
+      <h6 ><strong> Objectives:</strong></h6>
+      <% cnt = 0
+        
+         one = @c_st.first
+
+         @o_st.all.each do |o| 
+            obj = o.objective
+            ostatus = o.status
+            cnt = cnt+1
+      %>  
+      
+       <div class="row">
+        <div class="col-md-6">
+        <p><%= obj.html_safe %></p>
+       </div>
+        <div class="col-md-6">
         <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div> 
-      </div>  
-    </div>
-   </div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+       </div></div>
+      <%end%>
+       <hr> 
+   
 
-   <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5 >Workflow & Communication</h5> 
-
-      </div>
-      <div class="card-body">   
-        <h5 >Workflow Tools</h5>  
-         <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>        
-      </div>  
-    </div>
-   </div>
-
-    <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5 >MSH & Combine</h5>    
-      </div>
-      <div class="card-body">   
-        <h5 >Aggregation Tool</h5> 
-         <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>    
-        <hr>
-        <h5 >Michigan Service Hub</h5> 
-         <% tstatus = 30 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>    
-          
-      </div>  
-    </div>
-   </div>
-
-
-
-  </div>    
-
-
-  <%#row 2%>
-  <div class="row" style="padding-top: 20px">
-   <div class="col-md">
-
-
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5 >Canvas LTI </h5>    
-      </div>
-      <div class="card-body">   
-       
-         <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>   
-       
-          
-      </div>  
-    </div>
-
-   </div>
-
-   <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5 >DCUQ</h5>    
-      </div>
-      <div class="card-body">   
-       <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>   
-
-      </div>  
-    </div>
-   </div>
-
-<div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5 >AEON</h5>    
-      </div>
-      <div class="card-body">   
-         <% tstatus = 40 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>   
-         
-          
-      </div>  
-    </div>
-   </div>
-
-  </div> 
-
-    <%#row 3%>
-  <div class="row" style="padding-top: 20px">
-   <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5 >ArchiveSpace PUI for SCRC</h5>    
-      </div>
-      <div class="card-body">   
-         <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div> 
-          
-          
-      </div>  
-    </div>
-   </div>
-
-   <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5 >Consultation</h5>    
-      </div>
-      <div class="card-body">   
-        <h5 >DB Campus Partnership Map</h5> 
-         <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>         
-      </div>  
-    </div>
-   </div>
-
-  <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5 >External Commitments</h5>    
-      </div>
-      <div class="card-body">   
-        <h5 >Analytics</h5>    
-         <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div> 
-        <hr>
-        <h5 >CRMS</h5> 
-         <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div> 
+            
+      <% if (flag) %>
          <hr>
-        <h5 >Clearing House</h5> 
-         <% tstatus = 10 %> 
-        <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>    
-          
-      </div>  
+        <h6 > <strong>Comments:</strong></h6>
+        <p><strong>March 2020:</strong><br><% if one != nil %><%=one.comment1.html_safe%><% end %></p>
+        <p><strong>April 2020:</strong><br><% if one != nil %><%=one.comment2.html_safe%><% end %></p>
+        <p><strong>May 2020:</strong><br><% if one != nil %><%=one.comment3.html_safe%><% end %></p>
+        <p><strong>June 2020:</strong><br><% if one != nil %><%=one.comment4.html_safe%><% end %></p>
+      <%end%>  
+      
+    </div>       
+      </div>
     </div>
-   </div>
-  </div> 
+    </div>
+<% end %>
 
-</div>  
+
+   
+  
+  
+</div>

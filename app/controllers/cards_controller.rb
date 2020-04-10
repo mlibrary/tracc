@@ -104,7 +104,7 @@ class CardsController < ApplicationController
     end  
 
   end
-
+ 
 
   # GET /cards/1
   # GET /cards/1.json
@@ -113,6 +113,25 @@ class CardsController < ApplicationController
     setup_for_display 
   end
 
+  def tactical_progress
+    
+  end
+  
+  def tactical_resources
+  end  
+
+  def tactical_resources2
+    cycle= params["cycle"]
+    epic=  params["epic"]
+
+    str = "short_name LIKE '" + epic + "%'"   
+    @card_one = Card.where(str)
+
+    #str = "card_id = '" + @card_one.first.id.to_s + "'" 
+    #@tracks = Track.where(str) 
+    
+  
+  end
   def resources2
     cycle= params["cycle"]
     epic=  params["epic"]
@@ -200,25 +219,72 @@ class CardsController < ApplicationController
      cycle = params["cycle"]
      track = params["track"]
 
+nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec'] 
+cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+s = cur_cycle.first.start.month
+
+months = ['','','','','']
+i = 1
+while (i<=4) do
+  months[i] = nameofmonths[s]
+  i = i + 1
+  s = s+1 
+  if (s>12)
+    s= 1
+  end
+end 
+
     str = "short_name LIKE '" + epic + "%'"   
     @card_one = Card.where(str)
 
 
     str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '"+cycle+"'" 
     @chips = ChipAssignment.where(str)
-
-     i =0 
+# "epic"=>"LSP", "cycle"=>"FY20:3", "track"=>"Development", "card_id"=>"1", "jrothman"=>"3", "timothy"=>"3", "ndallen"=>"3", "megrust"=>"2", "dfulmer"=>"2", "commit"=>"Save", "controller"=>"cards", "action"=>"update_resources"} permitted: true>
+    
      @chips.all.each do |chip| 
-       chip.chips = params[chip.uniqname] 
-       chip.save!
-       i = i + 1
+      
+      flag = true
+      i = 1
+      while (flag)
+        if chip.month.eql? (months[i])
+          flag = false
+          uniqname_str = chip.uniqname + i.to_s
+        end
+        i = i +1 
+        if (i>6) 
+          flag = false 
+        end  
+      end        
+      chip.chips = params[uniqname_str]
 
+      chip.save!
+      
+       
      end 
 
 
   end  
 
   def progress2
+    cycle= params["cycle"]
+    epic=  params["epic"]
+
+    str = "short_name LIKE '" + epic + "%'"   
+    one_card = Card.where(str)
+    str = "card_id = '" + one_card.first.id.to_s + "'" 
+    @track_epic = Objective.where(str) 
+
+    str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
+    @comment = TrackComment.where(str)
+    if (@comment.first == nil)
+     TrackComment.create(epic_title: epic,cycle:cycle)
+     @comment = TrackComment.where(str)
+    end  
+
+  end
+
+  def tactical_progress2
     cycle= params["cycle"]
     epic=  params["epic"]
 

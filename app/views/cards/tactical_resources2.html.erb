@@ -26,14 +26,10 @@ end
      <%= submit_tag 'Add Resources' %>
    <% end %>
 
-  <% @tracks.all.each do |t| 
-   
-  %> 
+  
   <%= form_tag("update_resources", :enctype =>"multipart/form-data") do  %> 
  <div class="card" style="padding-top: 5px">
-  <div class="card-header">
-    <h5>Track: <%=t.track%></h5>
-  </div>  
+   
  <div class="card-body"> 
   <div class="row">
     <% j = 0
@@ -47,12 +43,12 @@ end
    <p><strong><%= month %></strong></p>
    <%= hidden_field_tag 'epic', params["epic"] %>
    <%= hidden_field_tag 'cycle', params["cycle"] %>
-   <%= hidden_field_tag 'track', t.track %>
+   <%= hidden_field_tag 'track', "" %>
    <%= hidden_field_tag 'card_id', @card_one.first.id %>
    
-   <%   
+   <%   row = 0
 
-    str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle='" + cycle +"' AND trackname='" + t.track + "' AND month='" + month +"'"
+    str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle='" + cycle + "' AND month='" + month +"'"
     
     @chips = ChipAssignment.where(str)
 
@@ -63,8 +59,7 @@ end
          else
            fte = 0 
          end   
-
-         uniqname_str = chip.uniqname + j.to_s%>
+         uniqname_str = chip.uniqname + j.to_s %>
       <%= chip.uniqname %>: <%= fte %> FTE <br> <%= text_field_tag uniqname_str, value=chip.chips, :size=>"5"%> chips
       </p> 
     
@@ -75,14 +70,13 @@ end
    
  </div>
       
-      <% end # for columns  %>
-
+ <%end # form %>
      
 </div>
 
    <%= submit_tag 'Save' %>
 </div>
- <%end # form %>
+
 <% end%>
 
 
