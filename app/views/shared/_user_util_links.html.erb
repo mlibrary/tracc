@@ -17,33 +17,28 @@
     # 3=Update
     # 4=Reports
   %>
-
-  <% access_level = check_current_access %>
-  <% menu_count = 0 %>
   
+  <% access_level =10 %>
+  <% access_level = check_current_access %>
+ 
   <%= render_nav_actions do |config, action|%>
-    <% menu_count += 1 %>
-    <% if menu_count == 1 %>
-      <li class="lead"><%= action %></li>
-    <% elsif (menu_count == 2 && (access_level == 0 || access_level == 1)) %>
-      <li class="lead"><%= action %></li>
-    <% elsif (menu_count == 3 && access_level.zero?) %>
-      <li class="lead"><%= action %></li>
-    <% elsif (menu_count == 4 && access_level < 9) %>
-      <li class="lead"><%= action %></li>
+    <% if access_level == 0 %>
+      <li class="lead"><%= action %></li>   
     <% end %>
   <% end %>
 
   <% if has_user_authentication_provider? %>
-    <% if current_user %>
-    <li class="lead">
-      <%= link_to t('blacklight.header_links.logout'), destroy_user_session_path, class: 'nav-link' %>
-    </li>
+   
     <% unless current_user.to_s.blank? -%>
     <li class="lead">
       <%= link_to current_user, edit_user_registration_path, class: 'nav-link' %>
     </li>
     <% end %>
+     <% if current_user %>
+    <li class="lead">
+      <%= link_to t('blacklight.header_links.logout'), destroy_user_session_path, class: 'nav-link' %>
+    </li>
+    
     <% else %>
     <li class="lead">
       <%= link_to t('blacklight.header_links.login'), new_user_session_path, class: 'nav-link' %>

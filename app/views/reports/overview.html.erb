@@ -124,6 +124,26 @@ end
          a_cnt = 0 
          @alist.all.each do |active| 
            card_id = active.id 
+
+           str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+           @o_st = Objective.where(str) 
+           total = @o_st.first.status
+
+           totalfte = 0 
+           fte = 0 
+           @ch_st = ChipAssignment.where(str)
+           @ch_st.all.each do |ch| 
+            
+            if (ch.chips !=nil) 
+              fte = ch.chips/4.00
+              totalfte = totalfte + fte
+             else
+              fte = 0 
+            end 
+          end
+          totalfte = totalfte/4
+
+
            a_cnt = a_cnt + 1
            if (a_cnt == 5) 
            a_cnt = 1   
@@ -131,7 +151,11 @@ end
          </div><div class="row" style="padding-top: 20px" >        
          <% end %>
           <div class="col-md-3">
-         <%= active.short_name%>
+            <%= active.short_name%>
+            <p>Capacity Allocated: <%= totalfte.round(2) %>FTE</p>
+            <p>Progress: </p>
+              <div class="progress"> <div class="progress-bar bg-info" role="progressbar" style="width: <%=total%>%;" aria-valuenow="<%=total%>" aria-valuemin="0" aria-valuemax="100"> <%=total%>%
+          </div> </div>
          </div>
          <% end %> 
          </div> 

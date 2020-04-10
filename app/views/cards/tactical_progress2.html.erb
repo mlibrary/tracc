@@ -1,0 +1,42 @@
+
+
+<%= form_tag("save_progress", :enctype =>"multipart/form-data") do  %>
+
+<div class="card">
+  <div class="card-header">
+    <h4> <%=params["cycle"]%> Update Progress for: <%=params["epic"]%></h4>
+  </div>  
+<div class="card-body">  
+<h5><b>Objectives:</b></h5>
+ <% 
+   one = @comment.first
+
+   @track_epic.all.each do |t| 
+      track = t.objective
+      tstatus = t.status
+ %>  
+  <div class="row ml-1">
+    <div class="field">  
+     <p><strong><%=track%>:</strong> 
+     <%= text_field_tag track, value=tstatus %>%   </p>
+    </div>
+  </div>
+  <%end %> 
+ 
+<h5><b>Comments:</b></h5>
+<%= hidden_field_tag 'epic', params["epic"] %>
+<%= hidden_field_tag 'cycle', params["cycle"] %>
+
+<p>March:<br><%= text_area_tag 'comment1',  one.comment1 , :rows => 5, :cols => 100%></p>
+<p>April:<br><%= text_area_tag 'comment2',  one.comment2, :rows => 5, :cols => 100 %></p>
+<p>May:<br><%= text_area_tag 'comment3',  one.comment3, :rows => 5, :cols => 100 %></p>
+<p>June:<br><%= text_area_tag 'comment4',  one.comment4, :rows => 5, :cols => 100 %></p>
+
+</div>
+  <div class="card-footer"> 
+   <div class="actions">
+      <%= submit_tag 'Save' %>
+   </div>
+  </div>
+</div>
+<% end %>
