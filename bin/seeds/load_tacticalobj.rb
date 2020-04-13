@@ -1,8 +1,8 @@
 Objective.create(card_id:'9',objective: 'Complete the project -- no remaining Debian 8 systems.The objective will be achieved through a combination of replacement via puppetization, replacement via app hosting rationalization, and upgrades in places where warranted or required by time pressure.',cycle: 'FY20:3', status: 0)
 Objective.create(card_id:'10',objective: 'Stable beta quality kubernetes clusters at all on-premise sites.
 <br>- All non-production ruby app instances are deployable to the clusters via moku+docker or directly.
-<br>- Clearly identified "generation" of deployment model; a limited number to be supported concurrently.
-<br>- All instance service dependencies are identified; clear "ownership" of instances.',cycle: 'FY20:3', status: 0)
+<br>- Clearly identified generation of deployment model; a limited number to be supported concurrently.
+<br>- All instance service dependencies are identified; clear ownership of instances.',cycle: 'FY20:3', status: 0)
 Objective.create(card_id:'11',objective: 'Enable HT-like feedback that updates DCUQ when material has been ingested (requires updating HT feedback script).',cycle: 'FY20:3', status: 0)
 Objective.create(card_id:'12',objective: 'This timeline is now driven by Atlas and they have 12 months from mid-January to complete the work. The single objective continues to be to have SCRC and Clements Aeon instances hosted by Atlas and the project is complete.',cycle: 'FY20:3', status: 0)
 Objective.create(card_id:'13',objective: 'Plan and conduct the pilot of workflow and communication tools recommended in the July 2019 TASC Workflow/Communication Tools Investigation Team final report.',cycle: 'FY20:3', status: 0)

@@ -361,7 +361,7 @@ end
     @track_epic.all.each do |t| 
       obj = 'uobj' + t.id.to_s
       track = params[obj]
-      byebug
+    
       if (track.empty?)
         t.destroy!
       else
