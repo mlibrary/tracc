@@ -11,7 +11,11 @@ class ReportsController < ApplicationController
   end  
 
   def overview
-    
+    #@capacity = Chip.all
+    @capacity = [
+  ["July 2017", 346.0],
+  ["July 2016", 50.0],
+]
   end
   
   def tactical

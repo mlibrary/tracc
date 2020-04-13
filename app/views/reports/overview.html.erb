@@ -43,20 +43,58 @@ while (i<=4) do
   end
 end 
 
+
+chart1 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
+chart2 = Gchart.bar(:title => "Project Assignments", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
+chart_pie = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
+
+chart4 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
+chart5 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
+
+
 %>
+
 <div class="container">
-<h3> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Dashboard </h3>  
+<h3  style="padding-bottom: 45px"> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Dashboard </h3> 
+
+  <div class="card" style="background: <%=color1 %>">
+     <div class="card-header" style="background: <%= color2 %>">
+       <h4>LIT Capacity</h4>
+     </div>
+    <div class="card-body">
+      <div class="row">
+          <div class="col-md-4"><%= image_tag chart1 %></div>
+          <div class="col-md-4"> <%= image_tag chart2 %></div>
+          <div class="col-md-4"> <%= image_tag chart_pie %></div>   
+      </div>
+    </div>
+ </div>
+
+   <div class="card" style="background: <%=color1 %>">
+     <div class="card-header" style="background: <%= color2 %>">
+       <h4>Project Progress</h4>
+     </div>
+    <div class="card-body">
+      <div class="row">
+          <div class="col-md-6"><%= image_tag chart_pie %></div>
+          <div class="col-md-6"> <%= image_tag chart_pie %></div>
+           
+      </div>
+    </div>
+ </div>
+
 <div class="panel-group" id="accordion" style="padding-top: 25px">
   <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
       <h4>
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-        Strategic Projects </a>
+        Details: Strategic Projects </a>
       </h4>
     </div>
 
     <div id="collapse1" class="panel-collapse collapse in">
       <div class="card-body">
+        
         <div class="row">
         <% 
            

@@ -334,6 +334,44 @@ end
     end   
   end  
     
+  def edit_objectives
+  end
+
+  def edit_objectives2
+    cycle= params["cycle"]
+    card=  params["card"]
+
+    str = "short_name LIKE '" + card + "%'"   
+    one_card = Card.where(str)
+    str = "card_id = '" + one_card.first.id.to_s + "' AND cycle='"+cycle +"'" 
+    @obj = Objective.where(str) 
+  end
+
+  def save_objectives
+    epic=  params["epic"]
+    cycle = params["cycle"]
+
+    #str = "epic_title LIKE '" + epic + "'"  
+    str = "short_name LIKE '" + epic + "%'"   
+    one_card = Card.where(str)
+    str = "card_id = '" + one_card.first.id.to_s + "' AND cycle LIKE '"+cycle+"'"  
+    @track_epic = Objective.where(str) 
+    
+
+    @track_epic.all.each do |t| 
+      obj = 'uobj' + t.id.to_s
+      track = params[obj]
+      byebug
+      if (track.empty?)
+        t.destroy!
+      else
+        t.objective = track
+        t.save!  
+      end  
+      
+    end   
+  end   
+
   def import
   end
 
