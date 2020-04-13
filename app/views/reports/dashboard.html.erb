@@ -6,6 +6,11 @@
    color4 = ""
     
   cycle = params["cycle"]
+   cycle = params["cycle"]
+  bar = params["bar"]
+  progress = params["progress"]
+  
+  
 
   nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
   cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
@@ -148,10 +153,12 @@
                     i = i+ 1 ;
             %>     
           <p><%=track%>
+            <% if (bar) %>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
+            <% end %>  
           </p>
           <% end %>
           <%
@@ -187,10 +194,12 @@
                %>     
                <p>
               <%=track%> 
+              <% if (bar) %>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
+              <% end %>
               </p>
               <% end %>
               <%
@@ -223,10 +232,12 @@
                     i = i+ 1 ;
                %>     
           <p><%=track %> 
+              <% if (bar) %>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
+              <% end %>
             </p>
           <% end %>
           <%
@@ -264,10 +275,12 @@
                     i = i+ 1 ;
                %>     
               <p><%=track%>
+              <% if (bar) %>  
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
+              <% end %>
             </p>
               <% end %>
                <%
@@ -299,10 +312,12 @@
                     i = i+ 1 ;
                %>     
              <p><%=track%>
+              <% if (bar) %>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
+              <% end %>
            </p>
               <% end %>
           <%
@@ -341,10 +356,12 @@
                     i = i+ 1 ;
                %>     
               <p><%=track%>
+              <% if (bar) %>  
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
+              <% end %>
               </p>
               <% end %>
         <%
@@ -378,10 +395,12 @@
                     i = i+ 1 ;
                %>     
              <p><%=track%>
+              <% if (bar) %>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
+              <% end %>
              </p>
               <% end %>
             <%
@@ -415,10 +434,12 @@
                     i = i+ 1 ;
                %>     
               <p><%=track%>
+                <% if (bar) %>
               <div class="progress">
                 <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
                 </div>
               </div>
+              <% end %>
               </p>
               <% end %>
           <%

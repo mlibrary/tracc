@@ -350,7 +350,7 @@ end
   def save_objectives
     epic=  params["epic"]
     cycle = params["cycle"]
-
+    nobj = params["nobj"]
     #str = "epic_title LIKE '" + epic + "'"  
     str = "short_name LIKE '" + epic + "%'"   
     one_card = Card.where(str)
@@ -369,7 +369,17 @@ end
         t.save!  
       end  
       
-    end   
+    end  #for all
+
+    if (nobj.empty?)
+    else
+      obj_new = Objective.new
+      obj_new.card_id = one_card.first.id.to_s
+      obj_new.objective = nobj
+      obj_new.cycle = cycle
+      obj_new.save
+    end  
+
   end   
 
   def import

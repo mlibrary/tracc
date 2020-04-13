@@ -19,6 +19,32 @@
      <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
    </div>
  </div>
+
+<div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "progress", 1, {:checked => "checked"}  %> Overall Progress
+   </div>
+ </div>
+
+<div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "bar", 1, {:checked => "checked"}  %> Progress Bar
+   </div>
+ </div>
+
+
+ <div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "obj" , 1, {:checked => "checked"} %> Objectives
+   </div>
+ </div>
+
+<div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "comments", 1, {:checked => "checked"}  %> Comments
+   </div>
+ </div>
+
  </div>
  <div class="card-footer"> 
    <div class="actions">
@@ -43,6 +69,14 @@
      <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
    </div>
  </div>
+
+  <div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "bar", 1, {:checked => "checked"}  %> Progress Bar
+   </div>
+ </div>
+
+ 
  </div>
  <div class="card-footer"> 
    <div class="actions">

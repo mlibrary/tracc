@@ -11,6 +11,10 @@
   total_chips = Chip.sum(:project) *1.00
 
   cycle = params["cycle"]
+  bar = params["bar"]
+  progress = params["progress"]
+  comments = params["comments"]
+  obj = params["obj"]
  flag = true
 
 nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
@@ -80,7 +84,10 @@ end
       <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
 
-        <h5 ><%= active.title %> </h5><p>Cycle Progress: <%= total%>%</p>
+        <h5 ><%= active.title %> </h5>
+        <% if (progress) %>
+        <p>Cycle Progress: <%= total%>%</p>
+        <% end %>    
         
       </div>  
     <div class="card-body"> 
@@ -141,7 +148,7 @@ end
         <hr>
       <%#<h6 ><strong> Project Lead:</strong></h6> 
       <p>Jon Rothman</p>%>
-
+      <% if (obj) %>
       <h6 ><strong> Objectives:</strong></h6>
       <% cnt = 0
         
@@ -158,18 +165,20 @@ end
         <p><%= obj.html_safe %></p>
        </div>
         <div class="col-md-6">
+          <% if (bar) %>
         <div class="progress">
           <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
           </div>
         </div>
+        <% end %>
        </div></div>
       <%end%>
        <hr> 
    
-
+       <% end %>
             
-      <% if (flag) %>
-         <hr>
+      <% if (comments) %>
+         
         <h6 > <strong>Comments:</strong></h6>
         <p><strong>March 2020:</strong><br><% if one != nil %><%=one.comment1.html_safe%><% end %></p>
         <p><strong>April 2020:</strong><br><% if one != nil %><%=one.comment2.html_safe%><% end %></p>

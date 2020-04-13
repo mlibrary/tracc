@@ -4,6 +4,10 @@
 
    color3 = "" 
    color4 = ""
+
+   cycle = params["cycle"]
+   bar = params["bar"]
+  
 %>   
 
 <h3> FY20:3 (March-June) Library IT Tactical Projects</h3>
@@ -34,11 +38,12 @@
       %>
       <p><%= o.objective.html_safe %></p>
       <% end  %>
-
+      <% if (bar) %>
       <div class="progress">
           <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
           </div>
         </div>
+       <% end %> 
        <% end %> 
       <% if (cnt <@slist.count) %>
       <hr>
