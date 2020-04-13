@@ -17,7 +17,7 @@ $(document).ready(function () {
 
   <div class="card">
     <div class="card-header" id="headingOne">
-      <h5 class="panel-title">Edit Card:  <em><%= @card_one.short_name %></em></h5>
+      <h5 class="panel-title">Edit Card:  <em><%= @card_one.short_name %> (<a href='edit_objectives'>Edit Objectives</a>)</em></h5>
       <div class="form-buttons" style="margin-top: 20px;">
         <%= f.submit("Update Card") %>
       </div>

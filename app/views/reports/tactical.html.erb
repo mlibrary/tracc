@@ -23,15 +23,23 @@
         #str = "card_id="+ id.to_s + " AND cycle='"+ cycle + "'"
         str = "card_id="+ id.to_s
         @o_st = Objective.where(str) 
-        ostatus = @o_st.first.status
+        
       %> 
       <h5 ><%= one.short_name %></h5>
+      <% @o_st.all.each do |o|  
+        ostatus =  o. status%>
+      <p><b>Objectives:</b></p>
+      <% if (o.nil?) 
+         else
+      %>
+      <p><%= o.objective.html_safe %></p>
+      <% end  %>
 
-      <p><b>Objectives:</b></p><p><%= @o_st.first.objective.html_safe %></p>
       <div class="progress">
           <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
           </div>
         </div>
+       <% end %> 
       <% if (cnt <@slist.count) %>
       <hr>
       <% end %>
@@ -56,14 +64,23 @@
         #str = "card_id="+ id.to_s + " AND cycle='"+ cycle + "'"
         str = "card_id="+ id.to_s
         @o_st = Objective.where(str) 
-        ostatus = @o_st.first.status
+        
       %> 
       <h5 ><%= one.short_name %></h5>
-      <p><b>Objectives:</b></p><p><%= @o_st.first.objective.html_safe %></p>
+        <% @o_st.all.each do |o|  
+        ostatus =  o. status%>
+      <p><b>Objectives:</b></p>
+      <% if (o.nil?) 
+         else
+      %>
+      <p><%= o.objective.html_safe %></p>
+      <% end  %>
+
       <div class="progress">
           <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
           </div>
         </div>
+       <% end %> 
       <% if (cnt <@slist.count) %>
       <hr>
       <% end %>
@@ -88,14 +105,23 @@
         #str = "card_id="+ id.to_s + " AND cycle='"+ cycle + "'"
         str = "card_id="+ id.to_s
         @o_st = Objective.where(str) 
-        ostatus = @o_st.first.status
+        
       %> 
       <h5 ><%= one.short_name %></h5>
-      <p><b>Objectives:</b></p><p><%= @o_st.first.objective.html_safe %></p>
+        <% @o_st.all.each do |o|  
+        ostatus =  o. status%>
+      <p><b>Objectives:</b></p>
+      <% if (o.nil?) 
+         else
+      %>
+      <p><%= o.objective.html_safe %></p>
+      <% end  %>
+
       <div class="progress">
           <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
           </div>
         </div>
+       <% end %> 
       <% if (cnt <@slist.count) %>
       <hr>
       <% end %>

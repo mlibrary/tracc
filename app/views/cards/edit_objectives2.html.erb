@@ -1,0 +1,34 @@
+
+
+<%= form_tag("save_objectives", :enctype =>"multipart/form-data") do  %>
+
+<div class="card">
+  <div class="card-header">
+    <h4> <%=params["cycle"]%> Edit Objectives for: <%=params["card"]%></h4>
+  </div>  
+<div class="card-body">  
+<h5><b>Objectives:</b></h5>
+ <% 
+   @obj.all.each do |t| 
+      track = t.objective
+      t_id = t.id
+      uobj = 'uobj' +t_id.to_s
+ %>  
+  <div class="row ml-1">
+    <div class="field">  
+    
+     <p><%= text_area_tag uobj, track, :rows => 5, :cols => 100%></p>
+    </div>
+  </div>
+  <%end %> 
+ 
+</div>
+  <div class="card-footer"> 
+   <div class="actions">
+      <%= hidden_field_tag 'epic', params["card"] %>
+      <%= hidden_field_tag 'cycle', params["cycle"] %>
+      <%= submit_tag 'Save' %>
+   </div>
+  </div>
+</div>
+<% end %>

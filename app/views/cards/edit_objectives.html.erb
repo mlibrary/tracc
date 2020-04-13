@@ -1,0 +1,44 @@
+<h5></h5>
+
+<%= form_tag("edit_objectives2", :enctype =>"multipart/form-data") do %>
+   
+<% cname = Cycle.all %>
+<% card = Card.all %>
+<% cur_cycle = Cycle.where("current_cycle =1") %>
+
+<div class="card">
+  <div class="card-header">
+    <h4> Edit Objectives</h4>
+  </div>  
+<div class="card-body">  
+
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name",  cur_cycle.first.cycle_name)  %>
+  
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :project %>
+     <%= select_tag "card", options_from_collection_for_select(card, "short_name", "title")  %>
+     
+   </div>
+</div>
+
+
+
+
+</div>
+   <div class="card-footer">
+   
+   <div class="actions">
+      <%= submit_tag 'Next' %>
+   </div>
+ 
+  
+</div>
+</div>
+<% end %>
