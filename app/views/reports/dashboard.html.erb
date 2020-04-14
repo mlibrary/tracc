@@ -476,33 +476,6 @@
             <% if (!@card_ht.short_description.nil?) %> 
  			     <p> <%= @card_ht.short_description.html_safe %></p>
            <% end %>
-         <h6><strong>Objectives</strong></h6>
-           
-              <%  total = 0 
-                  i = 0 
-                  @track_ht.all.each do |t| 
-                    track = t.objective
-                    tstatus = t.status
-                    if (tstatus != nil)
-                     total+=tstatus
-                    end 
-                    i = i+ 1 ;
-               %>     
-              <p><%=track%>
-                <% if (bar) %>
-              <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>
-              <% end %>
-              </p>
-              <% end %>
-          <%
-             if (i>0)
-            completed = total/i
-            left = 100 - completed 
-          end
-          %>
          
  		</div>  		 
   		</div>
