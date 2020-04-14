@@ -28,6 +28,16 @@
   end 
 
 
+  @card_lsp = Card.where("id= '1' ").first
+  @card_cs = Card.where("id= '2' ").first
+  @card_db = Card.where("id= '4'  ").first
+  @card_ls = Card.where("id= '3'  ").first
+  @card_dcp = Card.where("id= '5' ").first
+  @card_f = Card.where("id= '6'  ").first
+  @card_w = Card.where("id= '7' ").first
+  @card_ht = Card.where("id= '8' ").first
+  
+
   @track_lsp = Objective.where("card_id= '1' AND cycle LIKE '"+cycle+"'")
   @track_cs = Objective.where("card_id= '2'  AND cycle LIKE '"+cycle+"'")
   @track_db = Objective.where("card_id= '4'  AND cycle LIKE '"+cycle+"'")
@@ -141,8 +151,10 @@
         <% end %>
     		
   		</div>  
- 		<div class="card-body"> 			  
-    
+ 		<div class="card-body"> 	
+        <% if (!@card_lsp.short_description.nil?) %>  
+         <p> <%= @card_lsp.short_description.html_safe %></p>
+        <% end %> 
          <h6><strong>Objectives</strong></h6>
             <%  
               total = 0
@@ -171,7 +183,7 @@
           end
           %>
          
-             <p style="padding-top: 120px"></p>
+            
  		</div>  		 
   		</div>
     </div>
@@ -185,7 +197,9 @@
         <% end %>
       </div>  
  		<div class="card-body">
- 			 
+           <% if (!@card_cs.short_description.nil?) %> 
+ 			   <p> <%= @card_cs.short_description.html_safe %></p>
+         <% end %>
        <h6><strong>Objectives</strong></h6>
              
               <%  total = 0
@@ -229,8 +243,10 @@
         
   		</div>  
  		<div class="card-body">
- 			
-         <h6><strong>Progress</strong></h6>
+             <% if (!@card_ls.short_description.nil?) %> 
+ 			     <p> <%= @card_ls.short_description.html_safe %></p>
+           <% end %>
+         <h6><strong>Objectives</strong></h6>
          <%  total = 0 
              i = 0 
              @track_ls.all.each do |t| 
@@ -275,8 +291,10 @@
        
   		</div>  
  		<div class="card-body">
- 		
-         <h6><strong>Progress</strong></h6>
+        <% if (!@card_db.short_description.nil?) %> 
+ 		  <p> <%= @card_db.short_description.html_safe %></p>
+      <% end %>
+         <h6><strong>Objectives</strong></h6>
               <%  total = 0 
                   i = 0 
                   @track_db.all.each do |t| 
@@ -314,8 +332,10 @@
         <% end %>
   		</div>  
  		<div class="card-body">
- 			 
-        <h6><strong>Progress</strong></h6>
+           <% if (!@card_dcp.short_description.nil?) %> 
+ 			   <p> <%= @card_dcp.short_description.html_safe %></p>
+         <% end %>
+        <h6><strong>Objectives</strong></h6>
        
            
        
@@ -365,7 +385,9 @@
         
   		</div>  
  		<div class="card-body">
- 			
+             <% if (!@card_w.short_description.nil?) %> 
+ 			     <p> <%= @card_w.short_description.html_safe %></p>
+           <% end %>
          <h6><strong>Objectives</strong></h6>
               <%  total = 0 
                   i = 0 
@@ -407,8 +429,9 @@
         
       </div>  
     <div class="card-body">
-        
-
+        <% if (!@card_f.short_description.nil?) %> 
+          <p> <%= @card_f.short_description.html_safe %></p>
+        <% end %>
           <h6><strong>Objectives</strong></h6>
               <%  total = 0
                   i = 0 
@@ -450,7 +473,9 @@
        
   		</div>  
  		<div class="card-body">
- 			
+            <% if (!@card_ht.short_description.nil?) %> 
+ 			     <p> <%= @card_ht.short_description.html_safe %></p>
+           <% end %>
          <h6><strong>Objectives</strong></h6>
            
               <%  total = 0 
