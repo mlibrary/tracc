@@ -24,8 +24,8 @@ Rails.application.routes.draw do
 
   resources :chips do
     collection do
-      get :resources, :edit
-      post :save_resources
+      get :resources, :staff_chips
+      post :edit_chips, :save_chips
     end
   end
 

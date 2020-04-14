@@ -1,0 +1,75 @@
+ 
+<%
+  uniqname = params["uniqname"]
+  str = "uniqname='"+uniqname+"'"
+  one_chip = Chip.where(str)
+  
+  if (!one_chip.first.nil?)
+    one_chip = one_chip.first
+    title = "Edit Staff Chips"
+  else
+    title = "Add New Staff"
+    one_chip = Chip.new  
+  end  
+
+  
+
+%>
+<div class="card">
+  <div class="card-header">
+    <h4> <%= title %></h4>
+  </div>  
+<div class="card-body">  
+
+<%= form_tag("save_chips", :enctype =>"multipart/form-data") do  %>
+
+
+ <div class="row ml-1">
+    <div class="field">
+      Uniqname: <%= text_field_tag 'uniqname', value=one_chip.uniqname  %> (Leave it blank for deleting the chip)
+    </div>
+</div>
+
+ <div class="row ml-1">
+    <div class="field">
+      First Name: <%= text_field_tag 'fname', value=one_chip.fname  %>
+    </div>
+</div>
+
+ <div class="row ml-1">
+    <div class="field">
+      Last Name: <%= text_field_tag 'lname', value=one_chip.lname  %>
+    </div>
+</div>
+
+ <div class="row ml-1">
+    <div class="field">
+      Department: <%= text_field_tag 'dept', value=one_chip.dept  %>
+    </div>
+</div>
+
+ <div class="row ml-1">
+    <div class="field">
+      Project: <%= text_field_tag 'project', value=one_chip.project  %>
+      Ops/Services: <%= text_field_tag 'ops', value=one_chip.ops  %>
+      
+    </div>
+</div>
+
+      <div class="actions">
+        <%= hidden_field_tag 'id', one_chip.id %>
+        <%= submit_tag 'Save' %>
+      </div>
+
+     <% 
+       end 
+     %>
+     
+   
+ 
+</div>
+
+  <div class="card-footer"> 
+   
+  </div>
+</div>

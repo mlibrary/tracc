@@ -1,0 +1,40 @@
+ 
+<%
+  temp_chips = Chip.order(:uniqname)
+    chips = ['<Add New Staff>']
+    temp_chips.each do |t|
+      chips << t.uniqname
+    end
+%>
+<div class="card">
+  <div class="card-header">
+    <h4> Edit Staff Chips (<a href="resources">view all</a>)</h4>
+  </div>  
+<div class="card-body">  
+
+<%= form_tag("edit_chips", :enctype =>"multipart/form-data") do  %>
+
+
+ <div class="row ml-1">
+    <div class="field">
+      Uniqname:
+     <%= select_tag "uniqname", options_for_select(chips)  %>
+    </div>
+</div>
+
+<div class="actions">
+        <%= submit_tag 'Next' %>
+</div>
+
+     <% 
+       end 
+     %>
+     
+   
+ 
+</div>
+
+  <div class="card-footer"> 
+   
+  </div>
+</div>
