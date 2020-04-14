@@ -165,10 +165,11 @@ chart5 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", 
 
            str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
            @o_st = Objective.where(str) 
-           if (@o_st.nil?)
-            total = 0 
-           else 
+           
+           if ( @o_st.first != nil)
             total = @o_st.first.status
+           else
+            total = 0  
            end
            totalfte = 0 
            fte = 0 
