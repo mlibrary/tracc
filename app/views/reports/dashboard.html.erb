@@ -135,7 +135,10 @@
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
 
-    		<h5 >LSP Migration (Alma)</h5><p>Cycle Progress: <%= total_lsp %>%</p>
+    		<h5 >LSP Migration (Alma)</h5>
+        <% if (progress) %>
+          <p>Cycle Progress: <%= total_lsp %>%</p>
+        <% end %>
     		
   		</div>  
  		<div class="card-body"> 			  
@@ -176,8 +179,11 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color3 %>">
   		<div class="card-header" style="background: <%= color4 %>">
-    		<h5 >Catalog Search </h5><p>Cycle Progress: <%= total_cs %>%</p>
-  		</div>  
+    		<h5 >Catalog Search </h5>
+        <% if (progress) %>
+          <p>Cycle Progress: <%= total_cs %>%</p>
+        <% end %>
+      </div>  
  		<div class="card-body">
  			 
        <h6><strong>Objectives</strong></h6>
@@ -216,7 +222,11 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Library Search </h5><p>Cycle Progress: <%= total_ls %>%</p>
+    		<h5 >Library Search </h5>
+         <% if (progress) %>
+          <p>Cycle Progress: <%= total_ls %>%</p>
+        <% end %>
+        
   		</div>  
  		<div class="card-body">
  			
@@ -258,7 +268,11 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Deep Blue</h5><p>Cycle Progress: <%= total_db %>%</p>
+    		<h5 >Deep Blue</h5>
+         <% if (progress) %>
+          <p>Cycle Progress: <%= total_db %>%</p>
+        <% end %>
+       
   		</div>  
  		<div class="card-body">
  		
@@ -295,11 +309,15 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Digital Collections Platform </h5>
+    		<h5 >Digital Collections Platform </h5><% if (progress) %>
+          <p>Cycle Progress: <%= total_dcp %>%</p>
+        <% end %>
   		</div>  
  		<div class="card-body">
  			 
-        <h6><strong>Progress</strong></h6> <p>Cycle Progress: <%= total_dcp %>%</p>
+        <h6><strong>Progress</strong></h6>
+       
+           
        
               <%  total = 0 
                   i = 0 
@@ -340,7 +358,11 @@
     <div class="col-md">
     <div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>Website Redesign</h5><p>Cycle Progress: <%= total_w %>%</p>
+    		<h5>Website Redesign</h5>
+         <% if (progress) %>
+          <p>Cycle Progress: <%= total_w %>%</p>
+        <% end %>
+        
   		</div>  
  		<div class="card-body">
  			
@@ -378,7 +400,11 @@
     <div class="col-md">
       <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
-        <h5>Fulcrum </h5><p>Cycle Progress: <%= total_f %>%</p>
+        <h5>Fulcrum </h5>
+         <% if (progress) %>
+          <p>Cycle Progress: <%= total_f %>%</p>
+        <% end %>
+        
       </div>  
     <div class="card-body">
         
@@ -417,7 +443,11 @@
     <div class="col-md">
     	<div class="card" style="background: <%=color1 %>">
   		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>HathiTrust </h5><%= total_ht %>%
+    		<h5>HathiTrust </h5>
+       <% if (progress) %>
+          <p>Cycle Progress: <%= total_ht %>%</p>
+        <% end %>
+       
   		</div>  
  		<div class="card-body">
  			
