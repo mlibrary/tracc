@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_210526) do
+ActiveRecord::Schema.define(version: 2020_04_14_165159) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_04_05_210526) do
     t.string "requester_div"
     t.string "contact_names"
     t.string "title"
-    t.string "short_description"
+    t.text "short_description"
     t.string "prev_work"
     t.string "accomplish"
     t.string "accomplish_details"
@@ -238,7 +238,7 @@ ActiveRecord::Schema.define(version: 2020_04_05_210526) do
 
   create_table "objectives", force: :cascade do |t|
     t.integer "card_id"
-    t.string "objective"
+    t.text "objective"
     t.string "cycle"
     t.integer "status"
     t.datetime "recorded_on"
