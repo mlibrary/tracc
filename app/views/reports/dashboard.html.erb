@@ -164,10 +164,8 @@
     total = total/cnt      
     @c_st = TrackComment.where(str)
 
-    if (card_no%3==0)
-%>
-  </div>  <div class="row" style="padding-top:20px"> 
- <% end %>     
+    %>
+ 
     <div class="col-sm d-flex">
       <div class="card">
       <div class="card-header">
@@ -210,7 +208,12 @@
       </div>      
       </div>
     </div>
+     <% if (card_no.remainder(3)==0)
+     %>
+       </div>  <div class="row" style="padding-top:20px"> 
+     <% end %>   
       <% end %>
+      <div class="col-sm d-flex"></div>
   </div>
 
  </div>
