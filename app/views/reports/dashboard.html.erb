@@ -10,8 +10,6 @@
   bar = params["bar"]
   progress = params["progress"]
   
-  
-
   nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
   cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
   s = cur_cycle.first.start.month
@@ -27,6 +25,8 @@
    endmonth = nameofmonths[s]
   end 
 
+  @slist = Card.where("activity_type LIKE 'Strategic'")
+  
 
   @card_lsp = Card.where("id= '1' ").first
   @card_cs = Card.where("id= '2' ").first
@@ -137,351 +137,92 @@
   total_ht = total/cnt 
   
 %>
-<%#row1 %>
-<h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
 
- <div class="row" style="padding-top: 20px">
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
 
-    		<h5 >LSP Migration (Alma)</h5>
+<div class="container-fluid">
+  <h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
+
+   <div class="row" style="padding-top:20px"> 
+<% 
+  card_no = 0
+  @slist.all.each do |strategic| 
+     total = 0 
+     cnt = 0
+     card_no = card_no+1
+
+     card_id = strategic.id 
+     str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+     @o_st = Objective.where(str) 
+     
+     @o_st.all.each do |o|     
+       ostatus = o.status
+       cnt = cnt+1 
+       if (ostatus != nil)
+          total+=ostatus
+       end
+     end    
+    total = total/cnt      
+    @c_st = TrackComment.where(str)
+
+    %>
+ 
+    <div class="col-sm d-flex">
+      <div class="card">
+      <div class="card-header">
+        <h5><%= strategic.title %></h5>
         <% if (progress) %>
-          <p>Cycle Progress: <%= total_lsp %>%</p>
-        <% end %>
-    		
-  		</div>  
- 		<div class="card-body"> 	
-        <% if (!@card_lsp.short_description.nil?) %>  
-         <p> <%= @card_lsp.short_description.html_safe %></p>
-        <% end %> 
-         <h6><strong>Objectives</strong></h6>
-            <%  
-              total = 0
-              i = 0 
-              @track_lsp.all.each do |t| 
-                    track = t.objective
-                    tstatus = t.status
-                    if (tstatus != nil)
-                      total+=tstatus
-                    end  
-                    i = i+ 1 ;
-            %>     
-          <p><%=track%>
-            <% if (bar) %>
-              <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>
-            <% end %>  
-          </p>
-          <% end %>
-          <%
-             if (i>0)
-            completed = total/i
-            left = 100 - completed 
-          end
-          %>
-         
-            
- 		</div>  		 
-  		</div>
-    </div>
-
-    <div class="col-md">
-    	<div class="card" style="background: <%=color3 %>">
-  		<div class="card-header" style="background: <%= color4 %>">
-    		<h5 >Catalog Search </h5>
-        <% if (progress) %>
-          <p>Cycle Progress: <%= total_cs %>%</p>
+          <p>Cycle Progress: <%= total %>%</p>
         <% end %>
       </div>  
- 		<div class="card-body">
-           <% if (!@card_cs.short_description.nil?) %> 
- 			   <p> <%= @card_cs.short_description.html_safe %></p>
+      <div class="card-body flex-fill">
+         <% if (!strategic.short_description.nil?) %> 
+           <p> <%= strategic.short_description.html_safe %></p>
          <% end %>
-       <h6><strong>Objectives</strong></h6>
-             
-              <%  total = 0
-                  i = 0
-                  @track_cs.all.each do |t| 
-                    track = t.objective
-                    tstatus = t.status
-                    if (tstatus != nil)
-                     total+=tstatus
-                    end 
-                    i = i+ 1 ;
-               %>     
-               <p>
-              <%=track%> 
-              <% if (bar) %>
-              <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>
-              <% end %>
-              </p>
-              <% end %>
-              <%
-            if (i>0)
-              completed = total/i
-              left = 100 - completed 
-            end
-          %>
-         
- 		</div>  		 
-  		</div>
-    </div>
-
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Library Search </h5>
-         <% if (progress) %>
-          <p>Cycle Progress: <%= total_ls %>%</p>
-        <% end %>
+         <% if (strategic.title.include? 'Hathi') 
+            # don nothing
+            else %>
+         <h6 ><strong> Objectives:</strong></h6>
+         <% cnt = 0
         
-  		</div>  
- 		<div class="card-body">
-             <% if (!@card_ls.short_description.nil?) %> 
- 			     <p> <%= @card_ls.short_description.html_safe %></p>
-           <% end %>
-         <h6><strong>Objectives</strong></h6>
-         <%  total = 0 
-             i = 0 
-             @track_ls.all.each do |t| 
-                    track = t.objective
-                    tstatus = t.status
-                    if (tstatus != nil)
-                      total+=tstatus
-                    end  
-                    i = i+ 1 ;
-               %>     
-          <p><%=track %> 
-              <% if (bar) %>
-              <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>
-              <% end %>
-            </p>
-          <% end %>
-          <%
-             if (i>0)
-            completed = total/i
-            left = 100 - completed 
-          end
-          %>
-         
- 		</div>  		 
-  		</div>
-    </div>
-  </div>
+           one = @c_st.first
 
-  <%# row2 %>
-
-  <div class="row" style="padding-top: 20px">
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Deep Blue</h5>
-         <% if (progress) %>
-          <p>Cycle Progress: <%= total_db %>%</p>
-        <% end %>
+           @o_st.all.each do |o| 
+             obj = o.objective
+             ostatus = o.status
+             cnt = cnt+1
+         %>  
        
-  		</div>  
- 		<div class="card-body">
-        <% if (!@card_db.short_description.nil?) %> 
- 		  <p> <%= @card_db.short_description.html_safe %></p>
-      <% end %>
-         <h6><strong>Objectives</strong></h6>
-              <%  total = 0 
-                  i = 0 
-                  @track_db.all.each do |t| 
-                    track = t.objective
-                    
-                     tstatus = t.status
-                     if (tstatus != nil)
-                     total+=tstatus
-                    end
-                    i = i+ 1 ;
-               %>     
-              <p><%=track%>
-              <% if (bar) %>  
-              <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>
-              <% end %>
-            </p>
-              <% end %>
-               <%
-           
-          %>
-         
-<p style="padding-top: 50px"></p>
- 		</div>  		 
-  		</div>
-    </div>
-
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5 >Digital Collections Platform </h5><% if (progress) %>
-          <p>Cycle Progress: <%= total_dcp %>%</p>
+        <p style="padding-top:10px;"" ><%=cnt.to_s %>. <%= obj%></p>
+      
+        <% if (bar) %>  
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
         <% end %>
-  		</div>  
- 		<div class="card-body">
-           <% if (!@card_dcp.short_description.nil?) %> 
- 			   <p> <%= @card_dcp.short_description.html_safe %></p>
-         <% end %>
-        <h6><strong>Objectives</strong></h6>
+
        
-           
+      <% end # if not HT
+         end #objectives%>
        
-              <%  total = 0 
-                  i = 0 
-                  @track_dcp.all.each do |t| 
-                    track = t.objective
-                    tstatus = t.status
-                    if (tstatus != nil)
-                     total+=tstatus
-                    end 
-                    i = i+ 1 ;
-               %>     
-             <p><%=track%>
-              <% if (bar) %>
-              <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>
-              <% end %>
-           </p>
-              <% end %>
-          <%
-             if (i>0)
-            completed = total/i
-            left = 100 - completed 
-          end
-          %>
-         
- 		</div>  		 
-  		</div>
-    </div>
-
-<div class="col-md"></div>
-  </div>
- <%# row 3%>
-
-
-  <div class="row" style="padding-top: 20px">
-    <div class="col-md">
-    <div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>Website Redesign</h5>
-         <% if (progress) %>
-          <p>Cycle Progress: <%= total_w %>%</p>
-        <% end %>
-        
-  		</div>  
- 		<div class="card-body">
-             <% if (!@card_w.short_description.nil?) %> 
- 			     <p> <%= @card_w.short_description.html_safe %></p>
-           <% end %>
-         <h6><strong>Objectives</strong></h6>
-              <%  total = 0 
-                  i = 0 
-                  @track_w.all.each do |t| 
-                    track = t.objective
-                    tstatus = t.status
-                    if (tstatus != nil)
-                     total+=tstatus
-                    end 
-                    i = i+ 1 ;
-               %>     
-              <p><%=track%>
-              <% if (bar) %>  
-              <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>
-              <% end %>
-              </p>
-              <% end %>
-        <%
-             if (i>0)
-            completed = total/i
-            left = 100 - completed 
-          end
-          %>
-         
- 		</div>  		 
-  		</div>
-    </div>
-
-    <div class="col-md">
-      <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-        <h5>Fulcrum </h5>
-         <% if (progress) %>
-          <p>Cycle Progress: <%= total_f %>%</p>
-        <% end %>
-        
-      </div>  
-    <div class="card-body">
-        <% if (!@card_f.short_description.nil?) %> 
-          <p> <%= @card_f.short_description.html_safe %></p>
-        <% end %>
-          <h6><strong>Objectives</strong></h6>
-              <%  total = 0
-                  i = 0 
-                  @track_f.all.each do |t| 
-                    track = t.objective
-                    tstatus = t.status
-                    if (tstatus != nil)
-                     total+=tstatus
-                    end 
-                    i = i+ 1 ;
-               %>     
-             <p><%=track%>
-              <% if (bar) %>
-              <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%=tstatus%>%;" aria-valuenow="<%=tstatus%>" aria-valuemin="0" aria-valuemax="100"><%=tstatus%>%
-                </div>
-              </div>
-              <% end %>
-             </p>
-              <% end %>
-            <%
-             if (i>0)
-            completed = total/i
-            left = 100 - completed 
-          end
-          %>
-         
-    </div>       
+      </div>      
       </div>
     </div>
-
-    <div class="col-md">
-    	<div class="card" style="background: <%=color1 %>">
-  		<div class="card-header" style="background: <%= color2 %>">
-    		<h5>HathiTrust </h5>
-       <% if (progress) %>
-          <p>Cycle Progress: <%= total_ht %>%</p>
-        <% end %>
-       
-  		</div>  
- 		<div class="card-body">
-            <% if (!@card_ht.short_description.nil?) %> 
- 			     <p> <%= @card_ht.short_description.html_safe %></p>
-           <% end %>
-         
- 		</div>  		 
-  		</div>
-    </div>
-
-    
+     <% if (card_no.remainder(3)==0)
+     %>
+       </div>  <div class="row" style="padding-top:20px"> 
+     <% end %>   
+      <% end %>
+      <div class="col-sm d-flex"></div>
   </div>
+
+ </div>
   
 </div>
+
+
+
+
+  
+   
+    
