@@ -1,4 +1,4 @@
- <div class="container">
+ 
 <% color1 = "" #neutral 100
    color2 = "" #blue-300
 
@@ -10,13 +10,15 @@
   
 %>   
 
-<h3> FY20:3 (March-June) Library IT Tactical Projects</h3>
+<div class="container-fluid">
+  <h3> FY20:3 (March-June) Library IT Tactical Projects</h3>
+  
  <div class="row" style="padding-top: 20px">
-   <div class="col-md">  
+   <div class="col-sm d-flex">  
     
      <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>"> <h5 >Internal LIT Projects</h5> </div>
-       <div class="card-body">
+       <div class="card-body flex-fill">
           <% 
         cnt = 0 
 
@@ -56,9 +58,9 @@
        </div>
       </div>
    </div>
-   <div class="col-md"><div class="card" style="background: <%=color1 %>">
+   <div class="col-sm d-flex"><div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>"> <h5 >Library Projects</h5> </div>
-       <div class="card-body">
+       <div class="card-body flex-fill">
              <% 
         cnt = 0 
 
@@ -97,9 +99,9 @@
        </div>
       </div>
    </div>
-   <div class="col-md"> <div class="card" style="background: <%=color1 %>">
+   <div class="col-sm d-flex"> <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>"> <h5 >External Commitments</h5> </div>
-       <div class="card-body">
+       <div class="card-body flex-fill">
              <% 
         cnt = 0 
 
@@ -139,5 +141,6 @@
       </div>
    </div>
  </div>
+
 
 

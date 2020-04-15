@@ -106,45 +106,29 @@ class ReportsController < ApplicationController
 
   def export
      
-    status = params["status"]
-    atype = params["activity_type"]
-    type = params["chart"]
-    cycle_from = params["cycle_from"]
-    cycle_to = params["cycle_to"]
+   
+    type = params["type"]
       
-    # Switch values if cycle_from is later than cycle_to
-    if cycle_from > cycle_to
-      temp = cycle_to
-      cycle_to = cycle_from
-      cycle_from = temp
+    if (type.eql? 'Projects')
+      @result = Card.all
+    elsif (type.eql? "Staff Chips")
+      @result = Chip.all
+    elsif (type.eql? "Assignments")
+      @result = ChipAssignment.all
+    elsif (type.eql? "Objectives")
+      @result = Objective.all
+    elsif (type.eql? "Cycle Review")
+      @result = CycleReview.all
+    elsif (type.eql? "Project Tracks")  
+      @result = Track.all
+    elsif (type.eql? "Comments")    
+      @result = TrackComment.all      
     end
 
-    cycle_str = " AND in_cycle>='"+cycle_from+"' "  
-    cycle_str += " AND in_cycle<='"+cycle_to+"' " 
-
-    if (atype == "All")
-      activity_str = ' '
-    else
-      activity_str = " AND request_type='"+atype+"' "
+    respond_to do |format|
+      format.html
+      format.csv { send_data @result.to_csv }
     end
-
-    str = "card_status LIKE ''"
-
-    if (status != "All")
-      str += " OR card_status='"+status+"'"
-    else 
-      str += "OR card_status LIKE '%'"  
-    end
-    
-    str += cycle_str + activity_str
-
-    
-    @cards = Card.where(str) 
-
-   respond_to do |format|
-    format.html
-    format.csv { send_data @cards.to_csv }
   end
- end
 
 end
