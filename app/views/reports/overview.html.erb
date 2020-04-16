@@ -51,54 +51,11 @@ chart_pie = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']
 chart4 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
 chart5 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
 
+pro = Array.new
+cap =Array.new
 
-%>
 
-<div class="container">
-<h3  style="padding-bottom: 45px"> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Dashboard </h3> 
-
-  <div class="card" style="background: <%=color1 %>">
-     <div class="card-header" style="background: <%= color2 %>">
-       <h4>LIT Capacity</h4>
-     </div>
-    <div class="card-body">
-      <div class="row">
-          <div class="col-md-4"><%= image_tag chart1 %></div>
-          <div class="col-md-4"> <%= image_tag chart2 %></div>
-          <div class="col-md-4"> <%= image_tag chart_pie %></div>   
-      </div>
-    </div>
- </div>
-
-   <div class="card" style="background: <%=color1 %>">
-     <div class="card-header" style="background: <%= color2 %>">
-       <h4>Project Progress</h4>
-     </div>
-    <div class="card-body">
-      <div class="row">
-          <div class="col-md-6"><%= image_tag chart_pie %></div>
-          <div class="col-md-6"> <%= image_tag chart_pie %></div>
-           
-      </div>
-    </div>
- </div>
-
-<div class="panel-group" id="accordion" style="padding-top: 25px">
-  <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-      <h4>
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-        Details: Strategic Projects </a>
-      </h4>
-    </div>
-
-    <div id="collapse1" class="panel-collapse collapse in">
-      <div class="card-body">
-        
-        <div class="row">
-        <% 
-           
-           @slist.all.each do |strategic| 
+   @slist.all.each do |strategic| 
            card_id = strategic.id 
            str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
  
@@ -130,24 +87,73 @@ chart5 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", 
             end 
           end
           totalfte = totalfte/4
-          if (card_id == 5)   
-       %>
-         </div><div class="row" style="padding-top: 20px" >
-         <% end %>
 
-          <div class="col-md-3">  <h5 ><%= strategic.short_name %> </h5>
-            <p>Capacity Allocated: <%= totalfte.round(2) %>FTE</p>
-            <p>Progress: </p>
-              <div class="progress"> <div class="progress-bar bg-info" role="progressbar" style="width: <%=total%>%;" aria-valuenow="<%=total%>" aria-valuemin="0" aria-valuemax="100"> <%=total%>%
-          </div> </div>
-          </div>
-         <% end %>
-         </div>
+          pro << total
+          cap << totalfte
+         end
+ 
+            
+status_keys = ['Capacity','Progress']
+x_labels = ['LSP | CS | LS | DB | DCP | Fulcrum | Website | HT']
+title =""
+details_data = Gchart.bar( %>
+                  <% :size => '600x400', %>
+                  <% :bar_colors => '81b0df,adcb62' , %>
+                  <% :title => title, %>
+                  <% :bg => 'FFFFFF', %>
+                  <% :legend => status_keys, %>
+                  <% :data => [cap,pro], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => 100, %>
+                  <% :min_value => 0, %>
+                  <% :bar_width_and_spacing => [50,6], %>
+                  <% :axis_labels => x_labels, %>
+                  <% ) 
 
+# ---- end of capacity and progress details ------
+%>
+
+<div class="container">
+<h3  style="padding-bottom: 45px"> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Dashboard </h3> 
+<div class="panel-group" id="accordion" style="padding-top: 25px">
+  <div class="card" style="background: <%=color1 %>">
+     <div class="card-header" style="background: <%= color2 %>">
+       <h4>
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        Strategic Projects:  Capacity and Progress </a>
+      </h4>
+    </div>
+
+    <div id="collapse1" class="panel-collapse collapse in">
+    <div class="card-body">
+      <div class="row">
+          <div class="col-md-9"><%= image_tag details_data%></div>
+          
+          <div class="col-md-3"> 
+              <% 
+              i = 0 
+              @slist.each do |strategic|
+              
+             %>
+             <p><b><%= strategic.short_name%></b>
+              <br>Capacity: <%=cap[i]%> FTE
+              <br>Progress: <%=pro[i]%>%
+             </p>
+             <% 
+               i = i + 1   
+               end 
+            %>
+              
+
+          </div>   
       </div>
     </div>
-  </div>
- 
+ </div>
+ </div>
+  
+
   <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
        <h4> 
@@ -217,7 +223,7 @@ chart5 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", 
       <div class="card-header" style="background: <%= color2 %>">
       <h4 >
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-        Operational </a>
+        LIT Capacity </a>
       </h4>
     </div>
     <div id="collapse3" class="panel-collapse collapse">
@@ -227,38 +233,8 @@ chart5 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", 
               
          %>  
         <h5>Total FTE: <%=totalfte %></h5>
-        <div class="row">
-          <div class="col">Dept</div>
-          <div class="col">First Name</div>
-          <div class="col">Last Name</div>
-          <div class="col">Uniqname</div>
-          <div class="col">Ops/Services</div>
-        </div> 
+        
           
-          
-          
-        <%
-         
-          ch.each do |t|
-            fte = t.ops*1.0/4
-          if (flag) 
-              color = color3
-              flag = !flag
-          else 
-            color = color4
-            flag = !flag
-          end 
-        %>   
-        <div class="row" style="background: <%=color %>">
-          <div class="col"><%=t.dept%></div>
-          <div class="col"><%=t.fname%></div>
-          <div class="col"><%=t.lname%></div>
-          <div class="col"><%=t.uniqname%></div>
-          <div class="col"><%=fte%></div>
-        </div> 
-           
-        <%  end
-        %>
 
       </div>
     </div>
