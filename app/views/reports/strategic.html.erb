@@ -93,7 +93,7 @@ end
     <%
      totalfte = 0 
      str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
-     @ch_st = ChipAssignment.where(str)
+     @ch_st = ChipAssignment.where(str).order(:uniqname)
      @ch_st.all.each do |ch| 
             
             if (ch.chips !=nil) 
@@ -119,7 +119,7 @@ end
           total = 0 
         
           str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "' AND month LIKE '"+month + "'"
-          @ch_st = ChipAssignment.where(str)
+          @ch_st = ChipAssignment.where(str).order(:uniqname)
           @ch_st.all.each do |ch| 
 
           if (ch.chips !=nil) 
