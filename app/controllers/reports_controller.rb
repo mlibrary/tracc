@@ -131,4 +131,20 @@ class ReportsController < ApplicationController
     end
   end
 
+  def cycle_board
+    cycle = params['cycle']
+    type = params['type']
+
+
+    if (type.eql? 'Strategic')
+      @pro_list = Card.where("activity_type LIKE 'Strategic'")
+    end
+    
+    if (type.eql? 'Tactical')
+      @pro_list = Card.where("activity_type LIKE '%Active%'")
+    end
+    
+
+  end  
+
 end

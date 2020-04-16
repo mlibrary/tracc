@@ -1,0 +1,12 @@
+<div class="container-fluid">
+
+          <div class="row">
+           <% @pro_list.each do |pro| %>  
+            <div class="col-sm d-flex">
+              <div class="card card-body flex-fill">
+                <%= pro.short_name %>
+              </div>
+             </div>
+           <% end %>  
+          </div>
+</div>

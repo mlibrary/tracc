@@ -43,8 +43,8 @@ Rails.application.routes.draw do
 
   resources :reports do
     collection do
-      get :index, :charts, :export, :cycledashboard , :tactical_dashboard, :overview, :paused
-      post :generate, :dashboard, :strategic, :tactical_stats, :tactical
+      get :index, :charts, :export, :cycledashboard , :tactical_dashboard, :overview, :paused, :boards
+      post :generate, :dashboard, :strategic, :tactical_stats, :tactical, :cycle_board
     end
   end
 

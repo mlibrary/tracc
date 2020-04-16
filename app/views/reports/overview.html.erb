@@ -44,17 +44,12 @@ while (i<=4) do
 end 
 
 
-chart1 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
-chart2 = Gchart.bar(:title => "Project Assignments", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
-chart_pie = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
 
-chart4 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
-chart5 = Gchart.pie_3d(:title => "Total Capacity", :labels => "['one', 'two']", :data => [10,20], :size => '300x200')
 
 pro = Array.new
 cap =Array.new
 
-
+   total_strategic = 0 
    @slist.all.each do |strategic| 
            card_id = strategic.id 
            str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
@@ -90,9 +85,11 @@ cap =Array.new
 
           pro << total
           cap << totalfte
+          total_strategic = total_strategic + totalfte
          end
  
-            
+
+
 status_keys = ['Capacity','Progress']
 x_labels = ['LSP | CS | LS | DB | DCP | Fulcrum | Website | HT']
 title =""
@@ -113,6 +110,48 @@ details_data = Gchart.bar( %>
                   <% ) 
 
 # ---- end of capacity and progress details ------
+
+status_keys_c = ['Capacity']
+x_labels = ['LSP | CS | LS | DB | DCP | Fulcrum | Website | HT']
+title =""
+strategic_cap = Gchart.bar( %>
+                  <% :size => '500x200', %>
+                  <% :bar_colors => '81b0df' , %>
+                  <% :title => title, %>
+                  <% :bg => 'FFFFFF', %>
+                  <% :legend => status_keys_c, %>
+                  <% :data => [cap], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => 30, %>
+                  <% :min_value => 0, %>
+                  <% :bar_width_and_spacing => [50,6], %>
+                  <% :axis_labels => x_labels, %>
+                  <% :axis_range => [nil, [0,20,5]], %>
+                  <% ) 
+# end of strategic capacity
+
+status_keys_p = ['Progress']
+x_labels = ['LSP | CS | LS | DB | DCP | Fulcrum | Website | HT']
+title =""
+strategic_pro = Gchart.bar( %>
+                  <% :size => '500x200', %>
+                  <% :bar_colors => 'adcb62' , %>
+                  <% :title => title, %>
+                  <% :bg => 'FFFFFF', %>
+                  <% :legend => status_keys_p, %>
+                  <% :data => [pro], %>
+                  <% :stacked => false, %>
+                  <% :legend_position => 'bottom', %>
+                  <% :axis_with_labels => [['x'], ['y']], %>
+                  <% :max_value => 100, %>
+                  <% :min_value => 0, %>
+                  <% :bar_width_and_spacing => [50,6], %>
+                  <% :axis_labels => x_labels, %>
+                  <% ) 
+# end of strategic progress
+
 %>
 
 <div class="container">
@@ -129,26 +168,34 @@ details_data = Gchart.bar( %>
     <div id="collapse1" class="panel-collapse collapse in">
     <div class="card-body">
       <div class="row">
-          <div class="col-md-9"><%= image_tag details_data%></div>
+          <div class="col-md-6"><%= image_tag details_data%></div>
           
-          <div class="col-md-3"> 
-              <% 
+          <div class="col-md-6"> 
+              
+              <p><%= image_tag strategic_cap%></p>
+              <p><%= image_tag strategic_pro%></p>
+
+          </div>   
+      </div>
+      <div class="row" style="padding-top: 20px">
+        <div class="col">
+          <b>Title:<br>Capacity:<br>Progress:</b>
+        </div>
+        <% 
               i = 0 
               @slist.each do |strategic|
               
              %>
-             <p><b><%= strategic.short_name%></b>
-              <br>Capacity: <%=cap[i]%> FTE
-              <br>Progress: <%=pro[i]%>%
-             </p>
+             <div class="col"><b><%= strategic.short_name%></b>
+              <br><%=cap[i]%> FTE
+              <br><%=pro[i]%>% 
+             </div>
              <% 
                i = i + 1   
                end 
             %>
-              
-
-          </div>   
-      </div>
+           
+      </div>  
     </div>
  </div>
  </div>
@@ -166,6 +213,7 @@ details_data = Gchart.bar( %>
         <div class="row" style="padding-top: 20px" >
          <%
          a_cnt = 0 
+         total_tactical = 0 
          @alist.all.each do |active| 
            card_id = active.id 
 
@@ -191,7 +239,7 @@ details_data = Gchart.bar( %>
           end
           totalfte = totalfte/4
 
-
+          total_tactical = total_tactical + totalfte
            a_cnt = a_cnt + 1
            if (a_cnt == 5) 
            a_cnt = 1   
@@ -214,10 +262,26 @@ details_data = Gchart.bar( %>
 </div>  
 <%
  ch = Chip.order(:dept)
- totalfte = 0 
+ totalops = 0
+ totalpro =0 
  ch.each do |t|
-  totalfte = totalfte = totalfte + t.ops*1.0/4
+  totalops = totalops = totalops + t.ops
+  totalpro = totalpro = totalpro + t.project
  end
+ 
+ totalops = totalops*1.0/4
+ totalpro = totalpro*1.0/4
+ 
+ totalfte = Array.new
+ totalfte << totalpro
+ totalfte << totalops
+
+ tact_s = Array.new
+ tact_s << total_strategic
+ tact_s << total_tactical
+
+ total_cap = Gchart.pie_3d(:title => "Total Capacity", :labels => "Project|Ops/Services", :data => totalfte, :size => '500x200')
+pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tactical", :data => tact_s, :size => '500x200')
 %>
   <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
@@ -228,14 +292,18 @@ details_data = Gchart.bar( %>
     </div>
     <div id="collapse3" class="panel-collapse collapse">
       <div class="card-body">
-        <% 
-            flag = true
-              
-         %>  
-        <h5>Total FTE: <%=totalfte %></h5>
-        
-          
-
+        <div class="row">
+          <div class="col-md-6">    
+            <p><%= image_tag total_cap%></p>
+            <p align="center">Project: <%=totalpro.round(2) %> FTE</p>
+            <p align="center">Ops/Services: <%=totalops.round(2) %> FTE</p>
+          </div>
+          <div class="col-md-6">      
+            <p ><%= image_tag pro_cap%></p>
+            <p align="center">Strategic: <%=total_strategic.round(2) %> FTE</p>
+            <p align="center">Tactial: <%=total_tactical.round(2) %> FTE</p>
+          </div>  
+        </div>  
       </div>
     </div>
   </div>
