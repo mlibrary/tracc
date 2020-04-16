@@ -1,12 +1,36 @@
 <div class="container-fluid">
 
-          <div class="row">
+          <div class="row" style="background-color: #F7F7F7">
+          
+          	<div class = "col">
+          		
+          	</div>	
            <% @pro_list.each do |pro| %>  
-            <div class="col-sm d-flex">
-              <div class="card card-body flex-fill">
-                <%= pro.short_name %>
-              </div>
+            <div class="col d-flex border border-dark "  >
+                
+			<p class="text-center" style="padding-top: 10px"><b><%= pro.short_name %> </b></p>
              </div>
            <% end %>  
           </div>
+  <% # tracks %>
+     <div class="row" style="background-color: #F7F7F7">
+          
+          	<div class = "col">
+          		
+          	</div>	
+           <% @pro_list.each do |pro| %>  
+            <div class="col d-flex border border-dark "  >
+            	<% i =0 
+            	   while (i < 2 ) 
+            	   	i = i +1 %>
+                <div class="col d-flex border border-dark "  >
+			        <p class="text-center" style="padding-top: 10px"><b>Tr</b></p>
+		        </div>
+		        <% end %>
+             </div>
+           <% end %>  
+    </div>                   
 </div>
+
+
+
