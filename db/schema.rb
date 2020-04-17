@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_165159) do
+ActiveRecord::Schema.define(version: 2020_04_17_202424) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -305,10 +305,10 @@ ActiveRecord::Schema.define(version: 2020_04_14_165159) do
   create_table "track_comments", force: :cascade do |t|
     t.integer "card_id"
     t.string "epic_title"
-    t.string "comment1"
-    t.string "comment2"
-    t.string "comment3"
-    t.string "comment4"
+    t.text "comment1"
+    t.text "comment2"
+    t.text "comment3"
+    t.text "comment4"
     t.string "cycle"
     t.string "uemail"
     t.datetime "created_at", null: false
