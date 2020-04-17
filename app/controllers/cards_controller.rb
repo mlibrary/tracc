@@ -272,10 +272,9 @@ end
 
     str = "short_name LIKE '" + epic + "%'"   
     one_card = Card.where(str)
-    str = "card_id = '" + one_card.first.id.to_s + "'" 
+    str = "card_id = '" + one_card.first.id.to_s + "' AND cycle LIKE '"+cycle+"'" 
     @track_epic = Objective.where(str) 
-
-    str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
+ 
     @comment = TrackComment.where(str)
     if (@comment.first == nil)
      TrackComment.create(epic_title: epic,cycle:cycle)
