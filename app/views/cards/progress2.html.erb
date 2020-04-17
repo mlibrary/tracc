@@ -10,13 +10,19 @@
 <h5><b>Objectives:</b></h5>
  <% 
    one = @comment.first
+   if (one.nil?)
+    one = TrackComment.new
+   end 
+    
+   cnt = 0
    @track_epic.all.each do |t| 
       track = t.objective
       tstatus = t.status
+      cnt = cnt+1
  %>  
   <div class="row ml-1">
     <div class="field">  
-     <p><strong><%=track%>:</strong> 
+     <p><strong><%=cnt%>. <%=track%>:</strong> 
      <%= text_field_tag track, value=tstatus %>%   </p>
     </div>
   </div>

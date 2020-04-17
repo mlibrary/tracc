@@ -56,6 +56,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'execjs'
+  gem 'therubyracer'
 end
 
 group :test do
@@ -89,7 +91,5 @@ gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'ettin', '~> 1.2'
 #gem 'ruby', "~> 2.6.3"
 
-#gem 'execjs'
 
-#gem 'therubyracer'
 
