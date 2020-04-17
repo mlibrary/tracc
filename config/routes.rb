@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 
   resources :reports do
     collection do
-      get :index, :charts, :export, :cycledashboard , :tactical_dashboard, :overview, :paused, :boards
+      get :index, :about, :charts, :export, :cycledashboard , :tactical_dashboard, :overview, :paused, :boards
       post :generate, :dashboard, :strategic, :tactical_stats, :tactical, :cycle_board
     end
   end
@@ -56,7 +56,6 @@ Rails.application.routes.draw do
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
     collection do
-      get :about
       post :add_milestone, :add_comment, :add_objective, :update_milestone_check, :update_objective_check
     end
   end
