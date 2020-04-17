@@ -276,12 +276,15 @@ strategic_pro = Gchart.bar( %>
  totalfte << totalpro
  totalfte << totalops
 
+ total_left =  totalpro - (total_strategic+total_tactical)
  tact_s = Array.new
  tact_s << total_strategic
  tact_s << total_tactical
+ tact_s << total_left
+
 
  total_cap = Gchart.pie_3d(:title => "Total Capacity", :labels => "Project|Ops/Services", :data => totalfte, :size => '500x200')
-pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tactical", :data => tact_s, :size => '500x200')
+pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tactical|Unassigned", :data => tact_s, :size => '500x200')
 %>
   <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
