@@ -89,7 +89,7 @@ gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'ettin', '~> 1.2'
 #gem 'ruby', "~> 2.6.3"
 
-gem 'execjs'
+#gem 'execjs'
 
-gem 'therubyracer'
+#gem 'therubyracer'
 
