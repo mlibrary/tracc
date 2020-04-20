@@ -55,7 +55,11 @@ params["cycle"] = cycle
       %>
       <tr>
         <td> <%= i %><% i+=1 %></td>
-        <td><%= card.title %>(<%= card.short_name %>, <%= card.in_cycle %>)</td>
+        <td><%= card.title %>( <%= card.short_name %>
+          <% if (!card.in_cycle.nil?) %> , <%= card.in_cycle %>
+          <% end %>
+        )
+        </td>
         <td><%= cd.select :card_status, options_from_collection_for_select(s, "status", "status",:selected=>saved_status)  %></td>
         <td> <%= cd.select :rationale, options_from_collection_for_select(r, "rationale", "rationale",:selected=>saved_r)  %></td>
         <td><%= cd.text_field(:comments, size: 40) %></td>
