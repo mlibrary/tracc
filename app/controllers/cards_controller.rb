@@ -806,7 +806,7 @@ def edit_rationale
   # add new status
   if (!params["status_n"].empty?)
     s = Rationale.new
-    s.status = params["status_n"]
+    s.rationale = params["status_n"]
     s.save!
   end   
 
