@@ -92,9 +92,11 @@
                 str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "' AND trackname='"+t.track + "'"  %>
                 <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
                 <% @chips.each do |ch| %>
+                  <% if (ch.chips >0) %>
                   <div class="card card body">
                   <p style="text-align: center;">  <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %><br><%= ch.uniqname %>(<%= ch.chips%>)</p>
                   </div>
+                  <% end %>
                 <% end %>
                 <% i = i +1 %>
                </div>
@@ -159,10 +161,11 @@
                 <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
                 <% @chips.each do |ch| %>
                 <%#= "\u263A".unicode_normalize %>
+                <% if (ch.chips >0) %>
                 <div class="card card body">
                   <p style="text-align: center;">  <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %><br><%= ch.uniqname %>(<%= ch.chips%>)</p>
                   </div>
-    
+                <% end %>
                  
                 <% end %>
                 <% i = i +1 %>
