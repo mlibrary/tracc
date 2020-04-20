@@ -261,7 +261,6 @@ end
       chip.save!
       
       if (chip.chips <=0)
-        byebug
         chip.destroy!
       end  
        

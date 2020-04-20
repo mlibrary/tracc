@@ -18,12 +18,12 @@ end
 
 %>
 
-<h4> <%=cycle%> Update Resources for: <%=params["epic"]%></h4>
+<h4 style="padding-bottom: 10px;"> <%=cycle%> Update Resources for: <%=params["epic"]%></h4>
   <%= form_tag("add_resource", :enctype =>"multipart/form-data") do  %>
      <%= hidden_field_tag 'epic', params["epic"] %>
      <%= hidden_field_tag 'cycle', params["cycle"] %>
      <%= hidden_field_tag 'card_id', @card_one.first.id %>
-     <%= submit_tag 'Add Resources' %>
+     <p style="padding-bottom: 20px;"><%= submit_tag 'Add Resources' %></p>
    <% end %>
 
   <% @tracks.all.each do |t| 
