@@ -1,25 +1,28 @@
-
+<h5></h5>
 
 <%= form_tag(cycle_review_index_path, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
-<% statuses = Status.all %>
+<% card = Card.all %>
+<% cur_cycle = Cycle.where("current_cycle =1") %>
 
 <div class="card">
   <div class="card-header">
-    <h4> Update Cycle Review Sheet</h4>
+    <h4> Add/Edit Cycle Review</h4>
   </div>  
 <div class="card-body">  
+
 <div class="row ml-1">
     <div class="field">
      <%= label_tag :cycle %>
-     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name")  %>
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name",  cur_cycle.first.cycle_name)  %>
   
    </div>
 </div>
+
 <div class="row ml-1">
     <div class="field">
-     <%= label_tag :review_type %>
+     <%= label_tag :review_Type %>
      <%= select_tag "review_type", options_for_select([['Mid Cycle', 1], ['End of Cycle', 2]]) %>
   
    </div>
@@ -27,15 +30,9 @@
 
 <div class="row ml-1">
     <div class="field">
-     <%= label_tag :status %>
-     <ul>
-     <% statuses.each do |status| %>
-     <li>
-     <%= check_box_tag 'status_ids[]', status.id -%>
-        <%=  status.status -%>
-      </li>
-     <% end %>
-     </ul>
+     <%= label_tag :Project_Type %>
+     <%= select_tag "p_type", options_for_select([['Strategic', 1], ['Tactical', 2]]) %>
+  
    </div>
 </div>
 
@@ -43,7 +40,7 @@
    <div class="card-footer">
    
    <div class="actions">
-      <%= submit_tag 'Generate Sheet' %>
+      <%= submit_tag 'Next' %>
    </div>
  
   

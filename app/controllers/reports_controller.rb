@@ -136,13 +136,15 @@ class ReportsController < ApplicationController
     type = params['type']
 
 
-    if (type.eql? 'Strategic')
+    if ( (type.eql? 'Strategic') || (type.eql? 'All Boards'))
       @pro_list = Card.where("activity_type LIKE 'Strategic'")
     end
     
-    if (type.eql? 'Tactical')
-      @pro_list = Card.where("activity_type LIKE '%Active%'")
+    if ( (type.eql? 'Tactical') || (type.eql? 'All Boards') )
+      @pro_list1 = Card.where("activity_type LIKE '%Active%'")
     end
+
+  
     
 
   end  

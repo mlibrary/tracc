@@ -1,35 +1,220 @@
-<div class="container-fluid">
+<% 
+  p_type = params["type"]
+  cycle = params["cycle"]
+  nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
+  cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+  s = cur_cycle.first.start.month
+  stmonth = ""
+  endmonth = ""
+  months = ["","","","",""]
+  
+  i = 0 
+  while (i<4) do
+    months[i] = nameofmonths[s]
+    i = i + 1
+    if s<=12
+      s = s +1 
+    else
+      s =1 
+    end  
+   
+  end
 
+%>
+      
+  <% # projects and tracks %>
+   <% if ( (p_type.eql? "Strategic") || (p_type.eql? "All Boards") )%>  
+
+   <div class="row">
+  <div class = "col  d-flex">
+    <h4 style="padding-top: 20px"> <%=cycle%> Cycle Planning Board: Strategic </h4>
+  </div>
+  </div>    
           <div class="row" style="background-color: #F7F7F7">
           
-          	<div class = "col">
-          		
-          	</div>	
-           <% @pro_list.each do |pro| %>  
+            <div class = "col d-flex border border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px;">
+              <b>&nbsp;</b>
+            </div>  
+           
+           <% i = 0
+              while (i < 4) do 
+              
+                %>  
             <div class="col d-flex border border-dark "  >
                 
-			<p class="text-center" style="padding-top: 10px"><b><%= pro.short_name %> </b></p>
+      <p class="text-center" style="margin-top: auto; margin-bottom: auto; margin-left: auto; margin-right: auto; padding-top: 20px"><b><%= months[i] %> </b></p>
              </div>
-           <% end %>  
+           <% 
+             i = i +1
+             end %>  
           </div>
-  <% # tracks %>
-     <div class="row" style="background-color: #F7F7F7">
-          
-          	<div class = "col">
-          		
-          	</div>	
+
+
            <% @pro_list.each do |pro| %>  
-            <div class="col d-flex border border-dark "  >
-            	<% i =0 
-            	   while (i < 2 ) 
-            	   	i = i +1 %>
-                <div class="col d-flex border border-dark "  >
-			        <p class="text-center" style="padding-top: 10px"><b>Tr</b></p>
-		        </div>
-		        <% end %>
+
+           <div class="row">
+             <div class="col d-flex border border-dark ">
+              <b><%= pro.short_name %></b><br>
+              <% #<br><b>....Objectives:</b><br> %>
+             </div> 
+             
+              <%
+              str = "card_id = '" + pro.id.to_s + "' AND cycle='"+cycle+"'" 
+              @obj = Objective.where(str)
+              i = 0 
+              @obj.each do |o|
+                i = i + 1 
+              %>
+               
+              <% end %>
+              
+         
+           
+         </div>
+
+           <%
+               str = "card_id = '" + pro.id.to_s + "'"
+               @tracks = Track.where(str) 
+               @tracks.each do |t|
+           %>
+            <div class="row">
+             <div class="col d-flex border border-dark "  >
+              <p style="padding-left: 10px"><%= t.track %></p>
              </div>
+
+           
+             
+            <% i = 0
+              while (i < 4) do 
+               %> 
+               <div class="col d-flex border border-dark ">
+                <% 
+                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "' AND trackname='"+t.track + "'"  %>
+                <% @chips = ChipAssignment.where(str1) %>
+                <% @chips.each do |ch| %>
+                <%= "\u263A".unicode_normalize %>
+                <%= "\u1F464".unicode_normalize %>
+    
+                  <%= ch.uniqname %>(<%= ch.chips%>)
+                <% end %>
+                <% i = i +1 %>
+               </div>
+              <% end %>
+           </div>
+
+           <%  end %>
+
            <% end %>  
-    </div>                   
+<% end %>
+
+<% if ((p_type.eql? "Tactical") || (p_type.eql? "All Boards") ) %>
+
+<div class="row">
+  <div class = "col  d-flex">
+    <h4 style="padding-top: 40px"> <%=cycle%> Cycle Planning Board: Tactical</h4>
+  </div>
+</div>    
+          <div class="row" style="background-color: #F7F7F7">
+          
+            <div class = "col d-flex border border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px;">
+              <b>&nbsp;</b>
+            </div>  
+           
+           <% i = 0
+              while (i < 4) do 
+              
+                %>  
+            <div class="col d-flex border border-dark "  >
+                
+      <p class="text-center" style="margin-top: auto; margin-bottom: auto; margin-left: auto; margin-right: auto; padding-top: 20px"><b><%= months[i] %> </b></p>
+             </div>
+           <% 
+             i = i +1
+             end %>  
+          </div>
+
+     <% @pro_list1.each do |pro| %>  
+
+           <div class="row">
+             <div class="col d-flex border border-dark ">
+              <b><%= pro.short_name %></b><br>
+              <% #<br><b>....Objectives:</b><br> %>
+             </div> 
+             
+              <%
+              str = "card_id = '" + pro.id.to_s + "' AND cycle='"+cycle+"'" 
+              @obj = Objective.where(str)
+              i = 0 
+              @obj.each do |o|
+                i = i + 1 
+              %>
+               
+              <% end %>
+             
+            <% i = 0
+              while (i < 4) do 
+               %> 
+               <div class="col d-flex border border-dark ">
+                <% 
+                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "'"  %>
+                <% @chips = ChipAssignment.where(str1) %>
+                <% @chips.each do |ch| %>
+                <%= "\u263A".unicode_normalize %>
+                <%= "\u1F464".unicode_normalize %>
+    
+                  <%= ch.uniqname %>(<%= ch.chips%>)
+                <% end %>
+                <% i = i +1 %>
+               </div>
+              <% end #while do%>
+           </div>
+
+           <% end %>  
+   <% end                
+       
+ if  ((p_type.eql? "Operational") ||  (p_type.eql? 'All Boards') )
+    dept = Array.new
+    dept << "A&E"
+    dept << "AIM"
+    dept << "DCC"
+    dept << "D&D"
+    dept << "DLA"
+    
+  %>
+  <div class="row">
+  <div class = "col  d-flex">
+    <h4 style="padding-top: 40px"> <%=cycle%> Cycle Planning Board: Operational </h4>
+  </div>
+</div> 
+
+<div class="row">
+  <% i = 0 
+     while (i < 5) do %> 
+     <div class="col d-flex border border-dark ">
+      <p><b><%= dept[i] %></b>
+     </div>
+     <% i = i +1 
+        end %>
+</div>   
+<div class="row">           
+ <% i = 0 
+     while (i < 5) do %> 
+     
+      <div class="col d-flex border border-dark ">
+       <% str  = "dept LIKE '" + dept[i] + "'"
+          ch = Chip.where(str).order(:uniqname) 
+          ch.each do |one| %> 
+             <%=one.uniqname %>(<%=one.ops %>)
+          <% end %>  
+          
+      
+     <% i = i + 1 %>
+        </div> 
+     <% end %>          
+       </div>
+    
+<% end %>
+  
 </div>
 
 

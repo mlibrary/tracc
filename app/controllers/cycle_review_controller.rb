@@ -11,6 +11,7 @@ class CycleReviewController < ApplicationController
 
   def add
  
+ byebug
     review_type = params["review_type"]
     cycle = params["cycle"]
 
@@ -52,58 +53,29 @@ class CycleReviewController < ApplicationController
     
   def update
 
-   a = params["status_ids"] 
+    
+
+   #a = params["status_ids"] 
    cycle = params["cycle"]
-
-   str = "card_status LIKE ''"
-   str1 = "card_status LIKE ''"
-
-   if (a.to_s.include?('1'))
-    str = str + " OR cycle_reviews.status LIKE 'New'" 
-    str1 = str1 + " OR card_status LIKE 'New'" 
-   end 
-   if (a.to_s.include?('2'))
-    str = str + " OR cycle_reviews.status LIKE 'Done'" 
-    str1 = str1 + " OR card_status LIKE 'Done'" 
-   end 
-   if (a.to_s.include?('3'))
-    str = str + " OR cycle_reviews.status LIKE 'Stopped'" 
-    str1 = str1 + " OR card_status LIKE 'Stopped'" 
-   end 
-   if (a.to_s.include?('4'))
-    str = str + " OR cycle_reviews.status LIKE 'In-Progress'"
-    str1 = str1 + " OR card_status LIKE 'In-Progress'" 
-   end 
-   if (a.to_s.include?('5'))
-    str = str + " OR cycle_reviews.status LIKE 'Not-Started' " 
-    str1 = str1 + " OR card_status LIKE 'Not-Started' " 
-   end 
-   if (a.to_s.include?('6'))
-    str = str + " OR cycle_reviews.status LIKE 'Not Picked up'" 
-    str1 = str1 + " OR card_status LIKE 'Not Picked up'"     
-   end 
-   if (a.to_s.include?('7'))
-    str = str + " OR cycle_reviews.status LIKE 'Behind Schedule'" 
-    str1 = str1 + " OR card_status LIKE 'Behind Schedule'" 
-   end 
-   if (a.to_s.include?('8'))
-    str = str + " OR cycle_reviews.status LIKE 'On-Hold'" 
-    str1 = str1 + " OR card_status LIKE 'On-Hold'" 
-   end 
-   if (a.to_s.include?('9'))
-    str = str + " OR cycle_reviews.status LIKE 'Other' " 
-    str1 = str1 + " OR card_status LIKE 'Other' " 
-   end 
-
-   str = str + "AND cycle='"+cycle+"'"
+   r_type = params["review_type"]
+   p_type = params["p_type"]
    
-   
+   if (p_type.eql? "2")
+     str = "card_status LIKE 'In-Progress' AND activity_type LIKE '%Active%'"
+   else
+     str = "activity_type LIKE '%Strategic%'"
+   end
 
-   @cards = Card.joins(:cycle_review).where(str).order(:in_cycle) 
-   if (@cards.first.nil?)
-    str1 = str1 + " AND in_cycle <= '"+cycle+"'"
-    @cards = Card.where(str1).order(:in_cycle)
+   str1 = str + "AND cycle='"+cycle+"'"
+   
+   @cards = Card.joins(:cycle_review).where(str1).order(:in_cycle) 
+
+   
+   if (@cards.first.nil?) # no cyclereview found
+    #str1 = str1 + " AND in_cycle <= '"+cycle+"'"
+     @cards = Card.where(str).order(:in_cycle)
    end 
+   
    
   end 
 
