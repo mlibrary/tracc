@@ -165,7 +165,7 @@ strategic_pro = Gchart.bar( %>
       </h4>
     </div>
 
-    <div id="collapse1" class="panel-collapse collapse in">
+    <div id="collapse1" class="panel-collapse collapse show">
     <div class="card-body">
       <div class="row">
           <div class="col-md-6"><%= image_tag details_data%></div>
@@ -199,7 +199,7 @@ strategic_pro = Gchart.bar( %>
     </div>
  </div>
  </div>
-  
+  <p style="padding-top: 20px;"></p>
 
   <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
@@ -208,7 +208,7 @@ strategic_pro = Gchart.bar( %>
         Tactical Projects</a>
       </h4>
     </div>
-    <div id="collapse2" class="panel-collapse collapse">
+    <div id="collapse2" class="panel-collapse collapse show">
       <div class="card-body">
         <div class="row" style="padding-top: 20px" >
          <%
@@ -286,6 +286,7 @@ strategic_pro = Gchart.bar( %>
  total_cap = Gchart.pie_3d(:title => "Total Capacity", :labels => "Project|Ops/Services", :data => totalfte, :size => '500x200')
 pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tactical|Unassigned", :data => tact_s, :size => '500x200')
 %>
+<p style="padding-top: 20px;"></p>
   <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
       <h4 >
@@ -293,7 +294,7 @@ pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tac
         LIT Capacity </a>
       </h4>
     </div>
-    <div id="collapse3" class="panel-collapse collapse">
+    <div id="collapse3" class="panel-collapse collapse show">
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">    
@@ -305,6 +306,38 @@ pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tac
             <p ><%= image_tag pro_cap%></p>
             <p align="center">Strategic: <%=total_strategic.round(2) %> FTE</p>
             <p align="center">Tactial: <%=total_tactical.round(2) %> FTE</p>
+          </div>  
+        </div>  
+      </div>
+    </div>
+  </div>
+
+<p style="padding-top: 20px;"></p>
+
+<div class="card" style="background: <%=color1 %>">
+      <div class="card-header" style="background: <%= color2 %>">
+      <h4 >
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+        Project Status </a>
+      </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse show">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">  
+            <% str = "activity_type LIKE 'Strategic' "
+               @s_list = Card.where(str) 
+               @s_list.each do |s| %>  
+                 <p align="center"><%= s.short_name%>: <%= s.card_status %> (<%= s.rationale %>) </p>
+         
+               <% end %>   
+          </div>
+          <div class="col-md-6">      
+            <% str = "activity_type LIKE '%Active%' "
+               @s_list = Card.where(str) 
+               @s_list.each do |s| %>  
+                  <p align="center"><%= s.short_name%>: <%= s.card_status %> (<%= s.rationale %>) </p>
+               <% end %>    
           </div>  
         </div>  
       </div>
