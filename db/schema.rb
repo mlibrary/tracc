@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_202424) do
+ActiveRecord::Schema.define(version: 2020_04_20_171517) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -191,10 +191,11 @@ ActiveRecord::Schema.define(version: 2020_04_17_202424) do
     t.string "status"
     t.string "rationale"
     t.string "cycle"
-    t.string "notes"
+    t.text "notes"
     t.string "review_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "obj_id"
     t.index ["card_id"], name: "index_cycle_reviews_on_card_id"
   end
 

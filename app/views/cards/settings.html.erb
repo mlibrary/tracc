@@ -1,0 +1,81 @@
+
+
+<h4>Settings</h4>
+
+<%= form_tag("edit_status", :enctype =>"multipart/form-data") do %>
+   
+<% status = Status.all %>
+
+<div class="card">
+  <div class="card-header">
+    <h5> Edit Status</h5><p>TO DELETE AN ENTRY: LEAVE IT BLANK </p>
+  </div>  
+  <div class="card-body">  
+  	<% status.each do |s| 
+  		st = s.status
+        s_id = s.id
+        nst = 'nst' + s_id.to_s
+  	%>
+  	 <div class="row ml-1">
+      <div class="field">  
+       <p><%= text_field_tag nst, st %></p>
+      </div>
+     </div>
+    <% end %> 
+
+     <div class="row ml-1">
+      <div class="field">  
+       <p>Add New Status:<br><%= text_field_tag "status_n", "" %></p>
+      </div>
+     </div>
+
+     <div class="actions">
+      <%= submit_tag 'Update' %>
+   </div>
+  </div>
+
+  
+  
+</div>
+
+<% end %>
+
+<p></p>
+
+<%= form_tag("edit_status", :enctype =>"multipart/form-data") do %>
+   
+<% status = Rationale.all %>
+
+<div class="card">
+  <div class="card-header">
+    <h5> Edit Rationale</h5><p>TO DELETE AN ENTRY: LEAVE IT BLANK </p>
+  </div>  
+  <div class="card-body">  
+  	<% status.each do |s| 
+  		st = s.rationale
+        s_id = s.id
+        nst = 'nst' + s_id.to_s
+  	%>
+  	 <div class="row ml-1">
+      <div class="field">  
+       <p><%= text_field_tag nst, st %></p>
+      </div>
+     </div>
+    <% end %> 
+
+     <div class="row ml-1">
+      <div class="field">  
+       <p>Add New Rationale:<br><%= text_field_tag "status_n", "" %></p>
+      </div>
+     </div>
+
+     <div class="actions">
+      <%= submit_tag 'Update' %>
+   </div>
+  </div>
+
+
+</div>
+
+<% end %>
+

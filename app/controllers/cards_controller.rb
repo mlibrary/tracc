@@ -772,6 +772,25 @@ end
   end
 end 
 
+def edit_status
+  status = Status.all
+  status.each do |s|
+    s_id = s.id
+    nst = 'nst' + s_id.to_s
+    s.status = params[nst]
+    s.save!
+    if (s.status.eql? '')
+      s.destroy!
+    end  
+  end  
+  # add new status
+  if (!params["status_n"].empty?)
+    s = Status.new
+    s.status = params["status_n"]
+    s.save!
+  end   
+
+end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
