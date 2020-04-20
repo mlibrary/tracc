@@ -11,7 +11,7 @@ class CycleReviewController < ApplicationController
 
   def add
  
- byebug
+ 
     review_type = params["review_type"]
     cycle = params["cycle"]
 
