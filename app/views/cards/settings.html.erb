@@ -42,16 +42,16 @@
 
 <p></p>
 
-<%= form_tag("edit_status", :enctype =>"multipart/form-data") do %>
+<%= form_tag("edit_rationale", :enctype =>"multipart/form-data") do %>
    
-<% status = Rationale.all %>
+<% rat = Rationale.all %>
 
 <div class="card">
   <div class="card-header">
     <h5> Edit Rationale</h5><p>TO DELETE AN ENTRY: LEAVE IT BLANK </p>
   </div>  
   <div class="card-body">  
-  	<% status.each do |s| 
+  	<% rat.each do |s| 
   		st = s.rationale
         s_id = s.id
         nst = 'nst' + s_id.to_s

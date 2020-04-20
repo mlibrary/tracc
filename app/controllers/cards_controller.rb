@@ -792,6 +792,26 @@ def edit_status
 
 end  
 
+def edit_rationale
+  status = Rationale.all
+  status.each do |s|
+    s_id = s.id
+    nst = 'nst' + s_id.to_s
+    s.rationale = params[nst]
+    s.save!
+    if (s.rationale.eql? '')
+      s.destroy!
+    end  
+  end  
+  # add new status
+  if (!params["status_n"].empty?)
+    s = Rationale.new
+    s.status = params["status_n"]
+    s.save!
+  end   
+
+end  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
