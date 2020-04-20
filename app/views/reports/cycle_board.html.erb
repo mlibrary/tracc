@@ -28,6 +28,7 @@
    <div class="row">
   <div class = "col  d-flex">
     <h4 style="padding-top: 20px"> <%=cycle%> Cycle Planning Board: Strategic </h4>
+
   </div>
   </div>    
           <div class="row" style="background-color: #F7F7F7">
@@ -54,7 +55,14 @@
 
            <div class="row">
              <div class="col border border-dark ">
-              <b><%= pro.short_name %></b><br>
+              <p style="padding-top: 10px;"><b><%= pro.short_name %></b></p>
+               <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
+    <div class="actions">
+      <%= hidden_field_tag 'cycle', params["cycle"] %>
+      <%= hidden_field_tag 'epic', pro.short_name %>
+      <%= submit_tag 'Edit Resources' %>
+   </div>
+    <% end %>
               <% #<br><b>....Objectives:</b><br> %>
              </div> 
              
@@ -138,7 +146,14 @@
 
            <div class="row">
              <div class="col border border-dark ">
-              <b><%= pro.short_name %></b><br>
+              <b><%= pro.short_name %></b>
+               <%= form_tag("/cards/tactical_resources2", :enctype =>"multipart/form-data") do %>
+                 <div class="actions">
+                  <%= hidden_field_tag 'cycle', params["cycle"] %>
+                  <%= hidden_field_tag 'epic', pro.short_name %>
+                  <%= submit_tag 'Edit Resources' %>
+                 </div>
+               <% end %>  
               <% #<br><b>....Objectives:</b><br> %>
              </div> 
              
