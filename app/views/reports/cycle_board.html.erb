@@ -163,7 +163,7 @@
                   <p style="text-align: center;">  <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %><br><%= ch.uniqname %>(<%= ch.chips%>)</p>
                   </div>
     
-                  <%= ch.uniqname %>(<%= ch.chips%>)
+                 
                 <% end %>
                 <% i = i +1 %>
                </div>
@@ -213,7 +213,7 @@
           ch = Chip.where(str).order(:uniqname) 
           ch.each do |one| %> 
              <div class="card card body">
-                  <p style="text-align: center; padding-top:5px;">  <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %><br><%= one.uniqname %>(<%= one.ops%>)</p>
+                  <p style="text-align: center; padding-top:8px;">  <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %><br><%= one.uniqname %>(<%= one.ops%>)</p>
                   </div>
           <% end %>  
           
