@@ -32,7 +32,7 @@
   </div>    
           <div class="row" style="background-color: #F7F7F7">
           
-            <div class = "col d-flex border border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px;">
+            <div class = "col border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px;">
               <b>&nbsp;</b>
             </div>  
            
@@ -40,7 +40,7 @@
               while (i < 4) do 
               
                 %>  
-            <div class="col d-flex border border-dark "  >
+            <div class="col border border-dark "  >
                 
       <p class="text-center" style="margin-top: auto; margin-bottom: auto; margin-left: auto; margin-right: auto; padding-top: 20px"><b><%= months[i] %> </b></p>
              </div>
@@ -53,7 +53,7 @@
            <% @pro_list.each do |pro| %>  
 
            <div class="row">
-             <div class="col d-flex border border-dark ">
+             <div class="col border border-dark ">
               <b><%= pro.short_name %></b><br>
               <% #<br><b>....Objectives:</b><br> %>
              </div> 
@@ -78,7 +78,7 @@
                @tracks.each do |t|
            %>
             <div class="row">
-             <div class="col d-flex border border-dark "  >
+             <div class="col border border-dark "  >
               <p style="padding-left: 10px"><%= t.track %></p>
              </div>
 
@@ -87,15 +87,14 @@
             <% i = 0
               while (i < 4) do 
                %> 
-               <div class="col d-flex border border-dark ">
+               <div class="col border border-dark ">
                 <% 
                 str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "' AND trackname='"+t.track + "'"  %>
-                <% @chips = ChipAssignment.where(str1) %>
+                <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
                 <% @chips.each do |ch| %>
-                <%= "\u263A".unicode_normalize %>
-                <%= "\u1F464".unicode_normalize %>
-    
-                  <%= ch.uniqname %>(<%= ch.chips%>)
+                  <div class="card card body">
+                  <p style="text-align: center;">  <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %><br><%= ch.uniqname %>(<%= ch.chips%>)</p>
+                  </div>
                 <% end %>
                 <% i = i +1 %>
                </div>
@@ -110,13 +109,13 @@
 <% if ((p_type.eql? "Tactical") || (p_type.eql? "All Boards") ) %>
 
 <div class="row">
-  <div class = "col  d-flex">
+  <div class = "col">
     <h4 style="padding-top: 40px"> <%=cycle%> Cycle Planning Board: Tactical</h4>
   </div>
 </div>    
           <div class="row" style="background-color: #F7F7F7">
           
-            <div class = "col d-flex border border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px;">
+            <div class = "col border border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px;">
               <b>&nbsp;</b>
             </div>  
            
@@ -124,7 +123,7 @@
               while (i < 4) do 
               
                 %>  
-            <div class="col d-flex border border-dark "  >
+            <div class="col border border-dark "  >
                 
       <p class="text-center" style="margin-top: auto; margin-bottom: auto; margin-left: auto; margin-right: auto; padding-top: 20px"><b><%= months[i] %> </b></p>
              </div>
@@ -136,7 +135,7 @@
      <% @pro_list1.each do |pro| %>  
 
            <div class="row">
-             <div class="col d-flex border border-dark ">
+             <div class="col border border-dark ">
               <b><%= pro.short_name %></b><br>
               <% #<br><b>....Objectives:</b><br> %>
              </div> 
@@ -154,13 +153,15 @@
             <% i = 0
               while (i < 4) do 
                %> 
-               <div class="col d-flex border border-dark ">
+               <div class="col border border-dark ">
                 <% 
                 str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "'"  %>
-                <% @chips = ChipAssignment.where(str1) %>
+                <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
                 <% @chips.each do |ch| %>
-                <%= "\u263A".unicode_normalize %>
-                <%= "\u1F464".unicode_normalize %>
+                <%#= "\u263A".unicode_normalize %>
+                <div class="card card body">
+                  <p style="text-align: center;">  <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %><br><%= ch.uniqname %>(<%= ch.chips%>)</p>
+                  </div>
     
                   <%= ch.uniqname %>(<%= ch.chips%>)
                 <% end %>
@@ -182,16 +183,23 @@
     
   %>
   <div class="row">
-  <div class = "col  d-flex">
+  <div class = "col" >
     <h4 style="padding-top: 40px"> <%=cycle%> Cycle Planning Board: Operational </h4>
   </div>
 </div> 
 
 <div class="row">
-  <% i = 0 
+  <%  
+
+  i = 0 
      while (i < 5) do %> 
-     <div class="col d-flex border border-dark ">
-      <p><b><%= dept[i] %></b>
+     <div class="col border border-dark " >
+      <p style="text-align: center; padding-top: 10px; "><b><%= dept[i] %></b></p>
+      <%  
+        str  = "dept LIKE '" + dept[i] + "'"
+        sum =  Chip.where(str).sum(:ops)
+      %>
+      <p>Total: <%= sum%> chips; <%= sum/4.00 %> FTE </p>
      </div>
      <% i = i +1 
         end %>
@@ -200,11 +208,13 @@
  <% i = 0 
      while (i < 5) do %> 
      
-      <div class="col d-flex border border-dark ">
+      <div class="col border border-dark ">
        <% str  = "dept LIKE '" + dept[i] + "'"
           ch = Chip.where(str).order(:uniqname) 
           ch.each do |one| %> 
-             <%=one.uniqname %>(<%=one.ops %>)
+             <div class="card card body">
+                  <p style="text-align: center; padding-top:5px;">  <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %><br><%= one.uniqname %>(<%= one.ops%>)</p>
+                  </div>
           <% end %>  
           
       
