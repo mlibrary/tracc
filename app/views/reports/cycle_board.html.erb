@@ -25,13 +25,13 @@
   <% # projects and tracks %>
    <% if ( (p_type.eql? "Strategic") || (p_type.eql? "All Boards") )%>  
 
-   <div class="row">
+   <div class="row ">
   <div class = "col  d-flex">
     <h4 style="padding-top: 20px"> <%=cycle%> Cycle Planning Board: Strategic </h4>
 
   </div>
   </div>    
-          <div class="row" style="background-color: #F7F7F7">
+          <div class="row sticky-top" style="background-color: #F7F7F7;">
           
             <div class = "col border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px;  padding-bottom: 20px;">
               <b>&nbsp;</b>
@@ -41,7 +41,7 @@
               while (i < 4) do 
               
                 %>  
-            <div class="col border border-dark "  >
+            <div class="col border border-dark"   >
                 
       <p class="text-center" style="margin-top: auto; margin-bottom: auto; margin-left: auto; margin-right: auto; padding-top: 20px; padding-bottom: 20px"><b><%= months[i] %> </b></p>
              </div>
@@ -55,7 +55,13 @@
 
            <div class="row">
              <div class="col border border-dark ">
-              <p style="padding-top: 10px;"><b><%= pro.short_name %></b></p>
+              
+              <%
+               str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
+               t_chips = ChipAssignment.where(str1).sum(:chips)
+               t_chips_fte = t_chips/4.00
+              %>
+              <p style="padding-top: 10px;"><b><%= pro.short_name %> (Total: <%=t_chips%> chips,<%=t_chips_fte%> FTE)</b></p>
                <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
     <div class="actions">
       <%= hidden_field_tag 'cycle', params["cycle"] %>
@@ -75,19 +81,21 @@
               %>
                
               <% end %>
-              
-         
-           
+      
          </div>
 
            <%
                str = "card_id = '" + pro.id.to_s + "'"
                @tracks = Track.where(str) 
                @tracks.each do |t|
+
+              str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "' AND trackname='"+t.track + "'"  
+              t_chips = ChipAssignment.where(str1).sum(:chips)
+              t_chips_fte = t_chips/4.00
            %>
             <div class="row">
              <div class="col border border-dark "  >
-              <p style="padding-left: 10px"><%= t.track %></p>
+              <p style="padding-left: 10px"><%= t.track %>(Total: <%=t_chips%> chips,<%=t_chips_fte%> FTE)</p>
              </div>
 
            

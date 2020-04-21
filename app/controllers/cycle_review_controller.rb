@@ -14,35 +14,76 @@ class CycleReviewController < ApplicationController
  
     review_type = params["review_type"]
     cycle = params["cycle"]
+    p_type = params["p_type"]
 
-    cards = Card.all
+    if (p_type.eql? "2")
+     str = "card_status LIKE 'In-Progress' AND activity_type LIKE '%Active%'"
+   else
+     str = "activity_type LIKE '%Strategic%'"
+   end
+
+    cards = Card.where(str)
+
     cards.each do |card|
-      id = card.id.to_s
-
-      if ( params["cards"][id]!= nil)
-        
-        s = params["cards"][id][:card_status]
-        r = params["cards"][id][:rationale]
-        c = params["cards"][id][:comments]
      
+       s_id = "s" + card.id.to_s + "_0" 
+        r_id  = "r" + card.id.to_s + "_0" 
+        c_id =  "c" + card.id.to_s + "_0" 
+        
+        s = params[s_id]
+        r = params[r_id]
+        c = params[c_id]
+
         card.rationale = r 
         card.comments = c
         card.card_status = s 
         card.save!
-        
-        cr1 = CycleReview.where("card_id=? AND review_type=? AND cycle=?",id,review_type,cycle)
+
+        cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,0,review_type,cycle)
         cr = cr1.first
         
         if (cr ==nil)
           cr = CycleReview.new
         end
         
-        cr.card_id = id
+        cr.card_id = card.id
         cr.status = s
         cr.rationale = r
         cr.notes = c 
         cr.cycle = cycle
         cr.review_type = review_type
+        cr.obj_id = 0
+        cr.save!
+      
+      
+      obj = Objective.where("card_id='"+card.id.to_s+"'")
+      obj.each do |o|
+
+        s_id = "s" + card.id.to_s + "_" + o.id.to_s
+        r_id  = "r" + card.id.to_s + "_" + o.id.to_s
+        c_id =  "c" + card.id.to_s + "_" + o.id.to_s
+        
+        s = params[s_id]
+        r = params[r_id]
+        c = params[c_id]
+     
+      
+        
+        cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,o.id,review_type,cycle)
+        cr = cr1.first
+        
+        if (cr ==nil)
+          cr = CycleReview.new
+        end
+        
+        
+        cr.card_id = card.id
+        cr.status = s
+        cr.rationale = r
+        cr.notes = c 
+        cr.cycle = cycle
+        cr.review_type = review_type
+        cr.obj_id = o.id
         cr.save!
 
       end
@@ -52,8 +93,6 @@ class CycleReviewController < ApplicationController
   end
     
   def update
-
-    
 
    #a = params["status_ids"] 
    cycle = params["cycle"]
@@ -68,13 +107,13 @@ class CycleReviewController < ApplicationController
 
    str1 = str + "AND cycle='"+cycle+"'"
    
-   @cards = Card.joins(:cycle_review).where(str1).order(:in_cycle) 
-
+   #@cards = Card.joins(:cycle_review).where(str1).order(:in_cycle) 
    
-   if (@cards.first.nil?) # no cyclereview found
+   
+   #if (@cards.first.nil?) # no cyclereview found
     #str1 = str1 + " AND in_cycle <= '"+cycle+"'"
      @cards = Card.where(str).order(:in_cycle)
-   end 
+   #end 
    
    
   end 
