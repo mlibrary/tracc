@@ -1,11 +1,13 @@
 
 
-<% r = Rationale.all %>
-<% s = Status.all  
+<% r_all = Rationale.all %>
+<% s_all = Status.all  
 %>
 
 <% i = 1 %>
-<% cycle = params["cycle"] %>
+<% cycle = params["cycle"] 
+   p_type = params["p_type"]
+%>
 <% review_type = params["review_type"] #1=mid, 2=end 
 
 if (review_type == "1")
@@ -17,23 +19,21 @@ params["review_type"] = review_type
 params["cycle"] = cycle
 %>
 
-
-   
   <%= form_tag(add_cycle_review_index_path, :enctype =>"multipart/form-data") do %>
   <div class="card">
   <div class="card-header">
     <h2><%=cycle%> <%=caption%> </h2>
+    <%= hidden_field_tag 'p_type', p_type %>
      <%= submit_tag 'Save' %> 
   </div>
   <div class="card-body"> 
-  <table  class="table table-striped">
-    <thead>
-      <tr>
-        <th >#</th>
-        <th >Short Name and Title</th>
-        <th >Status</th>
-        <th >Rationale</th>
-        <th >Comments</th>
+  <table  class="" border=1>
+    <thead class="sticky-top">
+      <tr >
+        <th style="text-align: center; padding-top: 10px;padding-bottom: 10px;">Short Name and Title</th>
+        <th style="text-align: center; padding-top: 10px;padding-bottom: 10px;">Status</th>
+        <th style="text-align: center; padding-top: 10px;padding-bottom: 10px;">Rationale</th>
+        <th style="text-align: center; padding-top: 10px;padding-bottom: 10px;">Comments</th>
       </tr>
     </thead>
     <tbody>
@@ -41,7 +41,7 @@ params["cycle"] = cycle
       <%= hidden_field_tag "cycle", cycle %>
 
       <% @cards.each do |card| %>
-      <%= fields_for "cards[]", card do |cd| %>
+      
           
       <%    cr1 = CycleReview.where("card_id=? AND review_type=? AND cycle=?",card.id,review_type,cycle)
           cr = cr1.first
@@ -49,25 +49,66 @@ params["cycle"] = cycle
           if (cr.nil?)
             saved_status = card.card_status
             saved_r = card.rationale
+            saved_n = card.comments
           else
             saved_status = cr.status
             saved_r = cr.rationale
-          end    
+            saved_n = cr.notes
+          end 
+          s = "s" + card.id.to_s + "_0" 
+          r = "r" + card.id.to_s + "_0"   
+          comment =  "c" + card.id.to_s + "_0" 
       %>
-      <tr>
-        <td> <%= i %><% i+=1 %></td>
-        <td><%= card.title %>( <%= card.short_name %>
+      <tr style="background-color: #CCC">
+        
+        <td><b><%= card.title %>( <%= card.short_name %>
           <% if (!card.in_cycle.nil?) %> , <%= card.in_cycle %>
           <% end %>
-        )
+        )</b>
         </td>
-        <td><%= cd.select :card_status, options_from_collection_for_select(s, "status", "status",:selected=>saved_status)  %></td>
-        <td> <%= cd.select :rationale, options_from_collection_for_select(r, "rationale", "rationale",:selected=>saved_r)  %></td>
-        <td><%= cd.text_field(:comments, size: 40) %></td>
-        
+        <td><%= select_tag s, options_from_collection_for_select(s_all, "status", "status",:selected=>saved_status)  %></td>
+        <td><%= select_tag r , options_from_collection_for_select(r_all, "rationale", "rationale",:selected=>saved_r) %></td>
+        <td> <%= text_area_tag comment,  saved_n , :rows => 2, :cols => 50%> </td>     
       </tr>
+
+
+       <%
+        obj = Objective.where("card_id='"+card.id.to_s+"'")
+        obj.each do |o| 
+
+         cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,o.id,review_type,cycle)
+          cr = cr1.first
+          
+          if (cr.nil?)
+            saved_status = card.card_status
+            saved_r = card.rationale
+            saved_n = card.comments
+          else
+            saved_status = cr.status
+            saved_r = cr.rationale
+            saved_n = cr.notes
+          end 
+           
+         s = "s" + card.id.to_s + "_" + o.id.to_s
+         r = "r" + card.id.to_s + "_" + o.id.to_s
+         comment =  "c" + card.id.to_s + "_" + o.id.to_s
+         
+        %>
+       
+         <tr>
+        
+        <td><p>...<%= o.objective%></p>
+        </td>
+        <td><%= select_tag s, options_from_collection_for_select(s_all, "status", "status",:selected=>saved_status)  %></td>
+        <td> <%= select_tag r , options_from_collection_for_select(r_all, "rationale", "rationale",:selected=>saved_r)  %></td>
+        <td>
+          <%= text_area_tag comment,  saved_n , :rows => 2, :cols => 50%>
+        </td>     
+      </tr>
+        <% end %>
+
       <% end %>
-    <% end %>
+    
     </tbody>
   </table>
 </div>
