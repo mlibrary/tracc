@@ -91,7 +91,7 @@
 
               str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "' AND trackname='"+t.track + "'"  
               t_chips = ChipAssignment.where(str1).sum(:chips)
-              t_chips_fte = t_chips/16.00
+              t_chips_fte = t_chips
            %>
             <div class="row">
              <div class="col border border-dark "  >
