@@ -192,7 +192,13 @@
                 <%#= "\u263A".unicode_normalize %>
                 
                 <div class="card card body">
-                  <p style="text-align: center;">  <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %><br><%= ch.uniqname %>(<%= ch.chips%>)</p>
+                  <p style="text-align: center;">  
+                   <% cnt = 0
+                      while (cnt < ch.chips) do 
+                      cnt = cnt + 1 %>
+                      <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
+                      <% end %>
+                      <br><%= ch.uniqname %></p>
                   </div>
                 
                  
@@ -245,7 +251,13 @@
           ch = Chip.where(str).order(:uniqname) 
           ch.each do |one| %> 
              <div class="card card body">
-                  <p style="text-align: center; padding-top:8px;">  <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %><br><%= one.uniqname %>(<%= one.ops%>)</p>
+                  <p style="text-align: center; padding-top:8px;"> 
+                      <% cnt = 0
+                      while (cnt < one.ops) do 
+                      cnt = cnt + 1 %>
+                      <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %>
+                      <% end %>
+                  <br><%= one.uniqname %></p>
                   </div>
           <% end %>  
           
