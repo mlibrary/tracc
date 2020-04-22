@@ -59,7 +59,7 @@
               <%
                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                t_chips = ChipAssignment.where(str1).sum(:chips)
-               t_chips_fte = t_chips/16.00
+               t_chips_fte = t_chips
               %>
               <p style="padding-top: 10px;"><b><%= pro.short_name %> (Total: <%=t_chips%> chips, <%=t_chips_fte%> FTE)</b></p>
                <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
