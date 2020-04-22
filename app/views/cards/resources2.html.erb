@@ -16,23 +16,114 @@ while (i<=4) do
   end
 end 
 
+str = "card_id = '" + @card_one.first.id.to_s + "'" 
+    tracks = Track.where(str) 
+
+    temp_chips = Chip.order(:uniqname)
+    chips = ['']
+    temp_chips.each do |t|
+      chips << t.uniqname
+    end
+
 %>
 
-<h4 style="padding-bottom: 10px;"> <%=cycle%> Update Resources for: <%=params["epic"]%></h4>
-  <%= form_tag("add_resource", :enctype =>"multipart/form-data") do  %>
-     <%= hidden_field_tag 'epic', params["epic"] %>
-     <%= hidden_field_tag 'cycle', params["cycle"] %>
-     <%= hidden_field_tag 'card_id', @card_one.first.id %>
-     <p style="padding-bottom: 20px;"><%= submit_tag 'Add Resources' %></p>
-   <% end %>
+<h4 style="padding-bottom: 10px;"> <%=cycle%> Add/Edit Resources for: <%=params["epic"]%></h4>
+  <%#= form_tag("add_resource", :enctype =>"multipart/form-data") do  %>
+     <%#= hidden_field_tag 'epic', params["epic"] %>
+     <%#= hidden_field_tag 'cycle', params["cycle"] %>
+     <%#= hidden_field_tag 'card_id', @card_one.first.id %>
+     <%#<p style="padding-bottom: 20px;"><%= submit_tag 'Add Resources' %>
+   <% #end %>
+<div class="card">
+  <div class="card-header">
+    <b>Add:</b>
+  </div>
+  <div class="card-body">
+<%= form_tag("save_resources", :enctype =>"multipart/form-data") do  %>
 
+ <div class="row ml-1">
+
+    <div class="field">
+     Track: 
+     <%= select_tag "track", options_from_collection_for_select(tracks, "track", "track")  %>
+   </div>
+</div>
+
+ <div class="row ml-1">
+    <div class="field">
+     Month: 
+     <%= select_tag "month1", options_for_select(months)  %>
+ 
+     Uniqname:
+     <%= select_tag "uniqname1", options_for_select(chips)  %>
+      Number of chips:
+     <%= text_field_tag 'num_chips1', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     Month: 
+     <%= select_tag "month2", options_for_select(months)  %> 
+     Uniqname:
+     <%= select_tag "uniqname2", options_for_select(chips)  %>
+      Number of chips:
+     <%= text_field_tag 'num_chips2', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     Month: 
+     <%= select_tag "month3", options_for_select(months)  %> 
+     Uniqname:
+     <%= select_tag "uniqname3", options_for_select(chips)  %>
+      Number of chips:
+     <%= text_field_tag 'num_chips3', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     Month: 
+     <%= select_tag "month4", options_for_select(months)  %> 
+     Uniqname:
+     <%= select_tag "uniqname4", options_for_select(chips)  %>
+      Number of chips:
+     <%= text_field_tag 'num_chips4', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+ 
+
+      <div class="actions">
+        <%= hidden_field_tag 'epic', params["epic"] %>
+        <%= hidden_field_tag 'cycle', params["cycle"] %>
+        <%= submit_tag 'Save' %>
+      </div>
+
+     <% 
+       end 
+     %>
+     
+</div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <b>Edit:</b>
+  </div>
+  <div class="card-body">
+<%#------%>
+<p style="padding-top: 15px"></p>
   <% @tracks.all.each do |t| 
    
   %> 
+
   <%= form_tag("update_resources", :enctype =>"multipart/form-data") do  %> 
- <div class="card" style="padding-top: 5px">
+ <div class="card">
   <div class="card-header">
-    <h5>Track: <%=t.track%></h5>
+    <h6>Track: <%=t.track%></h6>
   </div>  
  <div class="card-body"> 
   <div class="row">
@@ -84,6 +175,8 @@ end
 </div>
  <%end # form %>
 <% end%>
+</div>
+</div>
 
 
 

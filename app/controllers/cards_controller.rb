@@ -245,28 +245,31 @@ end
      @chips.all.each do |chip| 
       
       flag = true
+      found = false
       i = 1
       while (flag)
-        if chip.month.eql? (months[i])
+        if ( (chip.month.eql? (months[i])) && (chip.trackname.eql? track))
           flag = false
+          found = true
           uniqname_str = chip.uniqname + i.to_s
         end
         i = i +1 
         if (i>6) 
           flag = false 
         end  
-      end        
-      chip.chips = params[uniqname_str]
-      if (chip.chips.nil?)
+      end   
+      if (found)     
+       chip.chips = params[uniqname_str]
+       if (chip.chips.nil?)
         chip.chips = 0 
-      end
+       end
         
-      if (chip.chips <=0)
+       if (chip.chips <=0)
         chip.destroy!
-      else
+       else
         chip.save!  
+       end  
       end  
-       
      end 
 
 
