@@ -62,7 +62,7 @@
                t_chips = t_chips/4.00
                t_chips_fte = t_chips/4.00
               %>
-              <p style="padding-top: 10px;"><b><%= pro.short_name %> </b></p>
+              <h6 style="padding-top: 10px;"><b><%= pro.title %> </b></h6>
               <p>Total (average per month): <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
                <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
     <div class="actions">
@@ -98,8 +98,9 @@
            %>
             <div class="row">
              <div class="col border border-dark "  >
-              <p style="padding-left: 10px"><%= t.track %></p>
+              <p style="padding-top: 5px;"><b><%= t.track %></b></p>
               <p>Total (average per month): <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <p>Consultants: Consultant1, Consultant2, Consultant3</p> 
              </div>
 
            
@@ -113,8 +114,8 @@
                 <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
                 <% @chips.each do |ch| %>
                   
-                  <div class="card card body">
-                  <p style="text-align: center;"> 
+                  <div class="card card body" style="padding-top: 5px;">
+                  <p style="text-align: center; "> 
                       <% cnt = 0
                       if (!ch.chips.nil?)
                         while (cnt < ch.chips) do 
