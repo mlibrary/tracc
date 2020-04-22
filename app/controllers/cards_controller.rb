@@ -257,11 +257,14 @@ end
         end  
       end        
       chip.chips = params[uniqname_str]
-
-      chip.save!
-      
+      if (chip.chips.nil?)
+        chip.chips = 0 
+      end
+        
       if (chip.chips <=0)
         chip.destroy!
+      else
+        chip.save!  
       end  
        
      end 
