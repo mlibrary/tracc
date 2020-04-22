@@ -59,9 +59,9 @@
               <%
                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                t_chips = ChipAssignment.where(str1).sum(:chips)
-               t_chips_fte = t_chips/4.00
+               t_chips_fte = t_chips/16.00
               %>
-              <p style="padding-top: 10px;"><b><%= pro.short_name %> (Total: <%=t_chips%> chips,<%=t_chips_fte%> FTE)</b></p>
+              <p style="padding-top: 10px;"><b><%= pro.short_name %> (Total: <%=t_chips%> chips, <%=t_chips_fte%> FTE)</b></p>
                <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
     <div class="actions">
       <%= hidden_field_tag 'cycle', params["cycle"] %>
@@ -91,11 +91,11 @@
 
               str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "' AND trackname='"+t.track + "'"  
               t_chips = ChipAssignment.where(str1).sum(:chips)
-              t_chips_fte = t_chips/4.00
+              t_chips_fte = t_chips/16.00
            %>
             <div class="row">
              <div class="col border border-dark "  >
-              <p style="padding-left: 10px"><%= t.track %>(Total: <%=t_chips%> chips,<%=t_chips_fte%> FTE)</p>
+              <p style="padding-left: 10px"><%= t.track %>(Total: <%=t_chips%> chips, <%=t_chips_fte%> FTE)</p>
              </div>
 
            
@@ -110,7 +110,13 @@
                 <% @chips.each do |ch| %>
                   
                   <div class="card card body">
-                  <p style="text-align: center;">  <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %><br><%= ch.uniqname %>(<%= ch.chips%>)</p>
+                  <p style="text-align: center;"> 
+                   <% cnt = 0
+                      while (cnt < ch.chips) do 
+                      cnt = cnt + 1 %>
+                      <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
+                      <% end %>
+                      <br><%= ch.uniqname %></p>
                   </div>
                   
                 <% end %>
@@ -186,7 +192,13 @@
                 <%#= "\u263A".unicode_normalize %>
                 
                 <div class="card card body">
-                  <p style="text-align: center;">  <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %><br><%= ch.uniqname %>(<%= ch.chips%>)</p>
+                  <p style="text-align: center;">  
+                   <% cnt = 0
+                      while (cnt < ch.chips) do 
+                      cnt = cnt + 1 %>
+                      <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
+                      <% end %>
+                      <br><%= ch.uniqname %></p>
                   </div>
                 
                  
@@ -239,7 +251,13 @@
           ch = Chip.where(str).order(:uniqname) 
           ch.each do |one| %> 
              <div class="card card body">
-                  <p style="text-align: center; padding-top:8px;">  <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %><br><%= one.uniqname %>(<%= one.ops%>)</p>
+                  <p style="text-align: center; padding-top:8px;"> 
+                      <% cnt = 0
+                      while (cnt < one.ops) do 
+                      cnt = cnt + 1 %>
+                      <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %>
+                      <% end %>
+                  <br><%= one.uniqname %></p>
                   </div>
           <% end %>  
           
