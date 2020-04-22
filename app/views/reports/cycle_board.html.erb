@@ -59,10 +59,11 @@
               <%
                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                t_chips = ChipAssignment.where(str1).sum(:chips)
-               t_chips_fte = t_chips/16.00
+               t_chips = t_chips/4.00
+               t_chips_fte = t_chips/4.00
               %>
               <p style="padding-top: 10px;"><b><%= pro.short_name %> </b></p>
-              <p>Total: <%=t_chips %> chips, <%=t_chips_fte %> FTE</p>
+              <p>Total (average per month): <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
                <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
     <div class="actions">
       <%= hidden_field_tag 'cycle', params["cycle"] %>
@@ -92,12 +93,13 @@
 
               str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "' AND trackname='"+t.track + "'"  
               t_chips = ChipAssignment.where(str1).sum(:chips)
-              t_chips_fte = t_chips/16.00
+              t_chips = t_chips/4.00
+              t_chips_fte = t_chips/4.00
            %>
             <div class="row">
              <div class="col border border-dark "  >
               <p style="padding-left: 10px"><%= t.track %></p>
-              <p>Total: <%=t_chips %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <p>Total (average per month): <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
              </div>
 
            
