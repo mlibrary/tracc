@@ -90,7 +90,7 @@ cap =Array.new
  
 
 
-status_keys = ['Capacity','Progress']
+status_keys = ['Allocation','Progress']
 x_labels = ['LSP | CS | LS | DB | DCP | Fulcrum | Website | HT']
 title =""
 details_data = Gchart.bar( %>
@@ -111,7 +111,7 @@ details_data = Gchart.bar( %>
 
 # ---- end of capacity and progress details ------
 
-status_keys_c = ['Capacity']
+status_keys_c = ['Allocation']
 x_labels = ['LSP | CS | LS | DB | DCP | Fulcrum | Website | HT']
 title =""
 strategic_cap = Gchart.bar( %>
@@ -124,7 +124,7 @@ strategic_cap = Gchart.bar( %>
                   <% :stacked => false, %>
                   <% :legend_position => 'bottom', %>
                   <% :axis_with_labels => [['x'], ['y']], %>
-                  <% :max_value => 30, %>
+                  <% :max_value => 20, %>
                   <% :min_value => 0, %>
                   <% :bar_width_and_spacing => [50,6], %>
                   <% :axis_labels => x_labels, %>
@@ -161,7 +161,7 @@ strategic_pro = Gchart.bar( %>
      <div class="card-header" style="background: <%= color2 %>">
        <h4>
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-        Strategic Projects:  Capacity and Progress </a>
+        Strategic Projects:  Allocation and Progress </a>
       </h4>
     </div>
 
@@ -172,14 +172,26 @@ strategic_pro = Gchart.bar( %>
           
           <div class="col-md-6"> 
               
-              <p><%= image_tag strategic_cap%></p>
-              <p><%= image_tag strategic_pro%></p>
+              
+                <div class="card">
+                 <div class="card-header">Allocation</div> 
+                 <div class="card-body">
+                  <%= image_tag strategic_cap%>
+                 </div>
+                </div> 
+                <p style="padding-top: 10px;">
+                <div class="card">
+                  <div class="card-header">Progress</div>
+                  <div class="card-body">
+                    <%= image_tag strategic_pro%>
+                  </div>  
+                </div> 
 
           </div>   
       </div>
       <div class="row" style="padding-top: 20px">
         <div class="col">
-          <b>Title:<br>Capacity:<br>Progress:</b>
+          <b>Title:<br>Allocation:<br>Progress:</b>
         </div>
         <% 
               i = 0 
@@ -266,6 +278,38 @@ strategic_pro = Gchart.bar( %>
   </div>
 
 </div>  
+
+<p style="padding-top: 20px;"></p>
+
+<div class="card" style="background: <%=color1 %>">
+      <div class="card-header" style="background: <%= color2 %>">
+      <h4 >
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+        Status </a>
+      </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse show">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">  
+            <% str = "activity_type LIKE 'Strategic' "
+               @s_list = Card.where(str) 
+               @s_list.each do |s| %>  
+                 <p align="center"><%= s.short_name%>: <%= s.card_status %> (<%= s.rationale %>) </p>
+         
+               <% end %>   
+          </div>
+          <div class="col-md-6">      
+            <% str = "activity_type LIKE '%Active%' "
+               @s_list = Card.where(str) 
+               @s_list.each do |s| %>  
+                  <p align="center"><%= s.short_name%>: <%= s.card_status %> (<%= s.rationale %>) </p>
+               <% end %>    
+          </div>  
+        </div>  
+      </div>
+    </div>
+  </div>
 <%
  ch = Chip.order(:dept)
  totalops = 0
@@ -292,6 +336,7 @@ strategic_pro = Gchart.bar( %>
  total_cap = Gchart.pie_3d(:title => "Total Capacity", :labels => "Project|Ops/Services", :data => totalfte, :size => '500x200')
 pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tactical|Unassigned", :data => tact_s, :size => '500x200')
 %>
+
 <p style="padding-top: 20px;" >
 </p>
   <div class="card" style="background: <%=color1 %>">
@@ -319,36 +364,6 @@ pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tac
     </div>
   </div>
 
-<p style="padding-top: 20px;"></p>
 
-<div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-      <h4 >
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-        Project Status </a>
-      </h4>
-    </div>
-    <div id="collapse4" class="panel-collapse collapse show">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">  
-            <% str = "activity_type LIKE 'Strategic' "
-               @s_list = Card.where(str) 
-               @s_list.each do |s| %>  
-                 <p align="center"><%= s.short_name%>: <%= s.card_status %> (<%= s.rationale %>) </p>
-         
-               <% end %>   
-          </div>
-          <div class="col-md-6">      
-            <% str = "activity_type LIKE '%Active%' "
-               @s_list = Card.where(str) 
-               @s_list.each do |s| %>  
-                  <p align="center"><%= s.short_name%>: <%= s.card_status %> (<%= s.rationale %>) </p>
-               <% end %>    
-          </div>  
-        </div>  
-      </div>
-    </div>
-  </div>
 </div>
 </div>
