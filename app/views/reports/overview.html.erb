@@ -249,9 +249,12 @@ strategic_pro = Gchart.bar( %>
           <div class="col-md-3">
             <%= active.short_name%>
             <p>Capacity Allocated: <%= totalfte.round(2) %>FTE</p>
+          
+            <% if (total>0) %>
             <p>Progress: </p>
               <div class="progress"> <div class="progress-bar bg-info" role="progressbar" style="width: <%=total%>%;" aria-valuenow="<%=total%>" aria-valuemin="0" aria-valuemax="100"> <%=total%>%
           </div> </div>
+          <% end %>
          </div>
          <% end %> 
          </div> 
