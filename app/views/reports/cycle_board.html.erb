@@ -114,11 +114,13 @@
                   <div class="card card body">
                   <p style="text-align: center;"> 
                       <% cnt = 0
-                      while (cnt < ch.chips) do 
-                      cnt = cnt + 1 %>
-                      <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
-                      <% end %>
-                      <br><%= ch.uniqname %></p>
+                      if (!ch.chips.nil?)
+                        while (cnt < ch.chips) do 
+                          cnt = cnt + 1 %>
+                          <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
+                        <% end %>
+                        <br><%= ch.uniqname %></p>
+                      <% end %>  
                   </div>
                   
                 <% end %>
@@ -196,11 +198,13 @@
                 <div class="card card body">
                   <p style="text-align: center;">  
                    <% cnt = 0
-                      while (cnt < ch.chips) do 
-                      cnt = cnt + 1 %>
-                      <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
-                      <% end %>
+                      if (!ch.chips.nil?)
+                        while (cnt < ch.chips) do 
+                          cnt = cnt + 1 %>
+                          <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
+                        <% end %>  
                       <br><%= ch.uniqname %></p>
+                      <% end %>
                   </div>
                 
                  
@@ -256,11 +260,13 @@
              <div class="card card body">
                   <p style="text-align: center; padding-top:8px;"> 
                       <% cnt = 0
-                      while (cnt < one.ops) do 
-                      cnt = cnt + 1 %>
-                      <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %>
+                      if ( (!one.ops.nil?) && (one.ops >0) )
+                        while (cnt < one.ops) do 
+                         cnt = cnt + 1 %>
+                         <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %>
+                        <% end %>
+                      <br><%= one.uniqname %></p>
                       <% end %>
-                  <br><%= one.uniqname %></p>
                   </div>
           <% end %>  
           
