@@ -1,8 +1,7 @@
 
 
 <% r_all = Rationale.all %>
-<% s_all = Status.all  
-%>
+<% s_all = Status.all  %>
 
 <% i = 1 %>
 <% cycle = params["cycle"] 
@@ -47,9 +46,9 @@ params["cycle"] = cycle
           cr = cr1.first
           
           if (cr.nil?)
-            saved_status = card.card_status
-            saved_r = card.rationale
-            saved_n = card.comments
+            saved_status = 'Not Recorded' #card.card_status
+            saved_r = 'Not Recorded' #card.rationale
+            saved_n = '' #card.comments
           else
             saved_status = cr.status
             saved_r = cr.rationale
@@ -61,10 +60,14 @@ params["cycle"] = cycle
       %>
       <tr style="background-color: #CCC">
         
-        <td><b><%= card.title %>( <%= card.short_name %>
+        <td><b>
+
+          <%= card.title %>( <%= card.short_name %>
           <% if (!card.in_cycle.nil?) %> , <%= card.in_cycle %>
           <% end %>
-        )</b>
+        )</b> <% if (p_type.eql? "2") %>
+            <i>[<%=card.card_type %>] </i>
+            <% end %>
         </td>
         <td><%= select_tag s, options_from_collection_for_select(s_all, "status", "status",:selected=>saved_status)  %></td>
         <td><%= select_tag r , options_from_collection_for_select(r_all, "rationale", "rationale",:selected=>saved_r) %></td>
@@ -80,9 +83,9 @@ params["cycle"] = cycle
           cr = cr1.first
           
           if (cr.nil?)
-            saved_status = card.card_status
-            saved_r = card.rationale
-            saved_n = card.comments
+            saved_status = 'Not Recorded'#card.card_status
+            saved_r = 'Not Recorded' #card.rationale
+            saved_n = '' #card.comments
           else
             saved_status = cr.status
             saved_r = cr.rationale
@@ -99,10 +102,19 @@ params["cycle"] = cycle
         
         <td><p>...<%= o.objective%></p>
         </td>
-        <td><%= select_tag s, options_from_collection_for_select(s_all, "status", "status",:selected=>saved_status)  %></td>
-        <td> <%= select_tag r , options_from_collection_for_select(r_all, "rationale", "rationale",:selected=>saved_r)  %></td>
         <td>
+          <% if (p_type.eql? "1") %>
+          <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",:selected=>saved_status)  %>
+            <% end %>
+          </td>
+        <td> 
+          <% if (p_type.eql? "1") %>
+            <%= select_tag r , options_from_collection_for_select(r_all, "rationale", "rationale",:selected=>saved_r)  %>
+           <% end %>   
+            </td>
+        <td> <% if (p_type.eql? "1") %>
           <%= text_area_tag comment,  saved_n , :rows => 2, :cols => 50%>
+          <% end %>
         </td>     
       </tr>
         <% end %>

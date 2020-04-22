@@ -17,10 +17,10 @@ class CycleReviewController < ApplicationController
     p_type = params["p_type"]
 
     if (p_type.eql? "2")
-     str = "card_status LIKE 'In-Progress' AND activity_type LIKE '%Active%'"
-   else
+     str = "activity_type LIKE '%Active%'"
+    else
      str = "activity_type LIKE '%Strategic%'"
-   end
+    end
 
     cards = Card.where(str)
 
@@ -55,9 +55,10 @@ class CycleReviewController < ApplicationController
         cr.obj_id = 0
         cr.save!
       
-      
-      obj = Objective.where("card_id='"+card.id.to_s+"'")
-      obj.each do |o|
+       if (p_type.eql? "1") 
+            
+        obj = Objective.where("card_id='"+card.id.to_s+"'")
+        obj.each do |o|
 
         s_id = "s" + card.id.to_s + "_" + o.id.to_s
         r_id  = "r" + card.id.to_s + "_" + o.id.to_s
@@ -86,10 +87,10 @@ class CycleReviewController < ApplicationController
         cr.obj_id = o.id
         cr.save!
 
-      end
-    end  
+      end #obj.each
+     end # if strategic
+    end  #card.each
     
-
   end
     
   def update
@@ -100,21 +101,20 @@ class CycleReviewController < ApplicationController
    p_type = params["p_type"]
    
    if (p_type.eql? "2")
-     str = "card_status LIKE 'In-Progress' AND activity_type LIKE '%Active%'"
+     str = "activity_type LIKE '%Active%'"
    else
      str = "activity_type LIKE '%Strategic%'"
    end
 
-   str1 = str + "AND cycle='"+cycle+"'"
+   #str1 = str + "AND cycle='"+cycle+"'"
    
    #@cards = Card.joins(:cycle_review).where(str1).order(:in_cycle) 
    
    
    #if (@cards.first.nil?) # no cyclereview found
     #str1 = str1 + " AND in_cycle <= '"+cycle+"'"
-     @cards = Card.where(str).order(:in_cycle)
+     @cards = Card.where(str).order(card_type: :desc)
    #end 
-   
    
   end 
 
