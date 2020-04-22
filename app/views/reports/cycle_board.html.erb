@@ -21,7 +21,7 @@
   end
 
 %>
-      
+ <div class="container">     
   <% # projects and tracks %>
    <% if ( (p_type.eql? "Strategic") || (p_type.eql? "All Boards") )%>  
 
@@ -34,7 +34,7 @@
           <div class="row sticky-top" style="background-color: #F7F7F7;">
           
             <div class = "col border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px;  padding-bottom: 20px;">
-              <b>&nbsp;</b>
+              <p style="text-align: center;"><b>Projects</b></p>
             </div>  
            
            <% i = 0
@@ -57,11 +57,12 @@
              <div class="col border border-dark ">
               
               <%
-               #str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
-               #t_chips = ChipAssignment.where(str1).sum(:chips)
-               #t_chips_fte = t_chips
+               str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
+               t_chips = ChipAssignment.where(str1).sum(:chips)
+               t_chips_fte = t_chips/16.00
               %>
               <p style="padding-top: 10px;"><b><%= pro.short_name %> </b></p>
+              <p>Total: <%=t_chips %> chips, <%=t_chips_fte %> FTE</p>
                <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
     <div class="actions">
       <%= hidden_field_tag 'cycle', params["cycle"] %>
@@ -89,13 +90,14 @@
                @tracks = Track.where(str) 
                @tracks.each do |t|
 
-              #str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "' AND trackname='"+t.track + "'"  
-              #t_chips = ChipAssignment.where(str1).sum(:chips)
-              #t_chips_fte = t_chips
+              str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "' AND trackname='"+t.track + "'"  
+              t_chips = ChipAssignment.where(str1).sum(:chips)
+              t_chips_fte = t_chips/16.00
            %>
             <div class="row">
              <div class="col border border-dark "  >
               <p style="padding-left: 10px"><%= t.track %></p>
+              <p>Total: <%=t_chips %> chips, <%=t_chips_fte.round(2) %> FTE</p>
              </div>
 
            
@@ -111,7 +113,11 @@
                   
                   <div class="card card body">
                   <p style="text-align: center;"> 
-                  
+                      <% cnt = 0
+                      while (cnt < ch.chips) do 
+                      cnt = cnt + 1 %>
+                      <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
+                      <% end %>
                       <br><%= ch.uniqname %></p>
                   </div>
                   
@@ -133,10 +139,10 @@
     <h4 style="padding-top: 40px"> <%=cycle%> Cycle Planning Board: Tactical</h4>
   </div>
 </div>    
-          <div class="row" style="background-color: #F7F7F7">
+          <div class="row sticky-top" style="background-color: #F7F7F7">
           
             <div class = "col border border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px; padding-bottom: 20px">
-              <b>&nbsp;</b>
+              <p style="text-align: center;"><b>Projects</b></p>
             </div>  
            
            <% i = 0
@@ -221,8 +227,9 @@
     <h4 style="padding-top: 40px"> <%=cycle%> Cycle Planning Board: Operational </h4>
   </div>
 </div> 
-
-<div class="row">
+</div>
+<div class="container">
+  <div class="row sticky-top" style="background-color: #F7F7F7">
   <%  
 
   i = 0 
@@ -264,8 +271,5 @@
        </div>
     
 <% end %>
-  
 </div>
-
-
 
