@@ -144,6 +144,42 @@ class CardsController < ApplicationController
     
   
   end
+
+  def edit_consultants
+     
+  end
+  
+  def save_consultants
+  epic=  params["epic"]
+     cycle = params["cycle"]
+     track = params["track"]
+     uniqname1 = params["uniqname1"]
+
+     str = "short_name LIKE '" + epic + "%'"   
+     @card_one = Card.where(str)
+
+     str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '"+cycle+"' AND trackname= '"+track +"'" 
+     @consult = Consultant.where(str)
+     @consult.each do |one|
+      uname = "uname" + one.id.to_s
+      uname_v = params[uname]
+      if (uname_v.length > 2)
+        one.uniqname =  uname_v
+        one.save!
+      else
+        one.destroy!  
+      end #if
+     end #consult.each
+
+     if (uniqname1.length >2)
+        n_c = Consultant.new
+        n_c.uniqname = uniqname1
+        n_c.trackname = track
+        n_c.cycle = cycle
+        n_c.card_id = @card_one.first.id 
+        n_c.save!
+     end #if
+  end  
   
   def save_resources
 

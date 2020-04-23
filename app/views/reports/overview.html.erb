@@ -65,7 +65,11 @@ cap =Array.new
               total+=ostatus
             end
           end    
-          total = total/cnt 
+          if (cnt>0)
+            total = total/cnt 
+          else
+            total = 0
+          end    
           # capacity
           totalfte = 0 
         
