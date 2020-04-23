@@ -110,7 +110,7 @@
                   consult.each do |one_c|
                     one_chip = Chip.where("uniqname LIKE '"+one_c.uniqname+"'") 
                     %>
-                    <br><%= one_chip.first.fname + " " + one_chip.first.lname %>
+                    <br><%= one_chip.first.fname + " " + one_chip.first.lname[0] + "." %>
                     <% end  %>
               </i></p>
               <% end %>
@@ -144,7 +144,7 @@
                           cnt = cnt + 1 %>
                           <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
                         <% end %>
-                        <br><%= one_chip.first.fname + " " + one_chip.first.lname %></p>
+                        <br><%= one_chip.first.fname  %></p>
                       <% end %>  
                   </div>
                   
@@ -207,7 +207,7 @@
                   consult.each do |one_c|
                     one_chip = Chip.where("uniqname LIKE '"+one_c.uniqname+"'") 
                     %>
-                    <br><%= one_chip.first.fname + " " + one_chip.first.lname %>
+                    <br><%= one_chip.first.fname + " " + one_chip.first.lname[0] + "."  %>
                     <% end  %>
               </i></p>
               <% end %> 
@@ -252,7 +252,7 @@
                           cnt = cnt + 1 %>
                           <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
                         <% end %>  
-                      <br><%= one_chip.first.fname + " " + one_chip.first.lname %></p>
+                      <br><%= one_chip.first.fname  %></p>
                       <% end %>
                   </div>
                 
@@ -316,7 +316,7 @@
                          cnt = cnt + 1 %>
                          <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %>
                         <% end %>
-                      <br><%= one_chip.first.fname + " " + one_chip.first.lname %></p>
+                      <br><%= one_chip.first.fname  %></p>
                       <% end %>
                   </div>
           <% end %>  
