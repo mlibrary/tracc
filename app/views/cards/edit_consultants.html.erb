@@ -1,0 +1,69 @@
+<%
+    cycle= params["cycle"]
+    epic=  params["epic"]
+    track = params["track"] 
+
+    str = "short_name LIKE '" + epic + "%'"   
+    @card_one = Card.where(str)
+
+    temp_chips = Chip.order(:uniqname)
+    chips = ['']
+    temp_chips.each do |t|
+      chips << t.uniqname
+    end
+
+%>
+
+  
+<div class="card">
+  <div class="card-header">
+    <h4 style="padding-bottom: 10px;"> <%=cycle%> Add/Edit Consultants for: <%=epic%>/<%=track%></h4>
+  </div>
+  <div class="card-body">
+   <%= form_tag("save_consultants", :enctype =>"multipart/form-data") do  %>
+   <%
+     str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '"+cycle+"' AND trackname= '"+track +"'" 
+     @consult = Consultant.where(str)
+     @consult.each do |one|
+     	uname = "uname" + one.id.to_s
+        
+   %>
+  <div class="row ml-1">
+    <div class="field">
+ 
+     Uniqname:
+     <%= select_tag uname, options_for_select(chips, one.uniqname)  %>
+   </div>
+</div>
+<% end %>
+
+ <div class="row ml-1">
+    <div class="field">
+ 
+     Add Consultant (Uniqname):
+     <%= select_tag "uniqname1", options_for_select(chips)  %>
+   </div>
+</div>
+
+      <div class="actions">
+        <%= hidden_field_tag 'epic', params["epic"] %>
+        <%= hidden_field_tag 'cycle', params["cycle"] %>
+        <%= hidden_field_tag 'track', params["track"] %>
+        <%= submit_tag 'Save' %>
+      </div>
+
+     <% 
+       end 
+     %>
+     
+
+
+
+</div>
+</div>
+
+
+
+
+
+

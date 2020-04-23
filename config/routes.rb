@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :cards do
     collection do
       get :settings, :import, :import_card, :import_complexity, :import_impact, :advance_search, :progress, :resources, :tactical_progress,  :tactical_resources, :edit_objectives
-      post :edit_status, :edit_rationale, :update, :progress2, :tactical_progress2,:save_progress, :resources2, :save_resources, :update_resources, :add_resource, :tactical_resources2, :edit_objectives2, :save_objectives
+      post :edit_status, :edit_rationale, :update, :progress2, :tactical_progress2,:save_progress, :resources2, :save_resources, :update_resources, :add_resource, :tactical_resources2, :edit_objectives2, :save_objectives, :edit_consultants,:save_consultants
     end
   end
 

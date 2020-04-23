@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_171517) do
+ActiveRecord::Schema.define(version: 2020_04_22_222900) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -184,6 +184,17 @@ ActiveRecord::Schema.define(version: 2020_04_20_171517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_complexities_on_card_id"
+  end
+
+  create_table "consultants", force: :cascade do |t|
+    t.integer "card_id"
+    t.string "uniqname"
+    t.string "type"
+    t.string "role"
+    t.string "trackname"
+    t.string "cycle"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cycle_reviews", force: :cascade do |t|
