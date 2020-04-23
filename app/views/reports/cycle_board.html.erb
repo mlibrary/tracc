@@ -239,7 +239,9 @@
                 <% 
                 str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "'"  %>
                 <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
-                <% @chips.each do |ch| %>
+                <% @chips.each do |ch| 
+                  one_chip = Chip.where("uniqname LIKE '"+ ch.uniqname+"'")
+                %>
                 <%#= "\u263A".unicode_normalize %>
                 
                 <div class="card card body">
@@ -250,7 +252,7 @@
                           cnt = cnt + 1 %>
                           <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
                         <% end %>  
-                      <br><%= ch.uniqname %></p>
+                      <br><%= one_chip.first.fname + " " + one_chip.first.lname %></p>
                       <% end %>
                   </div>
                 
@@ -303,7 +305,9 @@
       <div class="col border border-dark ">
        <% str  = "dept LIKE '" + dept[i] + "'"
           ch = Chip.where(str).order(:uniqname) 
-          ch.each do |one| %> 
+          ch.each do |one| 
+            one_chip = Chip.where("uniqname LIKE '"+ one.uniqname+"'")
+        %> 
              <div class="card card body">
                   <p style="text-align: center; padding-top:8px;"> 
                       <% cnt = 0
@@ -312,7 +316,7 @@
                          cnt = cnt + 1 %>
                          <%= image_tag("User2.png", :alt => 'User Icon', size:"30x30") %>
                         <% end %>
-                      <br><%= one.uniqname %></p>
+                      <br><%= one_chip.first.fname + " " + one_chip.first.lname %></p>
                       <% end %>
                   </div>
           <% end %>  
