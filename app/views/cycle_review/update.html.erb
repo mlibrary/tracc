@@ -17,30 +17,43 @@ end
 params["review_type"] = review_type
 params["cycle"] = cycle
 %>
+<script>
+function add_visual() {
+     var tbl = document.getElementById('tbl');
 
-  <%= form_tag(add_cycle_review_index_path, :enctype =>"multipart/form-data") do %>
+    var tr = tbl.getElementsByTagName('tr');
+    for (var i = 0; i < tr.length; i++) {
+        var tdlist=tr[i].getElementsByTagName('td');
+        for(var j=0; j<tdlist.length; j++)
+        {
+            var first_td = tdlist[j];
+            first_td.style.background = 'RED';
+        }
+    }
+}
+    
+
+</script>
+
+
+<div class="container">
   <div class="card">
-  <div class="card-header">
+    <div class="card-header">
+  <%= form_tag(add_cycle_review_index_path, :enctype =>"multipart/form-data") do %>
+  
     <h2><%=cycle%> <%=caption%> </h2>
     <%= hidden_field_tag 'p_type', p_type %>
-     <%= submit_tag 'Save' %> 
+     <%= submit_tag 'Save Cycle Review' %> 
   </div>
-  <div class="card-body"> 
-  <table  class="" border=1>
-    <thead class="sticky-top">
-      <tr >
-        <th style="text-align: center; padding-top: 10px;padding-bottom: 10px;">Short Name and Title</th>
-        <th style="text-align: center; padding-top: 10px;padding-bottom: 10px;">Status</th>
-        <th style="text-align: center; padding-top: 10px;padding-bottom: 10px;">Rationale</th>
-        <th style="text-align: center; padding-top: 10px;padding-bottom: 10px;">Comments</th>
-      </tr>
-    </thead>
-    <tbody>
+  
+
       <%= hidden_field_tag "review_type", review_type %>
       <%= hidden_field_tag "cycle", cycle %>
-
+</div>
+<div class="card-body">
       <% @cards.each do |card| %>
-      
+      <div class="row">
+        
           
       <%    cr1 = CycleReview.where("card_id=? AND review_type=? AND cycle=?",card.id,review_type,cycle)
           cr = cr1.first
@@ -58,27 +71,64 @@ params["cycle"] = cycle
           r = "r" + card.id.to_s + "_0"   
           comment =  "c" + card.id.to_s + "_0" 
       %>
-      <tr style="background-color: #CCC">
-        
-        <td><b>
-
-          <%= card.title %>( <%= card.short_name %>
-          <% if (!card.in_cycle.nil?) %> , <%= card.in_cycle %>
+        <div class="col border border-dark">
+          <p><b><%= card.title %>
+          <% if (p_type.eql? "2") %> ( <%=card.short_name%>,<%= card.in_cycle %>[<%=card.card_type %>]
           <% end %>
-        )</b> <% if (p_type.eql? "2") %>
-            <i>[<%=card.card_type %>] </i>
+        </b> </p>
+         
+           
+            <p><b>Status:</b><br>
+            <% s_all.each do |one_s| 
+            %>
+           
+            <%if (one_s.status.eql? saved_status) %>
+              <%= radio_button_tag s, one_s.status,  checked=true,  options = {} %> 
+            <% else %>
+               <%= radio_button_tag s, one_s.status, checked = false, options = {} %> 
             <% end %>
-        </td>
-        <td><%= select_tag s, options_from_collection_for_select(s_all, "status", "status",:selected=>saved_status)  %></td>
-        <td><%= select_tag r , options_from_collection_for_select(r_all, "rationale", "rationale",:selected=>saved_r) %></td>
-        <td> <%= text_area_tag comment,  saved_n , :rows => 2, :cols => 50%> </td>     
-      </tr>
-
-
+            <% if (one_s.status.eql? "In-Progress") %>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"70x30")%>
+            <% elsif (one_s.status.eql? "Slow Progress") %>
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"70x30")%> 
+            <% elsif (one_s.status.eql? "Paused") %>
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"70x30")%> 
+            <% elsif (one_s.status.eql? "Stopped") %>
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"70x30")%> 
+            <% elsif (one_s.status.eql? "Done") %>
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"70x30")%>
+            <% else %>
+            <%=one_s.status %>   
+            <% end %> 
+            <br>
+         
+          <%end%>
+       
+           </p>
+           <p><b>Rationale:</b>
+            <% r_all.each do |one_r| 
+            %>
+           
+            <%if (one_r.rationale.eql? saved_r) %>
+              <%= radio_button_tag r, one_r.rationale,  checked=true,  options = {} %> 
+            <% else %>
+               <%= radio_button_tag r, one_r.rationale, checked = false, options = {} %> 
+            <% end %>
+           <%= one_r.rationale %><br>
+           <% end %>
+          </p>
+        <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p>    
+     
+        </div>
+     
+<%# each track%>
+      <% if (p_type.eql? "1") %>
+           
        <%
-        obj = Objective.where("card_id='"+card.id.to_s+"'")
+        track_cnt = 0 
+        obj = Track.where("card_id='"+card.id.to_s+"'")
         obj.each do |o| 
-
+         track_cnt = track_cnt + 1
          cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,o.id,review_type,cycle)
           cr = cr1.first
           
@@ -98,37 +148,76 @@ params["cycle"] = cycle
          
         %>
        
-         <tr>
+       
+        <div class="col border border-dark">
         
-        <td><p>...<%= o.objective%></p>
-        </td>
-        <td>
-          <% if (p_type.eql? "1") %>
-          <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",:selected=>saved_status)  %>
+        <p><b><i>Track: <%= o.track%></i></b></p>
+       
+          
+        <p><b>Status:</b><br>
+            <% s_all.each do |one_s| 
+            %>
+           
+            <%if (one_s.status.eql? saved_status) %>
+              <%= radio_button_tag s, one_s.status,  checked=true,  options = {} %> 
+            <% else %>
+               <%= radio_button_tag s, one_s.status, checked = false, options = {} %> 
             <% end %>
-          </td>
-        <td> 
-          <% if (p_type.eql? "1") %>
-            <%= select_tag r , options_from_collection_for_select(r_all, "rationale", "rationale",:selected=>saved_r)  %>
-           <% end %>   
-            </td>
-        <td> <% if (p_type.eql? "1") %>
-          <%= text_area_tag comment,  saved_n , :rows => 2, :cols => 50%>
-          <% end %>
-        </td>     
-      </tr>
-        <% end %>
-
-      <% end %>
+            <% if (one_s.status.eql? "In-Progress") %>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"70x30")%>
+            <% elsif (one_s.status.eql? "Slow Progress") %>
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"70x30")%> 
+            <% elsif (one_s.status.eql? "Paused") %>
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"70x30")%> 
+            <% elsif (one_s.status.eql? "Stopped") %>
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"70x30")%> 
+            <% elsif (one_s.status.eql? "Done") %>
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"70x30")%>
+            <% else %>
+            <%=one_s.status %>   
+            <% end %> 
+            <br>
+         
+          <%end%>
+       
+           </p>
+           <p><b>Rationale:</b>
+            <% r_all.each do |one_r| 
+            %>
+           
+            <%if (one_r.rationale.eql? saved_r) %>
+              <%= radio_button_tag r, one_r.rationale,  checked=true,  options = {} %> 
+            <% else %>
+               <%= radio_button_tag r, one_r.rationale, checked = false, options = {} %> 
+            <% end %>
+           <%= one_r.rationale %><br>
+           <% end %>
+          </p>
+        <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p>    
+          
+        </div>
+        <% end #each track %>
+         <% 
+        track_cnt = 4-track_cnt 
+        while (track_cnt > 0) do
+            track_cnt = track_cnt-1
+        %>
+         <div class="col border border-light"></div>
+        <% end #while %>
+        <% end #if ptype %>
+        </div>
+       
+      <% end # each card%>
     
-    </tbody>
-  </table>
-</div>
+    </div>
+
 <div class="card-footer">
    <div class="actions">
-      <%= submit_tag 'Save' %>
+      <%= submit_tag 'Save Cycle Review' %>
    </div>
- </div>  
+  <% end #form%>
 </div>
-  <% end %>
+</div>
+</div>
+ 
 
