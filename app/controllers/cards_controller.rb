@@ -153,14 +153,19 @@ class CardsController < ApplicationController
 
      @cards.each do |one_c|
        ntrack = "ntrack" + one_c.id.to_s
+       otrack = "otrack" + one_c.id.to_s
+       
        @tracks = Track.where("card_id='"+one_c.id.to_s+"'")
        @tracks.each do |one_t| 
          t = "t"+ one_t.id.to_s
+         o = "o"+ one_t.id.to_s
+         
          t_val = params[t]
          if (t_val.empty?)
            one_t.destroy!
          else 
            one_t.track = t_val
+           one_t.status = params[o]
            one_t.save!
          end  
        end 
@@ -168,6 +173,7 @@ class CardsController < ApplicationController
        if (!params[ntrack].empty?)
         t = Track.new
         t.card_id = one_c.id
+        y.status = params[otrack]
         t.track = params[ntrack]
         t.epic_title = one_c.short_name
         t.save!
