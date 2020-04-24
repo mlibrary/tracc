@@ -118,7 +118,7 @@ params["cycle"] = cycle
         track_cnt = 0 
         obj = Track.where("card_id='"+card.id.to_s+"'")
         obj.each do |o| 
-         track_cnt = track_cnt + 1
+         
          cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,o.id,review_type,cycle)
           cr = cr1.first
           
@@ -135,10 +135,11 @@ params["cycle"] = cycle
          s = "s" + card.id.to_s + "_" + o.id.to_s
          r = "r" + card.id.to_s + "_" + o.id.to_s
          comment =  "c" + card.id.to_s + "_" + o.id.to_s
-         
+         if (!o.track.eql? "Project-Level")
+          track_cnt = track_cnt + 1
         %>
        
-       
+        
         <div class="col border border-dark">
         
         <p style="padding-top: 15px;"><b><i>Track: <%= o.track%></i></b></p>
@@ -186,6 +187,7 @@ params["cycle"] = cycle
         <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p>    
           
         </div>
+         <% end #if not project-level %>
         <% end #each track %>
          <% 
         track_cnt = 4-track_cnt 
