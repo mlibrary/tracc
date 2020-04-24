@@ -52,7 +52,11 @@
 
 
            <% @pro_list.each do |pro| %>  
-
+           <div class="row">
+             <div class="col ">
+              <p style="padding-top: 7px"></p>
+              </div>
+           </div>   
            <div class="row">
              <div class="col border border-dark ">
               
@@ -62,8 +66,8 @@
                t_chips = t_chips/4.00
                t_chips_fte = t_chips/4.00
               %>
-              <h6 style="padding-top: 10px;"><b><%= pro.title %> </b></h6>
-              <p>Total (average per month): <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <h6 style="padding-top: 15px;"><b><%= pro.title %> </b></h6>
+              <p>Total (average per month): <br><%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
                <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
     <div class="actions">
       <%= hidden_field_tag 'cycle', params["cycle"] %>
@@ -71,24 +75,14 @@
       <%= submit_tag 'Edit Resources' %>
    </div>
     <% end %>
-              <% #<br><b>....Objectives:</b><br> %>
-             </div> 
              
-              <%
-              str = "card_id = '" + pro.id.to_s + "' AND cycle='"+cycle+"'" 
-              @obj = Objective.where(str)
-              i = 0 
-              @obj.each do |o|
-                i = i + 1 
-              %>
-               
-              <% end %>
+             </div> 
       
          </div>
 
            <%
                str = "card_id = '" + pro.id.to_s + "'"
-               @tracks = Track.where(str) 
+               @tracks = Track.where(str).order(:status)
                @tracks.each do |t|
 
               str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "' AND trackname='"+t.track + "'"  
@@ -101,10 +95,10 @@
             <div class="row">
              <div class="col border border-dark "  >
               <p style="padding-top: 5px;"><b><%= t.track %></b></p>
-              <p>Total (average per month): <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <p>Total (average per month): <br><%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
               <% consult = Consultant.where(str1).order(:uniqname)
                 if (consult.count>0) %>
-                <p><i>Consultants: 
+                <p><i>Consultant(s): 
                 <%
 
                   consult.each do |one_c|
@@ -114,14 +108,7 @@
                     <% end  %>
               </i></p>
               <% end %>
-                <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
-                <div class="actions">
-                  <%= hidden_field_tag 'cycle', params["cycle"] %>
-                  <%= hidden_field_tag 'epic', pro.short_name %>
-                  <%= hidden_field_tag 'track', t.track %>
-                  <%= submit_tag 'Edit Consultants' %>
-                </div>
-    <% end %> 
+             
              </div>
 
            
@@ -186,10 +173,10 @@
           </div>
 
      <% @pro_list1.each do |pro| %>  
-
+          
            <div class="row">
              <div class="col border border-dark ">
-              <b><%= pro.short_name %></b>
+              <p><b><%= pro.short_name %></b></p>
                <%= form_tag("/cards/tactical_resources2", :enctype =>"multipart/form-data") do %>
                  <div class="actions">
                   <%= hidden_field_tag 'cycle', params["cycle"] %>
@@ -201,7 +188,7 @@
                 str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                 consult = Consultant.where(str1).order(:uniqname)
                 if (consult.count>0) %>
-                <p><i>Consultants: 
+                <p><i>Consultant(s): 
                 <%
 
                   consult.each do |one_c|

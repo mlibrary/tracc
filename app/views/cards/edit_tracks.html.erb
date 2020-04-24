@@ -1,0 +1,59 @@
+<%
+    
+
+%>
+
+
+<div class="card" >
+  <div class="card-header">
+    <h4 style="padding-bottom: 10px;"> Add/Edit Tracks</h4>
+  </div>
+  <div class="card-body">
+   <%= form_tag("save_tracks", :enctype =>"multipart/form-data") do  %>
+   <%
+     @cards = Card.where("activity_type LIKE '%Strategic%'")
+
+     @cards.each do |one_c|
+      %>
+      <p><b><%= one_c.short_name %></b></p>
+      <%
+        ntrack = "ntrack" + one_c.id.to_s
+        otrack = "otrack"+ one_c.id.to_s
+     	  @tracks = Track.where("card_id='"+one_c.id.to_s+"'")
+        @tracks.each do |one_t| 
+          t = "t"+one_t.id.to_s
+          o = "o"+one_t.id.to_s
+            
+      %>
+        <p><%= text_field_tag t, one_t.track %> Order:<%= text_field_tag o, one_t.status %></p>
+      <% end   %>
+      <div class="row ml-1" style="padding-top: 10px;">
+       <div class="field">
+         Add a Track :<br>
+          <%= text_field_tag ntrack, ""  %> Order:<%= text_field_tag otrack, '' %>
+      </div>
+      </div>
+      <hr>
+     <% end    %>
+    
+ 
+
+      <div class="actions">
+        <%= submit_tag 'Save Tracks' %>
+      </div>
+
+     <% 
+       end 
+     %>
+     
+
+
+
+</div>
+</div>
+
+
+
+
+
+

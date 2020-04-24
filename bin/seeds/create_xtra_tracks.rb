@@ -2,7 +2,6 @@
 Track.create(card_id:'1',epic_title: 'LSP',track: 'Project-Level', status: 0)
 Track.create(card_id:'2',epic_title: 'Catalog Search',track: 'Project-Level', status: 0)
 Track.create(card_id:'3',epic_title: 'Library Search',track: 'Project-Level', status: 0)
-Track.create(card_id:'3',epic_title: 'Library Search',track: 'Project-Level', status: 0)
 Track.create(card_id:'4',epic_title: 'Deep Blue',track: 'Project-Level', status: 0)
 Track.create(card_id:'5',epic_title: 'Digital Collections Platform',track: 'Project-Level', status: 0)
 Track.create(card_id:'6',epic_title: 'Fulcrum',track: 'Project-Level', status: 0)

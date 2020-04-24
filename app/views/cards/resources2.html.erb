@@ -28,12 +28,7 @@ str = "card_id = '" + @card_one.first.id.to_s + "'"
 %>
 
 <h4 style="padding-bottom: 10px;"> <%=cycle%> Add/Edit Resources for: <%=params["epic"]%></h4>
-  <%#= form_tag("add_resource", :enctype =>"multipart/form-data") do  %>
-     <%#= hidden_field_tag 'epic', params["epic"] %>
-     <%#= hidden_field_tag 'cycle', params["cycle"] %>
-     <%#= hidden_field_tag 'card_id', @card_one.first.id %>
-     <%#<p style="padding-bottom: 20px;"><%= submit_tag 'Add Resources' %>
-   <% #end %>
+    
 <div class="card">
   <div class="card-header">
     <b>Add:</b>
@@ -120,11 +115,22 @@ str = "card_id = '" + @card_one.first.id.to_s + "'"
    
   %> 
 
-  <%= form_tag("update_resources", :enctype =>"multipart/form-data") do  %> 
+   
  <div class="card">
   <div class="card-header">
     <h6>Track: <%=t.track%></h6>
-  </div>  
+
+       <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
+                <div class="actions">
+                  <%= hidden_field_tag 'cycle', params["cycle"] %>
+                  <%= hidden_field_tag 'epic', @card_one.first.short_name %>
+                  <%= hidden_field_tag 'track', t.track %>
+                  <%= submit_tag 'Add/Edit Consultants' %>
+                </div>
+    <% end %> 
+    
+  </div> 
+  <%= form_tag("update_resources", :enctype =>"multipart/form-data") do  %> 
  <div class="card-body"> 
   <div class="row">
     <% j = 0
