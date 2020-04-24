@@ -145,6 +145,36 @@ class CardsController < ApplicationController
   
   end
 
+  def edit_tracks
+  end
+  
+  def save_tracks
+     @cards = Card.where("activity_type LIKE '%Strategic%'")
+
+     @cards.each do |one_c|
+       ntrack = "ntrack" + one_c.id.to_s
+       @tracks = Track.where("card_id='"+one_c.id.to_s+"'")
+       @tracks.each do |one_t| 
+         t = "t"+ one_t.id.to_s
+         t_val = params[t]
+         if (t_val.empty?)
+           one_t.destroy!
+         else 
+           one_t.track = t_val
+           one_t.save!
+         end  
+       end 
+       # add new track 
+       if (!params[ntrack].empty?)
+        t = Track.new
+        t.card_id = one_c.id
+        t.track = params[ntrack]
+        t.epic_title = one_c.short_name
+        t.save!
+       end  
+     end 
+  end  
+
   def edit_consultants
      
   end
