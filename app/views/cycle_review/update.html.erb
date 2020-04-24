@@ -17,24 +17,6 @@ end
 params["review_type"] = review_type
 params["cycle"] = cycle
 %>
-<script>
-function add_visual() {
-     var tbl = document.getElementById('tbl');
-
-    var tr = tbl.getElementsByTagName('tr');
-    for (var i = 0; i < tr.length; i++) {
-        var tdlist=tr[i].getElementsByTagName('td');
-        for(var j=0; j<tdlist.length; j++)
-        {
-            var first_td = tdlist[j];
-            first_td.style.background = 'RED';
-        }
-    }
-}
-    
-
-</script>
-
 
 <div class="container">
   <div class="card">
@@ -71,8 +53,12 @@ function add_visual() {
           r = "r" + card.id.to_s + "_0"   
           comment =  "c" + card.id.to_s + "_0" 
       %>
-        <div class="col border border-dark">
-          <p><b><%= card.title %>
+         <% if (p_type.eql? "2") %>
+           <div class="col-md-12 border border-dark">
+         <% else %>
+           <div class="col border border-dark">
+         <% end %>   
+          <p style="padding-top: 15px;"><b><%= card.title %>
           <% if (p_type.eql? "2") %> ( <%=card.short_name%>,<%= card.in_cycle %>[<%=card.card_type %>]
           <% end %>
         </b> </p>
@@ -105,7 +91,7 @@ function add_visual() {
           <%end%>
        
            </p>
-           <p><b>Rationale:</b>
+           <p><b>Rationale:</b><br>
             <% r_all.each do |one_r| 
             %>
            
@@ -117,7 +103,11 @@ function add_visual() {
            <%= one_r.rationale %><br>
            <% end %>
           </p>
-        <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p>    
+          <% if (p_type.eql? "2") %>
+            <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 70%> </p>  
+          <% else %>
+          <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p> 
+          <% end %>     
      
         </div>
      
@@ -151,7 +141,7 @@ function add_visual() {
        
         <div class="col border border-dark">
         
-        <p><b><i>Track: <%= o.track%></i></b></p>
+        <p style="padding-top: 15px;"><b><i>Track: <%= o.track%></i></b></p>
        
           
         <p><b>Status:</b><br>
@@ -181,7 +171,7 @@ function add_visual() {
           <%end%>
        
            </p>
-           <p><b>Rationale:</b>
+           <p><b>Rationale:</b><br>
             <% r_all.each do |one_r| 
             %>
            
