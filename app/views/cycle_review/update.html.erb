@@ -64,7 +64,7 @@ params["cycle"] = cycle
         </b> </p>
          
            
-            <p><b>Status:</b><br>
+            <p><b>State:</b><br>
             <% s_all.each do |one_s| 
             %>
            
@@ -74,24 +74,24 @@ params["cycle"] = cycle
                <%= radio_button_tag s, one_s.status, checked = false, options = {} %> 
             <% end %>
             <% if (one_s.status.eql? "In-Progress") %>
-             <%= image_tag("Play.png", :alt => 'User Icon', size:"70x30")%>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
             <% elsif (one_s.status.eql? "Slow Progress") %>
-             <%= image_tag("Slow.png", :alt => 'User Icon', size:"70x30")%> 
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%>
             <% elsif (one_s.status.eql? "Paused") %>
-             <%= image_tag("Paused.png", :alt => 'User Icon', size:"70x30")%> 
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
             <% elsif (one_s.status.eql? "Stopped") %>
-             <%= image_tag("Stop.png", :alt => 'User Icon', size:"70x30")%> 
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
             <% elsif (one_s.status.eql? "Done") %>
-             <%= image_tag("Done.png", :alt => 'User Icon', size:"70x30")%>
-            <% else %>
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>
+            <% end %>
             <%=one_s.status %>   
-            <% end %> 
+            
             <br>
          
           <%end%>
        
            </p>
-           <p><b>Rationale:</b><br>
+           <p><b>Status:</b><br>
             <% r_all.each do |one_r| 
             %>
            
@@ -123,8 +123,8 @@ params["cycle"] = cycle
           cr = cr1.first
           
           if (cr.nil?)
-            saved_status = 'Not Recorded'#card.card_status
-            saved_r = 'Not Recorded' #card.rationale
+            saved_status = o.status#card.card_status
+            saved_r = o.rationale #card.rationale
             saved_n = '' #card.comments
           else
             saved_status = cr.status
@@ -145,7 +145,7 @@ params["cycle"] = cycle
         <p style="padding-top: 15px;"><b><i>Track: <%= o.track%></i></b></p>
        
           
-        <p><b>Status:</b><br>
+        <p><b>State:</b><br>
             <% s_all.each do |one_s| 
             %>
            
@@ -155,24 +155,23 @@ params["cycle"] = cycle
                <%= radio_button_tag s, one_s.status, checked = false, options = {} %> 
             <% end %>
             <% if (one_s.status.eql? "In-Progress") %>
-             <%= image_tag("Play.png", :alt => 'User Icon', size:"70x30")%>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
             <% elsif (one_s.status.eql? "Slow Progress") %>
-             <%= image_tag("Slow.png", :alt => 'User Icon', size:"70x30")%> 
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
             <% elsif (one_s.status.eql? "Paused") %>
-             <%= image_tag("Paused.png", :alt => 'User Icon', size:"70x30")%> 
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
             <% elsif (one_s.status.eql? "Stopped") %>
-             <%= image_tag("Stop.png", :alt => 'User Icon', size:"70x30")%> 
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
             <% elsif (one_s.status.eql? "Done") %>
-             <%= image_tag("Done.png", :alt => 'User Icon', size:"70x30")%>
-            <% else %>
-            <%=one_s.status %>   
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
             <% end %> 
+            <%=one_s.status %> 
             <br>
          
           <%end%>
        
            </p>
-           <p><b>Rationale:</b><br>
+           <p><b>Status:</b><br>
             <% r_all.each do |one_r| 
             %>
            
