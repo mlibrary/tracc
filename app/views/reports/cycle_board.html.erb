@@ -21,7 +21,8 @@
   end
 
 %>
- <div class="container">     
+
+
   <% # projects and tracks %>
    <% if ( (p_type.eql? "Strategic") || (p_type.eql? "All Boards") )%>  
 
@@ -50,7 +51,7 @@
              end %>  
           </div>
 
-
+            <div class="panel-group" id="accordion">
            <% @pro_list.each do |pro| %>  
            <div class="row">
              <div class="col ">
@@ -66,7 +67,7 @@
                t_chips = t_chips/4.00
                t_chips_fte = t_chips/4.00
               %>
-              <h6 style="padding-top: 15px;"><b><%= pro.title %> </b></h6>
+              <h6 style="padding-top: 5px;"><b><%= pro.title %> </b></h6>
               <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
               <hr>
                 <p>State:
@@ -83,8 +84,25 @@
             <% end %> 
             (<%=pro.card_status %>)
              </p>
-             <p>Status: <%= pro.rationale %></p>
+            
 
+             <p>Status: <%= pro.rationale %></p>
+               
+               <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a>
+              
+
+               <div id="collapse1" class="panel-collapse collapse">
+                <p style="padding-top: 5px">
+                  <%
+                 o_cnt = 0 
+                 o_all = Objective.where(str1)
+                 o_all.each do |o|
+                  o_cnt = o_cnt + 1 
+                   %>
+                 <p><%=o_cnt%>. <%=o.objective%>  </p>
+                   <% end %>
+               </div>
+              <p style="padding-top: 5px"></p>
                <%#= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
    
       <%#= hidden_field_tag 'cycle', params["cycle"] %>
@@ -192,7 +210,7 @@
 
            <% end %>  
 <% end %>
-
+</div>
 <% if ((p_type.eql? "Tactical") || (p_type.eql? "All Boards") ) %>
 
 <div class="row">
