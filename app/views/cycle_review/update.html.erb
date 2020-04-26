@@ -65,43 +65,11 @@ params["cycle"] = cycle
          
            
             <p><b>State:</b><br>
-            <% s_all.each do |one_s| 
-            %>
-           
-            <%if (one_s.status.eql? saved_status) %>
-              <%= radio_button_tag s, one_s.status,  checked=true,  options = {} %> 
-            <% else %>
-               <%= radio_button_tag s, one_s.status, checked = false, options = {} %> 
-            <% end %>
-            <% if (one_s.status.eql? "In-Progress") %>
-             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
-            <% elsif (one_s.status.eql? "Slow Progress") %>
-             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%>
-            <% elsif (one_s.status.eql? "Paused") %>
-             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
-            <% elsif (one_s.status.eql? "Stopped") %>
-             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
-            <% elsif (one_s.status.eql? "Done") %>
-             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>
-            <% end %>
-            <%=one_s.status %>   
-            
-            <br>
-         
-          <%end%>
-       
+            <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",  saved_status)  %>  
+      
            </p>
-           <p><b>Status:</b><br>
-            <% r_all.each do |one_r| 
-            %>
-           
-            <%if (one_r.rationale.eql? saved_r) %>
-              <%= radio_button_tag r, one_r.rationale,  checked=true,  options = {} %> 
-            <% else %>
-               <%= radio_button_tag r, one_r.rationale, checked = false, options = {} %> 
-            <% end %>
-           <%= one_r.rationale %><br>
-           <% end %>
+           <p><b>Status:</b><br><%= select_tag r, options_from_collection_for_select(r_all, "rationale", "rationale",  saved_r)  %>
+          
           </p>
           <% if (p_type.eql? "2") %>
             <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 70%> </p>  
@@ -135,7 +103,7 @@ params["cycle"] = cycle
          s = "s" + card.id.to_s + "_" + o.id.to_s
          r = "r" + card.id.to_s + "_" + o.id.to_s
          comment =  "c" + card.id.to_s + "_" + o.id.to_s
-         if (!o.track.eql? "Project-Level")
+         #if (!o.track.eql? "Project-Level")
           track_cnt = track_cnt + 1
         %>
        
@@ -146,47 +114,49 @@ params["cycle"] = cycle
        
           
         <p><b>State:</b><br>
-            <% s_all.each do |one_s| 
+          <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",  saved_status)  %>
+            <%# s_all.each do |one_s| 
             %>
            
-            <%if (one_s.status.eql? saved_status) %>
-              <%= radio_button_tag s, one_s.status,  checked=true,  options = {} %> 
-            <% else %>
-               <%= radio_button_tag s, one_s.status, checked = false, options = {} %> 
-            <% end %>
-            <% if (one_s.status.eql? "In-Progress") %>
-             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
-            <% elsif (one_s.status.eql? "Slow Progress") %>
-             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
-            <% elsif (one_s.status.eql? "Paused") %>
-             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
-            <% elsif (one_s.status.eql? "Stopped") %>
-             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
-            <% elsif (one_s.status.eql? "Done") %>
-             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
-            <% end %> 
-            <%=one_s.status %> 
+            <%#if (one_s.status.eql? saved_status) %>
+              <%#= radio_button_tag s, one_s.status,  checked=true,  options = {} %> 
+            <%# else %>
+               <%#= radio_button_tag s, one_s.status, checked = false, options = {} %> 
+            <%# end %>
+            <%# if (one_s.status.eql? "In-Progress") %>
+             <%#= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
+            <%# elsif (one_s.status.eql? "Slow Progress") %>
+             <%#= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
+            <%# elsif (one_s.status.eql? "Paused") %>
+             <%#= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
+            <%# elsif (one_s.status.eql? "Stopped") %>
+             <%#= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
+            <%# elsif (one_s.status.eql? "Done") %>
+             <%#= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
+            <%# end %> 
+            <%#=one_s.status %> 
             <br>
          
-          <%end%>
+          <%#end%>
        
            </p>
            <p><b>Status:</b><br>
-            <% r_all.each do |one_r| 
+            <%= select_tag r, options_from_collection_for_select(r_all, "rationale", "rationale",  saved_r)  %>
+            <%# r_all.each do |one_r| 
             %>
            
-            <%if (one_r.rationale.eql? saved_r) %>
-              <%= radio_button_tag r, one_r.rationale,  checked=true,  options = {} %> 
-            <% else %>
-               <%= radio_button_tag r, one_r.rationale, checked = false, options = {} %> 
-            <% end %>
-           <%= one_r.rationale %><br>
-           <% end %>
+            <%#if (one_r.rationale.eql? saved_r) %>
+              <%#= radio_button_tag r, one_r.rationale,  checked=true,  options = {} %> 
+            <%# else %>
+               <%#= radio_button_tag r, one_r.rationale, checked = false, options = {} %> 
+            <%# end %>
+           <%#= one_r.rationale %>
+           <%# end %>
           </p>
         <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p>    
           
         </div>
-         <% end #if not project-level %>
+         <% #end #if not project-level %>
         <% end #each track %>
          <% 
         track_cnt = 4-track_cnt 

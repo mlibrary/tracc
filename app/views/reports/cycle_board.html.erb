@@ -67,7 +67,7 @@
                t_chips_fte = t_chips/4.00
               %>
               <h6 style="padding-top: 15px;"><b><%= pro.title %> </b></h6>
-              <p>Total (average per month): <br><%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
               <hr>
                 <p>State:
              <% if (pro.card_status.eql? "In-Progress") %>
@@ -112,7 +112,7 @@
             <div class="row">
              <div class="col border border-dark "  >
               <p style="padding-top: 5px;"><b><%= t.track %></b></p>
-              <p>Total (average per month): <br><%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
               <% consult = Consultant.where(str1).order(:uniqname)
                 if (consult.count>0) %>
                 <hr>
