@@ -165,7 +165,7 @@ class CardsController < ApplicationController
            one_t.destroy!
          else 
            one_t.track = t_val
-           one_t.status = params[o]
+           one_t.disp_order = params[o]
            one_t.save!
          end  
        end 
@@ -173,7 +173,7 @@ class CardsController < ApplicationController
        if (!params[ntrack].empty?)
         t = Track.new
         t.card_id = one_c.id
-        y.status = params[otrack]
+        t.disp_order = params[otrack]
         t.track = params[ntrack]
         t.epic_title = one_c.short_name
         t.save!

@@ -21,7 +21,8 @@
   end
 
 %>
- <div class="container">     
+
+
   <% # projects and tracks %>
    <% if ( (p_type.eql? "Strategic") || (p_type.eql? "All Boards") )%>  
 
@@ -50,7 +51,7 @@
              end %>  
           </div>
 
-
+            <div class="panel-group" id="accordion">
            <% @pro_list.each do |pro| %>  
            <div class="row">
              <div class="col ">
@@ -66,15 +67,49 @@
                t_chips = t_chips/4.00
                t_chips_fte = t_chips/4.00
               %>
-              <h6 style="padding-top: 15px;"><b><%= pro.title %> </b></h6>
-              <p>Total (average per month): <br><%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
-               <%= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
-    <div class="actions">
-      <%= hidden_field_tag 'cycle', params["cycle"] %>
-      <%= hidden_field_tag 'epic', pro.short_name %>
-      <%= submit_tag 'Edit Resources' %>
-   </div>
-    <% end %>
+              <h6 style="padding-top: 5px;"><b><%= pro.title %> </b></h6>
+              <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <hr>
+                <p>State:
+             <% if (pro.card_status.eql? "In-Progress") %>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
+             <% elsif (pro.card_status.eql? "Slow Progress") %>
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (pro.card_status.eql? "Paused") %>
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (pro.card_status.eql? "Stopped") %>
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (pro.card_status.eql? "Done") %>
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
+            <% end %> 
+            (<%=pro.card_status %>)
+             </p>
+            
+
+             <p>Status: <%= pro.rationale %></p>
+               <hr>
+               <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a>
+              
+
+               <div id="collapse1" class="panel-collapse collapse">
+                <p style="padding-top: 5px">
+                  <%
+                 o_cnt = 0 
+                 o_all = Objective.where(str1)
+                 o_all.each do |o|
+                  o_cnt = o_cnt + 1 
+                   %>
+                 <p><%=o_cnt%>. <%=o.objective%>  </p>
+                   <% end %>
+               </div>
+              <p style="padding-top: 5px"></p>
+               <%#= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
+   
+      <%#= hidden_field_tag 'cycle', params["cycle"] %>
+      <%#= hidden_field_tag 'epic', pro.short_name %>
+      <%#= submit_tag 'Edit Resources' %>
+   
+    <%# end %>
              
              </div> 
       
@@ -82,7 +117,7 @@
 
            <%
                str = "card_id = '" + pro.id.to_s + "'"
-               @tracks = Track.where(str).order(:status)
+               @tracks = Track.where(str).order(:disp_order)
                @tracks.each do |t|
 
               str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "' AND trackname='"+t.track + "'"  
@@ -95,20 +130,41 @@
             <div class="row">
              <div class="col border border-dark "  >
               <p style="padding-top: 5px;"><b><%= t.track %></b></p>
-              <p>Total (average per month): <br><%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
               <% consult = Consultant.where(str1).order(:uniqname)
                 if (consult.count>0) %>
+                <hr>
                 <p><i>Consultant(s): 
                 <%
 
                   consult.each do |one_c|
                     one_chip = Chip.where("uniqname LIKE '"+one_c.uniqname+"'") 
                     %>
-                    <br><%= one_chip.first.fname + " " + one_chip.first.lname[0] + "." %>
+                    <br><%= image_tag('User3.png', :alt => 'User Icon', size:"30x30")%> <%= one_chip.first.fname + " " + one_chip.first.lname[0] + "." %>
                     <% end  %>
               </i></p>
-              <% end %>
-             
+              <hr>
+              <% end #if%>
+              <%
+
+              %>
+             <p>State:
+             <% if (t.status.eql? "In-Progress") %>
+             <%= image_tag("Play.png", :alt => 'In-Progress', size:"30x30")%>
+             <% elsif (t.status.eql? "Slow Progress") %>
+             <%= image_tag("Slow.png", :alt => 'Slow', size:"30x30")%> 
+            <% elsif (t.status.eql? "Paused") %>
+             <%= image_tag("Paused.png", :alt => 'Paused', size:"30x30")%> 
+            <% elsif (t.status.eql? "Stopped") %>
+             <%= image_tag("Stop.png", :alt => 'Stop', size:"30x30")%> 
+            <% elsif (t.status.eql? "Done") %>
+             <%= image_tag("Done.png", :alt => 'Done', size:"30x30")%>  
+            <% end %> 
+            (<%=t.status %>)
+             </p>
+             <p>Status: <%= t.rationale %></p>
+
+
              </div>
 
            
@@ -131,7 +187,16 @@
                           cnt = cnt + 1 %>
                           <%= image_tag("User1.png", :alt => 'User Icon', size:"30x30") %>
                         <% end %>
-                        <br><%= one_chip.first.fname  %></p>
+                        <br>
+                        <%  
+                          dup_chip = Chip.where("fname LIKE '" + one_chip.first.fname + "'")
+                          cnt_chip = dup_chip.all.count
+                          if (cnt_chip>1) %>
+                         <%=  one_chip.first.fname+ " " + one_chip.first.lname[0] + "."%>
+                        <% else %>
+                         <%= one_chip.first.fname  %>
+                        <% end %>  
+                        </p>
                       <% end %>  
                   </div>
                   
@@ -145,7 +210,7 @@
 
            <% end %>  
 <% end %>
-
+</div>
 <% if ((p_type.eql? "Tactical") || (p_type.eql? "All Boards") ) %>
 
 <div class="row">
@@ -176,14 +241,8 @@
           
            <div class="row">
              <div class="col border border-dark ">
-              <p><b><%= pro.short_name %></b></p>
-               <%= form_tag("/cards/tactical_resources2", :enctype =>"multipart/form-data") do %>
-                 <div class="actions">
-                  <%= hidden_field_tag 'cycle', params["cycle"] %>
-                  <%= hidden_field_tag 'epic', pro.short_name %>
-                  <%= submit_tag 'Edit Resources' %>
-                 </div>
-               <% end %> 
+              <p style="padding-top: 15px"><b><%= pro.short_name %></b></p>
+              
                <% 
                 str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                 consult = Consultant.where(str1).order(:uniqname)
@@ -198,15 +257,22 @@
                     <% end  %>
               </i></p>
               <% end %> 
-              <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %> 
-               <div class="actions">
-                  <%= hidden_field_tag 'cycle', params["cycle"] %>
-                  <%= hidden_field_tag 'epic', pro.short_name %>
-                  <%= hidden_field_tag 'track', '' %>
-                  <%= submit_tag 'Edit Consultants' %>
-                </div>
-
-              <% end #<br><b>....Objectives:</b><br> %>
+               <hr>
+                <p>State:
+             <% if (pro.card_status.eql? "In-Progress") %>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
+             <% elsif (pro.card_status.eql? "Slow Progress") %>
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (pro.card_status.eql? "Paused") %>
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (pro.card_status.eql? "Stopped") %>
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (pro.card_status.eql? "Done") %>
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
+            <% end %> 
+            (<%=pro.card_status %>)
+             </p>
+             <p>Status: <%= pro.rationale %></p>
              </div> 
              
               <%
@@ -248,6 +314,8 @@
                 <% i = i +1 %>
                </div>
               <% end #while do%>
+             
+
            </div>
 
            <% end %>  

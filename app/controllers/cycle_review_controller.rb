@@ -57,20 +57,24 @@ class CycleReviewController < ApplicationController
       
        if (p_type.eql? "1") 
             
-        obj = Objective.where("card_id='"+card.id.to_s+"'")
-        obj.each do |o|
+        tracks = Track.where("card_id='"+card.id.to_s+"'")
+        tracks.each do |t|
 
-        s_id = "s" + card.id.to_s + "_" + o.id.to_s
-        r_id  = "r" + card.id.to_s + "_" + o.id.to_s
-        c_id =  "c" + card.id.to_s + "_" + o.id.to_s
+        s_id = "s" + card.id.to_s + "_" + t.id.to_s
+        r_id  = "r" + card.id.to_s + "_" + t.id.to_s
+        c_id =  "c" + card.id.to_s + "_" + t.id.to_s
         
         s = params[s_id]
         r = params[r_id]
         c = params[c_id]
-     
-      
         
-        cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,o.id,review_type,cycle)
+
+        t.rationale = r 
+        #o.comments = c
+        t.status = s 
+        t.save!
+        
+        cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,t.id,review_type,cycle)
         cr = cr1.first
         
         if (cr ==nil)
@@ -84,7 +88,7 @@ class CycleReviewController < ApplicationController
         cr.notes = c 
         cr.cycle = cycle
         cr.review_type = review_type
-        cr.obj_id = o.id
+        cr.obj_id = t.id
         cr.save!
 
       end #obj.each

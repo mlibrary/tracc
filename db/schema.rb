@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_222900) do
+ActiveRecord::Schema.define(version: 2020_04_24_212253) do
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
@@ -331,9 +331,11 @@ ActiveRecord::Schema.define(version: 2020_04_22_222900) do
     t.integer "card_id"
     t.string "epic_title"
     t.string "track"
-    t.integer "status"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "disp_order"
+    t.string "rationale"
   end
 
   create_table "users", force: :cascade do |t|
