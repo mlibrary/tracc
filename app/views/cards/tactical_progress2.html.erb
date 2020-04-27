@@ -14,14 +14,14 @@
    if (one.nil?)
     one = TrackComment.new
    end 
-   
+
    @track_epic.all.each do |t| 
       track = t.objective
       tstatus = t.status
  %>  
   <div class="row ml-1">
     <div class="field">  
-     <p><strong><%=track%>:</strong> 
+     <p><strong><%=track.html_safe %>:</strong> 
      <%= text_field_tag track, value=tstatus %>%   </p>
     </div>
   </div>
