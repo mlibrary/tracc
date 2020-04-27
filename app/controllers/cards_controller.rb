@@ -161,6 +161,16 @@ class CardsController < ApplicationController
          o = "o"+ one_t.id.to_s
          
          t_val = params[t]
+
+         if (!t_val.eql? one_t.track)
+          #check chip assignment tracks and edit 
+          @assign = ChipAssignment.where("trackname='"+one_t.track+"'")
+          @assign.each do |a|
+            a.trackname = t_val
+            a.save!
+          end  
+          
+         end 
          if (t_val.empty?)
            one_t.destroy!
          else 

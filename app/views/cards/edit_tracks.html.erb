@@ -9,7 +9,7 @@
     <h4 style="padding-bottom: 10px;"> Add/Edit Tracks</h4>
   </div>
   <div class="card-body">
-   <%= form_tag("save_tracks", :enctype =>"multipart/form-data") do  %>
+   <%= form_tag(save_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
    <%
      @cards = Card.where("activity_type LIKE '%Strategic%'")
 
