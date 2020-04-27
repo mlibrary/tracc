@@ -397,7 +397,7 @@ end
   #"LSP"=>"20", "epic"=>"LSP", "comment1"=>"one", "comment2"=>"one2", "comment3"=>"one3", "comment4"=>"one4", "commit"=>"Save", "controller"=>"cards", "action"=>"save_progress"} permitted: true>
     epic=  params["epic"]
     cycle = params["cycle"]
-
+    
     #str = "epic_title LIKE '" + epic + "'"  
     str = "short_name LIKE '" + epic + "%'"   
     one_card = Card.where(str)
@@ -405,10 +405,11 @@ end
     @track_epic = Objective.where(str) 
     @comment = TrackComment.where(str)
     one = @comment.first
-
+    
     if (one==nil)
      one = TrackComment.new
      one.card_id = one_card.first.id.to_s
+     one.epic_title = one_card.first.short_name  
     end  
     one.comment1 = params["comment1"]
     one.comment2 = params["comment2"]

@@ -20,7 +20,7 @@
     <h4 style="padding-bottom: 10px;"> <%=cycle%> Add/Edit Consultants for: <%=epic%>/<%=track%></h4>
   </div>
   <div class="card-body">
-   <%= form_tag("save_consultants", :enctype =>"multipart/form-data") do  %>
+   <%= form_tag(save_consultants_cards_path, :enctype =>"multipart/form-data") do  %>
    <%
      str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '"+cycle+"' AND trackname= '"+track +"'" 
      @consult = Consultant.where(str)

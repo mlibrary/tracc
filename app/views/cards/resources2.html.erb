@@ -34,7 +34,7 @@ str = "card_id = '" + @card_one.first.id.to_s + "'"
     <b>Add:</b>
   </div>
   <div class="card-body">
-<%= form_tag("save_resources", :enctype =>"multipart/form-data") do  %>
+<%= form_tag(save_resources_cards_path, :enctype =>"multipart/form-data") do  %>
 
  <div class="row ml-1">
 
