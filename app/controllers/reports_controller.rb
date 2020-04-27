@@ -144,9 +144,6 @@ class ReportsController < ApplicationController
       @pro_list1 = Card.where("activity_type LIKE '%Active%'")
     end
 
-  
-    
-
   end  
 
 end
