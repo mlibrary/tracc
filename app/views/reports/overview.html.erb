@@ -289,7 +289,7 @@ strategic_pro = Gchart.bar( %>
       <div class="card-header" style="background: <%= color2 %>">
       <h4 >
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-        Status </a>
+        Strategic and Tactical Project Status </a>
       </h4>
     </div>
     <div id="collapse4" class="panel-collapse collapse show">
@@ -299,7 +299,20 @@ strategic_pro = Gchart.bar( %>
             <% str = "activity_type LIKE 'Strategic' "
                @s_list = Card.where(str) 
                @s_list.each do |s| %>  
-                 <p align="center"><%= s.short_name%>: <%= s.card_status %> (<%= s.rationale %>) </p>
+                 <p align="center"><b><%= s.short_name%></b>: 
+                  <% if (s.card_status.eql? "In-Progress") %>
+                    <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
+                  <% elsif (s.card_status.eql? "Slow Progress") %>
+                    <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
+                  <% elsif (s.card_status.eql? "Paused") %>
+                    <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
+                  <% elsif (s.card_status.eql? "Stopped") %>
+                    <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
+                  <% elsif (s.card_status.eql? "Done") %>
+                    <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
+                  <% end %> 
+
+                  <%= s.card_status %> (<%= s.rationale %>) </p>
          
                <% end %>   
           </div>
@@ -307,7 +320,17 @@ strategic_pro = Gchart.bar( %>
             <% str = "activity_type LIKE '%Active%' "
                @s_list = Card.where(str) 
                @s_list.each do |s| %>  
-                  <p align="center"><%= s.short_name%>: <%= s.card_status %> (<%= s.rationale %>) </p>
+                  <p align="center"><b><%= s.short_name%>:</b>  <% if (s.card_status.eql? "In-Progress") %>
+                    <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
+                  <% elsif (s.card_status.eql? "Slow Progress") %>
+                    <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
+                  <% elsif (s.card_status.eql? "Paused") %>
+                    <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
+                  <% elsif (s.card_status.eql? "Stopped") %>
+                    <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
+                  <% elsif (s.card_status.eql? "Done") %>
+                    <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
+                  <% end %> <%= s.card_status %> (<%= s.rationale %>) </p>
                <% end %>    
           </div>  
         </div>  
