@@ -383,7 +383,8 @@ end
     str = "card_id = '" + one_card.first.id.to_s + "'" 
     @track_epic = Objective.where(str) 
 
-    str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
+    #str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
+    str = "card_id='" + one_card.first.id.to_s + "' AND cycle='"+ cycle + "'"
     @comment = TrackComment.where(str)
     if (@comment.first == nil)
      TrackComment.create(epic_title: epic,cycle:cycle)
