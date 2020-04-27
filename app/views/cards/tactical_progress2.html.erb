@@ -11,6 +11,10 @@
  <% 
    one = @comment.first
    
+   if (one.nil?)
+    one = TrackComment.new
+   end 
+   
    @track_epic.all.each do |t| 
       track = t.objective
       tstatus = t.status
