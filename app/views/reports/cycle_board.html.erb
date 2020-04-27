@@ -98,8 +98,12 @@
                  o_all = Objective.where(str1)
                  o_all.each do |o|
                   o_cnt = o_cnt + 1 
+                  ostatus = o.status
                    %>
-                 <p><%=o_cnt%>. <%=o.objective%>  </p>
+                 <p><%=o_cnt%>. <%=o.objective%>  <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div> </p>
                    <% end %>
                </div>
               <p style="padding-top: 5px"></p>

@@ -61,8 +61,8 @@ class CatalogController < ApplicationController
 
     config.add_nav_action(:update, partial: 'cards/update')
 
-    
     config.add_nav_action(:tools, partial: 'cards/tools')
+    config.add_nav_action(:about, partial: 'reports/about')
 
     # solr field configuration for document/show views
     config.show.title_field = 'title_ssi'
