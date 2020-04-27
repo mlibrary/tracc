@@ -17,6 +17,7 @@
   progress = params["progress"]
   comments = params["comments"]
   obj = params["obj"]
+  resource = params["resource"]
   
  flag = true
 
@@ -85,7 +86,7 @@ end
     		<% end %>
   		</div>  
  		<div class="card-body"> 
-    <%
+    <% if (resource)
      totalfte = 0 
      str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
      @ch_st = ChipAssignment.where(str).order(:uniqname)
@@ -140,6 +141,7 @@ end
       <% end %>
     </div>
         <hr>
+        <% end%>
       <%#<h6 ><strong> Project Lead:</strong></h6> 
       <p>Jon Rothman</p>%>
       <% if (obj) %>

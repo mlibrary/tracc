@@ -22,6 +22,12 @@
 
 <div class="row ml-1">
     <div class="field">     
+     <%= check_box_tag "resource", 1, {:checked => "checked"}  %> Resource Allocation
+   </div>
+ </div>
+
+<div class="row ml-1">
+    <div class="field">     
      <%= check_box_tag "progress", 1, {:checked => "checked"}  %> Overall Progress
    </div>
  </div>
@@ -82,7 +88,7 @@
    </div>
  </div>
 
- <p style="padding-top: 40px"> </p>
+ <p style="padding-top: 65px"> </p>
  </div>
  <div class="card-footer"> 
    <div class="actions">
