@@ -17,13 +17,14 @@
    cnt = 0
    @track_epic.all.each do |t| 
       track = t.objective
+      t_id = "t" + t.id.to_s
       tstatus = t.status
       cnt = cnt+1
  %>  
   <div class="row ml-1">
     <div class="field">  
      <p><strong><%=cnt%>. <%=track%>:</strong> 
-     <%= text_field_tag track, value=tstatus %>%   </p>
+     <%= text_field_tag t_id, value=tstatus %>%   </p>
     </div>
   </div>
   <%end %> 

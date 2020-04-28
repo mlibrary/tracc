@@ -421,7 +421,8 @@ end
 
     @track_epic.all.each do |t| 
       track = t.objective
-      t.status = params[track]
+      t_id = "t" + t.id.to_s
+      t.status = params[t_id]
       t.save!
     end   
   end  
