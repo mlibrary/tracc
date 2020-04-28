@@ -14,8 +14,9 @@ if (review_type == "1")
 else
   caption = " End of Cycle Review"   
 end
-params["review_type"] = review_type
-params["cycle"] = cycle
+#params["review_type"] = review_type
+#params["cycle"] = cycle
+eview = params["eview"]
 %>
 
 <div class="container">
@@ -65,11 +66,49 @@ params["cycle"] = cycle
          
            
             <p><b>State:</b><br>
-            <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",  saved_status)  %>  
+             <% if (eview) %>
+            <% s_all.each do |one_s| 
+            %>
+           
+            <%if (one_s.status.eql? saved_status) %>
+              <%= radio_button_tag s, one_s.status,  checked=true,  options = {} %> 
+            <% else %>
+               <%= radio_button_tag s, one_s.status, checked = false, options = {} %> 
+            <% end %>
+            <% if (one_s.status.eql? "In-Progress") %>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
+            <% elsif (one_s.status.eql? "Slow Progress") %>
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (one_s.status.eql? "Paused") %>
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (one_s.status.eql? "Stopped") %>
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (one_s.status.eql? "Done") %>
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
+            <% end %> 
+            <%=one_s.status %> 
+            <br>
+           <%end # for each%>
+           <% else %>
+           <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",  saved_status)  %>
+          <%end %> 
       
            </p>
-           <p><b>Status:</b><br><%= select_tag r, options_from_collection_for_select(r_all, "rationale", "rationale",  saved_r)  %>
-          
+           <p><b>Status:</b><br>
+             <% if (eview)%>
+            <% r_all.each do |one_r| 
+            %>
+           
+            <%if (one_r.rationale.eql? saved_r) %>
+              <%= radio_button_tag r, one_r.rationale,  checked=true,  options = {} %> 
+            <% else %>
+               <%= radio_button_tag r, one_r.rationale, checked = false, options = {} %> 
+            <% end %>
+           <%= one_r.rationale %><br>
+           <% end %>
+           <% else %>
+           <%= select_tag r, options_from_collection_for_select(r_all, "rationale", "rationale",  saved_r)  %>
+           <% end %>
           </p>
           <% if (p_type.eql? "2") %>
             <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 70%> </p>  
@@ -114,44 +153,48 @@ params["cycle"] = cycle
        
           
         <p><b>State:</b><br>
-          <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",  saved_status)  %>
-            <%# s_all.each do |one_s| 
+          <% if (eview) %>
+            <% s_all.each do |one_s| 
             %>
            
-            <%#if (one_s.status.eql? saved_status) %>
-              <%#= radio_button_tag s, one_s.status,  checked=true,  options = {} %> 
-            <%# else %>
-               <%#= radio_button_tag s, one_s.status, checked = false, options = {} %> 
-            <%# end %>
-            <%# if (one_s.status.eql? "In-Progress") %>
-             <%#= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
-            <%# elsif (one_s.status.eql? "Slow Progress") %>
-             <%#= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
-            <%# elsif (one_s.status.eql? "Paused") %>
-             <%#= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
-            <%# elsif (one_s.status.eql? "Stopped") %>
-             <%#= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
-            <%# elsif (one_s.status.eql? "Done") %>
-             <%#= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
-            <%# end %> 
-            <%#=one_s.status %> 
+            <%if (one_s.status.eql? saved_status) %>
+              <%= radio_button_tag s, one_s.status,  checked=true,  options = {} %> 
+            <% else %>
+               <%= radio_button_tag s, one_s.status, checked = false, options = {} %> 
+            <% end %>
+            <% if (one_s.status.eql? "In-Progress") %>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
+            <% elsif (one_s.status.eql? "Slow Progress") %>
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (one_s.status.eql? "Paused") %>
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (one_s.status.eql? "Stopped") %>
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
+            <% elsif (one_s.status.eql? "Done") %>
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
+            <% end %> 
+            <%=one_s.status %> 
             <br>
-         
-          <%#end%>
-       
+           <%end # for each%>
+           <% else %>
+           <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",  saved_status)  %>
+          <%end %>
            </p>
            <p><b>Status:</b><br>
-            <%= select_tag r, options_from_collection_for_select(r_all, "rationale", "rationale",  saved_r)  %>
-            <%# r_all.each do |one_r| 
+            <% if (eview)%>
+            <% r_all.each do |one_r| 
             %>
            
-            <%#if (one_r.rationale.eql? saved_r) %>
-              <%#= radio_button_tag r, one_r.rationale,  checked=true,  options = {} %> 
-            <%# else %>
-               <%#= radio_button_tag r, one_r.rationale, checked = false, options = {} %> 
-            <%# end %>
-           <%#= one_r.rationale %>
-           <%# end %>
+            <%if (one_r.rationale.eql? saved_r) %>
+              <%= radio_button_tag r, one_r.rationale,  checked=true,  options = {} %> 
+            <% else %>
+               <%= radio_button_tag r, one_r.rationale, checked = false, options = {} %> 
+            <% end %>
+           <%= one_r.rationale %><br>
+           <% end %>
+           <% else %>
+           <%= select_tag r, options_from_collection_for_select(r_all, "rationale", "rationale",  saved_r)  %>
+           <% end %>
           </p>
         <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p>    
           
