@@ -17,12 +17,13 @@
 
    @track_epic.all.each do |t| 
       track = t.objective
+      t_id = "t" + t.id.to_s
       tstatus = t.status
  %>  
   <div class="row ml-1">
     <div class="field">  
-     <p><strong><%=track.html_safe %>:</strong> 
-     <%= text_field_tag track, value=tstatus %>%   </p>
+     <p><strong><%=track.html_safe %>:</strong> <br>
+     Progress: <%= text_field_tag t_id, value=tstatus %>%   </p>
     </div>
   </div>
   <%end %> 
