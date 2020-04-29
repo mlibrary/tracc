@@ -123,7 +123,7 @@ eview = params["eview"]
            <div class="row">
        <%
         track_cnt = 0 
-        obj = Track.where("card_id='"+card.id.to_s+"'")
+        obj = Track.where("card_id='"+card.id.to_s+"'").order(:disp_order)
         obj.each do |o| 
          
          cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,o.id,review_type,cycle)
