@@ -165,10 +165,10 @@ strategic_pro = Gchart.bar( %>
 
 <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
-      <h4 >
+      <h5>
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
         Status: Strategic and Tactical  </a>
-      </h4>
+      </h5>
     </div>
     <div id="collapse4" class="panel-collapse collapse show">
       <div class="card-body">
@@ -181,11 +181,11 @@ strategic_pro = Gchart.bar( %>
                  <h6><b><%= s.short_name%></b></h6>
                  <div class="row"> 
                   <% # all tracks
-                    all_tracks = Track.where("card_id='"+s.id.to_s+"'")
+                    all_tracks = Track.where("card_id='"+s.id.to_s+"'").order(:disp_order)
                     track_cnt = 0 
                     all_tracks.each do |t|
                       track_cnt = track_cnt + 1
-                  %><div class="col"> <i><%= t.track %></i> 
+                  %><div class="col"> <i><%=track_cnt%>. <%= t.track %></i> <br>Status: 
                       <% if (t.status.eql? "In-Progress") %>
                          <%= image_tag("Play.png", :alt => 'User Icon', size:"20x20")%>
                       <% elsif (t.status.eql? "Slow Progress") %>
@@ -197,7 +197,7 @@ strategic_pro = Gchart.bar( %>
                       <% elsif (t.status.eql? "Done") %>
                          <%= image_tag("Done.png", :alt => 'User Icon', size:"20x20")%>  
                       <% end #if %> 
-                       <br><%= s.rationale %> </div>
+                       <br><%= t.rationale %> </div>
 
                     <%    end #for each track  %>
                      <% track_cnt = 4-track_cnt 
@@ -217,7 +217,7 @@ strategic_pro = Gchart.bar( %>
                @s_list = Card.where(str) 
                @s_list.each do |s| %>  
                <div class="card card-body">
-                  <p ><b><%= s.short_name%>:</b>  <% if (s.card_status.eql? "In-Progress") %>
+                  <p ><b><%= s.short_name%>:</b> <br>Status:  <% if (s.card_status.eql? "In-Progress") %>
                     <%= image_tag("Play.png", :alt => 'User Icon', size:"20x20")%>
                   <% elsif (s.card_status.eql? "Slow Progress") %>
                     <%= image_tag("Slow.png", :alt => 'User Icon', size:"20x20")%> 
@@ -242,13 +242,13 @@ strategic_pro = Gchart.bar( %>
 
   <div class="card" style="background: <%=color1 %>">
      <div class="card-header" style="background: <%= color2 %>">
-       <h4>
+       <h5>
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
         Resource Allocation and Progress: Strategic </a>
-      </h4>
+      </h5>
     </div>
 
-    <div id="collapse1" class="panel-collapse collapse show">
+    <div id="collapse1" class="panel-collapse collapse">
     <div class="card-body">
       <div class="row">
           <div class="col-md-6"><%= image_tag details_data%></div>
@@ -298,12 +298,12 @@ strategic_pro = Gchart.bar( %>
 
   <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
-       <h4> 
+       <h5> 
        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
         Resource Allocation and Progress: Tactical </a>
-      </h4>
+      </h5>
     </div>
-    <div id="collapse2" class="panel-collapse collapse show">
+    <div id="collapse2" class="panel-collapse collapse">
       <div class="card-body">
         <div class="row" style="padding-top: 20px" >
          <%
@@ -396,12 +396,12 @@ pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tac
 </p>
   <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
-      <h4 >
+      <h5>
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
         LIT Capacity </a>
-      </h4>
+      </h5>
     </div>
-    <div id="collapse3" class="panel-collapse collapse show">
+    <div id="collapse3" class="panel-collapse collapse">
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">    

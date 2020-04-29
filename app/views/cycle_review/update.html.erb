@@ -55,16 +55,16 @@ eview = params["eview"]
           comment =  "c" + card.id.to_s + "_0" 
       %>
          <% if (p_type.eql? "2") %>
-           <div class="col-md-12 border border-dark">
+           <div class="col-md-12 border border-light">
          <% else %>
-           <div class="col border border-dark">
+           <div class="col border border-light">
          <% end %>   
           <p style="padding-top: 15px;"><b><%= card.title %>
           <% if (p_type.eql? "2") %> ( <%=card.short_name%>,<%= card.in_cycle %>[<%=card.card_type %>]
           <% end %>
         </b> </p>
          
-           
+           <% if (p_type.eql? "2") %>
             <p><b>State:</b><br>
              <% if (eview) %>
             <% s_all.each do |one_s| 
@@ -115,12 +115,12 @@ eview = params["eview"]
           <% else %>
           <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p> 
           <% end %>     
-     
+          <% end #if ptype eql 2%>
         </div>
-     
+     </div>
 <%# each track%>
       <% if (p_type.eql? "1") %>
-           
+           <div class="row">
        <%
         track_cnt = 0 
         obj = Track.where("card_id='"+card.id.to_s+"'")
@@ -147,12 +147,12 @@ eview = params["eview"]
         %>
        
         
-        <div class="col border border-dark">
+        <div class="col border border-light">
         
         <p style="padding-top: 15px;"><b><i>Track: <%= o.track%></i></b></p>
        
           
-        <p><b>State:</b><br>
+        <p><b>Status:</b><br>
           <% if (eview) %>
             <% s_all.each do |one_s| 
             %>
@@ -180,7 +180,7 @@ eview = params["eview"]
            <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",  saved_status)  %>
           <%end %>
            </p>
-           <p><b>Status:</b><br>
+           <p><b>Status Details:</b><br>
             <% if (eview)%>
             <% r_all.each do |one_r| 
             %>
@@ -208,8 +208,9 @@ eview = params["eview"]
         %>
          <div class="col border border-light"></div>
         <% end #while %>
-        <% end #if ptype %>
         </div>
+        <% end #if ptype %>
+        
        
       <% end # each card%>
     
