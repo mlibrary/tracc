@@ -48,6 +48,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :alerts do
+    collection do
+      get :index, :my_alerts, :add, :export
+      post :save
+    end
+  end
+
   mount Blacklight::Engine => '/'
   concern :marc_viewable, Blacklight::Marc::Routes::MarcViewable.new
   root to: "catalog#index"

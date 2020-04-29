@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_212253) do
+ActiveRecord::Schema.define(version: 2020_04_29_110637) do
+
+  create_table "alerts", force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "track_id"
+    t.string "uniqname1"
+    t.string "uniqname2"
+    t.string "uniqname3"
+    t.string "uniqname4"
+    t.string "owner"
+    t.string "type"
+    t.string "cycle"
+    t.integer "status"
+    t.string "created_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "assessments", force: :cascade do |t|
     t.integer "card_id"
