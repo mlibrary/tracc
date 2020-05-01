@@ -215,9 +215,28 @@ strategic_pro = Gchart.bar( %>
           <div class="col-md-3">      
             <% str = "activity_type LIKE '%Active%' "
                @s_list = Card.where(str) 
-               @s_list.each do |s| %>  
+               @s_list.each do |s| 
+                str = "card_id='" + s.id.to_s + "' AND cycle='"+ cycle + "'"
+                fte = ChipAssignment.where(str).sum(:chips)
+                fte = fte/16.00
+
+                
+                @o_st = Objective.where(str) 
+                
+                totalp = 0 
+                if ( @o_st.first != nil)
+                 totalp = @o_st.first.status
+                 if (totalp.nil?)
+                   totalp = 0 
+                 end  
+                else
+                  totalp = 0  
+                end
+              %>  
                <div class="card card-body">
-                  <p ><b><%= s.short_name%>:</b> <br>Status:  <% if (s.card_status.eql? "In-Progress") %>
+                  <p ><b><%= s.short_name%>:</b> 
+                    <br><%= fte.round(2) %> FTE
+                    <br>Status:  <% if (s.card_status.eql? "In-Progress") %>
                     <%= image_tag("Play.png", :alt => 'User Icon', size:"20x20")%>
                   <% elsif (s.card_status.eql? "Slow Progress") %>
                     <%= image_tag("Slow.png", :alt => 'User Icon', size:"20x20")%> 
@@ -228,8 +247,11 @@ strategic_pro = Gchart.bar( %>
                   <% elsif (s.card_status.eql? "Done") %>
                     <%= image_tag("Done.png", :alt => 'User Icon', size:"20x20")%>  
                   <% end %> <%#= s.card_status %> <br><%= s.rationale %> </p>
-                </div>
-               <% end %>    
+                
+                   
+                <div class="progress"> <div class="progress-bar bg-info" role="progressbar" style="width: <%=totalp %>%;" aria-valuenow="<%=totalp %>" aria-valuemin="0" aria-valuemax="100"> <%=totalp %>%
+          </div> </div></div>
+          <% end %>
           </div>  
         </div>  
       </div>
@@ -251,9 +273,9 @@ strategic_pro = Gchart.bar( %>
     <div id="collapse1" class="panel-collapse collapse">
     <div class="card-body">
       <div class="row">
-          <div class="col-md-6"><%= image_tag details_data%></div>
           
-          <div class="col-md-6"> 
+          
+          <div class="col-md-8"> 
               
               
                 <div class="card">
@@ -262,7 +284,7 @@ strategic_pro = Gchart.bar( %>
                   <%= image_tag strategic_cap%>
                  </div>
                 </div> 
-                <p style="padding-top: 10px;">
+                <p style="padding-top: 20px;">
                 <div class="card">
                   <div class="card-header">Progress</div>
                   <div class="card-body">
@@ -271,25 +293,24 @@ strategic_pro = Gchart.bar( %>
                 </div> 
 
           </div>   
-      </div>
-      <div class="row" style="padding-top: 20px">
-        <div class="col">
-          <b>Title:<br>Allocation:<br>Progress:</b>
-        </div>
+        <div class="col-md-4">
+          
+        
         <% 
               i = 0 
               @slist.each do |strategic|
               
              %>
-             <div class="col"><b><%= strategic.short_name%></b>
+             <p><b><%= strategic.short_name%></b>
               <br><%=cap[i]%> FTE
-              <br><%=pro[i]%>% 
-             </div>
+              <br>Progress: <%=pro[i]%>% 
+             </p>
+             <hr>
              <% 
                i = i + 1   
                end 
             %>
-           
+        </div>   
       </div>  
     </div>
  </div>
