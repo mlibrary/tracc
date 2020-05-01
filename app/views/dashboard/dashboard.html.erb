@@ -27,124 +27,13 @@
 
   @slist = Card.where("activity_type LIKE 'Strategic'")
   
-
-  @card_lsp = Card.where("id= '1' ").first
-  @card_cs = Card.where("id= '2' ").first
-  @card_db = Card.where("id= '4'  ").first
-  @card_ls = Card.where("id= '3'  ").first
-  @card_dcp = Card.where("id= '5' ").first
-  @card_f = Card.where("id= '6'  ").first
-  @card_w = Card.where("id= '7' ").first
-  @card_ht = Card.where("id= '8' ").first
-  
-
-  @track_lsp = Objective.where("card_id= '1' AND cycle LIKE '"+cycle+"'")
-  @track_cs = Objective.where("card_id= '2'  AND cycle LIKE '"+cycle+"'")
-  @track_db = Objective.where("card_id= '4'  AND cycle LIKE '"+cycle+"'")
-  @track_ls = Objective.where("card_id= '3'  AND cycle LIKE '"+cycle+"'")
-  @track_dcp = Objective.where("card_id= '5' AND cycle LIKE '"+cycle+"'")
-  @track_f = Objective.where("card_id= '6'   AND cycle LIKE '"+cycle+"'")
-  @track_w = Objective.where("card_id= '7'  AND cycle LIKE '"+cycle+"'")
-  @track_ht = Objective.where("card_id= '8' AND cycle LIKE '"+cycle+"'")
-
-
- total = 0 
- cnt = 0
-  @track_lsp.all.each do |o|     
-            ostatus = o.status
-            cnt = cnt+1 
-            if (ostatus != nil)
-              total+=ostatus
-            end
-  end    
-  total_lsp = total/cnt 
-
-  total = 0 
- cnt = 0
-  @track_cs.all.each do |o|     
-            ostatus = o.status
-            cnt = cnt+1 
-            if (ostatus != nil)
-              total+=ostatus
-            end
-  end    
-  total_cs = total/cnt   
-
-  total = 0 
- cnt = 0
-  @track_ls.all.each do |o|     
-            ostatus = o.status
-            cnt = cnt+1 
-            if (ostatus != nil)
-              total+=ostatus
-            end
-  end    
-  total_ls = total/cnt 
-
-  total = 0 
- cnt = 0
-  @track_db.all.each do |o|     
-            ostatus = o.status
-            cnt = cnt+1 
-            if (ostatus != nil)
-              total+=ostatus
-            end
-  end    
-  total_db = total/cnt 
-
-  total = 0 
- cnt = 0
-  @track_dcp.all.each do |o|     
-            ostatus = o.status
-            cnt = cnt+1 
-            if (ostatus != nil)
-              total+=ostatus
-            end
-  end    
-  total_dcp = total/cnt 
-
-  total = 0 
- cnt = 0
-  @track_f.all.each do |o|     
-            ostatus = o.status
-            cnt = cnt+1 
-            if (ostatus != nil)
-              total+=ostatus
-            end
-  end    
-  total_f = total/cnt 
-
-  total = 0 
- cnt = 0
-  @track_w.all.each do |o|     
-            ostatus = o.status
-            cnt = cnt+1 
-            if (ostatus != nil)
-              total+=ostatus
-            end
-  end    
-  total_w = total/cnt 
-
-  total = 0 
- cnt = 0
-  @track_ht.all.each do |o|     
-            ostatus = o.status
-            cnt = cnt+1 
-            if (ostatus != nil)
-              total+=ostatus
-            end
-  end    
-  total_ht = total/cnt 
-  
 %>
-
-
 <div class="container-fluid">
   <h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
 
    <div class="row" style="padding-top:20px"> 
 <% 
-  totalfte = 0 
+ 
   card_no = 0
   @slist.all.each do |strategic| 
      total = 0 
@@ -162,7 +51,18 @@
           total+=ostatus
        end
      end    
-    total = total/cnt      
+    
+    if (cnt>0) 
+     total = total/cnt 
+    else
+     total = 0 
+    end 
+    
+   
+    t_chips = ChipAssignment.where(str).sum(:chips)
+    t_chips = t_chips/4.00
+    t_chips_fte = t_chips/4.00    
+
     @c_st = TrackComment.where(str)
 
     %>
@@ -175,7 +75,7 @@
           <p>Cycle Progress: <%= total %>%</p>
         <% end %>
         <% if (fte) %>
-          <p>Total FTE: <%= totalfte %>%</p>
+          <p>Total FTE: <%= t_chips_fte.round(2) %></p>
         <% end %>
       </div>  
       <div class="card-body flex-fill">
