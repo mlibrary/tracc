@@ -1,1 +1,81 @@
-all alerts
+<%
+    
+type = 'Strategic'
+chips = Chip.order(:uniqname)
+%>
+
+
+<div class="card" >
+  <div class="card-header">
+    <h4 style="padding-bottom: 10px;"> Add/Edit Action Items</h4>
+  </div>
+  <div class="card-body">
+   <%= form_tag(save_alerts_path, :enctype =>"multipart/form-data") do  %>
+   <%
+     @cards = Card.where("activity_type LIKE '%Strategic%'")
+
+     @cards.each do |one_c|
+     	nItem = "nItem" + one_c.id.to_s
+     	tracks = Track.where("card_id='"+ one_c.id.to_s + "'")
+      %>
+      <p><b><%= one_c.short_name %></b></p>
+       <div class="row ml-1" style="padding-top: 10px;">
+       <div class="field">
+         Add an Action Item:<br>
+         <%
+            
+            
+         %>
+		<div class="row ml-1">
+    	<div class="field">
+     	Track: 
+     		<%= select_tag "track", options_from_collection_for_select(tracks, "track", "track")  %>
+   		</div>
+		</div>
+
+		<div class="row ml-1">
+    	<div class="field">
+     	Assigned To: 
+     		<%= select_tag "uniqname", options_from_collection_for_select(chips, "uniqname", "uniqname")  %>
+   		</div>
+		</div>
+         
+          <%= text_field_tag nItem, ""  %> Status:<%= text_field_tag 'nstatus', '' %>
+      </div>
+      </div>
+      <hr>
+      <%
+        
+     	  @alerts = Alert.where("card_id='"+ one_c.id.to_s + "'")
+          @alerts.each do |one_a| 
+          id = "a"+one_a.id.to_s
+          status = "s"+one_a.id.to_s
+            
+      %>
+        <p><%= text_field_tag id, one_a.comments %> Status:<%= text_field_tag status %></p>
+      <% end   %>
+     
+     <% end    %>
+    
+ 
+
+      <div class="actions">
+        <%= submit_tag 'Save Tracks' %>
+      </div>
+
+     <% 
+       end 
+     %>
+     
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
