@@ -1,6 +1,6 @@
 <h5></h5>
 
-<%= form_tag(cycle_board_reports_path, :enctype =>"multipart/form-data") do %>
+<%= form_tag(cycle_board_dashboard_index_path, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
 <% card_epic = Card.where("activity_type LIKE 'Strategic' ") %>

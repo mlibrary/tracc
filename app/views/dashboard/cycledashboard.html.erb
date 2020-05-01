@@ -4,12 +4,16 @@
 <% cname = Cycle.all %>
 <% cur_cycle = Cycle.where("current_cycle =1") %>
 
-<div class="row" style="padding-top: 20px">
- <div class="col-md-6">
- <%= form_tag(tactical_stats_reports_path, :enctype =>"multipart/form-data") do %>
+<div class="row" style="padding-top: 10px">
+<div class="col-md-12"> <h2> Dashboard for Strategic Projects</h2></div>
+</div>
+<div class="row" style="padding-top: 10px">
+
+ <div class="col-md-4">
+ <%= form_tag(strategic_dashboard_index_path, :enctype =>"multipart/form-data") do %>
  <div class="card">
   <div class="card-header">
-    <h5>LIT Internal Dashboard for Active Tactical <br>Projects</h5>
+    <h5>LIT Internal</h5>
   </div>  
  <div class="card-body">  
 
@@ -20,7 +24,7 @@
    </div>
  </div>
 
- <div class="row ml-1">
+<div class="row ml-1">
     <div class="field">     
      <%= check_box_tag "resource", 1, {:checked => "checked"}  %> Resource Allocation
    </div>
@@ -61,11 +65,11 @@
  <% end %>
 </div>
 
- <div class="col-md-6">
- <%= form_tag(tactical_reports_path, :enctype =>"multipart/form-data") do %>
+ <div class="col-md-4">
+ <%= form_tag(dashboard_dashboard_index_path, :enctype =>"multipart/form-data") do %>
  <div class="card">
   <div class="card-header">
-    <h5>Public Dashboard for Active Tactical<br> Projects</h5>
+    <h5>Executive</h5>
   </div>  
  <div class="card-body">  
 
@@ -75,14 +79,26 @@
      <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
    </div>
  </div>
-
+ 
   <div class="row ml-1">
     <div class="field">     
      <%= check_box_tag "bar", 1, {:checked => "checked"}  %> Progress Bar
    </div>
  </div>
 
- <p style="padding-top: 95px"> </p>
+<div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "progress" ,1, {:checked => "checked"} %> Overall Progress
+   </div>
+ </div>
+
+ <div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "fte" ,1, {:checked => "checked"} %> Total FTE
+   </div>
+ </div>
+
+ <p style="padding-top: 40px"> </p>
  </div>
  <div class="card-footer"> 
    <div class="actions">
@@ -90,5 +106,44 @@
    </div>
  </div>
  <% end %>
+</div>
+</div>
+
+<div class="col-md-4">
+ <%= form_tag(dashboard_dashboard_index_path, :enctype =>"multipart/form-data") do %>
+ <div class="card">
+  <div class="card-header">
+    <h5>Public</h5>
+  </div>  
+ <div class="card-body">  
+
+  <div class="row ml-1">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
+   </div>
+ </div>
+ 
+  <div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "bar", 1, {:checked => "checked"}  %> Progress Bar
+   </div>
+ </div>
+
+<div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "progress" ,1, {:checked => "checked"} %> Overall Progress
+   </div>
+ </div>
+
+ <p style="padding-top: 65px"> </p>
+ </div>
+ <div class="card-footer"> 
+   <div class="actions">
+      <%= submit_tag 'Next >>' %>
+   </div>
+ </div>
+ <% end %>
+</div>
 </div>
 </div>

@@ -1,28 +1,6 @@
 class ReportsController < ApplicationController
   protect_from_forgery with: :null_session
 
-  def strategic
-  end
-    
-  def dashboard
-  end
-
-  def cycledashboard
-  end  
-
-  def overview
-    #@capacity = Chip.all
-    @capacity = [
-  ["July 2017", 346.0],
-  ["July 2016", 50.0],
-]
-  end
-  
-  def tactical
-  end
-
-  def tactical_stats
-  end
 
     
   def show
@@ -131,19 +109,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  def cycle_board
-    cycle = params['cycle']
-    type = params['type']
-
-
-    if ( (type.eql? 'Strategic') || (type.eql? 'All Boards'))
-      @pro_list = Card.where("activity_type LIKE 'Strategic'")
-    end
-    
-    if ( (type.eql? 'Tactical') || (type.eql? 'All Boards') )
-      @pro_list1 = Card.where("activity_type LIKE '%Active%'")
-    end
-
-  end  
+  
 
 end

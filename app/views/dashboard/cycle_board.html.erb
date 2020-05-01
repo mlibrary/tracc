@@ -70,24 +70,7 @@
               <h6 style="padding-top: 5px;"><b><%= pro.title %> </b></h6>
               <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
               <hr>
-                <p>State:
-             <% if (pro.card_status.eql? "In-Progress") %>
-             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
-             <% elsif (pro.card_status.eql? "Slow Progress") %>
-             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
-            <% elsif (pro.card_status.eql? "Paused") %>
-             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
-            <% elsif (pro.card_status.eql? "Stopped") %>
-             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
-            <% elsif (pro.card_status.eql? "Done") %>
-             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
-            <% end %> 
-            (<%=pro.card_status %>)
-             </p>
-            
-
-             <p>Status: <%= pro.rationale %></p>
-               <hr>
+              
                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a>
               
 
