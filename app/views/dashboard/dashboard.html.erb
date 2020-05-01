@@ -6,7 +6,7 @@
    color4 = ""
     
   cycle = params["cycle"]
-   cycle = params["cycle"]
+  fte = params["fte"]
   bar = params["bar"]
   progress = params["progress"]
   
@@ -144,6 +144,7 @@
 
    <div class="row" style="padding-top:20px"> 
 <% 
+  totalfte = 0 
   card_no = 0
   @slist.all.each do |strategic| 
      total = 0 
@@ -172,6 +173,9 @@
         <h5><%= strategic.title %></h5>
         <% if (progress) %>
           <p>Cycle Progress: <%= total %>%</p>
+        <% end %>
+        <% if (fte) %>
+          <p>Total FTE: <%= totalfte %>%</p>
         <% end %>
       </div>  
       <div class="card-body flex-fill">

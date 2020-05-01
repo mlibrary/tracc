@@ -1,5 +1,8 @@
 class AlertsController < ApplicationController
 
+  def show
+  end
+    
 	def save
 	  
 	 
