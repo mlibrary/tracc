@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_110637) do
+ActiveRecord::Schema.define(version: 2020_05_01_131434) do
 
   create_table "alerts", force: :cascade do |t|
     t.integer "card_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_110637) do
     t.string "created_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "comments"
   end
 
   create_table "assessments", force: :cascade do |t|
