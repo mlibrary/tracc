@@ -11,7 +11,7 @@ class CycleReviewController < ApplicationController
 
   def add
  
- 
+
     review_type = params["review_type"]
     cycle = params["cycle"]
     p_type = params["p_type"]
@@ -22,7 +22,7 @@ class CycleReviewController < ApplicationController
      str = "activity_type LIKE '%Strategic%'"
     end
 
-    cards = Card.where(str)
+    cards = Card.where(str).order(:card_type)
 
     cards.each do |card|
      
@@ -98,6 +98,14 @@ class CycleReviewController < ApplicationController
   end
     
   def update
+   
+   #one time destroy all
+ cr = CycleReview.all
+
+ cr.each do |one_cr|
+  #byebug
+  one_cr.destroy!
+ end 
 
    #a = params["status_ids"] 
    cycle = params["cycle"]

@@ -60,8 +60,7 @@ eview = params["eview"]
            <div class="col border border-light">
          <% end %>   
           <p style="padding-top: 15px;"><b><%= card.title %>
-          <% if (p_type.eql? "2") %> ( <%=card.short_name%>,<%= card.in_cycle %>[<%=card.card_type %>]
-          <% end %>
+          <% if (p_type.eql? "2") %> ( <%=card.short_name%>, <%= card.in_cycle %> [<%=card.card_type %>]) <% end %>
         </b> </p>
          
            <% if (p_type.eql? "2") %>
