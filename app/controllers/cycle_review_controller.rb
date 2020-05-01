@@ -99,14 +99,7 @@ class CycleReviewController < ApplicationController
     
   def update
    
-   #one time destroy all
- cr = CycleReview.all
-
- cr.each do |one_cr|
-  #byebug
-  one_cr.destroy!
- end 
-
+   
    #a = params["status_ids"] 
    cycle = params["cycle"]
    r_type = params["review_type"]
