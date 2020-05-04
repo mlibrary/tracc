@@ -176,12 +176,16 @@ strategic_pro = Gchart.bar( %>
           <div class="col-md-12">  
             <% str = "activity_type LIKE 'Strategic' "
                @s_list = Card.where(str) 
-               @s_list.each do |s| %>  
+               @s_list.each do |s| 
+                str = "card_id='"+s.id.to_s+"'"
+                fte = ChipAssignment.where(str).sum(:chips)
+                fte = fte/16.00
+            %>  
                  <div class="card card-body">
-                 <h6><b><%= s.short_name%></b></h6>
+                 <h6><b><%= s.short_name%> (<%= fte.round(2) %> FTE)</b></h6>
                  <div class="row"> 
                   <% # all tracks
-                    all_tracks = Track.where("card_id='"+s.id.to_s+"'").order(:disp_order)
+                    all_tracks = Track.where(str).order(:disp_order)
                     track_cnt = 0 
                     all_tracks.each do |t|
                       track_cnt = track_cnt + 1
@@ -216,13 +220,30 @@ strategic_pro = Gchart.bar( %>
                     cnt1 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
                    cnt2 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
                    cnt3 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
-                   cnt4 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count  
-                   p1 = 100- (month1p/cnt1)
-                   p2 = 100- (month2p/cnt2)
-                   p3 = 100- (month3p/cnt3)
-                   p4 = 100- (month4p/cnt4)
+                   cnt4 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count 
+                   strategic_p = [] 
 
-                  strategic_p = [100,p1,p2,p3,p4]
+                   p1 = 100- (month1p/cnt1)
+                   strategic_p << p1 
+                   
+                   p2 = 100- (month2p/cnt2)
+                   if (p2 < 100)
+                       strategic_p << p2
+                   end 
+
+                   p3 = 100- (month3p/cnt3)
+                   if (p3 < 100)
+                       strategic_p << p3
+                   end 
+
+                   p4 = 100- (month4p/cnt4)
+                   if (p4 < 100)
+                       strategic_p << p4
+                   end    
+                   
+                   
+
+                  
                   burndown_chart = Gchart.line(
                   :size => '240x100',
                   :line_colors => 'C06D09,115603',
