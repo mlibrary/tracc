@@ -170,10 +170,10 @@ strategic_pro = Gchart.bar( %>
         Status: Strategic and Tactical  </a>
       </h5>
     </div>
-    <div id="collapse4" class="panel-collapse collapse show">
+    <div id="collapse4" class="panel-collapse collapse">
       <div class="card-body">
         <div class="row">
-          <div class="col-md-9">  
+          <div class="col-md-12">  
             <% str = "activity_type LIKE 'Strategic' "
                @s_list = Card.where(str) 
                @s_list.each do |s| %>  
@@ -206,16 +206,40 @@ strategic_pro = Gchart.bar( %>
                            %>
                         <div class="col border border-light"></div>
                          <% end #while %>
-                  </div>
-                    </div>
-                   
-                  <% end #for each %>  
+                <%
+                  ideal_p = [100,75,50,25,0]
+                   month1p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status1)
+                   month2p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status2)
+                   month3p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status3)
+                   month4p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status4)   
+                  strategic_p = [100,100-month1p,100-month2p,100-month3p,100-month4p]
+                  burndown_chart = Gchart.line(
+                  :size => '240x100',
+                  :line_colors => 'e62ae5,287eec',
+                  :data => [strategic_p,ideal_p], 
+                  :legend => [ 'Remaining', 'Ideal'],
+                  :title => 'Effort Chart',
+                  :axis_with_labels => ['x', 'y'], 
+                  :axis_labels => [['', 'Mar', 'Apr', 'May', 'Jun']], 
+                  :axis_range => [nil, [25,100,25]])
+                %>
                     
+                   <div class="col-md-3"> <%= image_tag burndown_chart %>   </div>
+                 </div></div>
+                  <% end #for each %>  
+                   
           </div>
-          <div class="col-md-3">      
-            <% str = "activity_type LIKE '%Active%' "
+           
+        </div>
+        
+        
+        <div class="row" style="padding-top: 5px;">
+                
+            <% t_cnt = 0 
+               str = "activity_type LIKE '%Active%' "
                @s_list = Card.where(str) 
                @s_list.each do |s| 
+                t_cnt = t_cnt + 1
                 str = "card_id='" + s.id.to_s + "' AND cycle='"+ cycle + "'"
                 fte = ChipAssignment.where(str).sum(:chips)
                 fte = fte/16.00
@@ -232,7 +256,12 @@ strategic_pro = Gchart.bar( %>
                 else
                   totalp = 0  
                 end
-              %>  
+              %> 
+              <% if (t_cnt%5==0) 
+                  t_cnt = 1 %>
+                </div><div class="row" style="padding-top: 5px;">
+              <% end %>   
+              <div class="col">
                <div class="card card-body">
                   <p ><b><%= s.short_name%>:</b> 
                     <br><%= fte.round(2) %> FTE
@@ -249,12 +278,15 @@ strategic_pro = Gchart.bar( %>
                   <% end %> <%#= s.card_status %> <br><%= s.rationale %> </p>
                 
                    
-                <div class="progress"> <div class="progress-bar bg-info" role="progressbar" style="width: <%=totalp %>%;" aria-valuenow="<%=totalp %>" aria-valuemin="0" aria-valuemax="100"> <%=totalp %>%
-          </div> </div></div>
+                <div class="progress"> <div class="progress-bar bg-info" role="progressbar" style="width: <%=totalp %>%;" aria-valuenow="<%=totalp %>" aria-valuemin="0" aria-valuemax="100"> <%=totalp %>%</div> </div>
+              </div>
+              
+            </div>
+
           <% end %>
-          </div>  
+           
         </div>  
-      </div>
+      
     </div>
   </div>
 
@@ -409,8 +441,8 @@ strategic_pro = Gchart.bar( %>
  tact_s << total_left
 
 
- total_cap = Gchart.pie_3d(:title => "Total Capacity", :labels => "Project|Ops/Services", :data => totalfte, :size => '500x200')
-pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200')
+ total_cap = Gchart.pie_3d(:title => "Total Capacity", :labels => "Project|Ops/Services", :data => totalfte, :size => '500x200', :line_colors => 'CFC607,16147A')
+pro_cap = Gchart.pie_3d(:title => "Projects Capacity", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200', :line_colors => 'D9D129, BBB424, E9E131')
 %>
 
 <p style="padding-top: 5px;" >
