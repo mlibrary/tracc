@@ -177,14 +177,23 @@ strategic_pro = Gchart.bar( %>
             <% str = "activity_type LIKE 'Strategic' "
                @s_list = Card.where(str) 
                @s_list.each do |s| 
-                str = "card_id='"+s.id.to_s+"'"
+                str = "card_id='"+s.id.to_s+"' AND cycle='"+cycle+"'"
                 fte = ChipAssignment.where(str).sum(:chips)
                 fte = fte/16.00
+                #check alerts
+                str = "card_id='"+s.id.to_s+"'"
+                alert_cnt =  Alert.where(str).count
+
             %>  
                  <div class="card card-body">
-                 <h6><b><%= s.short_name%> (<%= fte.round(2) %> FTE)</b></h6>
+                 <h6><b><%= s.short_name%> (<%= fte.round(2) %> FTE)</b> 
+                  <% if (alert_cnt >0) %>
+                  <a href="../alerts"><span class="badge badge-warning">Notifications: <%= alert_cnt%></span></a>
+                  <% end %>
+                </h6>
                  <div class="row"> 
                   <% # all tracks
+                    
                     all_tracks = Track.where(str).order(:disp_order)
                     track_cnt = 0 
                     all_tracks.each do |t|
@@ -221,7 +230,7 @@ strategic_pro = Gchart.bar( %>
                    cnt2 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
                    cnt3 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
                    cnt4 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count 
-                   strategic_p = [] 
+                   strategic_p = [100] 
 
                    p1 = 100- (month1p/cnt1)
                    strategic_p << p1 

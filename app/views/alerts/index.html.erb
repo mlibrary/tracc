@@ -10,7 +10,7 @@ end
 
 %>
 
-
+<div class="panel-group" id="accordion">
 <div class="card" >
   <div class="card-header">
     <h4 style="padding-bottom: 10px;"> Add/Edit Action Items</h4>
@@ -26,19 +26,17 @@ end
       %>
       <%= form_tag(save_alerts_path, :enctype =>"multipart/form-data") do  %>
       <div class="card card-body">
-      <p><b><%= one_c.short_name %></b></p>
-       <div class="row ml-1" style="padding-top: 2px;">
-       <div class="field">
-         New Action Item:
-        
-		<div class="row ml-1">
-    	<div class="field">
+      <p><b><%= one_c.short_name %></b>
+<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+<span class="badge badge-primary">+ New</span></a>
+      </p>
+      <div id="collapse1" class="panel-collapse collapse">
+		  <div class="row ml-1"><div class="field">
      	Track: 
      		<%= select_tag "track", options_from_collection_for_select(tracks, "id", "track")  %>
      	Assigned To: 
      		<%= select_tag "owner", options_for_select(chips)  %>	
-   		</div>
-		</div>
+   		</div></div>
 
 		<div class="row ml-1">
     	<div class="field">
@@ -46,8 +44,6 @@ end
    		</div>
 		</div>
          
-           
-      </div>
       </div>
       <hr>
       <%
@@ -79,7 +75,7 @@ end
      <p style="padding-top: 5px;"> </p>
      <%  end # form%>
      <% end  #all cards  %>
-     
+     </div>
      
 
 
