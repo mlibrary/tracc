@@ -1,13 +1,60 @@
+<%
 
+cycle=params["cycle"]
+
+nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
+cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+s = cur_cycle.first.start.month
+months = ['','','','','']
+
+i = 1
+while (i<=4) do
+  months[i] = nameofmonths[s]
+  i = i + 1
+  s = s+1 
+  if (s>12)
+    s= 1
+  end
+end 
+%>
 
 <%= form_tag(save_progress_cards_path, :enctype =>"multipart/form-data") do  %>
 
 <div class="card">
   <div class="card-header">
-    <h4> <%=params["cycle"]%> Update Progress for: <%=params["epic"]%></h4>
-  </div>  
-<div class="card-body">  
-<h5><b>Objectives:</b></h5>
+    <h4> <%=cycle%> Update Progress for: <%=params["epic"]%>  </h4><p><%= submit_tag 'Save' %></p>
+  </div>   
+
+<div class="card-body"> 
+
+ <div class="row">
+   <div class="col-md-8">
+    <p align="center"><b>Objectives</b></p>
+   </div>
+   <div class="col-md-4">
+    <p align="center"><b>Progress</b></p>
+   </div>
+ 
+ </div>  
+ <div class="row">
+   <div class="col-md-8">
+    <b></b>
+   </div>
+   <div class="col-md-1">
+    <b><%= months[1] %></b>
+   </div>
+   <div class="col-md-1">
+    <b><%= months[2] %></b>
+   </div>
+   <div class="col-md-1">
+    <b><%= months[3] %></b>
+   </div>
+   <div class="col-md-1">
+    <b><%= months[4] %></b>
+   </div>
+
+ </div>   
+   <hr> 
  <% 
    one = @comment.first
    if (one.nil?)
@@ -15,28 +62,48 @@
    end 
     
    cnt = 0
-   @track_epic.all.each do |t| 
-      track = t.objective
-      t_id = "t" + t.id.to_s
-      tstatus = t.status
+   @track_epic.all.each do |t| #objectives
+      obj = t.objective
+      t_id1 = "t1" + t.id.to_s
+      t_id2 = "t2" + t.id.to_s
+      t_id3 = "t3" + t.id.to_s
+      t_id4 = "t4" + t.id.to_s
+      tstatus1 = t.status1
+      tstatus2 = t.status2
+      tstatus3 = t.status3
+      tstatus4 = t.status4
       cnt = cnt+1
  %>  
-  <div class="row ml-1">
-    <div class="field">  
-     <p><strong><%=cnt%>. <%=track%>:</strong> 
-     <%= text_field_tag t_id, value=tstatus %>%   </p>
-    </div>
+  <div class="row">
+     <div class="col-md-8"> 
+     <p><%=cnt%>. <%=obj.html_safe %></p>
+   </div>
+
+ 
+      <div class="col-md-1">
+        <%= text_field_tag t_id1, value=tstatus1, size: 3 %>% 
+      </div>
+      <div class="col-md-1">
+        <%= text_field_tag t_id2, value=tstatus2, size: 3  %>% 
+      </div>
+      <div class="col-md-1">
+        <%= text_field_tag t_id3, value=tstatus3, size: 3  %>% 
+      </div>
+      <div class="col-md-1">
+        <%= text_field_tag t_id4, value=tstatus4, size: 3  %>% 
+      </div>  
   </div>
+  <hr>
   <%end %> 
  
 <h5><b>Comments:</b></h5>
 <%= hidden_field_tag 'epic', params["epic"] %>
 <%= hidden_field_tag 'cycle', params["cycle"] %>
 
-<p>March:<br><%= text_area_tag 'comment1',  one.comment1 , :rows => 5, :cols => 100%></p>
-<p>April:<br><%= text_area_tag 'comment2',  one.comment2, :rows => 5, :cols => 100 %></p>
-<p>May:<br><%= text_area_tag 'comment3',  one.comment3, :rows => 5, :cols => 100 %></p>
-<p>June:<br><%= text_area_tag 'comment4',  one.comment4, :rows => 5, :cols => 100 %></p>
+<p><%= months[1] %><br><%= text_area_tag 'comment1',  one.comment1 , :rows => 5, :cols => 100%></p>
+<p><%= months[2] %><br><%= text_area_tag 'comment2',  one.comment2, :rows => 5, :cols => 100 %></p>
+<p><%= months[3] %><br><%= text_area_tag 'comment3',  one.comment3, :rows => 5, :cols => 100 %></p>
+<p><%= months[4] %><br><%= text_area_tag 'comment4',  one.comment4, :rows => 5, :cols => 100 %></p>
 
 </div>
   <div class="card-footer"> 

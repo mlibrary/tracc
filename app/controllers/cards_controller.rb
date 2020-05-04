@@ -399,6 +399,12 @@ end
     epic=  params["epic"]
     cycle = params["cycle"]
     
+    
+    cur_month = Date.current.month
+    cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+    s = cur_cycle.first.start.month
+    pmonth = cur_month - cur_cycle.first.start.month + 1
+
     #str = "epic_title LIKE '" + epic + "'"  
     str = "short_name LIKE '" + epic + "%'"   
     one_card = Card.where(str)
@@ -421,7 +427,15 @@ end
 
     @track_epic.all.each do |t| 
       track = t.objective
-      t_id = "t" + t.id.to_s
+      t_id = "t" + pmonth.to_s + t.id.to_s
+      t_id1 = "t1" + t.id.to_s
+      t_id2 = "t2" + t.id.to_s
+      t_id3 = "t3" + t.id.to_s
+      t_id4 = "t4" + t.id.to_s
+      t.status1 = params[t_id1]
+      t.status2 = params[t_id2]
+      t.status3 = params[t_id3]
+      t.status4 = params[t_id4]
       t.status = params[t_id]
       t.save!
     end   
