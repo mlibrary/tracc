@@ -8,8 +8,11 @@
   endmonth = ""
   months = ["","","","",""]
   
-  i = 0 
-  while (i<4) do
+  s = cur_cycle.first.start.month
+
+  i = 1 
+
+  while (i<=4) do
     months[i] = nameofmonths[s]
     i = i + 1
     if s<=12
@@ -38,8 +41,8 @@
               <p style="text-align: center;"><b>Projects</b></p>
             </div>  
            
-           <% i = 0
-              while (i < 4) do 
+           <% i = 1
+              while (i <= 4) do 
               
                 %>  
             <div class="col border border-dark"   >
@@ -71,23 +74,62 @@
               <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
               <hr>
               
-               <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a>
+               <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a><p style="padding-top: 3px"></p>
               
 
                <div id="collapse1" class="panel-collapse collapse">
-                <p style="padding-top: 5px">
-                  <%
-                 o_cnt = 0 
-                 o_all = Objective.where(str1)
-                 o_all.each do |o|
-                  o_cnt = o_cnt + 1 
-                  ostatus = o.status
-                   %>
-                 <p><%=o_cnt%>. <%=o.objective%>  <div class="progress">
+                     <div class="row">
+        <div class="col-md-8"></div>
+           <% 
+      
+      i = 0 
+          while (i<=4) 
+            i = i + 1
+       %>
+       <div class="col-md-1"><%= months[i] %>
+       </div>
+       <% end %>  
+      </div>  
+
+      <% cnt = 0
+        
+        @o_st = Objective.where(str1) 
+
+         @o_st.all.each do |o| 
+            obj = o.objective
+           
+            cnt = cnt+1
+      %>  
+    
+        <div class="row"><div class="col-md-8"><%=cnt.to_s %>. <%= obj%></div>
+       
+       <% i = 1 
+          while (i<=4) 
+            i = i + 1
+            if (i == 1)
+             ostatus = o.status1
+            elsif (i == 2)
+             ostatus = o.status2
+            elsif (i == 3)
+             ostatus = o.status3
+            else
+             ostatus = o.status4
+            end    
+
+        %>    
+        <div class="col-md-1">
+        
+        <div class="progress">
           <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
           </div>
-        </div> </p>
-                   <% end %>
+        </div>
+      
+       </div>
+       <% end #while %> 
+     </div>
+       <% end %>
+               <p style="padding-top: 3px"></p>
+               </div>
                </div>
               <p style="padding-top: 5px"></p>
                <%#= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
