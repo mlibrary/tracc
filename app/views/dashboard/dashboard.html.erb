@@ -9,6 +9,7 @@
   fte = params["fte"]
   bar = params["bar"]
   progress = params["progress"]
+  pchart = params["pchart"]
   
   nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
   cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
@@ -24,9 +25,72 @@
     end  
    endmonth = nameofmonths[s]
   end 
+  
+  s = cur_cycle.first.start.month
+  months = ['','','','','']
+  i = 1
+  while (i<=4) do
+    months[i] = nameofmonths[s]
+    i = i + 1
+    s = s+1 
+    if (s>12)
+     s= 1
+    end
+  end 
 
   @slist = Card.where("activity_type LIKE 'Strategic'")
-  
+
+  #burndown chart data
+  ideal_p = [100,75,50,25,0]
+
+  data_array = []
+  legend = []
+  strategic_p = []
+
+  cur_month = Date.current.month
+  cur_dt = Date.current.day
+
+  @slist.each do |s|
+      month1p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status1)
+      month2p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status2)
+      month3p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status3)
+      month4p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status4)  
+
+     cnt1 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
+     cnt2 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
+     cnt3 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
+     cnt4 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count 
+
+     #p1 = 100- (month1p/cnt1)
+     #strategic_p << p1 
+     #p2 = 100- (month2p/cnt2)
+     #strategic_p << p2
+     #p3 = 100- (month3p/cnt3)
+     #strategic_p << p3
+     #p4 = 100- (month4p/cnt4)
+     #strategic_p << p4
+
+     p1 = 100- (month1p/cnt1)
+     strategic_p << p1 
+                   
+     p2 = 100- (month2p/cnt2)
+     if (p2 < 100)
+        strategic_p << p2
+     end 
+
+     p3 = 100- (month3p/cnt3)
+     if (p3 < 100)
+       strategic_p << p3
+     end 
+
+     p4 = 100- (month4p/cnt4)
+     if (p4 < 100)
+       strategic_p << p4
+     end 
+
+     data_array << strategic_p
+     legend << s.short_name
+  end                 
 %>
 <div class="container-fluid">
   <h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
@@ -84,9 +148,7 @@
          <% if (!strategic.short_description.nil?) %> 
            <p> <%= strategic.short_description.html_safe %></p>
          <% end %>
-         <% if (strategic.title.include? 'Hathi') 
-            # don nothing
-            else %>
+         
          <h6 ><strong> Objectives:</strong></h6>
          <% cnt = 0
         
@@ -108,7 +170,7 @@
         <% end %>
 
        
-      <% end # if not HT
+      <% 
          end #objectives%>
        
       </div>      
@@ -122,7 +184,51 @@
       <div class="col-sm d-flex"></div>
   </div>
 
+  <% 
+ 
+  legend <<  'Expected'
+  data_array << ideal_p
+  if (pchart)
+    pos= months.index(nameofmonths[cur_month])
+                  
+    if (cur_dt < 24) # add curren month only if end of the month
+     pos = pos-1
+    end 
+    graph_months = ['']
+    i = 0 
+    while (i<pos)
+      i = i + 1
+      graph_months << months[i]
+    end
+
+    burndown_chart = Gchart.line(
+    :size => '700x300',
+    :line_colors => '70C8BE,B8E1DD,CDCF15,F47E56,F16A74,FFB8AE,00A99A,F2CC65,50C878',
+    :data => data_array, 
+    :legend => legend,
+    :title => 'Effort Chart',
+    :axis_with_labels => ['x', 'y'], 
+    :axis_labels => [graph_months], 
+    :axis_range => [nil, [25,100,25]])
+  
+  %>
+  <p style="padding-top:10px"> </p>
+  <div class="card">
+    <div class="card-header">
+      <h5>Progress Chart</h5>
+    </div>
+  <div class="card-body">    
+   <div class="row">
+    <div class="col">
+      <%= image_tag burndown_chart %>
+    </div>
+   </div>
+  </div> 
+ </div> 
+ <% end  #if phart%>
+
  </div>
+  
   
 </div>
 
