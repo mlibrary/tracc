@@ -37,7 +37,7 @@ if (s != nil)
   endmonth = nameofmonths[s]
 end 
 
-
+s = cur_cycle.first.start.month
 
 months = ['','','','','']
 i = 1
@@ -49,6 +49,7 @@ while (i<=4) do
     s= 1
   end
 end 
+
 
 %>
 
@@ -145,29 +146,59 @@ end
       <%#<h6 ><strong> Project Lead:</strong></h6> 
       <p>Jon Rothman</p>%>
       <% if (obj) %>
-      <h6 ><strong> Objectives:</strong></h6>
+      <div class="row">
+        <div class="col-md-8">
+        <h6 ><strong> Objectives</strong></h6>
+        </div>
+      <% 
+      
+      i = 0 
+          while (i<=4) 
+            i = i + 1
+       %>
+       <div class="col-md-1"><%= months[i] %>
+       </div>
+       <% end %>  
+      </div>      
     	<% cnt = 0
         
          one = @c_st.first
 
          @o_st.all.each do |o| 
             obj = o.objective
-            ostatus = o.status
+           
             cnt = cnt+1
       %>  
-      
+    
+
        <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
         <p><%=cnt.to_s %>. <%= obj%></p>
        </div>
-        <div class="col-md-6">
+       <% i = 1 
+          while (i<=4) 
+            i = i + 1
+            if (i == 1)
+             ostatus = o.status1
+            elsif (i == 2)
+             ostatus = o.status2
+            elsif (i == 3)
+             ostatus = o.status3
+            else
+             ostatus = o.status4
+            end    
+
+        %>    
+        <div class="col-md-1">
         <% if (bar) %>  
         <div class="progress">
           <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
           </div>
         </div>
-        <% end %>
-       </div></div>
+        <% end %> 
+       </div>
+       <% end #while %> 
+     </div>
       <%end%>
        
    
