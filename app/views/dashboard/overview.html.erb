@@ -42,8 +42,8 @@ while (i<=4) do
     s= 1
   end
 end 
-
-
+cur_month = Date.current.month
+cur_dt = Date.current.day
 
 
 pro = Array.new
@@ -251,16 +251,26 @@ strategic_pro = Gchart.bar( %>
                    end    
                    
                    
-
+                  pos= months.index(nameofmonths[cur_month])
                   
+                  if (cur_dt < 24) # add curren month only if end of the month
+                    pos = pos-1
+                  end 
+                  graph_months = ['']
+                  i = 0 
+                  while (i<pos)
+                    i = i + 1
+                    graph_months << months[i]
+                  end
+
                   burndown_chart = Gchart.line(
                   :size => '240x100',
-                  :line_colors => 'C06D09,115603',
+                  :line_colors => '933A16,50C878',
                   :data => [strategic_p,ideal_p], 
-                  :legend => [ 'Remaining', 'Ideal'],
+                  :legend => [ 'Actual', 'Expected'],
                   :title => 'Effort Chart',
                   :axis_with_labels => ['x', 'y'], 
-                  :axis_labels => [['', 'Mar', 'Apr', 'May', 'Jun']], 
+                  :axis_labels => [graph_months], 
                   :axis_range => [nil, [25,100,25]])
                 %>
                     
