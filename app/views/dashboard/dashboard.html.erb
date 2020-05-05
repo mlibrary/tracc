@@ -125,8 +125,17 @@
      str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
      @o_st = Objective.where(str) 
      
-     @o_st.all.each do |o|     
-       ostatus = o.status
+     @o_st.all.each do |o|   
+       # based on current month  
+        if (pos==1)
+               ostatus = o.status1
+             elsif (pos==2)
+               ostatus = o.status2
+             elsif (pos==3)
+               ostatus = o.status3
+             elsif (pos==4)
+               ostatus = o.status4    
+             end  
        cnt = cnt+1 
        if (ostatus != nil)
           total+=ostatus
@@ -220,7 +229,7 @@
 
     burndown_chart = Gchart.line(
     :size => '700x300',
-    :line_colors => '70C8BE,B8E1DD,CDCF15,F47E56,F16A74,FFB8AE,00A99A,F2CC65,50C878',
+    :line_colors => '003f5c,5886a5,CDCF15,bc5090,ffa600,FFB8AE,00A99A,ff6361,50C878',
     :data => data_array, 
     :legend => legend,
     :title => 'Effort Chart',
