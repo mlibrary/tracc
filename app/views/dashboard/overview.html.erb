@@ -45,6 +45,11 @@ end
 cur_month = Date.current.month
 cur_dt = Date.current.day
 
+pos= months.index(nameofmonths[cur_month])
+                  
+    if (cur_dt < 24) # add curren month only if end of the month
+     pos = pos-1
+    end 
 
 pro = Array.new
 cap =Array.new
@@ -59,7 +64,15 @@ cap =Array.new
            @o_st = Objective.where(str) 
 
            @o_st.all.each do |o|     
-            ostatus = o.status
+             if (pos==1)
+               ostatus = o.status1
+             elsif (pos==2)
+               ostatus = o.status2
+             elsif (pos==3)
+               ostatus = o.status3
+             elsif (pos==4)
+               ostatus = o.status4    
+             end  
             cnt = cnt+1 
             if (ostatus != nil)
               total+=ostatus
@@ -160,6 +173,7 @@ strategic_pro = Gchart.bar( %>
 
 <div class="container">
 <h3  style="padding-bottom: 5px"> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Dashboard </h3> 
+<p>(Numbers reflect <%= months[pos] %> data)</p>
 
 <div class="panel-group" id="accordion" style="padding-top: 25px">
 
