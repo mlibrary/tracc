@@ -52,6 +52,7 @@
   cur_dt = Date.current.day
 
   @slist.each do |s|
+      strategic_p = [100]
       month1p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status1)
       month2p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status2)
       month3p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status3)
@@ -71,6 +72,7 @@
      #p4 = 100- (month4p/cnt4)
      #strategic_p << p4
 
+     
      p1 = 100- (month1p/cnt1)
      strategic_p << p1 
                    
@@ -91,7 +93,21 @@
 
      data_array << strategic_p
      legend << s.short_name
-  end                 
+  end  
+  
+    pos= months.index(nameofmonths[cur_month])
+                  
+    if (cur_dt < 24) # add curren month only if end of the month
+     pos = pos-1
+    end 
+
+    graph_months = ['']
+    i = 0 
+    while (i<pos)
+      i = i + 1
+      graph_months << months[i]
+    end
+
 %>
 <div class="container-fluid">
   <h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
@@ -157,7 +173,17 @@
 
            @o_st.all.each do |o| 
              obj = o.objective
-             ostatus = o.status
+             # get current status
+             if (pos==1)
+               ostatus = o.status1
+             elsif (pos==2)
+               ostatus = o.status2
+             elsif (pos==3)
+               ostatus = o.status3
+             elsif (pos==4)
+               ostatus = o.status4    
+             end  
+
              cnt = cnt+1
          %>  
        
@@ -186,21 +212,11 @@
   </div>
 
   <% 
- 
+  
   legend <<  'Expected'
   data_array << ideal_p
   if (pchart)
-    pos= months.index(nameofmonths[cur_month])
-                  
-    if (cur_dt < 24) # add curren month only if end of the month
-     pos = pos-1
-    end 
-    graph_months = ['']
-    i = 0 
-    while (i<pos)
-      i = i + 1
-      graph_months << months[i]
-    end
+    
 
     burndown_chart = Gchart.line(
     :size => '700x300',
