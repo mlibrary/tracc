@@ -141,11 +141,11 @@ strategic_cap = Gchart.bar( %>
                   <% :stacked => false, %>
                   <% :legend_position => 'bottom', %>
                   <% :axis_with_labels => [['x'], ['y']], %>
-                  <% :max_value => 20, %>
+                  <% :max_value => 5, %>
                   <% :min_value => 0, %>
                   <% :bar_width_and_spacing => [50,6], %>
                   <% :axis_labels => x_labels, %>
-                  <% :axis_range => [nil, [0,20,5]], %>
+                  <% :axis_range => [nil, [0,5,1]], %>
                   <% ) 
 # end of strategic capacity
 
@@ -501,6 +501,7 @@ pro_cap = Gchart.pie_3d(:title => "Project Capacity", :labels => "Strategic|Tact
             <p ><%= image_tag pro_cap%></p>
             <p align="center">Strategic: <%=total_strategic.round(2) %> FTE</p>
             <p align="center">Tactial: <%=total_tactical.round(2) %> FTE</p>
+             <p align="center">Standing: <%=total_left.round(2) %> FTE</p>
           </div>  
         </div>  
       </div>
