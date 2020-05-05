@@ -104,7 +104,13 @@
    </div>
  </div>
 
- <p style="padding-top: 10px"> </p>
+  <div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "capacity" ,1, {:checked => "checked"} %> LIT Capacity Charts
+   </div>
+ </div>
+
+
  </div>
  <div class="card-footer"> 
    <div class="actions">
@@ -141,6 +147,8 @@
      <%= check_box_tag "progress" ,1, {:checked => "checked"} %> Overall Progress
    </div>
  </div>
+
+
 
  <p style="padding-top: 65px"> </p>
  </div>
