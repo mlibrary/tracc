@@ -15,7 +15,7 @@
      <ul class="list-group list-group-flush">
        <li class="list-group-item"> <b>Short Name: </b><%= @card_one.short_name%> </li>   
        <li class="list-group-item"> <b>Status:</b> <%= @card_one.card_status %></li>
-        <li class="list-group-item"><strong>Description:</strong> <%= @card_one.short_description %></li> 
+        <li class="list-group-item"><strong>Description:</strong> <%= @card_one.short_description.html_safe %></li> 
        <li class="list-group-item"> <b>Request Type: </b><%= @card_one.request_type %></li> 
        <li class="list-group-item"> <b>Requester: </b><%= @card_one.requester_name%> </li>
        <li class="list-group-item"> <b>Division:</b> <%=@card_one.requester_div%></li>

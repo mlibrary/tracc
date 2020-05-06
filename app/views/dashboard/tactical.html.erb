@@ -32,8 +32,8 @@
         @o_st = Objective.where(str) 
         
       %> 
-      <h5 ><%= one.short_name %></h5>
-      <p><%= one.short_description %></p>
+      <h5 ><%= one.title.html_safe %></h5>
+      <p><%= one.short_description.html_safe %></p>
       <% if (obj) %>
       <% @o_st.all.each do |o|  
         ostatus =  o. status%>
@@ -75,8 +75,8 @@
         @o_st = Objective.where(str) 
         
       %> 
-      <h5 ><%= one.short_name %></h5>
-      <p><%= one.short_description %></p>
+      <h5 ><%= one.title.html_safe %></h5>
+      <p><%= one.short_description.html_safe %></p>
       <% if (obj) %>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
@@ -119,8 +119,8 @@
         @o_st = Objective.where(str) 
         
       %> 
-      <h5 ><%= one.short_name %></h5>
-        <p><%= one.short_description %></p>
+      <h5 ><%= one.title.html_safe %></h5>
+        <p><%= one.short_description.html_safe %></p>
         <% if (obj) %>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
