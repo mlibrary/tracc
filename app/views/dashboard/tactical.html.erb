@@ -33,7 +33,7 @@
         
       %> 
       <h5 ><%= one.title.html_safe %></h5>
-      <p><%= one.short_description.html_safe %></p>
+      <p><% unless one.short_description.nil? %> <%= one.short_description.html_safe %> <%end%></p>
       <% if (obj) %>
       <% @o_st.all.each do |o|  
         ostatus =  o. status%>
@@ -76,7 +76,7 @@
         
       %> 
       <h5 ><%= one.title.html_safe %></h5>
-      <p><%= one.short_description.html_safe %></p>
+      <p><% unless one.short_description.nil? %><%= one.short_description.html_safe %><%end%></p>
       <% if (obj) %>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
@@ -120,7 +120,7 @@
         
       %> 
       <h5 ><%= one.title.html_safe %></h5>
-        <p><%= one.short_description.html_safe %></p>
+        <p><% unless one.short_description.nil? %><%= one.short_description.html_safe %><% end %></p>
         <% if (obj) %>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
