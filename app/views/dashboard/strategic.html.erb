@@ -55,7 +55,7 @@ end
 
 <%#row1 %>
 <h3> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects - LIT Board </h3>
-
+<p>(Reflects progress through the month of <%= months[pos] %>)</p>
 <% @slist.all.each do |strategic| 
  card_id = strategic.id 
  str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"

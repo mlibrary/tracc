@@ -42,15 +42,28 @@
   @slist = Card.where("activity_type LIKE 'Strategic'")
 
   #burndown chart data
-  ideal_p = [100,75,50,25,0]
+  
 
   data_array = []
   legend = []
-  strategic_p = []
+  strategic_p = [100]
 
   cur_month = Date.current.month
   cur_dt = Date.current.day
+  pos= months.index(nameofmonths[cur_month])
+                  
+  if (cur_dt < 24) # add curren month only if end of the month
+    pos = pos-1
+  end 
 
+  ideal_p = [100] 
+  i = 0 
+  num = 75
+  while (i<pos)
+     ideal_p << num
+     num = num -25
+     i = i + 1
+  end
   @slist.each do |s|
       strategic_p = [100]
       month1p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status1)
@@ -63,43 +76,33 @@
      cnt3 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
      cnt4 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count 
 
-     #p1 = 100- (month1p/cnt1)
-     #strategic_p << p1 
-     #p2 = 100- (month2p/cnt2)
-     #strategic_p << p2
-     #p3 = 100- (month3p/cnt3)
-     #strategic_p << p3
-     #p4 = 100- (month4p/cnt4)
-     #strategic_p << p4
-
-     
+   
      p1 = 100- (month1p/cnt1)
-     strategic_p << p1 
-                   
+     if (p1 <100)
+       strategic_p << p1 
+         
+     end 
      p2 = 100- (month2p/cnt2)
      if (p2 < 100)
         strategic_p << p2
+        
      end 
 
      p3 = 100- (month3p/cnt3)
      if (p3 < 100)
        strategic_p << p3
+       
      end 
 
      p4 = 100- (month4p/cnt4)
      if (p4 < 100)
        strategic_p << p4
+       
      end 
 
      data_array << strategic_p
      legend << s.short_name
   end  
-  
-    pos= months.index(nameofmonths[cur_month])
-                  
-    if (cur_dt < 24) # add curren month only if end of the month
-     pos = pos-1
-    end 
 
     graph_months = ['']
     i = 0 
@@ -111,7 +114,131 @@
 %>
 <div class="container-fluid">
   <h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
-  <p>(Numbers reflect <%= months[pos] %> data)</p>
+  <p>(Reflects progress through the month of <%= months[pos] %>)</p>
+
+  <% 
+
+if (capacity) 
+
+ @slist = Card.where("activity_type LIKE 'Strategic'")
+ @alist = Card.where("activity_type LIKE '%Active%' ") 
+
+ total_tactical = 0 
+ total_strategic = 0 
+
+ @slist.each do |s|
+  str = "card_id='" + s.id.to_s + "' AND cycle='"+ cycle + "'"
+  ch_cnt = ChipAssignment.where(str).sum(:chips)
+  if (ch_cnt.nil?) 
+    ch_cnt = 0 
+  else  
+    ch_cnt = ch_cnt/4 
+  end
+  total_strategic = total_strategic + ch_cnt
+ end 
+
+ @alist.each do |a|
+  str = "card_id='" + a.id.to_s + "' AND cycle='"+ cycle + "'"
+  ch_cnt = ChipAssignment.where(str).sum(:chips)
+  if (ch_cnt.nil?) 
+    ch_cnt = 0 
+  else  
+    ch_cnt = ch_cnt/4 
+  end
+  total_tactical = total_tactical + ch_cnt
+ end 
+ 
+ ch = Chip.order(:dept)
+ totalops = 0
+ totalpro =0 
+ totalstanding = 0 
+ ch.each do |t|
+  totalops = totalops = totalops + t.ops
+  totalpro = totalpro = totalpro + t.project
+ end
+ 
+ totalops = totalops*1.0/4
+ totalpro = totalpro*1.0/4
+ finaltotal = totalops + totalpro
+ propercent = (totalpro/finaltotal)*100
+ opspercent = (totalops/finaltotal)*100
+ 
+ totalfte = Array.new
+ totalfte << totalpro
+ totalfte << totalops
+
+ total_standing =  totalpro - (total_strategic+total_tactical)
+ tpercent = (total_tactical/totalpro)*100
+ spercent = (total_strategic/totalpro)*100
+ leftpercent = (total_standing/totalpro)*100
+ tact_s = Array.new
+ tact_s << total_strategic
+ tact_s << total_tactical
+ tact_s << total_standing
+
+ 
+total_cap = Gchart.pie_3d(:title => "Total", :labels => "Ops/Services|Projects/Initiatives", :data => totalfte, :size => '500x200', :line_colors => 'f2c649,16147A')
+pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200', :line_colors => 'D9D129, BBB424, E9E131')
+%>
+
+<p style="padding-top: 5px;" >
+</p>
+  <div class="card" >
+      <div class="card-header" >
+        <h5>LIT Capacity </h5>
+      </div>
+    
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">    
+            <p><%= image_tag total_cap%></p>
+             <p align="center">Projects/Initiatives: <%=totalpro.round(2) %> FTE, <%=propercent.round(2) %>%  </p>
+            <p align="center">Ops/Services: <%=totalops.round(2) %> FTE, <%=opspercent.round(2) %>% </p>
+          </div>
+          <div class="col-md-6">      
+            <p ><%= image_tag pro_cap%></p>
+             <p align="center">Strategic: <%=total_strategic.round(2) %> FTE,<%=spercent.round(2) %>% </p>
+            <p align="center">Tactical: <%= total_tactical.round(2) %> FTE, <%=tpercent.round(2) %>% </p>
+             <p align="center">Standing: <%= total_standing.round(2) %> FTE, <%=leftpercent.round(2) %>% </p>
+          </div>  
+        </div>  
+      </div>
+    </div>
+  
+<% end %>
+
+  <% 
+  
+  legend <<  'Expected'
+  data_array << ideal_p
+  if (pchart)
+    
+
+    burndown_chart = Gchart.line(
+    :size => '700x300',
+    :line_colors => '003fff,5886a5,CDCF15,bc5090,ffa600,FFB8AE,00A99A,ff6361,50C878',
+    :data => data_array, 
+    :legend => legend,
+    :title => 'Effort Chart',
+    :axis_with_labels => ['x', 'y'], 
+    :axis_labels => [graph_months], 
+    :axis_range => [nil, [0,100,25]])
+  
+  %>
+  <p style="padding-top:10px"> </p>
+  <div class="card">
+    <div class="card-header">
+      <h5>Progress towards Objectives</h5>
+    </div>
+  <div class="card-body">    
+   <div class="row">
+    <div class="col">
+      <%= image_tag burndown_chart %>
+    </div>
+   </div>
+  </div> 
+ </div> 
+ <% end  #if phart%>
    <div class="row" style="padding-top:20px"> 
 <% 
  
@@ -220,122 +347,9 @@
       <div class="col-sm d-flex"></div>
   </div>
 
-  <% 
-  
-  legend <<  'Expected'
-  data_array << ideal_p
-  if (pchart)
-    
 
-    burndown_chart = Gchart.line(
-    :size => '700x300',
-    :line_colors => '003f5c,5886a5,CDCF15,bc5090,ffa600,FFB8AE,00A99A,ff6361,50C878',
-    :data => data_array, 
-    :legend => legend,
-    :title => 'Effort Chart',
-    :axis_with_labels => ['x', 'y'], 
-    :axis_labels => [graph_months], 
-    :axis_range => [nil, [25,100,25]])
-  
-  %>
-  <p style="padding-top:10px"> </p>
-  <div class="card">
-    <div class="card-header">
-      <h5>Progress Chart</h5>
-    </div>
-  <div class="card-body">    
-   <div class="row">
-    <div class="col">
-      <%= image_tag burndown_chart %>
-    </div>
-   </div>
-  </div> 
- </div> 
- <% end  #if phart%>
 
-<% 
 
-if (capacity) 
-
- @slist = Card.where("activity_type LIKE 'Strategic'")
- @alist = Card.where("activity_type LIKE '%Active%' ") 
-
- total_tactical = 0 
- total_strategic = 0 
-
- @slist.each do |s|
-  str = "card_id='" + s.id.to_s + "' AND cycle='"+ cycle + "'"
-  ch_cnt = ChipAssignment.where(str).sum(:chips)
-  if (ch_cnt.nil?) 
-    ch_cnt = 0 
-  else  
-    ch_cnt = ch_cnt/4 
-  end
-  total_strategic = total_strategic + ch_cnt
- end 
-
- @alist.each do |a|
-  str = "card_id='" + a.id.to_s + "' AND cycle='"+ cycle + "'"
-  ch_cnt = ChipAssignment.where(str).sum(:chips)
-  if (ch_cnt.nil?) 
-    ch_cnt = 0 
-  else  
-    ch_cnt = ch_cnt/4 
-  end
-  total_tactical = total_tactical + ch_cnt
- end 
- 
- ch = Chip.order(:dept)
- totalops = 0
- totalpro =0 
- ch.each do |t|
-  totalops = totalops = totalops + t.ops
-  totalpro = totalpro = totalpro + t.project
- end
- 
- totalops = totalops*1.0/4
- totalpro = totalpro*1.0/4
- 
- totalfte = Array.new
- totalfte << totalpro
- totalfte << totalops
-
- total_left =  totalpro - (total_strategic+total_tactical)
- tact_s = Array.new
- tact_s << total_strategic
- tact_s << total_tactical
- tact_s << total_left
-
- 
- total_cap = Gchart.pie_3d(:title => "Total Capacity", :labels => "Project|Ops/Services", :data => totalfte, :size => '500x200', :line_colors => 'CFC607,16147A')
-pro_cap = Gchart.pie_3d(:title => "Project Capacity", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200', :line_colors => 'D9D129, BBB424, E9E131')
-%>
-
-<p style="padding-top: 5px;" >
-</p>
-  <div class="card" >
-      <div class="card-header" >
-        <h5>LIT Capacity </h5>
-      </div>
-    
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">    
-            <p><%= image_tag total_cap%></p>
-            <p align="center">Project: <%=totalpro.round(2) %> FTE</p>
-            <p align="center">Ops/Services: <%=totalops.round(2) %> FTE</p>
-          </div>
-          <div class="col-md-6">      
-            <p ><%= image_tag pro_cap%></p>
-            <p align="center">Strategic: <%=total_strategic.round(2) %> FTE</p>
-            <p align="center">Tactial: <%=total_tactical.round(2) %> FTE</p>
-            <p align="center">Standing: <%=total_left.round(2) %> FTE</p>
-          </div>  
-        </div>  
-      </div>
-    </div>
-  
-<% end %>
 
  </div>  
 </div>

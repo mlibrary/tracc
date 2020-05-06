@@ -47,9 +47,10 @@ cur_dt = Date.current.day
 
 pos= months.index(nameofmonths[cur_month])
                   
-    if (cur_dt < 24) # add curren month only if end of the month
-     pos = pos-1
-    end 
+if (cur_dt < 24) # add curren month only if end of the month
+  pos = pos-1
+end 
+   
 
 pro = Array.new
 cap =Array.new
@@ -173,7 +174,7 @@ strategic_pro = Gchart.bar( %>
 
 <div class="container">
 <h3  style="padding-bottom: 5px"> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Dashboard </h3> 
-<p>(Numbers reflect <%= months[pos] %> data)</p>
+<p>(Reflects progress through the month of <%= months[pos] %>)</p>
 
 <div class="panel-group" id="accordion" style="padding-top: 25px">
 
@@ -205,14 +206,14 @@ strategic_pro = Gchart.bar( %>
                   <a href="../alerts"><span class="badge badge-warning">Notifications: <%= alert_cnt%></span></a>
                   <% end %>
                 </h6>
-                 <div class="row"> 
+                 <div class="row" style="padding-top: 5px"> 
                   <% # all tracks
                     
                     all_tracks = Track.where(str).order(:disp_order)
                     track_cnt = 0 
                     all_tracks.each do |t|
                       track_cnt = track_cnt + 1
-                  %><div class="col"> <i><%=track_cnt%>. <%= t.track %></i> <br>Status: 
+                  %><div class="col"> <i><b><%=track_cnt%>. <%= t.track %></b></i> <br>Status: 
                       <% if (t.status.eql? "In-Progress") %>
                          <%= image_tag("Play.png", :alt => 'User Icon', size:"20x20")%>
                       <% elsif (t.status.eql? "Slow Progress") %>
@@ -234,7 +235,8 @@ strategic_pro = Gchart.bar( %>
                         <div class="col border border-light"></div>
                          <% end #while %>
                 <%
-                  ideal_p = [100,75,50,25,0]
+                  
+
                    month1p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status1)
                    month2p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status2)
                    month3p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status3)
@@ -264,12 +266,15 @@ strategic_pro = Gchart.bar( %>
                        strategic_p << p4
                    end    
                    
-                   
-                  pos= months.index(nameofmonths[cur_month])
+                   ideal_p = [100] 
+  i = 0 
+  num = 75
+  while (i<pos)
+     ideal_p << num
+     num = num -25
+     i = i + 1
+  end
                   
-                  if (cur_dt < 24) # add curren month only if end of the month
-                    pos = pos-1
-                  end 
                   graph_months = ['']
                   i = 0 
                   while (i<pos)
@@ -278,14 +283,14 @@ strategic_pro = Gchart.bar( %>
                   end
 
                   burndown_chart = Gchart.line(
-                  :size => '240x100',
+                  :size => '240x150',
                   :line_colors => '933A16,50C878',
                   :data => [strategic_p,ideal_p], 
                   :legend => [ 'Actual', 'Expected'],
-                  :title => 'Effort Chart',
+                  :title => 'Effort Burndown',
                   :axis_with_labels => ['x', 'y'], 
                   :axis_labels => [graph_months], 
-                  :axis_range => [nil, [25,100,25]])
+                  :axis_range => [nil, [0,100,25]])
                 %>
                     
                    <div class="col-md-3"> <%= image_tag burndown_chart %>   </div>
@@ -372,21 +377,18 @@ strategic_pro = Gchart.bar( %>
           
           
           <div class="col-md-8"> 
-              
-              
-                <div class="card">
-                 <div class="card-header">Allocation</div> 
-                 <div class="card-body">
+       
+                 <div class=" card card-body">
+                  <strong>Allocation</strong>
                   <%= image_tag strategic_cap%>
                  </div>
-                </div> 
+               
                 <p style="padding-top: 20px;">
-                <div class="card">
-                  <div class="card-header">Progress</div>
-                  <div class="card-body">
+                  <div class=" card card-body">
+                    <strong>Progress</strong>
                     <%= image_tag strategic_pro%>
                   </div>  
-                </div> 
+               
 
           </div>   
         <div class="col-md-4">
@@ -464,20 +466,28 @@ strategic_pro = Gchart.bar( %>
  
  totalops = totalops*1.0/4
  totalpro = totalpro*1.0/4
- 
+ finaltotal = totalops + totalpro
+
+ propercent = (totalpro/finaltotal)*100
+ opspercent = (totalops/finaltotal)*100
+
  totalfte = Array.new
- totalfte << totalpro
  totalfte << totalops
+ totalfte << totalpro
+ 
 
  total_left =  totalpro - (total_strategic+total_tactical)
+ tpercent = (total_tactical/totalpro)*100
+ spercent = (total_strategic/totalpro)*100
+ leftpercent = (total_left/totalpro)*100
  tact_s = Array.new
  tact_s << total_strategic
  tact_s << total_tactical
  tact_s << total_left
 
-
- total_cap = Gchart.pie_3d(:title => "Total Capacity", :labels => "Project|Ops/Services", :data => totalfte, :size => '500x200', :line_colors => 'CFC607,16147A')
-pro_cap = Gchart.pie_3d(:title => "Project Capacity", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200', :line_colors => 'D9D129, BBB424, E9E131')
+ 
+ total_cap = Gchart.pie_3d(:title => "Total", :labels => "Ops/Services|Projects/Initiatives", :data => totalfte, :size => '500x200', :line_colors => 'f2c649,16147A')
+pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200', :line_colors => 'D9D129, BBB424, E9E131')
 %>
 
 <p style="padding-top: 5px;" >
@@ -494,14 +504,14 @@ pro_cap = Gchart.pie_3d(:title => "Project Capacity", :labels => "Strategic|Tact
         <div class="row">
           <div class="col-md-6">    
             <p><%= image_tag total_cap%></p>
-            <p align="center">Project: <%=totalpro.round(2) %> FTE</p>
-            <p align="center">Ops/Services: <%=totalops.round(2) %> FTE</p>
+            <p align="center">Projects/Initiatives: <%=totalpro.round(2) %> FTE, <%=propercent.round(2) %>%  </p>
+            <p align="center">Ops/Services: <%=totalops.round(2) %> FTE, <%=opspercent.round(2) %>% </p>
           </div>
           <div class="col-md-6">      
             <p ><%= image_tag pro_cap%></p>
-            <p align="center">Strategic: <%=total_strategic.round(2) %> FTE</p>
-            <p align="center">Tactial: <%=total_tactical.round(2) %> FTE</p>
-             <p align="center">Standing: <%=total_left.round(2) %> FTE</p>
+            <p align="center">Strategic: <%=total_strategic.round(2) %> FTE,<%=spercent.round(2) %>% </p>
+            <p align="center">Tactical: <%= total_tactical.round(2) %> FTE, <%=tpercent.round(2) %>% </p>
+             <p align="center">Standing: <%= total_left.round(2) %> FTE, <%=leftpercent.round(2) %>% </p>
           </div>  
         </div>  
       </div>
