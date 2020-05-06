@@ -7,6 +7,7 @@
 
    cycle = params["cycle"]
    bar = params["bar"]
+   obj = params["obj"]
   
 %>   
 
@@ -32,6 +33,8 @@
         
       %> 
       <h5 ><%= one.short_name %></h5>
+      <p><%= one.short_description %></p>
+      <% if (obj) %>
       <% @o_st.all.each do |o|  
         ostatus =  o. status%>
       <p><b>Objectives:</b></p>
@@ -47,12 +50,11 @@
         </div>
        <% end %> 
        <% end %> 
+       <% end #if %>
       <% if (cnt <@slist.count) %>
       <hr>
       <% end %>
-      <%
-        end  
-     %>
+      <% end   %>
 
 
        </div>
@@ -74,6 +76,8 @@
         
       %> 
       <h5 ><%= one.short_name %></h5>
+      <p><%= one.short_description %></p>
+      <% if (obj) %>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
       <p><b>Objectives:</b></p>
@@ -88,7 +92,8 @@
           </div>
         </div>
       <% end   
-      end %> 
+      end 
+        end %> 
       <% if (cnt <@slist.count) %>
       <hr>
       <% end
@@ -115,6 +120,8 @@
         
       %> 
       <h5 ><%= one.short_name %></h5>
+        <p><%= one.short_description %></p>
+        <% if (obj) %>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
       <p><b>Objectives:</b></p>
@@ -129,7 +136,8 @@
           </div>
         </div>
       <% end %>  
-       <% end %> 
+       <% end 
+          end #if obj%> 
       <% if (cnt <@slist.count) %>
       <hr>
       <%
