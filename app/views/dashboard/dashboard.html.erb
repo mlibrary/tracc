@@ -148,10 +148,9 @@ if (capacity)
   total_tactical = total_tactical + ch_cnt
  end 
  
- ch = Chip.order(:dept)
+  ch = Chip.order(:dept)
  totalops = 0
  totalpro =0 
- totalstanding = 0 
  ch.each do |t|
   totalops = totalops = totalops + t.ops
   totalpro = totalpro = totalpro + t.project
@@ -160,50 +159,56 @@ if (capacity)
  totalops = totalops*1.0/4
  totalpro = totalpro*1.0/4
  finaltotal = totalops + totalpro
+
  propercent = (totalpro/finaltotal)*100
  opspercent = (totalops/finaltotal)*100
- 
- totalfte = Array.new
- totalfte << totalpro
- totalfte << totalops
 
- total_standing =  totalpro - (total_strategic+total_tactical)
+ totalfte = Array.new
+ totalfte << totalops
+ totalfte << totalpro
+ 
+
+ total_left =  totalpro - (total_strategic+total_tactical)
  tpercent = (total_tactical/totalpro)*100
  spercent = (total_strategic/totalpro)*100
- leftpercent = (total_standing/totalpro)*100
+ leftpercent = (total_left/totalpro)*100
  tact_s = Array.new
  tact_s << total_strategic
  tact_s << total_tactical
- tact_s << total_standing
+ tact_s << total_left
 
  
-total_cap = Gchart.pie_3d(:title => "Total", :labels => "Ops/Services|Projects/Initiatives", :data => totalfte, :size => '500x200', :line_colors => 'f2c649,16147A')
+ total_cap = Gchart.pie_3d(:title => "Total", :labels => "Ops/Services|Projects/Initiatives", :data => totalfte, :size => '500x200', :line_colors => 'f2c649,16147A')
 pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200', :line_colors => 'D9D129, BBB424, E9E131')
 %>
 
 <p style="padding-top: 5px;" >
 </p>
-  <div class="card" >
-      <div class="card-header" >
-        <h5>LIT Capacity </h5>
-      </div>
-    
+  <div class="card" style="background: <%=color1 %>">
+      <div class="card-header" style="background: <%= color2 %>">
+      <h5>
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        LIT Capacity </a>
+      </h5>
+    </div>
+   
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">    
             <p><%= image_tag total_cap%></p>
-             <p align="center">Projects/Initiatives: <%=totalpro.round(2) %> FTE, <%=propercent.round(2) %>%  </p>
+            <p align="center">Projects/Initiatives: <%=totalpro.round(2) %> FTE, <%=propercent.round(2) %>%  </p>
             <p align="center">Ops/Services: <%=totalops.round(2) %> FTE, <%=opspercent.round(2) %>% </p>
           </div>
           <div class="col-md-6">      
             <p ><%= image_tag pro_cap%></p>
-             <p align="center">Strategic: <%=total_strategic.round(2) %> FTE,<%=spercent.round(2) %>% </p>
+            <p align="center">Strategic: <%=total_strategic.round(2) %> FTE, <%=spercent.round(2) %>% </p>
             <p align="center">Tactical: <%= total_tactical.round(2) %> FTE, <%=tpercent.round(2) %>% </p>
-             <p align="center">Standing: <%= total_standing.round(2) %> FTE, <%=leftpercent.round(2) %>% </p>
+             <p align="center">Standing: <%= total_left.round(2) %> FTE, <%=leftpercent.round(2) %>% </p>
           </div>  
         </div>  
       </div>
-    </div>
+  
+  </div>
   
 <% end %>
 
