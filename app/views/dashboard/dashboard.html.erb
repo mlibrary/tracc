@@ -123,30 +123,54 @@ if (capacity)
  @slist = Card.where("activity_type LIKE 'Strategic'")
  @alist = Card.where("activity_type LIKE '%Active%' ") 
 
- total_tactical = 0 
- total_strategic = 0 
+         total_strategic = 0 
+         @slist.all.each do |active| 
+           card_id = active.id 
 
- @slist.each do |s|
-  str = "card_id='" + s.id.to_s + "' AND cycle='"+ cycle + "'"
-  ch_cnt = ChipAssignment.where(str).sum(:chips)
-  if (ch_cnt.nil?) 
-    ch_cnt = 0 
-  else  
-    ch_cnt = ch_cnt/4 
-  end
-  total_strategic = total_strategic + ch_cnt
- end 
+           str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+          
+           totalfte = 0 
+           fte = 0 
+           @ch_st = ChipAssignment.where(str)
+           @ch_st.all.each do |ch| 
+            
+            if (ch.chips !=nil) 
+              fte = ch.chips/4.00
+              totalfte = totalfte + fte
+             else
+              fte = 0 
+            end 
+          end
+          totalfte = totalfte/4
 
- @alist.each do |a|
-  str = "card_id='" + a.id.to_s + "' AND cycle='"+ cycle + "'"
-  ch_cnt = ChipAssignment.where(str).sum(:chips)
-  if (ch_cnt.nil?) 
-    ch_cnt = 0 
-  else  
-    ch_cnt = ch_cnt/4 
-  end
-  total_tactical = total_tactical + ch_cnt
- end 
+          total_strategic = total_strategic + totalfte
+          
+        end    
+
+         total_tactical = 0 
+         @alist.all.each do |active| 
+           card_id = active.id 
+
+           str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+          
+           totalfte = 0 
+           fte = 0 
+           @ch_st = ChipAssignment.where(str)
+           @ch_st.all.each do |ch| 
+            
+            if (ch.chips !=nil) 
+              fte = ch.chips/4.00
+              totalfte = totalfte + fte
+             else
+              fte = 0 
+            end 
+          end
+          totalfte = totalfte/4
+
+          total_tactical = total_tactical + totalfte
+          
+        end    
+         
  
   ch = Chip.order(:dept)
  totalops = 0
