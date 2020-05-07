@@ -24,7 +24,7 @@
   end
 
 %>
-
+<div class="panel-group" id="accordion">
 
   <% # projects and tracks %>
    <% if ( (p_type.eql? "Strategic") || (p_type.eql? "All Boards") )%>  
@@ -54,23 +54,16 @@
              end %>  
           </div>
 
-            <div class="panel-group" id="accordion">
+            
            <% @pro_list.each do |pro| %>  
-           <div class="row">
-             <div class="col ">
-              <p style="padding-top: 7px"></p>
-              </div>
-           </div>   
-           <div class="row">
-             <div class="col border border-dark ">
-              
+  
               <%
                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                t_chips = ChipAssignment.where(str1).sum(:chips)
                t_chips = t_chips/4.00
                t_chips_fte = t_chips/4.00
               %>
-              <h6 style="padding-top: 5px;"><b><%= pro.title %> </b></h6>
+              <h6 style="padding-top: 10px;"><b><%= pro.title %> </b></h6>
               <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
               <hr>
               
@@ -129,8 +122,8 @@
      </div>
        <% end %>
                <p style="padding-top: 3px"></p>
-               </div>
-               </div>
+               
+               
               <p style="padding-top: 5px"></p>
                <%#= form_tag("/cards/resources2", :enctype =>"multipart/form-data") do %>
    
@@ -140,9 +133,7 @@
    
     <%# end %>
              
-             </div> 
-      
-         </div>
+             </div>
 
            <%
                str = "card_id = '" + pro.id.to_s + "'"
