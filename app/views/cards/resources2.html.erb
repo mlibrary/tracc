@@ -100,25 +100,50 @@ str = "card_id = '" + @card_one.first.id.to_s + "'"
      <% 
        end 
      %>
-     
-</div>
-</div>
+   <hr>
+    <p><b>Non LIT Members:</b></p>
+    <% nonl = Nonlit.where("card_id='"+@card_one.first.id.to_s+"' AND cycle='"+params["cycle"]+"'")%>
+    <% if (nonl.count >0) %>
+    <%= form_tag(edit_nonlit_index_path, :enctype =>"multipart/form-data") do %>
+    <% 
+       nonl.each do |ext|
+        t_id = ext.track_id
+        tname = Track.where("id='"+t_id.to_s+"'")
 
+    %>
+    <p><%= check_box_tag ext.id, 1 %> <%=ext.fname%> <%=ext.lname %> [<%=tname.first.track%>]</p>
+    <% end %>
+    <p><%= hidden_field_tag 'card_id', @card_one.first.id.to_s %>
+    <%= hidden_field_tag 'cycle', params["cycle"] %>
+    <%= submit_tag 'Delete Selected' %></p>
+    <% end %>
+    <% end #if count>0 %>
+
+    <%= form_tag(save_nonlit_index_path, :enctype =>"multipart/form-data") do %>
+    <%= hidden_field_tag 'card_id', @card_one.first.id.to_s %>
+    <%= hidden_field_tag 'cycle', params["cycle"] %>
+    Track: <%= select_tag "track", options_from_collection_for_select(tracks, "track", "track")  %>&nbsp; First Name: <%= text_field_tag 'fname', value='' , :required => true%>&nbsp; Last Name: <%= text_field_tag 'lname', value='' , :required => true %>
+    <%= submit_tag 'Add Non LIT Members' %>
+                  
+    <% end%> 
+
+</div>
+</div>
+<p style="padding-top: 10px"></p>
 <div class="card">
   <div class="card-header">
     <b>Edit:</b>
   </div>
   <div class="card-body">
 <%#------%>
-<p style="padding-top: 15px"></p>
+
   <% @tracks.all.each do |t| 
    
   %> 
 
    
- <div class="card">
-  <div class="card-header">
-    <h6>Track: <%=t.track%></h6>
+    <div class="card card-body"> 
+    <h6><%=t.track%></h6>
 
        <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
                 <div class="actions">
@@ -129,9 +154,9 @@ str = "card_id = '" + @card_one.first.id.to_s + "'"
                 </div>
     <% end %> 
     
-  </div> 
+  
   <%= form_tag("update_resources", :enctype =>"multipart/form-data") do  %> 
- <div class="card-body"> 
+ 
   <div class="row">
     <% j = 0
        i = 0 
@@ -169,8 +194,8 @@ str = "card_id = '" + @card_one.first.id.to_s + "'"
      <% 
       end  #all chips assignment %>
       
-   
- </div>
+   </div>
+ 
       
       <% end # for columns  %>
 
@@ -179,6 +204,7 @@ str = "card_id = '" + @card_one.first.id.to_s + "'"
 
    <%= submit_tag 'Save' %>
 </div>
+<p style="padding-top: 5px"></p>
  <%end # form %>
 <% end%>
 </div>
