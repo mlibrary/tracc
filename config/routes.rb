@@ -41,6 +41,13 @@ Rails.application.routes.draw do
     end
   end
 
+   resources :nonlit do
+    collection do
+      get :index
+      post :save, :edit  
+    end
+  end
+
   resources :reports do
     collection do
       get :index, :about, :charts, :export

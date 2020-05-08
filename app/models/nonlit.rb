@@ -1,0 +1,2 @@
+class Nonlit < ApplicationRecord
+end
