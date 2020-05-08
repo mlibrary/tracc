@@ -1,6 +1,8 @@
 <% 
   p_type = params["type"]
   cycle = params["cycle"]
+  editmode = params["editmode"]
+
   nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
   cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
   s = cur_cycle.first.start.month
@@ -65,12 +67,29 @@
               %>
               <div class="row">
               <div class="col border border-dark "> 
-              <h6 style="padding-top: 10px;"><b><%= pro.title %> </b></h6>
-              <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
-              
-              
-               <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a><p style="padding-top: 3px"></p>
-              
+                <div class="row"><div class="col-md-10">
+                  <h6 style="padding-top: 10px;"><b><%= pro.title %> </b></h6>
+                  <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a><p style="padding-top: 3px"></p>
+                 </div>
+                 <div class="col-md-2">
+                  <% if (editmode) %>
+                  <p style="padding-top: 10px">
+                   <%= form_tag(progress2_cards_path, :enctype =>"multipart/form-data") do %>
+                   <%= hidden_field_tag 'epic', pro.short_name %>
+                   <%= hidden_field_tag 'cycle', cycle %>
+                   <%= submit_tag 'Edit Progress' %>
+                   </p>
+                   <% end%>
+                   <p style="padding-top: 10px">
+                  <%= form_tag(resources2_cards_path, :enctype =>"multipart/form-data") do %>
+                   <%= hidden_field_tag 'epic', pro.short_name %>
+                   <%= hidden_field_tag 'cycle', cycle %>
+                   <%= submit_tag 'Edit Resources' %>
+                   </p>
+                  <% end %>
+                  <% end %>
+                 </div> </div>
                </div></div>
                <div id="collapse1" class="panel-collapse collapse">
                      <div class="row">
