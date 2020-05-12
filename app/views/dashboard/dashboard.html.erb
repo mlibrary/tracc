@@ -227,14 +227,19 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
         <div class="row">
           <div class="col-md-6">    
             <p><%= image_tag total_cap%></p>
-            <p align="center">Projects/Initiatives: <%=totalpro.round(2) %> FTE, <%=propercent.round(2) %>%  </p>
-            <p align="center">Ops/Services: <%=totalops.round(2) %> FTE, <%=opspercent.round(2) %>% </p>
+            <% fte_rounded= roundup(totalpro) %>
+            <p align="center">Projects/Initiatives: <%=fte_rounded %> FTE, <%=propercent.round(2) %>%  </p>
+             <% fte_rounded= roundup(totalops) %>
+            <p align="center">Ops/Services: <%=fte_rounded %> FTE, <%=opspercent.round(2) %>% </p>
           </div>
           <div class="col-md-6">      
             <p ><%= image_tag pro_cap%></p>
-            <p align="center">Strategic: <%=total_strategic.round(2) %> FTE, <%=spercent.round(2) %>% </p>
-            <p align="center">Tactical: <%= total_tactical.round(2) %> FTE, <%=tpercent.round(2) %>% </p>
-             <p align="center">Standing: <%= total_left.round(2) %> FTE, <%=leftpercent.round(2) %>% </p>
+             <% fte_rounded= roundup(total_strategic) %>
+            <p align="center">Strategic: <%=fte_rounded %> FTE, <%=spercent.round(2) %>% </p>
+              <% fte_rounded= roundup(total_tactical) %>
+            <p align="center">Tactical: <%= fte_rounded %> FTE, <%=tpercent.round(2) %>% </p>
+              <% fte_rounded= roundup(total_left) %>
+             <p align="center">Standing: <%= fte_rounded %> FTE, <%=leftpercent.round(2) %>% </p>
           </div>  
         </div>  
       </div>
@@ -370,8 +375,9 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
         <% if (progress) %>
           <p>Cycle Progress: <%= total %>%</p>
         <% end %>
-        <% if (fte) %>
-          <p>Average FTE per month: <%= t_chips_fte.round(2) %></p>
+        <% if (fte) 
+          fte_rounded = roundup(t_chips_fte)%>
+          <p>Average FTE per month: <%=fte_rounded  %></p>
         <% end %>
       </div>  
       <div class="card-body flex-fill">
