@@ -65,12 +65,13 @@
                t_chips = ChipAssignment.where(str1).sum(:chips)
                t_chips = t_chips/4.00
                t_chips_fte = t_chips/4.00
+               fte_rounded = roundup(t_chips_fte)
               %>
               <div class="row">
               <div class="col border border-dark "> 
                 <div class="row"><div class="col-md-10">
                   <h6 style="padding-top: 10px;"><b><%= pro.title %> </b></h6>
-                  <p>Total (average per month): <br><%= image_tag('user-loggedin.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+                  <p>Total (average per month): <br><%= image_tag('user-loggedin.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=fte_rounded %> FTE</p>
                   <% if (obj) %>  
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a><p style="padding-top: 3px"></p>
                   <% end %>
@@ -171,13 +172,13 @@
               t_chips = ChipAssignment.where(str1).sum(:chips)
               t_chips = t_chips/4.00
               t_chips_fte = t_chips/4.00
-
+              fte_rounded =roundup(t_chips_fte)
               
            %>
             <div class="row">
              <div class="col border border-dark "  >
               <p style="padding-top: 5px;"><b><%= t.track %></b></p>
-              <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+              <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=fte_rounded %> FTE</p>
               <% consult = Consultant.where(str1).order(:uniqname)
                 if (consult.count>0) %>
                 <hr>

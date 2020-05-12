@@ -31,17 +31,22 @@ module ApplicationHelper
                        parts = fte_rounded.to_s.split(".")
                        if (parts.count>1)
                          result = parts[1].to_i
-                       if (result> 0 && result < 25)
+                       if (result> 0 && result < 20)
                         fte_rounded = parts[0].to_i 
-                       elsif (result> 25 && result < 50)
+                       elsif (result>= 20 && result < 40)
                         fte_rounded = parts[0].to_i + 0.25 
-                       elsif (result> 50 && result < 75)
-                        fte_rounded = parts[0].to_i + 0.5
-                       elsif (result> 50 && result < 75) 
+                       elsif (result>= 40 && result < 50)
+                        fte_rounded = parts[0].to_i + 0.50   
+                       elsif (result>=50 && result < 65)
+                        fte_rounded = parts[0].to_i + 0.50 
+                       elsif (result>= 65 && result < 75)
                         fte_rounded = parts[0].to_i + 0.75
-                       elsif (result> 75 && result < 95) 
+                       elsif (result>=75  && result < 85) 
                         fte_rounded = parts[0].to_i + 0.75
-                        
+                       elsif (result>=85 && result < 90) 
+                        fte_rounded = parts[0].to_i + 0.75
+                       else
+                        fte_rounded = parts[0].to_i + 1
                        end 
                      end 
      return fte_rounded                
