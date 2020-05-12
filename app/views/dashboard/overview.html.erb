@@ -247,23 +247,28 @@ strategic_pro = Gchart.bar( %>
                    cnt3 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
                    cnt4 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count 
                    strategic_p = [100] 
+                   strategic_up =[0]
 
                    p1 = 100- (month1p/cnt1)
                    strategic_p << p1 
+                   strategic_up << (month1p/cnt1)
                    
                    p2 = 100- (month2p/cnt2)
                    if (p2 < 100)
                        strategic_p << p2
+                       strategic_up << (month2p/cnt1)
                    end 
 
                    p3 = 100- (month3p/cnt3)
                    if (p3 < 100)
                        strategic_p << p3
+                       strategic_up << (month3p/cnt1)
                    end 
 
                    p4 = 100- (month4p/cnt4)
                    if (p4 < 100)
                        strategic_p << p4
+                       strategic_up << (month4p/cnt1)
                    end    
                    
                    ideal_p = [100] 
@@ -291,9 +296,19 @@ strategic_pro = Gchart.bar( %>
                   :axis_with_labels => ['x', 'y'], 
                   :axis_labels => [graph_months], 
                   :axis_range => [nil, [0,100,25]])
+
+                   burnup_chart = Gchart.line(
+                  :size => '240x150',
+                  :line_colors => '933A16,50C878',
+                  :data => [strategic_up], 
+                  :title => 'Progress (%)',
+                  :axis_with_labels => ['x', 'y'], 
+                  :axis_labels => [graph_months],
+                  :max_value =>100, 
+                  :axis_range => [nil, [0,100,25]])
                 %>
                     
-                   <div class="col-md-3"> <%= image_tag burndown_chart %>   </div>
+                   <div class="col-md-3"> <%= image_tag burnup_chart %>   </div>
                  </div></div>
                   <% end #for each %>  
                    
