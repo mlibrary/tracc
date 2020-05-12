@@ -65,7 +65,9 @@
                t_chips = ChipAssignment.where(str1).sum(:chips)
                t_chips = t_chips/4.00
                t_chips_fte = t_chips/4.00
+               
                fte_rounded = roundup(t_chips_fte)
+
               %>
               <div class="row">
               <div class="col border border-dark "> 
