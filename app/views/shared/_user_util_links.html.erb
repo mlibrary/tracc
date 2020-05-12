@@ -22,7 +22,7 @@
   <% access_level = check_current_access %>
  
   <%= render_nav_actions do |config, action|%>
-    <% if access_level == 0 %>
+    <% if (access_level != 9) # guest%>
       <li class="lead"><%= action %></li>   
     <% end %>
   <% end %>

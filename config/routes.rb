@@ -29,6 +29,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :permit do
+    collection do
+      get :index
+      post :save
+    end
+  end
+
   resources :assessment do
     collection do
       get :import
