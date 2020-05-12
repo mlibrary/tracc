@@ -49,7 +49,14 @@ while (i<=4) do
     s= 1
   end
 end 
+cur_month = Date.current.month
+cur_dt = Date.current.day
 
+pos= months.index(nameofmonths[cur_month])
+                  
+if (cur_dt < 24) # add curren month only if end of the month
+  pos = pos-1
+end 
 
 %>
 
