@@ -10,6 +10,7 @@
   bar = params["bar"]
   progress = params["progress"]
   pchart = params["pchart"]
+  pchartup = params["pchartup"]
   capacity = params["capacity"]
   
   nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
@@ -45,8 +46,10 @@
   
 
   data_array = []
+  data_array_up = []
   legend = []
   strategic_p = [100]
+  strategic_up = [0]
 
   cur_month = Date.current.month
   cur_dt = Date.current.day
@@ -66,6 +69,8 @@
   end
   @slist.each do |s|
       strategic_p = [100]
+      strategic_up = [0]
+      
       month1p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status1)
       month2p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status2)
       month3p = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").sum(:status3)
@@ -79,28 +84,30 @@
    
      p1 = 100- (month1p/cnt1)
      if (p1 <100)
-       strategic_p << p1 
+       strategic_p << p1
+       strategic_up <<  (month1p/cnt1)
          
      end 
      p2 = 100- (month2p/cnt2)
      if (p2 < 100)
         strategic_p << p2
-        
+        strategic_up << (month2p/cnt1)
      end 
 
      p3 = 100- (month3p/cnt3)
      if (p3 < 100)
        strategic_p << p3
-       
+       strategic_up <<  (month3p/cnt1)
      end 
 
      p4 = 100- (month4p/cnt4)
      if (p4 < 100)
        strategic_p << p4
-       
+       strategic_up <<  (month4p/cnt1)
      end 
 
      data_array << strategic_p
+     data_array_up << strategic_up
      legend << s.short_name
   end  
 
@@ -235,40 +242,81 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
   </div>
   
 <% end %>
-
-  <% 
+<% if ( (pchartup) ||  (pchart)) 
   
-  legend <<  'Expected'
-  data_array << ideal_p
-  if (pchart)
-    
-
-    burndown_chart = Gchart.line(
-    :size => '700x300',
-    :line_colors => '003fff,5886a5,CDCF15,bc5090,ffa600,FFB8AE,00A99A,ff6361,50C878',
-    :data => data_array, 
-    :legend => legend,
-    :title => 'Effort Chart',
-    :axis_with_labels => ['x', 'y'], 
-    :axis_labels => [graph_months], 
-    :axis_range => [nil, [0,100,25]])
-  
+    if (pchartup && pchart)
+      size = '400x300'
+    else
+     size = '800x300'  
+    end 
   %>
-  <p style="padding-top:10px"> </p>
+ <p style="padding-top:10px"> </p>
   <div class="card">
     <div class="card-header">
       <h5>Progress towards Objectives</h5>
     </div>
   <div class="card-body">    
    <div class="row">
-    <div class="col">
-      <%= image_tag burndown_chart %>
-    </div>
-   </div>
-  </div> 
- </div> 
+    
+ <% 
+  
+  #legend <<  'Expected'
+  #data_array << ideal_p
+  if (pchartup)
+    
+
+    burnup_chart = Gchart.line(
+    :size => size,
+    :line_colors => '003fff,5886a5,CDCF15,bc5090,ffa600,FFB8AE,00A99A,ff6361,50C878',
+    :data => data_array_up, 
+    :legend => legend,
+    :title => 'Progress(%)',
+    :axis_with_labels => ['x', 'y'], 
+    :axis_labels => [graph_months], 
+    :max_value => 100,
+    :axis_range => [nil, [0,100,20]])
+  
+  %>
+      <div class="col">
+      <%= image_tag burnup_chart %>
+      </div>
+ 
  <% end  #if phart%>
-   <div class="row" style="padding-top:20px"> 
+
+
+
+   <% 
+  
+  #legend <<  'Expected'
+  #data_array << ideal_p
+  if (pchart)
+    
+
+    burndown_chart = Gchart.line(
+    :size => size,
+    :line_colors => '003fff,5886a5,CDCF15,bc5090,ffa600,FFB8AE,00A99A,ff6361,50C878',
+    :data => data_array, 
+    :legend => legend,
+    :title => 'Remaining (%)',
+    :axis_with_labels => ['x', 'y'], 
+    :axis_labels => [graph_months], 
+    :axis_range => [nil, [0,100,25]])
+  
+  %>
+     <div class="col">
+      <%= image_tag burndown_chart %>
+     </div>
+  
+ 
+
+ <% end  #if phart%>
+  
+  </div> 
+  </div> 
+</div>
+<% end # if progress charts%>
+ <div class="row" style="padding-top:20px"> 
+
 <% 
  
   card_no = 0
@@ -314,7 +362,7 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
     @c_st = TrackComment.where(str)
 
     %>
- 
+   
     <div class="col-sm d-flex">
       <div class="card">
       <div class="card-header">
