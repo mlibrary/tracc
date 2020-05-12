@@ -2,6 +2,7 @@
   p_type = params["type"]
   cycle = params["cycle"]
   editmode = params["editmode"]
+  obj = params['obj']
 
   nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
   cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
@@ -69,8 +70,10 @@
               <div class="col border border-dark "> 
                 <div class="row"><div class="col-md-10">
                   <h6 style="padding-top: 10px;"><b><%= pro.title %> </b></h6>
-                  <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+                  <p>Total (average per month): <br><%= image_tag('user-loggedin.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=t_chips_fte.round(2) %> FTE</p>
+                  <% if (obj) %>  
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-info">Objectives</button></a><p style="padding-top: 3px"></p>
+                  <% end %>
                  </div>
                  <div class="col-md-2">
                   <% if (editmode) %>
@@ -91,6 +94,8 @@
                   <% end %>
                  </div> </div>
                </div></div>
+     <% 
+     if (obj) %>          
                <div id="collapse1" class="panel-collapse collapse">
                      <div class="row">
         <div class="col-md-8"></div>
@@ -142,7 +147,7 @@
        <% end #while %> 
      </div>
        <% end %>
-               <p style="padding-top: 3px"></p>
+             
                
                
               <p style="padding-top: 5px"></p>
@@ -155,7 +160,7 @@
     <%# end %>
              
              </div>
-
+<% end #if obj %>
            <%
                str = "card_id = '" + pro.id.to_s + "'"
                @tracks = Track.where(str).order(:disp_order)

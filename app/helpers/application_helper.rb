@@ -4,7 +4,7 @@ module ApplicationHelper
     # 0=super user
     # 1=Cycle Planning Coordinator and the team Admin
     # 2=LIT Coordinating Group User
-    # 3=LIT Project/Teach Leads Guest
+    # 3=LIT Project/Tech Leads Guest
     # 9=view options only
 
     puts ">>>>> user_signed_in? is #{user_signed_in?}"

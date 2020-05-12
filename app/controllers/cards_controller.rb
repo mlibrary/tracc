@@ -7,10 +7,11 @@ class CardsController < ApplicationController
   # GET /cards.json
   def index
     access_level = check_current_access
+
     if (access_level == 0 || access_level == 1)
       @cards = Card.all
     else
-      flash.now[:notice] = "Sorry, you aren't allowed to do that. Try searching!"
+      flash.now[:notice] = "Sorry, you don't have access to edit."
     end
   end
 
