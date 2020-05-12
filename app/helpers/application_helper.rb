@@ -31,9 +31,9 @@ module ApplicationHelper
                        parts = fte_rounded.to_s.split(".")
                        if (parts.count>1)
                          result = parts[1].to_i
-                       if (result> 0 && result < 20)
+                       if (result> 0 && result < 10)
                         fte_rounded = parts[0].to_i 
-                       elsif (result>= 20 && result < 40)
+                       elsif (result> 10 && result < 40)
                         fte_rounded = parts[0].to_i + 0.25 
                        elsif (result>= 40 && result < 50)
                         fte_rounded = parts[0].to_i + 0.50   
