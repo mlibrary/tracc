@@ -207,7 +207,7 @@
               
               <% end #if%>
               <hr>
-             <p>State:
+             <p>Status:
              <% if (t.status.eql? "In-Progress") %>
              <%= image_tag("Play.png", :alt => 'In-Progress', size:"30x30")%>
              <% elsif (t.status.eql? "Slow Progress") %>
@@ -220,8 +220,7 @@
              <%= image_tag("Done.png", :alt => 'Done', size:"30x30")%>  
             <% end %> 
             (<%=t.status %>)
-             </p>
-             <p>Status: <%= t.rationale %></p>
+             <br>Details:<%= t.rationale %></p>
 
 
              </div>
