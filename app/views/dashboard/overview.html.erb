@@ -101,8 +101,10 @@ cap =Array.new
           end
           totalfte = totalfte/4
 
+          fte_rounded = roundup(totalfte) 
+
           pro << total
-          cap << totalfte
+          cap << fte_rounded
           total_strategic = total_strategic + totalfte
          end
  
@@ -199,9 +201,13 @@ strategic_pro = Gchart.bar( %>
                 str = "card_id='"+s.id.to_s+"'"
                 alert_cnt =  Alert.where(str).count
 
+                fte_rounded = roundup(fte) 
+                
+                       
+
             %>  
                  <div class="card card-body">
-                 <h6><b><%= s.short_name%> (<%= fte.round(2) %> FTE)</b> 
+                 <h6><b><%= s.short_name%> (<%= fte_rounded %> FTE)</b> 
                   <% if (alert_cnt >0) %>
                   <a href="../alerts"><span class="badge badge-warning">Notifications: <%= alert_cnt%></span></a>
                   <% end %>
@@ -348,7 +354,9 @@ strategic_pro = Gchart.bar( %>
               <div class="col">
                <div class="card card-body">
                   <p ><b><%= s.short_name%>:</b> 
-                    <br><%= fte.round(2) %> FTE
+                    <% fte_rounded = roundup(fte)
+                    %>
+                    <br><%= fte_rounded %> FTE
                     <br>Status:  <% if (s.card_status.eql? "In-Progress") %>
                     <%= image_tag("Play.png", :alt => 'User Icon', size:"20x20")%>
                   <% elsif (s.card_status.eql? "Slow Progress") %>
@@ -519,14 +527,20 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
         <div class="row">
           <div class="col-md-6">    
             <p><%= image_tag total_cap%></p>
-            <p align="center">Projects/Initiatives: <%=totalpro.round(2) %> FTE, <%=propercent.round(2) %>%  </p>
-            <p align="center">Ops/Services: <%=totalops.round(2) %> FTE, <%=opspercent.round(2) %>% </p>
+            <% fte_rounded = roundup(totalpro)
+              %>       
+            <p align="center">Projects/Initiatives: <%=fte_rounded %> FTE, <%=propercent.round(2) %>%  </p>
+           <% fte_rounded = roundup(totalops) %>  
+            <p align="center">Ops/Services: <%=fte_rounded %> FTE, <%=opspercent.round(2) %>% </p>
           </div>
           <div class="col-md-6">      
             <p ><%= image_tag pro_cap%></p>
-            <p align="center">Strategic: <%=total_strategic.round(2) %> FTE,<%=spercent.round(2) %>% </p>
-            <p align="center">Tactical: <%= total_tactical.round(2) %> FTE, <%=tpercent.round(2) %>% </p>
-             <p align="center">Standing: <%= total_left.round(2) %> FTE, <%=leftpercent.round(2) %>% </p>
+             <% fte_rounded = roundup(total_strategic) %> 
+            <p align="center">Strategic: <%= fte_rounded %> FTE,<%=spercent.round(2) %>% </p>
+            <% fte_rounded = roundup(total_tactical) %> 
+            <p align="center">Tactical: <%= fte_rounded %> FTE, <%=tpercent.round(2) %>% </p>
+            <% fte_rounded = roundup(total_left) %> 
+             <p align="center">Standing: <%= fte_rounded %> FTE, <%=leftpercent.round(2) %>% </p>
           </div>  
         </div>  
       </div>

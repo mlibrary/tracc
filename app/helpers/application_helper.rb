@@ -24,4 +24,28 @@ module ApplicationHelper
 
   end
 
+
+  def roundup(fte)
+    fte_rounded = fte.round(2) 
+                
+                       parts = fte_rounded.to_s.split(".")
+                       if (parts.count>1)
+                         result = parts[1].to_i
+                       if (result> 0 && result < 25)
+                        fte_rounded = parts[0].to_i 
+                       elsif (result> 25 && result < 50)
+                        fte_rounded = parts[0].to_i + 0.25 
+                       elsif (result> 50 && result < 75)
+                        fte_rounded = parts[0].to_i + 0.5
+                       elsif (result> 50 && result < 75) 
+                        fte_rounded = parts[0].to_i + 0.75
+                       elsif (result> 75 && result < 95) 
+                        fte_rounded = parts[0].to_i + 0.75
+                        
+                       end 
+                     end 
+     return fte_rounded                
+                
+  end  
+
 end
