@@ -182,21 +182,10 @@
               <p style="padding-top: 5px;"><b><%= t.track %></b></p>
               <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=fte_rounded %> FTE</p>
               
-                 <% nonl = Nonlit.where(str2)
+                 <% nonl = Nonlit.where(str2) %>
               
-                if (nonl.count>0) %>
-                <hr>
-                <p><i>Library Member(s): 
-                <%
-
-                  nonl.each do |one_c|
-
-                    %>
-                    <br><%= image_tag('User-nonlit.png', :alt => 'User Icon', size:"30x30")%> <%= one_c.fname + " " + one_c.lname[0] + "." %>
-                    <% end  %>
-              </i></p>
               
-              <% end #if%>
+             
               <% consult = Consultant.where(str1).order(:uniqname)
                 if (consult.count>0) %>
                 <hr>
@@ -268,6 +257,18 @@
                   </div>
                    
                 <% end %>
+                 <%
+
+                  nonl.each do |one_n|
+
+                    %>
+                    <div class="card card body" style="padding-top: 5px;">
+                    <p style="text-align: center; "> 
+                    <%= image_tag('User-nonlit.png', :alt => 'User Icon', size:"30x30")%> <br><%= one_n.fname + " " + one_n.lname[0] + "." %>
+                    </p>
+                  </div>
+                    <% end  %>
+
                 <% i = i +1 %>
                </div>
               <% end %>
