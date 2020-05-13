@@ -174,12 +174,121 @@ strategic_pro = Gchart.bar( %>
 
 %>
 
+
+<%
+  
+         a_cnt = 0 
+         total_tactical = 0 
+         @alist.all.each do |active| 
+           card_id = active.id 
+
+           str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
+           @o_st = Objective.where(str) 
+           
+           if ( @o_st.first != nil)
+            total = @o_st.first.status
+            if (total.nil?)
+              total = 0 
+            end  
+           else
+            total = 0  
+           end
+           totalfte = 0 
+           fte = 0 
+           @ch_st = ChipAssignment.where(str)
+           @ch_st.all.each do |ch| 
+            
+            if (ch.chips !=nil) 
+              fte = ch.chips/4.00
+              totalfte = totalfte + fte
+             else
+              fte = 0 
+            end 
+          end
+          totalfte = totalfte/4
+
+          total_tactical = total_tactical + totalfte
+           a_cnt = a_cnt + 1
+           if (a_cnt == 5) 
+           a_cnt = 1   
+           end
+        end    
+         
+#----
+ ch = Chip.order(:dept)
+ totalops = 0
+ totalpro =0 
+ ch.each do |t|
+  totalops = totalops = totalops + t.ops
+  totalpro = totalpro = totalpro + t.project
+ end
+ 
+ totalops = totalops*1.0/4
+ totalpro = totalpro*1.0/4
+ finaltotal = totalops + totalpro
+
+ propercent = (totalpro/finaltotal)*100
+ opspercent = (totalops/finaltotal)*100
+
+ totalfte = Array.new
+ totalfte << totalops
+ totalfte << totalpro
+ 
+
+ total_left =  totalpro - (total_strategic+total_tactical)
+ tpercent = (total_tactical/totalpro)*100
+ spercent = (total_strategic/totalpro)*100
+ leftpercent = (total_left/totalpro)*100
+ tact_s = Array.new
+ tact_s << total_strategic
+ tact_s << total_tactical
+ tact_s << total_left
+
+ 
+ total_cap = Gchart.pie_3d(:title => "Total", :labels => "Ops/Services|Projects/Initiatives", :data => totalfte, :size => '500x200', :line_colors => 'f2c649,16147A')
+pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200', :line_colors => 'D9D129, BBB424, E9E131')
+%>
+
 <div class="container">
 <h3  style="padding-bottom: 5px"> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Dashboard </h3> 
 <p>(Reflects progress through the month of <%= months[pos] %>)</p>
 
 <div class="panel-group" id="accordion" style="padding-top: 25px">
 
+ <div class="card" style="background: <%=color1 %>">
+      <div class="card-header" style="background: <%= color2 %>">
+      <h5>
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        LIT Capacity </a>
+      </h5>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">    
+            <p><%= image_tag total_cap%></p>
+            <% fte_rounded = roundup(totalpro)
+              %>       
+            <p align="center">Projects/Initiatives: <%=fte_rounded %> FTE, <%=propercent.round(2) %>%  </p>
+           <% fte_rounded = roundup(totalops) %>  
+            <p align="center">Ops/Services: <%=fte_rounded %> FTE, <%=opspercent.round(2) %>% </p>
+          </div>
+          <div class="col-md-6">      
+            <p ><%= image_tag pro_cap%></p>
+             <% fte_rounded = roundup(total_strategic) %> 
+            <p align="center">Strategic: <%= fte_rounded %> FTE,<%=spercent.round(2) %>% </p>
+            <% fte_rounded = roundup(total_tactical) %> 
+            <p align="center">Tactical: <%= fte_rounded %> FTE, <%=tpercent.round(2) %>% </p>
+            <% fte_rounded = roundup(total_left) %> 
+             <p align="center">Standing: <%= fte_rounded %> FTE, <%=leftpercent.round(2) %>% </p>
+          </div>  
+        </div>  
+      </div>
+    </div>
+  </div>
+
+<p style="padding-top: 5px;" >
+</p>
 <div class="card" style="background: <%=color1 %>">
       <div class="card-header" style="background: <%= color2 %>">
       <h5>
@@ -439,113 +548,8 @@ strategic_pro = Gchart.bar( %>
  
 
 
-<%
-  
-         a_cnt = 0 
-         total_tactical = 0 
-         @alist.all.each do |active| 
-           card_id = active.id 
-
-           str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
-           @o_st = Objective.where(str) 
-           
-           if ( @o_st.first != nil)
-            total = @o_st.first.status
-            if (total.nil?)
-              total = 0 
-            end  
-           else
-            total = 0  
-           end
-           totalfte = 0 
-           fte = 0 
-           @ch_st = ChipAssignment.where(str)
-           @ch_st.all.each do |ch| 
-            
-            if (ch.chips !=nil) 
-              fte = ch.chips/4.00
-              totalfte = totalfte + fte
-             else
-              fte = 0 
-            end 
-          end
-          totalfte = totalfte/4
-
-          total_tactical = total_tactical + totalfte
-           a_cnt = a_cnt + 1
-           if (a_cnt == 5) 
-           a_cnt = 1   
-           end
-        end    
-         
-#----
- ch = Chip.order(:dept)
- totalops = 0
- totalpro =0 
- ch.each do |t|
-  totalops = totalops = totalops + t.ops
-  totalpro = totalpro = totalpro + t.project
- end
- 
- totalops = totalops*1.0/4
- totalpro = totalpro*1.0/4
- finaltotal = totalops + totalpro
-
- propercent = (totalpro/finaltotal)*100
- opspercent = (totalops/finaltotal)*100
-
- totalfte = Array.new
- totalfte << totalops
- totalfte << totalpro
- 
-
- total_left =  totalpro - (total_strategic+total_tactical)
- tpercent = (total_tactical/totalpro)*100
- spercent = (total_strategic/totalpro)*100
- leftpercent = (total_left/totalpro)*100
- tact_s = Array.new
- tact_s << total_strategic
- tact_s << total_tactical
- tact_s << total_left
 
  
- total_cap = Gchart.pie_3d(:title => "Total", :labels => "Ops/Services|Projects/Initiatives", :data => totalfte, :size => '500x200', :line_colors => 'f2c649,16147A')
-pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|Tactical|Standing", :data => tact_s, :size => '500x200', :line_colors => 'D9D129, BBB424, E9E131')
-%>
-
-<p style="padding-top: 5px;" >
-</p>
-  <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-      <h5>
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-        LIT Capacity </a>
-      </h5>
-    </div>
-    <div id="collapse3" class="panel-collapse collapse">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">    
-            <p><%= image_tag total_cap%></p>
-            <% fte_rounded = roundup(totalpro)
-              %>       
-            <p align="center">Projects/Initiatives: <%=fte_rounded %> FTE, <%=propercent.round(2) %>%  </p>
-           <% fte_rounded = roundup(totalops) %>  
-            <p align="center">Ops/Services: <%=fte_rounded %> FTE, <%=opspercent.round(2) %>% </p>
-          </div>
-          <div class="col-md-6">      
-            <p ><%= image_tag pro_cap%></p>
-             <% fte_rounded = roundup(total_strategic) %> 
-            <p align="center">Strategic: <%= fte_rounded %> FTE,<%=spercent.round(2) %>% </p>
-            <% fte_rounded = roundup(total_tactical) %> 
-            <p align="center">Tactical: <%= fte_rounded %> FTE, <%=tpercent.round(2) %>% </p>
-            <% fte_rounded = roundup(total_left) %> 
-             <p align="center">Standing: <%= fte_rounded %> FTE, <%=leftpercent.round(2) %>% </p>
-          </div>  
-        </div>  
-      </div>
-    </div>
-  </div>
 
 
 </div>
