@@ -181,18 +181,18 @@
              <div class="col border border-dark "  >
               <p style="padding-top: 5px;"><b><%= t.track %></b></p>
               <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=fte_rounded %> FTE</p>
-              <hr>
+              
                  <% nonl = Nonlit.where(str2)
               
                 if (nonl.count>0) %>
                 <hr>
-                <p><i>Non-LIT Member(s): 
+                <p><i>Library Member(s): 
                 <%
 
                   nonl.each do |one_c|
 
                     %>
-                    <br><%= image_tag('User3.png', :alt => 'User Icon', size:"30x30")%> <%= one_c.fname + " " + one_c.lname[0] + "." %>
+                    <br><%= image_tag('User-nonlit.png', :alt => 'User Icon', size:"30x30")%> <%= one_c.fname + " " + one_c.lname[0] + "." %>
                     <% end  %>
               </i></p>
               
@@ -206,7 +206,7 @@
                   consult.each do |one_c|
                     one_chip = Chip.where("uniqname LIKE '"+one_c.uniqname+"'") 
                     %>
-                    <br><%= image_tag('User3.png', :alt => 'User Icon', size:"30x30")%> <%= one_chip.first.fname + " " + one_chip.first.lname[0] + "." %>
+                    <br><%= image_tag('User-consultant.png', :alt => 'User Icon', size:"30x30")%> <%= one_chip.first.fname + " " + one_chip.first.lname[0] + "." %>
                     <% end  %>
               </i></p>
               
