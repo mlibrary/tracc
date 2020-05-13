@@ -181,6 +181,22 @@
              <div class="col border border-dark "  >
               <p style="padding-top: 5px;"><b><%= t.track %></b></p>
               <p>Total (average per month): <br><%= image_tag('User1.png', :alt => 'User Icon', size:"30x30")%> <%=t_chips.round(2) %> chips, <%=fte_rounded %> FTE</p>
+              <hr>
+                 <% nonl = Nonlit.where(str2)
+              
+                if (nonl.count>0) %>
+                <hr>
+                <p><i>Non-LIT Member(s): 
+                <%
+
+                  nonl.each do |one_c|
+
+                    %>
+                    <br><%= image_tag('User3.png', :alt => 'User Icon', size:"30x30")%> <%= one_c.fname + " " + one_c.lname[0] + "." %>
+                    <% end  %>
+              </i></p>
+              
+              <% end #if%>
               <% consult = Consultant.where(str1).order(:uniqname)
                 if (consult.count>0) %>
                 <hr>
@@ -196,19 +212,7 @@
               
               <% end #if%>
               
-              <% nonl = Nonlit.where(str2)
-                if (nonl.count>0) %>
-                <hr>
-                <p><i>Non-LIT Member(s): 
-                <%
 
-                  nonl.each do |one_c|
-                    %>
-                    <br><%= image_tag('User3.png', :alt => 'User Icon', size:"30x30")%> <%= one_c.fname + " " + one_c.lname[0] + "." %>
-                    <% end  %>
-              </i></p>
-              
-              <% end #if%>
               <hr>
              <p>Status:
              <% if (t.status.eql? "In-Progress") %>
