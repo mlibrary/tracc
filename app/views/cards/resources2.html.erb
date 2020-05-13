@@ -123,7 +123,7 @@ str = "card_id = '" + @card_one.first.id.to_s + "'"
     <%= hidden_field_tag 'card_id', @card_one.first.id.to_s %>
     <%= hidden_field_tag 'cycle', params["cycle"] %>
     Track: <%= select_tag "track", options_from_collection_for_select(tracks, "track", "track")  %>&nbsp; First Name: <%= text_field_tag 'fname', value='' , :required => true%>&nbsp; Last Name: <%= text_field_tag 'lname', value='' , :required => true %>
-    <%= submit_tag 'Add Non LIT Members' %>
+    <%= submit_tag 'Add' %>
                   
     <% end%> 
 
