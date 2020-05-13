@@ -205,15 +205,15 @@
               <hr>
              <p>Status:
              <% if (t.status.eql? "In-Progress") %>
-             <%= image_tag("Play.png", :alt => 'In-Progress', size:"30x30")%>
+             <%= image_tag("Play.png", :alt => 'In-Progress', size:"20x20")%>
              <% elsif (t.status.eql? "Slow Progress") %>
-             <%= image_tag("Slow.png", :alt => 'Slow', size:"30x30")%> 
+             <%= image_tag("Slow.png", :alt => 'Slow', size:"20x20")%> 
             <% elsif (t.status.eql? "Paused") %>
-             <%= image_tag("Paused.png", :alt => 'Paused', size:"30x30")%> 
+             <%= image_tag("Paused.png", :alt => 'Paused', size:"20x20")%> 
             <% elsif (t.status.eql? "Stopped") %>
-             <%= image_tag("Stop.png", :alt => 'Stop', size:"30x30")%> 
+             <%= image_tag("Stop.png", :alt => 'Stop', size:"20x20")%> 
             <% elsif (t.status.eql? "Done") %>
-             <%= image_tag("Done.png", :alt => 'Done', size:"30x30")%>  
+             <%= image_tag("Done.png", :alt => 'Done', size:"20x20")%>  
             <% end %> 
             (<%=t.status %>)
              <br>Details: <%= t.rationale %></p>
@@ -328,15 +328,15 @@
                <hr>
                 <p>State:
              <% if (pro.card_status.eql? "In-Progress") %>
-             <%= image_tag("Play.png", :alt => 'User Icon', size:"30x30")%>
+             <%= image_tag("Play.png", :alt => 'User Icon', size:"20x20")%>
              <% elsif (pro.card_status.eql? "Slow Progress") %>
-             <%= image_tag("Slow.png", :alt => 'User Icon', size:"30x30")%> 
+             <%= image_tag("Slow.png", :alt => 'User Icon', size:"20x20")%> 
             <% elsif (pro.card_status.eql? "Paused") %>
-             <%= image_tag("Paused.png", :alt => 'User Icon', size:"30x30")%> 
+             <%= image_tag("Paused.png", :alt => 'User Icon', size:"20x20")%> 
             <% elsif (pro.card_status.eql? "Stopped") %>
-             <%= image_tag("Stop.png", :alt => 'User Icon', size:"30x30")%> 
+             <%= image_tag("Stop.png", :alt => 'User Icon', size:"20x20")%> 
             <% elsif (pro.card_status.eql? "Done") %>
-             <%= image_tag("Done.png", :alt => 'User Icon', size:"30x30")%>  
+             <%= image_tag("Done.png", :alt => 'User Icon', size:"20x20")%>  
             <% end %> 
             (<%=pro.card_status %>)
              </p>
