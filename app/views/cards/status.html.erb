@@ -1,55 +1,52 @@
 
-
+<div class="container">
+  
 <% r_all = Rationale.all %>
 <% s_all = Status.all  %>
 
-<% i = 1 %>
-<% cycle = params["cycle"] 
-   p_type = params["p_type"]
-%>
-<% review_type = params["review_type"] #1=mid, 2=end 
+<% i = 1 
+while (i<=2)
+p_type= i.to_s
+i = i + 1
+eview = false
+cur_cycle = Cycle.where("current_cycle =1") 
+cycle = cur_cycle.first.cycle_name
 
-if (review_type == "1")
-  caption = " Mid Cycle Review"
-else
-  caption = " End of Cycle Review"   
-end
-#params["review_type"] = review_type
-#params["cycle"] = cycle
-eview = params["eview"]
+if (p_type.eql? "2")
+     str = "activity_type LIKE '%Active%'"
+     caption = "Tactical Projects"
+    else
+     str = "activity_type LIKE '%Strategic%'"
+     caption = "Strategic Projects"
+    end
+
+    @cards = Card.where(str).order(:card_type)
 %>
 
-<div class="container">
-  <div class="card">
-    <div class="card-header">
-  <%= form_tag(add_cycle_review_index_path, :enctype =>"multipart/form-data") do %>
+
+  <%= form_tag(save_status_cards_path, :enctype =>"multipart/form-data") do %>
   
-    <h2><%=cycle%> <%=caption%> </h2>
+    
     <%= hidden_field_tag 'p_type', p_type %>
-     <%= submit_tag 'Save Cycle Review' %> 
-  </div>
-  
+    <%= hidden_field_tag "cycle", cycle %>
+    <p style="padding-top: 10px;"></p>
+<div class="card">
+    <div class="card-header"><h4><%= caption %></h4>
 
-      <%= hidden_field_tag "review_type", review_type %>
-      <%= hidden_field_tag "cycle", cycle %>
-</div>
+   <div class="actions">
+      <%= submit_tag 'Save Status' %>
+   </div>
+  </div>
 <div class="card-body">
       <% @cards.each do |card| %>
       <div class="row">
         
           
-      <%    cr1 = CycleReview.where("card_id=? AND review_type=? AND cycle=?",card.id,review_type,cycle)
-          cr = cr1.first
+      <%   
+            saved_status = card.card_status
+            saved_r = card.rationale
+            saved_n = card.comments
           
-          if (cr.nil?)
-            saved_status = 'Not Recorded' #card.card_status
-            saved_r = 'Not Recorded' #card.rationale
-            saved_n = '' #card.comments
-          else
-            saved_status = cr.status
-            saved_r = cr.rationale
-            saved_n = cr.notes
-          end 
           s = "s" + card.id.to_s + "_0" 
           r = "r" + card.id.to_s + "_0"   
           comment =  "c" + card.id.to_s + "_0" 
@@ -58,12 +55,14 @@ eview = params["eview"]
            <div class="col-md-12 border border-light">
          <% else %>
            <div class="col border border-light">
-         <% end %>   
-          <p style="padding-top: 15px;"><b><%= card.title %>
-          <% if (p_type.eql? "2") %> ( <%=card.short_name%>, <%= card.in_cycle %> [<%=card.card_type %>]) <% end %>
-        </b> </p>
+         <% end %>  
+
+         <% if (p_type.eql? "2") %>
          
-           <% if (p_type.eql? "2") %>
+         <div class="card card-body">
+          <p><b><%= card.title %>
+           ( <%=card.short_name%>, <%= card.in_cycle %> [<%=card.card_type %>]) </b> </p>
+       
             <p><b>State:</b><br>
              <% if (eview) %>
             <% s_all.each do |one_s| 
@@ -93,7 +92,7 @@ eview = params["eview"]
           <%end %> 
       
            </p>
-           <p><b>Status:</b><br>
+           <p>Status:<br>
              <% if (eview)%>
             <% r_all.each do |one_r| 
             %>
@@ -110,33 +109,33 @@ eview = params["eview"]
            <% end %>
           </p>
           <% if (p_type.eql? "2") %>
-            <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 70%> </p>  
+            <p>Comments:<br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 70%> </p>  
           <% else %>
-          <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p> 
-          <% end %>     
+          <p>Comments:<br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p> 
+          <% end %>  
+          </div>   
+        
           <% end #if ptype eql 2%>
         </div>
+        
      </div>
 <%# each track%>
-      <% if (p_type.eql? "1") %>
+      <% if (p_type.eql? "1") 
+           saved_n = card.comments
+      %>
+      <div class="card card-body">
+        <p><b><%= card.title %></b></p>
+      <div class="row"><div class="col">
+         <p>Comments:<br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 80 %> </p> </div></div>
            <div class="row">
        <%
         track_cnt = 0 
         obj = Track.where("card_id='"+card.id.to_s+"'").order(:disp_order)
         obj.each do |o| 
-         
-         cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,o.id,review_type,cycle)
-          cr = cr1.first
-          
-          if (cr.nil?)
             saved_status = o.status#card.card_status
             saved_r = o.rationale #card.rationale
-            saved_n = '' #card.comments
-          else
-            saved_status = cr.status
-            saved_r = cr.rationale
-            saved_n = cr.notes
-          end 
+            
+         
            
          s = "s" + card.id.to_s + "_" + o.id.to_s
          r = "r" + card.id.to_s + "_" + o.id.to_s
@@ -151,7 +150,7 @@ eview = params["eview"]
         <p style="padding-top: 15px;"><b><i>Track: <%= o.track%></i></b></p>
        
           
-        <p><b>Status:</b><br>
+        <p>Status:<br>
           <% if (eview) %>
             <% s_all.each do |one_s| 
             %>
@@ -179,7 +178,7 @@ eview = params["eview"]
            <%= select_tag s, options_from_collection_for_select(s_all, "status", "status",  saved_status)  %>
           <%end %>
            </p>
-           <p><b>Details:</b><br>
+           <p>Details:<br>
             <% if (eview)%>
             <% r_all.each do |one_r| 
             %>
@@ -195,10 +194,10 @@ eview = params["eview"]
            <%= select_tag r, options_from_collection_for_select(r_all, "rationale", "rationale",  saved_r)  %>
            <% end %>
           </p>
-        <p><b>Comments:</b><br> <%= text_area_tag comment,  saved_n , :rows => 3, :cols => 20%> </p>    
+          
           
         </div>
-         <% #end #if not project-level %>
+        
         <% end #each track %>
          <% 
         track_cnt = 4-track_cnt 
@@ -207,19 +206,21 @@ eview = params["eview"]
         %>
          <div class="col border border-light"></div>
         <% end #while %>
-        </div>
+        </div> 
+        
+      </div>
         <% end #if ptype %>
         
        
       <% end # each card%>
-    
+      
     </div>
-
-<div class="card-footer">
-   <div class="actions">
-      <%= submit_tag 'Save Cycle Review' %>
-   </div>
+  </div>
   <% end #form%>
+<% end # while %>
+
+
+  
 </div>
 </div>
 </div>

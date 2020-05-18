@@ -1,5 +1,10 @@
-<h5></h5>
 
+<div class="container">
+  <div class="row"><div class="col">
+    <h4> Update Progress</h4>
+  </div></div>  
+  <div class="row">
+    <div class="col">
 <%= form_tag(progress2_cards_path, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
@@ -8,7 +13,46 @@
 
 <div class="card">
   <div class="card-header">
-    <h4> Update Progress for Strategic Projects</h4>
+    <h5> Strategic Projects</h5>
+  </div>  
+<div class="card-body">  
+
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name",  cur_cycle.first.cycle_name)  %>
+  
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :project %>
+     <%= select_tag "epic", options_from_collection_for_select(card_epic, "short_name", "title")  %>
+     
+   </div>
+</div>
+
+</div>
+   <div class="card-footer">
+   
+   <div class="actions">
+      <%= submit_tag 'Next' %>
+   </div>  
+</div>
+</div>
+<% end %>
+</div>
+<div class="col">
+<%= form_tag(tactical_progress2_cards_path, :enctype =>"multipart/form-data") do %>
+   
+<% cname = Cycle.all %>
+<% card_epic = Card.where("activity_type LIKE '%Active%' ") %>
+<% cur_cycle = Cycle.where("current_cycle =1") %>
+
+<div class="card">
+  <div class="card-header">
+    <h5> Tactical Projects</h5>
   </div>  
 <div class="card-body">  
 
@@ -42,3 +86,6 @@
 </div>
 </div>
 <% end %>
+</div>
+</div>
+</div>

@@ -192,6 +192,62 @@ class CardsController < ApplicationController
      end 
   end  
 
+  def save_status
+    cycle = params["cycle"]
+    p_type = params["p_type"]
+
+    if (p_type.eql? "2")
+     str = "activity_type LIKE '%Active%'"
+    else
+     str = "activity_type LIKE '%Strategic%'"
+    end
+
+    cards = Card.where(str).order(:card_type)
+
+    cards.each do |card|
+     
+       s_id = "s" + card.id.to_s + "_0" 
+        r_id  = "r" + card.id.to_s + "_0" 
+        c_id =  "c" + card.id.to_s + "_0" 
+        
+        s = params[s_id]
+        r = params[r_id]
+        c = params[c_id]
+
+        card.rationale = r 
+        card.comments = c
+        card.card_status = s 
+        card.save!
+
+       
+      
+       if (p_type.eql? "1") 
+
+        c_id =  "c" + card.id.to_s + "_0" 
+        c = params[c_id]
+        card.comments = c   
+        card.save!
+             
+        tracks = Track.where("card_id='"+card.id.to_s+"'")
+        tracks.each do |t|
+
+        s_id = "s" + card.id.to_s + "_" + t.id.to_s
+        r_id  = "r" + card.id.to_s + "_" + t.id.to_s
+        
+        
+        s = params[s_id]
+        r = params[r_id]
+     
+        t.rationale = r  
+        t.status = s 
+        t.save!
+       
+        
+      end #obj.each
+     end # if strategic
+    end  #card.each
+  end
+    
   def edit_consultants
      
   end
