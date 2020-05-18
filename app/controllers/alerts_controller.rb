@@ -35,13 +35,14 @@ class AlertsController < ApplicationController
        if (!comments.empty?)
          t_id = params["track"]
 	     owner = params["owner"]
+       nstatus = params["nstatus"]
 
 	  	nalert = Alert.new
 	  	nalert.card_id = card_id
 	  	nalert.track_id = t_id
 	  	nalert.comments = comments
 	  	nalert.owner = owner
-	  	nalert.status = 0
+	  	nalert.status = nstatus
 
 	  	nalert.save
 	  	
