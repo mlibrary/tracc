@@ -36,19 +36,27 @@ end
      		<%= select_tag "track", options_from_collection_for_select(tracks, "id", "track")  %>
      	Assigned To: 
      		<%= select_tag "owner", options_for_select(chips)  %>	
+
+      
+       
    		</div></div>
 
 		<div class="row ml-1">
     	<div class="field">
-     	  <%= check_box_tag "nstatus", 0  %> <%= text_field_tag "nItem", "", size: 75  %> 
+     	  <%= check_box_tag "nstatus"  %> <%= text_field_tag "nItem", "", size: 75  %> 
    		</div>
 		</div>
-         
+           <div class="actions">
+        <%= hidden_field_tag 'card_id', one_c.id %>
+        <%= submit_tag 'Save' %>
       </div>
       <hr>
+      </div>
+      
       <%
         
      	  @alerts = Alert.where("card_id='"+ one_c.id.to_s + "'").order(created_at: :desc)
+        if (@alerts.count >0)
           @alerts.each do |one_a| 
           id = "a"+one_a.id.to_s
           status = "s"+one_a.id.to_s
@@ -57,20 +65,25 @@ end
           track_one = Track.where("id='" + t_id.to_s + "'")  
 
       %>
-        <p>  <i> <%= track_one.first.track %> (<%= one_a.created_at.to_date %>): </i>
+        <p>  <i> <% if (!owner.blank?) 
+                    owner = "@"+owner 
+                    end %>
+          <%= owner %> [<%= track_one.first.track %>, <%= one_a.created_at.to_date %>]: </i><br>
+          
         	<% if (one_a.status==0 || one_a.status.nil?)%>
         	<%= check_box_tag status, 0  %>
         	<% else %>
         	<%= check_box_tag status, 1, {:checked => "checked"}  %>
         	<% end #if %>
-        	<% if (!owner.blank?) %> @ <% end %>
-        	<%= owner %> <%= text_field_tag id, one_a.comments, size: 75  %> </p>
+          <%= text_field_tag id, one_a.comments, size: 75  %>
+        	 </p>
       <% end  # list all alerts %>
-      <hr>
+      
       <div class="actions">
       	<%= hidden_field_tag 'card_id', one_c.id %>
-        <%= submit_tag 'Save' %>
+        <%= submit_tag 'Update' %>
       </div>
+      <% end %>
      </div>
      <p style="padding-top: 5px;"> </p>
      <%  end # form%>
