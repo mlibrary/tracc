@@ -3,16 +3,16 @@
     Edit
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="/alerts">Action Items/Alerts</a>
+    <a class="dropdown-item" href="<%= alerts_path %>">Action Items/Alerts</a>
     <hr>
-    <a class="dropdown-item" href="/cards">Project Details</a>
-    <a class="dropdown-item" href="/cards/edit_objectives">Objectives</a>
-    <a class="dropdown-item" href="/cards/progress">Progress</a>
-    <a class="dropdown-item" href="/cards/resources">Resources</a>
-    <a class="dropdown-item" href="/cards/status">Status</a>
+    <a class="dropdown-item" href="<%= cards_path %>">Project Details</a>
+    <a class="dropdown-item" href="<%= edit_objectives_cards_path %>">Objectives</a>
+    <a class="dropdown-item" href="<%= progress_cards_path %>">Progress</a>
+    <a class="dropdown-item" href="<%= resources_cards_path %>">Resources</a>
+    <a class="dropdown-item" href="<%= status_cards_path %>">Status</a>
     <hr>
     
-    <a class="dropdown-item" href="/cycle_review">Cycle Review</a>
+    <a class="dropdown-item" href="<%= cycle_review_index_path %>">Cycle Review</a>
         <%#<a class="dropdown-item" href="/impact">Impact</a>
     <a class="dropdown-item" href="/complexity">Complexity</a>%>
   </div>

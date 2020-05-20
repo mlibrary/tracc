@@ -9,10 +9,24 @@
    bar = params["bar"]
    obj = params["obj"]
   
+  months = get_months()
+ cur_cycle = Cycle.where("current_cycle =1")
+ cycle = cur_cycle.first.cycle_name
+ stmonth = months[1]
+ endmonth = months[4]
+ cur_month = Date.current.month
+ cur_dt = Date.current.day
+ nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
+ pos= months.index(nameofmonths[cur_month])
+
+ if (cur_dt < 24) # add curren month only if end of the month
+    pos = pos-1
+ end 
+
 %>   
 
 <div class="container-fluid">
-  <h3> FY20:3 (March-June) Library IT Tactical Projects</h3>
+  <h3> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Tactical Projects</h3>
   
  <div class="row" style="padding-top: 20px">
    <div class="col-sm d-flex">  
