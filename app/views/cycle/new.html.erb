@@ -36,8 +36,20 @@
         </div>
       
       <% end %>
-       	
-    </div>	
+      <hr>
+      <div class="row" >
+        	<div class="col" >Add New Cycle</div>
+        	<div class="col" ></div>
+        	<div class="col" ></div>
+        	
+        </div>
+      	<div class="row" style="padding-top: 4px">
+      	<div class="col" ><%= text_field_tag "namen", "", size: 15  %></div>
+        	<div class="col"><%= text_field_tag "stn", "", size: 15  %></div>
+        	<div class="col"><%#= text_field_tag e_id, one.end, size: 15  %></div>
+        </div>	
+      </div> 	
+    
     <div class="card-footer">
     	 <div class="actions" style="padding-top: 4px">
            <%= submit_tag 'Save' %>
