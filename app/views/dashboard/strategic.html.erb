@@ -21,37 +21,14 @@
   
  flag = true
 
-nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
-cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
-s = cur_cycle.first.start.month
-stmonth = ""
-endmonth = ""
-
-if (s != nil)
-  stmonth = nameofmonths[s]
-  if s<=8
-    s = s +3
-  else
-    s = s+3 -12 
-  end  
-  endmonth = nameofmonths[s]
-end 
-
-s = cur_cycle.first.start.month
-
-months = ['','','','','']
-i = 1
-while (i<=4) do
-  months[i] = nameofmonths[s]
-  i = i + 1
-  s = s+1 
-  if (s>12)
-    s= 1
-  end
-end 
+months = get_months()
+cur_cycle = Cycle.where("current_cycle =1")
+cycle = cur_cycle.first.cycle_name
+stmonth = months[1]
+endmonth = months[4]
 cur_month = Date.current.month
 cur_dt = Date.current.day
-
+nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
 pos= months.index(nameofmonths[cur_month])
                   
 if (cur_dt < 24) # add curren month only if end of the month
@@ -115,7 +92,7 @@ end
            cols = 0
            while (cols <4) do
             cols = cols+1 
-            month = months[cols] 
+            month = months[cols]
          %>    
           <div class="col-md-3">
            <p> <strong><%=month %></strong></p>
@@ -159,13 +136,15 @@ end
         </div>
       <% 
       
-      i = 0 
+      i = 1 
           while (i<=4) 
-            i = i + 1
+            
        %>
-       <div class="col-md-1"><%= months[i] %>
+       <div class="col-md-1"><%= months[i][0..2] %>
        </div>
-       <% end %>  
+       <% 
+       i = i + 1
+       end %>  
       </div>      
     	<% cnt = 0
         

@@ -14,6 +14,13 @@ Rails.application.routes.draw do
       post :import_cycle_review, :export_cycle_review, :update, :edit, :add
     end
   end  
+
+  resources :cycle do
+    collection do
+      get :new
+      post :save
+    end
+  end  
   
   resources :cards do
     collection do

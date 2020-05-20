@@ -1,0 +1,63 @@
+<% cur_cycle = Cycle.where("current_cycle =1") %>
+
+
+<div class="container">
+ <%= form_tag(save_cycle_index_path, :enctype =>"multipart/form-data") do %>
+
+  <div class="card">
+    <div class="card-header">
+    <h4> New Cycle</h4>
+    </div>  
+    <div class="card-body">  
+     	
+    	<div class="row ml-1">
+        <div class="field">
+        <% label = "Select Current Cycle" %>	
+        <%= label_tag label %>
+        <%= select_tag "cycle", options_from_collection_for_select(@cname, "cycle_name", "cycle_name",  cur_cycle.first.cycle_name)  %>
+        </div>
+        </div>
+      <div class="row" style="padding-top: 4px">
+        	<div class="col" >Cycle Name</div>
+        	<div class="col" >Start Date</div>
+        	<div class="col" ></div>
+        	
+        </div>
+      <% @cname.each do |one| 
+      		name_id = "name" + one.id.to_s
+      		s_id = "s" + one.id.to_s
+      		e_id = "e" + one.id.to_s
+      %>
+        
+        <div class="row" style="padding-top: 4px">
+        	<div class="col" ><%= text_field_tag name_id, one.cycle_name, size: 15  %></div>
+        	<div class="col"><%= text_field_tag s_id, one.start, size: 15  %></div>
+        	<div class="col"><%#= text_field_tag e_id, one.end, size: 15  %></div>
+        </div>
+      
+      <% end %>
+      <hr>
+      <div class="row" >
+        	<div class="col" >Add New Cycle</div>
+        	<div class="col" ></div>
+        	<div class="col" ></div>
+        	
+        </div>
+      	<div class="row" style="padding-top: 4px">
+      	<div class="col" ><%= text_field_tag "namen", "", size: 15  %></div>
+        	<div class="col"><%= text_field_tag "stn", "", size: 15  %></div>
+        	<div class="col"><%#= text_field_tag e_id, one.end, size: 15  %></div>
+        </div>	
+      </div> 	
+    
+    <div class="card-footer">
+    	 <div class="actions" style="padding-top: 4px">
+           <%= submit_tag 'Save' %>
+         </div>
+ 
+    </div>	
+  </div>
+  <% end %>
+</div>
+
+
