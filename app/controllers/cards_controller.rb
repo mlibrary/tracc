@@ -201,15 +201,19 @@ class CardsController < ApplicationController
           @assign.each do |a|
             a.trackname = t_val
             a.save!
+            addlog(5,"Chip Assignment",a.trackname)
+   #1=login 2=progress 3=resources 4=setup 5=chips 6=alerts
           end  
           
          end 
          if (t_val.empty?)
            one_t.destroy!
+           addlog(7,"Track Delete",one_t.trackname)
          else 
            one_t.track = t_val
            one_t.disp_order = params[o]
            one_t.save!
+           addlog(7,"Track Edit Order",one_t.track)
          end  
        end 
        # add new track 
@@ -220,6 +224,7 @@ class CardsController < ApplicationController
         t.track = params[ntrack]
         t.epic_title = one_c.short_name
         t.save!
+        addlog(7,"Track New",t.track)
        end  
      end 
   end  
@@ -250,8 +255,9 @@ class CardsController < ApplicationController
         card.comments = c
         card.card_status = s 
         card.save!
-
-       
+        if (!s.nil?)
+          addlog(3,"Card Status",card.short_name+" status changed to:"+s)
+        end
       
        if (p_type.eql? "1") 
 
@@ -259,7 +265,9 @@ class CardsController < ApplicationController
         c = params[c_id]
         card.comments = c   
         card.save!
-             
+        addlog(3,"Card Comments",card.short_name+" comments saved: "+c)
+       
+
         tracks = Track.where("card_id='"+card.id.to_s+"'")
         tracks.each do |t|
 
@@ -273,7 +281,9 @@ class CardsController < ApplicationController
         t.rationale = r  
         t.status = s 
         t.save!
-       
+        if (!s.nil?)
+         addlog(7,"Track Status",t.track+" status changed to:"+s)
+        end
         
       end #obj.each
      end # if strategic
