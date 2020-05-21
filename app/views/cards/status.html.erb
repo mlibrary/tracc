@@ -1,4 +1,4 @@
-
+<% if (@approve_access) %>
 <div class="container">
   
 <% r_all = Rationale.all %>
@@ -224,5 +224,6 @@ if (p_type.eql? "2")
 </div>
 </div>
 </div>
+<% end %>
  
 

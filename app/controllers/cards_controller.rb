@@ -13,6 +13,27 @@ class CardsController < ApplicationController
     end
   end
 
+  def settings
+     if (approve_access)
+     
+    @approve_access = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+    @approve_access = false  
+    end
+  end
+
+   
+    
+  def status
+      if (approve_access)
+      @approve_access = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false  
+    end
+  end
+
   def setup_for_display
 
     @at_stake_list = Array.new
@@ -120,31 +141,44 @@ class CardsController < ApplicationController
   end  
 
   def tactical_resources2
-    cycle= params["cycle"]
-    epic=  params["epic"]
-
-    str = "short_name LIKE '" + epic + "%'"   
-    @card_one = Card.where(str)
-
-    #str = "card_id = '" + @card_one.first.id.to_s + "'" 
-    #@tracks = Track.where(str) 
+    if (approve_access)
+      cycle= params["cycle"]
+      epic=  params["epic"]
+      str = "short_name LIKE '" + epic + "%'"   
+      @card_one = Card.where(str)
+      @approve_access = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false  
+    end
     
-  
   end
+
   def resources2
-    cycle= params["cycle"]
-    epic=  params["epic"]
 
-    str = "short_name LIKE '" + epic + "%'"   
-    @card_one = Card.where(str)
+     if (approve_access)
+      @approve_access = true
+      cycle= params["cycle"]
+      epic=  params["epic"]
+      str = "short_name LIKE '" + epic + "%'"   
+      @card_one = Card.where(str)
 
-    str = "card_id = '" + @card_one.first.id.to_s + "'" 
-    @tracks = Track.where(str) 
-    
-  
+      str = "card_id = '" + @card_one.first.id.to_s + "'" 
+      @tracks = Track.where(str) 
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false  
+    end
+
   end
 
   def edit_tracks
+     if (approve_access)
+       @approve_access = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false  
+    end
   end
   
   def save_tracks
@@ -412,39 +446,53 @@ end
 
   end  
 
+  def progress
+    if (approve_access)
+       @approve_access = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false
+    end
+  end        
   def progress2
-    cycle= params["cycle"]
-    epic=  params["epic"]
 
-    str = "short_name LIKE '" + epic + "%'"   
-    one_card = Card.where(str)
-    str = "card_id = '" + one_card.first.id.to_s + "' AND cycle LIKE '"+cycle+"'" 
-    @track_epic = Objective.where(str) 
+  
+       cycle= params["cycle"]
+       epic=  params["epic"]
+
+       str = "short_name LIKE '" + epic + "%'"   
+       one_card = Card.where(str)
+       str = "card_id = '" + one_card.first.id.to_s + "' AND cycle LIKE '"+cycle+"'" 
+       @track_epic = Objective.where(str) 
  
-    @comment = TrackComment.where(str)
-    if (@comment.first == nil)
-     TrackComment.create(epic_title: epic,cycle:cycle)
-     @comment = TrackComment.where(str)
-    end  
-
+       @comment = TrackComment.where(str)
+       if (@comment.first == nil)
+         TrackComment.create(epic_title: epic,cycle:cycle)
+         @comment = TrackComment.where(str)
+       end  
+   
   end
 
   def tactical_progress2
-    cycle= params["cycle"]
-    epic=  params["epic"]
 
-    str = "short_name LIKE '" + epic + "%'"   
-    one_card = Card.where(str)
-    str = "card_id = '" + one_card.first.id.to_s + "'" 
-    @track_epic = Objective.where(str) 
+   
+    
+      cycle= params["cycle"]
+      epic=  params["epic"]
+
+      str = "short_name LIKE '" + epic + "%'"   
+      one_card = Card.where(str)
+      str = "card_id = '" + one_card.first.id.to_s + "'" 
+      @track_epic = Objective.where(str) 
 
     #str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
-    str = "card_id='" + one_card.first.id.to_s + "' AND cycle='"+ cycle + "'"
-    @comment = TrackComment.where(str)
-    if (@comment.first == nil)
-     TrackComment.create(epic_title: epic,cycle:cycle)
-     @comment = TrackComment.where(str)
-    end  
+      str = "card_id='" + one_card.first.id.to_s + "' AND cycle='"+ cycle + "'"
+      @comment = TrackComment.where(str)
+      if (@comment.first == nil)
+        TrackComment.create(epic_title: epic,cycle:cycle)
+        @comment = TrackComment.where(str)
+      end 
+     
 
   end
 
@@ -500,13 +548,21 @@ end
   end
 
   def edit_objectives2
-    cycle= params["cycle"]
-    card=  params["card"]
 
-    str = "short_name LIKE '" + card + "%'"   
-    one_card = Card.where(str)
-    str = "card_id = '" + one_card.first.id.to_s + "' AND cycle='"+cycle +"'" 
-    @obj = Objective.where(str) 
+     if (approve_access)
+      cycle= params["cycle"]
+      card=  params["card"]
+
+      str = "short_name LIKE '" + card + "%'"   
+      one_card = Card.where(str)
+      str = "card_id = '" + one_card.first.id.to_s + "' AND cycle='"+cycle +"'" 
+      @obj = Objective.where(str) 
+      @approve_access = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false  
+    end
+
   end
 
   def save_objectives
@@ -933,6 +989,10 @@ end
 end 
 
 def edit_status
+   if (approve_access)
+     
+    @approve_access = true
+    
   status = Status.all
   status.each do |s|
     s_id = s.id
@@ -948,11 +1008,17 @@ def edit_status
     s = Status.new
     s.status = params["status_n"]
     s.save!
-  end   
+  end 
+  else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+    @approve_access = false  
+    end  
 
 end  
 
 def edit_rationale
+  
+   
   status = Rationale.all
   status.each do |s|
     s_id = s.id
@@ -969,7 +1035,7 @@ def edit_rationale
     s.rationale = params["status_n"]
     s.save!
   end   
-
+  
 end  
 
   private
