@@ -6,12 +6,10 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    access_level = check_current_access
-
-    if (access_level == 0 || access_level == 1)
+    if (approve_access)
       @cards = Card.all
     else
-      flash.now[:notice] = "Sorry, you don't have access to edit."
+      flash.now[:notice] = I18n.t('blacklight.no_access')
     end
   end
 

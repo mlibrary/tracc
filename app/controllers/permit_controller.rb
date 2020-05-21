@@ -1,4 +1,5 @@
 class PermitController < ApplicationController
+include ApplicationHelper
 
  def index
 

@@ -24,6 +24,23 @@ module ApplicationHelper
 
   end
 
+  def approve_access
+    access_level = check_current_access
+    if (access_level>=0 && access_level<=2)
+      return true
+    end
+    return false  
+  end  
+  
+  def addlog(logtype,log_details,note)
+   #1=login 2=progress 3=resources 4=setup 5=chips 6=alerts
+   one = Plog.new
+   one.logtype = logtype
+   one.log_details = log_details
+   one.note = note
+   one.uniqname = current_user.email
+   one.save!
+  end
 
   def roundup(fte)
     fte_rounded = fte.round(2) 

@@ -1,0 +1,2 @@
+class Plog < ApplicationRecord
+end

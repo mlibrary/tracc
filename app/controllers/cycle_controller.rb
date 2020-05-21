@@ -1,4 +1,5 @@
 class CycleController < ApplicationController
+include ApplicationHelper
 
 	def new
 		@cname = Cycle.all

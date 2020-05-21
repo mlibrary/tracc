@@ -1,4 +1,5 @@
 class NonlitController < ApplicationController
+include ApplicationHelper
 
 	def save
 

@@ -89,3 +89,5 @@ en:
       default: 'entry'
 
     did_you_mean: 'Did you mean to type: %{options}?'
+
+    no_access: 'Sorry, access denied. Please login to continue'
