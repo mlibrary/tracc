@@ -33,7 +33,7 @@ module ApplicationHelper
   end  
   
   def addlog(logtype,log_details,note)
-   #1=login 2=progress 3=resources 4=setup 5=chips 6=alerts
+   #1=login 2=progress 3=card(status,details) 4=setup 5=chips 6=alerts 7=tracks 
    one = Plog.new
    one.logtype = logtype
    one.log_details = log_details

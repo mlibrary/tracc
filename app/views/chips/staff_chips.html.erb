@@ -1,5 +1,7 @@
  
 <%
+
+if (@approve_access)
   temp_chips = Chip.order(:uniqname)
     chips = ['<Add New Staff>']
     temp_chips.each do |t|
@@ -38,3 +40,4 @@
    
   </div>
 </div>
+<% end %>

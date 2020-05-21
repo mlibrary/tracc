@@ -5,6 +5,16 @@ include ApplicationHelper
 	def resources
 	end
 	
+  def staff_chips
+  
+     if (approve_access)
+      @approve_access = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false  
+    end
+  end 
+
 	def save_chips
      
      id = params["id"]
@@ -33,7 +43,6 @@ include ApplicationHelper
       end
 	end
 end 
-	def staff_chips
-	end
+	
 		
 end
