@@ -1,13 +1,13 @@
 <%
     
-type = 'Strategic'
+atype = 'Strategic'
 
 temp_chips = Chip.order(:uniqname)
     chips = ['']
     temp_chips.each do |t|
       chips << t.uniqname
 end
-
+if (@access_flag)
 %>
 
 <div class="panel-group" id="accordion">
@@ -95,6 +95,7 @@ end
 
 </div>
 </div>
+<%end%>
 
 
 

@@ -1,4 +1,13 @@
 class AlertsController < ApplicationController
+  include ApplicationHelper
+
+  def index
+      if (approve_access)
+      @access_flag = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+    end
+  end  
 
   def show
   end
@@ -21,10 +30,14 @@ class AlertsController < ApplicationController
          
          if (params[comments].blank?)
          	one_a.destroy!
+          addlog(6,"AI Deleted",one_a.comments)
+    
          else
 
            one_a.comments = params[comments]
            one_a.save!
+           addlog(6,"AI Updated",one_a.comments)
+      
          end # save or destroy
          
          	
@@ -44,7 +57,9 @@ class AlertsController < ApplicationController
 	  	nalert.owner = owner
 	  	nalert.status = nstatus
 
-	  	nalert.save
+	  	nalert.save!
+      addlog(6,"New AI Created",one_a.comments)
+      
 	  	
 	  end #if new comment	
 	end # save

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_170051) do
+ActiveRecord::Schema.define(version: 2020_05_20_181132) do
 
   create_table "alerts", force: :cascade do |t|
     t.integer "card_id"
@@ -293,6 +293,15 @@ ActiveRecord::Schema.define(version: 2020_05_08_170051) do
   create_table "permits", force: :cascade do |t|
     t.string "email"
     t.integer "level"
+  end
+
+  create_table "plogs", force: :cascade do |t|
+    t.integer "logtype"
+    t.string "log_details"
+    t.string "uniqname"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rationales", force: :cascade do |t|
