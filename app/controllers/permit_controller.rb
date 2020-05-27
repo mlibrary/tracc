@@ -16,6 +16,7 @@ include ApplicationHelper
   # check and remove if there are any other domains email addresses 
   @allp.each do |one_p|
   	flag = one_p.email.index("umich")
+
   	if (!flag)
   		one_p.destroy!
     end

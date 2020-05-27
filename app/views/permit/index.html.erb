@@ -4,7 +4,28 @@
       <h5 class="panel-title">User Accounts</h5>
     </div>
     <div class="card-body">
+  <h6 class="panel-title">Update User Password</h6>
+  <%= form_tag(save_permit_index_path, :enctype =>"multipart/form-data") do  %>
+    <div class="row ml-1">
+      <div class="field">
+      Uniqname:
+     <%= select_tag "uniqname", options_for_select(@chips)  %>
+      </div>
+    </div>
 
+    <div class="row ml-1">
+      <div class="field">
+      Password:
+     <%= text_field_tag "pswd"  %>
+      </div>
+    </div>
+
+    <div class="actions">
+        <%= submit_tag 'Save Password' %>
+    </div>
+   <% end %>
+   <hr>
+  
 	<h6 class="panel-title">Update User Accounts</h6>
 	<%= form_tag(save_permit_index_path, :enctype =>"multipart/form-data") do  %>
     <div class="row ml-1">
@@ -22,7 +43,7 @@
     </div>
 
     <div class="actions">
-        <%= submit_tag 'Update' %>
+        <%= submit_tag 'Assign Role' %>
     </div>
    <% end %>
    <hr>
@@ -33,7 +54,9 @@
 		level_pos = @all_levels_val.find_index(one_p.level.to_s)
 		
 	%>
-		<p><b><%= one_p.email[0..pos] %></b><br>
+		<p><b><%#= one_p.email[0..pos] %>
+    <%= one_p.email %>  
+    </b><br>
 			<% if (one_p.level ==0) %>
 				Super Admin
 			<% else %>
