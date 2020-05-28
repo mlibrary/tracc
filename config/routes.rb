@@ -43,6 +43,13 @@ Rails.application.routes.draw do
     end
   end
 
+   resources :plogs do
+    collection do
+      get :index
+      post :save
+    end
+  end
+
    resources :tracc_users do
     collection do
       get :index
