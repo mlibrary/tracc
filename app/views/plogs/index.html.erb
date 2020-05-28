@@ -1,0 +1,23 @@
+<% if (@approve_access) %>
+
+<div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="panel-title">Log</h5>
+    </div>
+    <div class="card-body">
+
+<%        @logs.each do |log|
+      
+	%>
+		<p><%#= one_p.email[0..pos] %>
+     <%= log.logtype %>, <%= log.log_details %> , <%= log.uniqname %> , <%= log.note %> 
+    
+		</p>
+	<% end %>
+	
+    </div>
+</div>     
+   
+
+
+<% end %>
