@@ -3,6 +3,10 @@ include ApplicationHelper
 
  def index
 
+ if (approve_access)
+     
+    @approve_access = true
+   
   @allp = Permit.all
   @all_levels = ["LIT CG", "Strategic Lead","LIT Contact", "Guest"]
   @all_levels_val = ["1", "2","3", "9"]
@@ -21,6 +25,11 @@ include ApplicationHelper
   		one_p.destroy!
     end
   end	
+  
+  else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+    @approve_access = false  
+    end
 
  end
 

@@ -1,0 +1,40 @@
+<% if (@approve_access) %>
+
+<div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="panel-title">User Accounts</h5>
+    </div>
+    <div class="card-body">
+  
+	
+	<%= form_tag(save_tracc_users_path, :enctype =>"multipart/form-data") do  %>
+    <div class="row ml-1">
+      <div class="field">
+      User:
+     <%= select_tag "uname", options_for_select(@users)  %>
+      </div>
+    </div>
+
+    
+
+    <div class="actions">
+        <%= submit_tag 'Remove User' %>
+    </div>
+   <% end %>
+   <hr>
+
+<%        @users.each do |user|
+      
+	%>
+		<p><%#= one_p.email[0..pos] %>
+     <%= user.name %>, <%= user.email %> ) | <%= link_to "Delete", user_registration_path(user), method: :delete, data: { confirm: "You sure?" } %>
+    
+		</p>
+	<% end %>
+	
+    </div>
+</div>     
+   
+
+
+<% end %>

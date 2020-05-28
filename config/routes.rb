@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     end
   end
 
-   resources :users do
+   resources :tracc_users do
     collection do
       get :index
       post :save
@@ -110,6 +110,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   concern :exportable, Blacklight::Routes::Exportable.new
+
+  
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns [:exportable, :marc_viewable]
