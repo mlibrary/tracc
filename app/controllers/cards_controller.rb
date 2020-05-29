@@ -537,6 +537,8 @@ end
     one.comment4 = params["comment4"]
     one.cycle = cycle
     one.save!
+    note = "Comments saved"
+    addlog(2,"Track progress",note)
 
     @track_epic.all.each do |t| 
       track = t.objective
@@ -551,6 +553,8 @@ end
       t.status4 = params[t_id4]
       t.status = params[t_id]
       t.save!
+      note = "Percent progress saved"
+      addlog(2,"Track progress",note)
     end   
   end  
     
@@ -595,6 +599,8 @@ end
       else
         t.objective = track
         t.save!  
+        note = "Objectives updated"
+        addlog(4,"Objectives",note)
       end  
       
     end  #for all
@@ -606,6 +612,8 @@ end
       obj_new.objective = nobj
       obj_new.cycle = cycle
       obj_new.save
+      note = "New objective added: "+nobj
+      addlog(4,"Objective",note)
     end  
 
   end   
@@ -1007,10 +1015,19 @@ def edit_status
   status.each do |s|
     s_id = s.id
     nst = 'nst' + s_id.to_s
-    s.status = params[nst]
-    s.save!
+    old = s.status
+    if (old.eql? params[nst])
+    else  
+      s.status = params[nst]
+      s.save!
+      note = "Status updated from: " + old +" to: " +  s.status
+      addlog(4,"Status",note)
+    end 
+      
     if (s.status.eql? '')
       s.destroy!
+      note = "Status deleted: " + old 
+      addlog(4,"Status",note)
     end  
   end  
   # add new status
@@ -1018,6 +1035,8 @@ def edit_status
     s = Status.new
     s.status = params["status_n"]
     s.save!
+    note = "New Status added: " + s.status
+    addlog(4,"Status",note)
   end 
   else
       flash.now[:notice] = I18n.t('blacklight.no_access')
@@ -1033,10 +1052,19 @@ def edit_rationale
   status.each do |s|
     s_id = s.id
     nst = 'nst' + s_id.to_s
-    s.rationale = params[nst]
-    s.save!
+    old = s.rationale
+    if (old.eql? params[nst])
+    else
+      s.rationale = params[nst]
+      s.save!
+      note = "Status details updated from: " + old +" to: " +  s.rationale
+
+      addlog(4,"Status Details",note)
+    end
     if (s.rationale.eql? '')
       s.destroy!
+      note = "Status details deleted:" +  old
+      addlog(4,"Status Details",note)
     end  
   end  
   # add new status
@@ -1044,6 +1072,8 @@ def edit_rationale
     s = Rationale.new
     s.rationale = params["status_n"]
     s.save!
+    note = "Status details added:" +  s.rationale
+    addlog(4,"Status Details",note)
   end   
   
 end  

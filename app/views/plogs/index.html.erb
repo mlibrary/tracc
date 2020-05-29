@@ -10,7 +10,7 @@
       
 	%>
 		<p><%#= one_p.email[0..pos] %>
-     <%= log.logtype %>, <%= log.log_details %> , <%= log.uniqname %> , <%= log.note %> 
+     <%=log.created_at %>: <%= log.logtype %>, <%= log.log_details %> , <%= log.uniqname %> , <%= log.note %> 
     
 		</p>
 	<% end %>
