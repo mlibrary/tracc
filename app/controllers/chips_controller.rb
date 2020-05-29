@@ -32,6 +32,8 @@ include ApplicationHelper
      if (!one_chip.nil?) 
        if (params["uniqname"].empty?)
        	one_chip.destroy!
+        note = "Chip deleted: " +  one_chip.uniqname
+        addlog(5,"Chip",note)
        else
         one_chip.uniqname = params["uniqname"]
         one_chip.fname = params["fname"]
@@ -40,6 +42,8 @@ include ApplicationHelper
         one_chip.project = params["project"]
         one_chip.ops= params["ops"]
         one_chip.save!
+        note = "Chip updated: " +  one_chip.uniqname
+        addlog(5,"Chip",note)
       end
 	end
 end 
