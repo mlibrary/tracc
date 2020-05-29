@@ -78,8 +78,8 @@ Rails.application.routes.draw do
 
   resources :reports do
     collection do
-      get :index, :about, :charts, :export
-      post :generate
+      get :index, :about, :charts, :export, :chip_assignment, :objectives
+      post :generate, :chip_assignment, :objectives
     end
   end
 

@@ -2,10 +2,10 @@
 
 
 <%
- ch = Chip.order(:dept)
+ 
  totalfte_o = 0
  totalfte_p = 0 
- ch.each do |t|
+ @ch.each do |t|
   totalfte_o = totalfte_o + t.ops*1.0/4
   totalfte_p = totalfte_p + t.project*1.0/4
  end
@@ -16,23 +16,60 @@
    color3 = "#FFF" 
    color4 = "#dcdcdc"
 
+cycle = params[ "cycle"]
+if (cycle.nil?)
  cur_cycle = Cycle.where("current_cycle =1")
 cycle = cur_cycle.first.cycle_name
-  
+end
+
+cname = Cycle.all 
+dept =  Chip.select(:dept).map(&:dept).uniq
+dept << "All"
+sel_dept = params["dept"]
+if (sel_dept.nil?)
+  sel_dept = "All"
+end  
 %>
 <div class="container">
-  <div class="card" style="background: <%=color1 %>">
-      <div class="card-header" style="background: <%= color2 %>">
-      <h4 > LIT Staff Capacity </h4>
-    </div>
+
+   <div class="card card-body">
+    <%= form_tag(chip_assignment_reports_path, :enctype =>"multipart/form-data") do %>
+ <div class="card">
+  <div class="card-header">
+    <h5>LIT Staff Allocation</h5>
+  </div>  
+ <div class="card-body">  
+
+  <div class="row ml-1">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> 
+   </div>
+ </div>
+
+ <div class="row ml-1">
+    <div class="field">
+     <%= label_tag :Department %>
+     <%= select_tag "dept", options_for_select(dept, sel_dept)  %> 
+   </div>
+ </div>
+
+
+   <div class="actions">
+      <%= submit_tag 'Refresh >>' %>
+   </div>
+
+ <%end%>
+   </div>  
+  
    
-   <div class="card-body">
+   <div class="card card-body">
         <% 
             flag = true
             cnt = 1 
               
          %>  
-        <h5>Total Project FTE: <%=totalfte_p %>, Total Ops FTE: <%=totalfte_o %></h5>
+       
         <div class="row" style="background: <%=color2 %>">
           <div class="col-md-1"></div> 	
           <div class="col-md-1"><b>Dept</b></div>
@@ -44,7 +81,7 @@ cycle = cur_cycle.first.cycle_name
           <div class="col-md-2"><b>Assignments</b></div>  
         </div>   
         <%
-          ch.each do |t|
+          @ch.each do |t|
             fte_o = t.ops*1.0/4
             fte_p = t.project*1.0/4
             
@@ -55,8 +92,15 @@ cycle = cur_cycle.first.cycle_name
             color = color4
             flag = !flag
           end 
-        %>   
-        <div class="row" style="background: <%=color %>">
+        %>  
+         <%  
+           if ( (sel_dept.eql? "All")  || (sel_dept.eql? t.dept))
+              str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "' "
+              ch_a = ChipAssignment.where(str).distinct
+
+              if (!ch_a.first.nil?)
+            %> 
+          <div class="row" >
           <div class="col-md-1"><%=cnt%></div> 	
           <div class="col-md-1"><%=t.dept%></div>
           <div class="col-md-2"><%=t.fname%></div>
@@ -64,11 +108,7 @@ cycle = cur_cycle.first.cycle_name
           <div class="col-md-2"><%=t.uniqname%></div>
           <div class="col-md-1"><%=fte_p%></div>
            <div class="col-md-1"><%=fte_o%></div>
-           <% 
-           		str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "' "
-           		ch_a = ChipAssignment.where(str).distinct
-
-           	%>	
+          	
            <div class="col-md-2">
            	<%
            	   ch_a.each do |a|
@@ -84,11 +124,12 @@ cycle = cur_cycle.first.cycle_name
           
         </div> 
            
-        <%  
+        <% 
+          end # if ch_a not nil 
+        end # if dept matches
           cnt = cnt +1 
           end
         %>
 
-    </div>
   </div>
 </div>

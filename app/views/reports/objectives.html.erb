@@ -1,0 +1,94 @@
+<%
+ slist = Card.where("activity_type LIKE 'Strategic'")
+
+ slist_array = Array.new
+ slist.each do |s|
+  slist_array << s.short_name
+ end 
+ slist_array << "All"
+
+
+ cname = Cycle.all 
+ clist_array = Array.new
+ cname.each do |s|
+  clist_array << s.cycle_name
+ end 
+ clist_array << "All"
+
+ 
+ cycle = params[ "cycle"]
+ if (cycle.nil?)
+  cur_cycle = Cycle.where("current_cycle =1")
+  cycle = cur_cycle.first.cycle_name
+ end
+
+ card = params["card"]
+
+ if ((card.nil?) || (card.eql? "All"))
+  sel_list = Card.where("activity_type LIKE 'Strategic'")
+  sel_card = "All"
+ else
+  sel_card = card
+  sel_list = Card.where("short_name LIKE '"+ card +"'")
+ end 
+
+%>
+<div class="container">
+
+   <div class="card card-body">
+    <%= form_tag(objectives_reports_path, :enctype =>"multipart/form-data") do %>
+ <div class="card">
+  <div class="card-header">
+    <h5>Strategic Projects Objectives</h5>
+  </div>  
+ <div class="card-body">  
+
+  <div class="row ml-1">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= select_tag "cycle", options_for_select(clist_array, cycle)  %> 
+   </div>
+ </div>
+
+ <div class="row ml-1">
+    <div class="field">
+     <%= label_tag :project %>
+     <%= select_tag "card", options_for_select(slist_array, sel_card )  %>
+     
+   </div>
+</div>
+
+
+   <div class="actions">
+      <%= submit_tag 'Refresh >>' %>
+   </div>
+
+ <%end%>
+   </div> 
+
+
+    
+   
+   <div class="card card-body">
+    <% sel_list.each do |s| %>
+     
+    <%  
+      if (cycle.eql? "All")
+       str = "card_id='"+s.id.to_s+"'"
+      else
+       str =  "card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'"
+      end  
+       
+      o = Objective.where(str).order(:cycle) %>
+      <p><b><%= s.short_name %></b></p>
+      <%o.each do |one_o|
+        %>
+        <p>[<%=one_o.cycle %>] <%= one_o.objective%><p>
+       <% end  %>
+       <hr>
+     <% end %>  
+    
+  
+  </div>  
+
+ </div>  

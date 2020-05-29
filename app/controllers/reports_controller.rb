@@ -6,6 +6,14 @@ class ReportsController < ApplicationController
   def show
   end 
 
+  def chip_assignment 
+     @ch = Chip.order(:dept)
+
+  end  
+
+  def objectives
+    
+  end  
   def generate
 # "cycle"=>"All", "status"=>"Any", "activity_type"=>"All", "chart"=>"Requests vs Cycle", "chart_type"=>"Bar",
     status = params["status"]
