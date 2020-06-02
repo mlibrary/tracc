@@ -29,6 +29,9 @@ sel_dept = params["dept"]
 if (sel_dept.nil?)
   sel_dept = "All"
 end  
+
+allocated = params["allocated"]
+
 %>
 <div class="container">
 
@@ -54,10 +57,25 @@ end
    </div>
  </div>
 
+<% if (allocated) %>
+<div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "allocated", 1, {:checked => "checked"}  %> Show Aloocated Staff Only
+   </div>
+ </div>
+<% else %>
+<div class="row ml-1">
+    <div class="field">     
+     <%= check_box_tag "allocated", 1 %> Show Aloocated Staff Only
+   </div>
+ </div> 
+<% end %>
 
+<div class="row ml-1">
    <div class="actions">
       <%= submit_tag 'Refresh >>' %>
    </div>
+</div>
 
  <%end%>
    </div>  
@@ -96,7 +114,7 @@ end
               str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "' "
               ch_a = ChipAssignment.where(str).distinct
 
-              if (!ch_a.first.nil?)
+              if ( (!ch_a.first.nil?) || (!allocated) )
             %> 
           <div class="row" >
           	
