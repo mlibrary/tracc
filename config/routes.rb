@@ -85,7 +85,7 @@ Rails.application.routes.draw do
 
    resources :dashboard do
     collection do
-      get :cycledashboard , :tactical_dashboard, :overview, :paused, :boards
+      get :cycledashboard , :tactical_dashboard, :overview, :paused, :boards, :cycle_board
       post :dashboard, :strategic, :tactical_stats, :tactical, :cycle_board
     end
   end

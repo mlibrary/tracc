@@ -92,9 +92,10 @@ allocated = params["allocated"]
           
           <div class="col-md-1"><b>Dept</b></div>
           <div class="col-md-3"><b>Name</b></div>
-          <div class="col-md-1"><b>Project</b></div>
           <div class="col-md-1"><b>Ops</b></div>
-          <div class="col-md-6"><b>Project Assignments</b></div>  
+          <div class="col-md-1"><b>Project</b></div>
+          <div class="col-md-4"><b>Project Assignments</b></div> 
+          <div class="col-md-2"><b>Available Capacity</b></div>  
         </div>   
         <%
           @ch.each do |t|
@@ -120,23 +121,26 @@ allocated = params["allocated"]
           	
           <div class="col-md-1"><%=t.dept%></div>
           <div class="col-md-3"><%=t.fname%> <%=t.lname%> (<%=t.uniqname%>)</div>
-          
+          <div class="col-md-1"><%=fte_o%></div>
           <div class="col-md-1"><%=fte_p%></div>
-           <div class="col-md-1"><%=fte_o%></div>
-          	
-           <div class="col-md-6">
-           	<%
+          
+                      	<%
            	   ch_a.each do |a|
            	   card_name=	Card.where("id='"+a.card_id.to_s+"'")
            	   card_name = card_name.first.short_name
                fte = a.chips*1.00/4
+               rem_fte = fte_p - fte
                if (fte>0)
+
            	%>
-           	 <p> <%= card_name %> (<%= a.cycle %>: <%= a.month %>, <%= fte%> FTE)</p>
+            <div class="col-md-4">
+
+           	 <p> <%= card_name %>, <%= a.trackname %> (<%= a.month %>: <%= fte%> FTE)</p>
+            </div>
                <% end # if %>
+               <div class="col-md-2"><%= a.month %>: <%= rem_fte %></div>
            	<% end %>
-           </div>
-          
+     
         </div> 
            
         <% 
