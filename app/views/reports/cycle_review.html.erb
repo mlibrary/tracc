@@ -1,0 +1,189 @@
+<%
+cycle = params["cycle"]
+review_type = params["review_type"]
+p_type = params["p_type"]
+%>
+
+
+<%= form_tag(cycle_review_reports_path, :enctype =>"multipart/form-data") do %>
+   
+<% cname = Cycle.all %>
+<% card = Card.all %>
+<% 
+
+if (cycle.nil?)
+  cur_cycle = Cycle.where("current_cycle =1").first.cycle_name
+else
+ cur_cycle = cycle  
+end
+
+if p_type.nil?
+  p_type = "1"
+end 
+
+if review_type.nil?
+  review_type = "1"
+end 
+
+
+
+ %>
+
+<div class="card">
+  <div class="card-header">
+    <h4> Report: Cycle Review</h4>
+  </div>  
+<div class="card-body">  
+
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name",  cur_cycle)  %>
+  
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :review_Type %>
+     <%= select_tag "review_type", options_for_select([['Mid Cycle', 1], ['End of Cycle', 2]], review_type) %>
+  
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :Project_Type %>
+     <%= select_tag "p_type", options_for_select([['Strategic', 1], ['Tactical', 2]], p_type) %>
+  
+   </div>
+</div>
+
+   
+   <div class="row ml-1">
+   <div class="actions">
+      <%= submit_tag 'Refresh' %>
+   </div>
+ </div>
+ 
+  
+
+</div>
+<% end %>
+
+<div class="card card-body" style="padding-top: 10px;">
+
+
+  <% 
+  if (p_type.eql? "2")
+     str = "activity_type LIKE '%Active%'"
+  else
+     str = "activity_type LIKE '%Strategic%'"
+    end
+
+  @cards = Card.where(str).order(:card_type)
+  @cards.each do |card| %>
+      <div class="row">
+        
+          
+      <%    cr1 = CycleReview.where("card_id=? AND review_type=? AND cycle=?",card.id,review_type,cycle)
+          cr = cr1.first
+          
+          if (cr.nil?)
+            saved_status = 'Not Recorded' #card.card_status
+            saved_r = 'Not Recorded' #card.rationale
+            saved_n = '' #card.comments
+          else
+            saved_status = cr.status
+            saved_r = cr.rationale
+            saved_n = cr.notes
+          end 
+          s = "s" + card.id.to_s + "_0" 
+          r = "r" + card.id.to_s + "_0"   
+          comment =  "c" + card.id.to_s + "_0" 
+      %>
+         <% if (p_type.eql? "2") %>
+           <div class="col-md-12 border border-light">
+         <% else %>
+           <div class="col border border-light">
+         <% end %>   
+          <p style="padding-top: 15px;"><b><%= card.title %>
+          <% if (p_type.eql? "2") %> ( <%=card.short_name%>, <%= card.in_cycle %> [<%=card.card_type %>]) <% end %>
+        </b> </p>
+         
+           <% if (p_type.eql? "2") %>
+            <p><b>State:</b>
+           
+            <%=saved_status %> 
+            <br>
+           </p>
+           <p><b>Status:</b>
+
+           <%= saved_r %><br>
+          </p>
+          <p><b>Comments:</b> <%= saved_n%></p> 
+            
+          <% end #if ptype eql 2%>
+        </div>
+     </div>
+<%# each track%>
+      <% if (p_type.eql? "1") %>
+           <div class="row">
+       <%
+        track_cnt = 0 
+        obj = Track.where("card_id='"+card.id.to_s+"'").order(:disp_order)
+        obj.each do |o| 
+         
+         cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,o.id,review_type,cycle)
+          cr = cr1.first
+          
+          if (cr.nil?)
+            saved_status = "Not Recorded"
+            saved_r = "Not Recorded" #o.rationale #card.rationale
+            saved_n = '' #card.comments
+          else
+            saved_status = cr.status
+            saved_r = cr.rationale
+            saved_n = cr.notes
+          end 
+           
+         s = "s" + card.id.to_s + "_" + o.id.to_s
+         r = "r" + card.id.to_s + "_" + o.id.to_s
+         comment =  "c" + card.id.to_s + "_" + o.id.to_s
+         #if (!o.track.eql? "Project-Level")
+          track_cnt = track_cnt + 1
+        %>
+       
+        
+        <div class="col border border-light">
+        
+        <p style="padding-top: 15px;"><b><i>Track: <%= o.track%></i></b></p>
+       
+          
+        <p><b>Status:</b>
+        
+            <%=saved_status %> 
+            </p>
+          
+           <p><b>Details:</b>
+             <%= saved_r  %>
+          
+          </p>
+        <p><b>Comments:</b> <%=  saved_n %> </p>    
+          
+        </div>
+         <% #end #if not project-level %>
+        <% end #each track %>
+         <% 
+        track_cnt = 4-track_cnt 
+        while (track_cnt > 0) do
+            track_cnt = track_cnt-1
+        %>
+         <div class="col border border-light"></div>
+        <% end #while %>
+        </div>
+        <% end #if ptype %>
+        
+       
+      <% end # each card%>
+</div>
