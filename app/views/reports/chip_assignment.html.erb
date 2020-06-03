@@ -123,7 +123,7 @@ allocated = params["allocated"]
           <div class="col-md-3"><%=t.fname%> <%=t.lname%> (<%=t.uniqname%>)</div>
           <div class="col-md-1"><%=fte_o%></div>
           <div class="col-md-1"><%=fte_p%></div>
-          
+          <div class="col-md-4">
                       	<%
            	   ch_a.each do |a|
            	   card_name=	Card.where("id='"+a.card_id.to_s+"'")
@@ -133,7 +133,7 @@ allocated = params["allocated"]
                if (fte>0)
 
            	%>
-            <div class="col-md-4">
+            
 
            	 <p> <%= card_name %>, <%= a.trackname %> (<%= a.month %>: <%= fte%> FTE)</p>
             </div>
