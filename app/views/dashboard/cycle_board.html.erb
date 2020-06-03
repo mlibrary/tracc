@@ -5,6 +5,12 @@
   obj = params['obj']
 
   nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
+
+
+  if (cycle.nil?)
+    cur_cycle = Cycle.where("current_cycle =1")
+    cycle = cur_cycle.first.cycle_name
+  end 
   cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
   s = cur_cycle.first.start.month
   stmonth = ""
@@ -25,6 +31,10 @@
     end  
    
   end
+
+if p_type.nil?
+  p_type = "1"
+end 
 
 %>
 <div class="panel-group" id="accordion">
