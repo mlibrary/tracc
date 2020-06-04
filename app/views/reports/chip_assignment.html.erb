@@ -130,11 +130,11 @@ allocated = params["allocated"]
                card_name = card_name.first.short_name
                fte = a.chips*1.00/4
                rem_fte = fte_p - fte
-               if (fte>0)
+               
 
             %>
             <div class="col-md-4">
-
+              <% if (fte>0) %>
              <p> <%= card_name %>, <%= a.trackname %> (<%= a.month %>: <%= fte%> FTE)</p>
             
                <% end # if %>
