@@ -32,7 +32,8 @@ end
 
 allocated = params["allocated"]
 
-months = get_months()
+months = get_months(cycle)
+byebug
 
 %>
 <div class="container">
@@ -134,6 +135,7 @@ months = get_months()
                total_fte_month = 0  
                str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "' AND month='"+m+"'"
                ch_a = ChipAssignment.where(str).distinct 
+
                 if ( (!m.empty?) && (ch_a.count>0))
                 %>
                   <p><b><%= m%></b><br>
@@ -157,6 +159,7 @@ months = get_months()
                   
                end #each month %>
                </p>
+                
                </div>
                <div class="col-md-2"> 
                 <p><b>Assigned:</b><br>
@@ -183,7 +186,7 @@ months = get_months()
                 <%
                   m_cnt = 0
                   months.each do |m|      
-                   if ((m_cnt>0) && (fte_array[m_cnt]> 0 )) %>
+                   if (m_cnt>0) %>
                     <%=m%>: 
                     <%
                       rem_fte = fte_p -  fte_array[m_cnt]
@@ -199,6 +202,7 @@ months = get_months()
                   end  # for each month
                 %>
                 </p>
+               
                </div>
                  
         </div> 
