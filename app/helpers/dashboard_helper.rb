@@ -1,10 +1,11 @@
 module DashboardHelper
-	def get_months
+	def get_months(cycle)
         
 nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
 
-cur_cycle = Cycle.where("current_cycle =1")
-cycle = cur_cycle.first.cycle_name
+
+cur_cycle = Cycle.where("cycle_name='"+cycle+"'")
+
 s = cur_cycle.first.start.month
 stmonth = ""
 endmonth = ""
