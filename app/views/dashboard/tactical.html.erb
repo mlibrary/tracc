@@ -22,6 +22,10 @@
  nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
  pos= months.index(nameofmonths[cur_month])
 
+ if pos.nil?
+  pos = 0 
+ end 
+ 
  if (cur_dt < 24) # add curren month only if end of the month
     pos = pos-1
  end 

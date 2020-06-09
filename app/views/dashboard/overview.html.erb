@@ -27,7 +27,7 @@ nameofmonths = ['','January', 'February','March','April','May','June','July','Au
 pos= months.index(nameofmonths[cur_month])
 
 if (!pos.nil?)                  
-if (cur_dt < 24) # add curren month only if end of the month
+if (cur_dt < 24) # add current month only if end of the month
   pos = pos-1
 end 
    
@@ -214,7 +214,14 @@ end #if pos not nil
  totalfte << totalops
  totalfte << totalpro
  
-
+ if (total_strategic.nil?)
+  total_strategic = 0 
+ end 
+ 
+ if (total_tactical.nil?)
+  total_tactical = 0 
+ end 
+  
  total_left =  totalpro - (total_strategic+total_tactical)
  tpercent = (total_tactical/totalpro)*100
  spercent = (total_strategic/totalpro)*100

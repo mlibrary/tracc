@@ -24,8 +24,12 @@
  cur_dt = Date.current.day
  nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
  pos= months.index(nameofmonths[cur_month])
+ 
+ if pos.nil?
+  pos = 0 
+ end  
 
- if (cur_dt < 24) # add curren month only if end of the month
+ if ( (cur_dt < 24) && (pos>0)) # add curren month only if end of the month
     pos = pos-1
   end 
 
@@ -62,7 +66,7 @@
      cnt3 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count
      cnt4 = Objective.where("card_id='"+s.id.to_s+"' AND cycle='" + cycle +"'").count 
 
-   
+     if (cnt1 >0)
      p1 = 100- (month1p/cnt1)
      if (p1 <100)
        strategic_p << p1
@@ -86,7 +90,7 @@
        strategic_p << p4
        strategic_up <<  (month4p/cnt1)
      end 
-
+     end 
      data_array << strategic_p
      data_array_up << strategic_up
      legend << s.short_name
