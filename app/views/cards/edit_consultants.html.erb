@@ -1,4 +1,5 @@
 <%
+
     cycle= params["cycle"]
     epic=  params["epic"]
     track = params["track"] 
@@ -23,24 +24,35 @@
    <%= form_tag(save_consultants_cards_path, :enctype =>"multipart/form-data") do  %>
    <%
      str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '"+cycle+"' AND trackname= '"+track +"'" 
-     @consult = Consultant.where(str)
+     %>
+
+     <% @consult = Consultant.where(str)
+     
      @consult.each do |one|
      	uname = "uname" + one.id.to_s
         
    %>
   <div class="row ml-1">
     <div class="field">
- 
-     Uniqname:
-     <%= select_tag uname, options_for_select(chips, one.uniqname)  %>
+     <%= check_box_tag uname, 1 %> <%=one.uniqname%> 
    </div>
 </div>
+<div class="actions">
+        <%= hidden_field_tag 'epic', params["epic"] %>
+        <%= hidden_field_tag 'cycle', params["cycle"] %>
+        <%= hidden_field_tag 'track', params["track"] %>
+        <%= hidden_field_tag 'option', 1 %>
+        <%= submit_tag 'Remove Selected' %>
+      </div>
+<% end %>
+<hr>
 <% end %>
 
+<%= form_tag(save_consultants_cards_path, :enctype =>"multipart/form-data") do  %>
  <div class="row ml-1">
     <div class="field">
  
-     Add Consultant (Uniqname):
+     Add a Consultant (Uniqname):
      <%= select_tag "uniqname1", options_for_select(chips)  %>
    </div>
 </div>

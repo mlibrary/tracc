@@ -111,8 +111,10 @@ end
                    <%= hidden_field_tag 'epic', pro.short_name %>
                    <%= hidden_field_tag 'cycle', cycle %>
                    <%= submit_tag 'Edit Resources' %>
-                   </p>
+                   
                   <% end %>
+                </p>
+               
                   <% end %>
                  </div> </div>
                </div></div>
@@ -220,7 +222,16 @@ end
               
               <% end #if%>
               
-
+  <p style="padding-top: 5px">
+                  <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
+                <div class="actions">
+                  <%= hidden_field_tag 'cycle', params["cycle"] %>
+                  <%= hidden_field_tag 'epic', pro.short_name %>
+                  <%= hidden_field_tag 'track', t.track %>
+                  <%= submit_tag 'Add/Edit Consultants' %>
+                </div>
+                <% end %>
+                </p> 
               <hr>
              <p>Status:
              <% if (t.status.eql? "In-Progress") %>
