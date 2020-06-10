@@ -295,27 +295,31 @@ class CardsController < ApplicationController
   end
   
   def save_consultants
+
   epic=  params["epic"]
      cycle = params["cycle"]
      track = params["track"]
      uniqname1 = params["uniqname1"]
+     op = params["option"]
 
-     str = "short_name LIKE '" + epic + "%'"   
+       str = "short_name LIKE '" + epic + "%'"   
      @card_one = Card.where(str)
 
+     if (op.eql? "1")
+
+   
      str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '"+cycle+"' AND trackname= '"+track +"'" 
      @consult = Consultant.where(str)
      @consult.each do |one|
       uname = "uname" + one.id.to_s
       uname_v = params[uname]
-      if (uname_v.length > 2)
-        one.uniqname =  uname_v
-        one.save!
-      else
+      if (uname_v)
         one.destroy!  
       end #if
      end #consult.each
+    
 
+   elsif (!uniqname1.nil?)
      if (uniqname1.length >2)
         n_c = Consultant.new
         n_c.uniqname = uniqname1
@@ -324,6 +328,7 @@ class CardsController < ApplicationController
         n_c.card_id = @card_one.first.id 
         n_c.save!
      end #if
+    end # if option
   end  
   
   def save_resources
@@ -715,9 +720,24 @@ end
 
   # GET /cards/new
   def new 
-    @card = Card.new
+    
+
   end
 
+  def save_card
+  
+     card = Card.new
+     card.title = params["title"]
+     card.short_name = params["short_name"]
+     card.short_description = params["short_description"]
+     card.lit_lead = params["lit_lead"]
+     card.service_lead = params["service_lead"]
+     card.request_type = params["request_type"]
+     card.activity_type = params["activity_type"]
+     card.save
+     
+  
+  end  
   # GET /cards/1/edit
   def edit
     @card_one = Card.find( params[:id] )

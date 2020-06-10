@@ -118,6 +118,8 @@ months = get_months(cycle)
               
             str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "'"
             ch_a = ChipAssignment.where(str).distinct 
+
+            
               if  ( (ch_a.count>0 ) || (!allocated)) 
             %> 
           <div class="row" >
@@ -129,18 +131,23 @@ months = get_months(cycle)
           <div class="col-md-4">
                         <%
                fte_array= Array.new
-                      
+                    i = 0   
+                
               months.each do |m| 
 
-               total_fte_month = 0  
-               str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "' AND month='"+m+"'"
-               ch_a = ChipAssignment.where(str).distinct 
+               total_fte_month = 0 
+
+               if (i>0)
+                str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "' AND month LIKE'"+m[0..2]+"%'"
+                ch_a = ChipAssignment.where(str).distinct 
+               end 
+               i = i + 1 
 
                 if ( (!m.empty?) && (ch_a.count>0))
                 %>
                   <p><b><%= m%></b><br>
                 <%  
-                end        
+                      
                ch_a.each do |a|
                card_name= Card.where("id='"+a.card_id.to_s+"'")
                card_name = card_name.first.short_name
@@ -153,7 +160,8 @@ months = get_months(cycle)
               <% if (fte>0) %>
                    <%= card_name %>, <%= a.trackname %> (<%= fte%> FTE)<br>
                <% end # if %>
-               <% end  #each chipassignment %>
+               <% end  #each chipassignment 
+                end #if %>
                 <% 
                   fte_array << total_fte_month
                   
@@ -165,7 +173,8 @@ months = get_months(cycle)
                 <p><b>Assigned:</b><br>
                 <%
                   m_cnt = 0
-                  months.each do |m|      
+                  months.each do |m| 
+
                    if ((m_cnt>0) && (fte_array[m_cnt]> 0 )) %>
                     <%=m%>: 
                     <%
