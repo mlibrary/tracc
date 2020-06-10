@@ -715,9 +715,24 @@ end
 
   # GET /cards/new
   def new 
-    @card = Card.new
+    
+
   end
 
+  def save_card
+  
+     card = Card.new
+     card.title = params["title"]
+     card.short_name = params["short_name"]
+     card.short_description = params["short_description"]
+     card.lit_lead = params["lit_lead"]
+     card.service_lead = params["service_lead"]
+     card.request_type = params["request_type"]
+     card.activity_type = params["activity_type"]
+     card.save
+     
+  
+  end  
   # GET /cards/1/edit
   def edit
     @card_one = Card.find( params[:id] )

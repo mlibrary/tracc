@@ -1,5 +1,60 @@
-<h1>New Card</h1>
 
-<%= render 'form', card: @card %>
 
-<%= link_to 'Back', cards_path %>
+<script type="text/javascript">
+$(document).ready(function () { 
+
+  $("div.hideable").hide();
+  $("span#triangle-down").hide();
+
+  $("#headingTwo").click(function () {
+    $("div.hideable").toggle("slow");
+    $("span#triangle-down").toggle("fast");
+    $("span#triangle-right").toggle("fast");
+  });  
+
+});
+</script>
+
+<%= form_tag(save_card_cards_path, :enctype =>"multipart/form-data") do  %>
+
+
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="panel-title">Add a new project</h5>
+      <div class="form-buttons" style="margin-top: 20px;">
+         <div class="actions">
+         <%= submit_tag 'Save' %>
+         </div>
+      </div>
+      
+      <p style="margin-top: 20px;">Title<br><%= text_field_tag "title", '',size:  60%></p>
+      <p>Short Name:<br><%= text_field_tag "short_name", '', size: 60 %></p>
+      <p>Description: <br><%= text_field_tag "short_description", '',  cols: "100", rows: "5" %></p>
+
+      <p>Status:<br>
+        <%# Get status keys %>
+        <% status = Status.all  %>
+        <select class="custom-select custom-select-sm card_status">
+          <option selected>Select Card Status</option>
+          <% status.each do |st|  %>
+            <option value=<%= st.status %>  <%= st.status %></option>
+          <% end  %>
+        </select>
+      </p>
+
+      <p>LIT Contact:<br><%= text_field_tag "lit_lead", '', size: 100 %></p>
+      <p>Service Lead: <br><%= text_field_tag "service_lead", '', size: 100 %></p>
+      <p>Request Type<i>[New Service, Service Improvement, Consultation, Other]</i><br> <%= text_field_tag "request_type", '', size: 100 %></p>
+      <p>Activity Type: <i>[Investigation, Project, TASC Investigation]</i><br> <%= text_field_tag "activity_type", '', size: 100 %></p>
+    
+	</div>
+
+        <div class="form-buttons" style="display:block;">
+          <%= submit_tag "Save" %>
+        </div>
+      
+    </div>
+  <% end %>
+
+
+
