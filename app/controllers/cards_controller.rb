@@ -163,7 +163,7 @@ class CardsController < ApplicationController
       str = "short_name LIKE '" + epic + "%'"   
       @card_one = Card.where(str)
 
-      str = "card_id = '" + @card_one.first.id.to_s + "'" 
+      str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle='"+cycle+"'" 
       @tracks = Track.where(str) 
     else
       flash.now[:notice] = I18n.t('blacklight.no_access')
