@@ -190,7 +190,7 @@ class CardsController < ApplicationController
        ntrack = "ntrack" + one_c.id.to_s
        otrack = "otrack" + one_c.id.to_s
        
-       @tracks = Track.where("card_id='"+one_c.id.to_s+"'")
+       @tracks = Track.where("card_id='"+one_c.id.to_s+"' AND cycle='"+cycle+"'")
        @tracks.each do |one_t| 
          t = "t"+ one_t.id.to_s
          o = "o"+ one_t.id.to_s
@@ -208,6 +208,7 @@ class CardsController < ApplicationController
           end  
           
          end 
+        if !t_val.nil?
          if (t_val.empty?)
            one_t.destroy!
            addlog(7,"Track Delete",one_t.trackname)
@@ -219,6 +220,7 @@ class CardsController < ApplicationController
            
            addlog(7,"Track Edit Order",one_t.track)
          end  
+        end  
        end 
        # add new track 
        if (!params[ntrack].empty?)
