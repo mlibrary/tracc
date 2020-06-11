@@ -222,7 +222,6 @@ end
               
               <% end #if%>
               
-  <p style="padding-top: 5px">
                   <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
                 <div class="actions">
                   <%= hidden_field_tag 'cycle', params["cycle"] %>
@@ -231,7 +230,7 @@ end
                   <%= submit_tag 'Add/Edit Consultants' %>
                 </div>
                 <% end %>
-                </p> 
+                
               <hr>
              <p>Status:
              <% if (t.status.eql? "In-Progress") %>
