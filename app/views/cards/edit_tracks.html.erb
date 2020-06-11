@@ -1,12 +1,31 @@
 <%
     
 if (@approve_access)
+  cycle = params["cycle"]
+  if cycle.nil?
+    cur_cycle = Cycle.where("current_cycle =1")
+    cycle = cur_cycle.first.cycle_name
+  end 
+cname = Cycle.all 
 %>
 
 
 <div class="card" >
   <div class="card-header">
     <h4 style="padding-bottom: 10px;"> Add/Edit Tracks</h4>
+    
+    <%= form_tag(edit_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
+     <div class="row ml-1">
+      <div class="field">
+      <%= label_tag :cycle %>
+      <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> 
+      <%= submit_tag 'Change Cycle' %>
+      </div>
+     </div>
+
+    
+
+    <% end %>
   </div>
   <div class="card-body">
    <%= form_tag(save_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
@@ -39,6 +58,7 @@ if (@approve_access)
  
 
       <div class="actions">
+        <%= hidden_field_tag "cycle", cycle %>
         <%= submit_tag 'Save Tracks' %>
       </div>
 

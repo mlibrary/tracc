@@ -182,6 +182,8 @@ class CardsController < ApplicationController
   end
   
   def save_tracks
+     cycle = params["cycle"]
+
      @cards = Card.where("activity_type LIKE '%Strategic%'")
 
      @cards.each do |one_c|
@@ -212,7 +214,9 @@ class CardsController < ApplicationController
          else 
            one_t.track = t_val
            one_t.disp_order = params[o]
+           one_t.cycle = cycle
            one_t.save!
+           
            addlog(7,"Track Edit Order",one_t.track)
          end  
        end 
@@ -223,6 +227,7 @@ class CardsController < ApplicationController
         t.disp_order = params[otrack]
         t.track = params[ntrack]
         t.epic_title = one_c.short_name
+        t.cycle = cycle
         t.save!
         addlog(7,"Track New",t.track)
        end  

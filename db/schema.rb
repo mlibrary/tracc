@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_181132) do
+ActiveRecord::Schema.define(version: 2020_06_11_172950) do
 
   create_table "alerts", force: :cascade do |t|
     t.integer "card_id"
@@ -377,6 +377,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_181132) do
     t.datetime "updated_at", null: false
     t.integer "disp_order"
     t.string "rationale"
+    t.string "cycle"
   end
 
   create_table "users", force: :cascade do |t|
