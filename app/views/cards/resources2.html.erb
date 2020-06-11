@@ -17,7 +17,7 @@ while (i<=4) do
   end
 end 
 
-str = "card_id = '" + @card_one.first.id.to_s + "'" 
+str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle ='"+cycle+"'" 
     tracks = Track.where(str) 
 
     temp_chips = Chip.order(:uniqname)

@@ -186,7 +186,7 @@ end
              </div>
 <% end #if obj %>
            <%
-               str = "card_id = '" + pro.id.to_s + "'"
+               str = "card_id = '" + pro.id.to_s + "' AND cycle='"+cycle+"'"
                @tracks = Track.where(str).order(:disp_order)
                @tracks.each do |t|
 
