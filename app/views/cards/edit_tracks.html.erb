@@ -17,9 +17,9 @@ cname = Cycle.all
     <%= form_tag(edit_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
      <div class="row ml-1">
       <div class="field">
-      <%= label_tag :cycle %>
+     <p>Current Cycle: <%=cycle %></p>
       <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> 
-      <%= submit_tag 'Change Cycle' %>
+      <%= submit_tag 'Refresh' %>
       </div>
      </div>
 
@@ -38,7 +38,7 @@ cname = Cycle.all
       <%
         ntrack = "ntrack" + one_c.id.to_s
         otrack = "otrack"+ one_c.id.to_s
-     	  @tracks = Track.where("card_id='"+one_c.id.to_s+"'")
+     	  @tracks = Track.where("card_id='"+one_c.id.to_s+"' AND cycle='"+cycle+"'")
         @tracks.each do |one_t| 
           t = "t"+one_t.id.to_s
           o = "o"+one_t.id.to_s
