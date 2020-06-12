@@ -109,7 +109,7 @@ str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle ='"+cycle+"'"
     <% 
        nonl.each do |ext|
         t_id = ext.track_id
-        tname = Track.where("id='"+t_id.to_s+"'")
+        tname = Track.where("id='"+t_id.to_s+"' AND cycle='"+cycle+"'")
 
     %>
     <p><%= check_box_tag ext.id, 1 %> <%=ext.fname%> <%=ext.lname %> [<%=tname.first.track%>]</p>

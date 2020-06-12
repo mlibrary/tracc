@@ -1,12 +1,21 @@
 <%
     
 if (@approve_access)
+  epic = params["epic"]
   cycle = params["cycle"]
-  if cycle.nil?
+ 
+cname = Cycle.all 
+card_epic = Card.where("activity_type LIKE 'Strategic' ") 
+
+ if cycle.nil?
     cur_cycle = Cycle.where("current_cycle =1")
     cycle = cur_cycle.first.cycle_name
   end 
-cname = Cycle.all 
+
+ if epic.nil?
+    epic = card_epic.first.title
+  end   
+
 %>
 
 
@@ -19,18 +28,27 @@ cname = Cycle.all
       <div class="field">
      <p>Current Cycle: <%=cycle %></p>
       <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> 
-      <%= submit_tag 'Refresh' %>
       </div>
      </div>
 
-    
+     <div class="row ml-1">
+      <div class="field">
+     <p>Strategic Project: <%=epic %></p>
+      <%= select_tag "epic", options_from_collection_for_select(card_epic, "title", "title",epic)  %>
+      </div>
+     </div>
+
+
+     <div class="row ml-1">
+       <%= submit_tag 'Refresh' %>
+     </div>  
 
     <% end %>
   </div>
   <div class="card-body">
    <%= form_tag(save_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
    <%
-     @cards = Card.where("activity_type LIKE '%Strategic%'")
+     @cards = Card.where("activity_type LIKE '%Strategic%' AND title LIKE '"+epic+"'")
 
      @cards.each do |one_c|
       %>
@@ -59,6 +77,7 @@ cname = Cycle.all
 
       <div class="actions">
         <%= hidden_field_tag "cycle", cycle %>
+        <%= hidden_field_tag "epic", epic %>   
         <%= submit_tag 'Save Tracks' %>
       </div>
 
