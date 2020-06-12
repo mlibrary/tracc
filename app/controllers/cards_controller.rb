@@ -208,6 +208,14 @@ class CardsController < ApplicationController
    #1=login 2=progress 3=resources 4=setup 5=chips 6=alerts
           end  
           
+           #check chip assignment tracks and edit 
+          @assign = Consultant.where("trackname='"+one_t.track+"' AND card_id='"+one_c.id.to_s+"' AND cycle='"+cycle+"'")
+          @assign.each do |a|
+            a.trackname = t_val
+            a.save!
+            addlog(5,"Consultants",a.trackname)
+   
+          end  
          end 
         if !t_val.nil?
          if (t_val.empty?)
