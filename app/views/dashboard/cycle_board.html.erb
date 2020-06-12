@@ -338,8 +338,19 @@ end
           
            <div class="row">
              <div class="col border border-dark ">
-              <p style="padding-top: 15px"><b><%= pro.short_name %></b></p>
+              <p style="padding-top: 15px"><b><%= pro.short_name %></b><br>
+               <i>Lead: <%=pro.lit_lead %> </i>
+              </p>
               
+               <p style="padding-top: 5px">
+                  <%= form_tag(tactical_resources2_cards_path, :enctype =>"multipart/form-data") do %>
+                   <%= hidden_field_tag 'epic', pro.short_name %>
+                   <%= hidden_field_tag 'cycle', cycle %>
+                   <%= submit_tag 'Edit Resources' %>
+                   
+                  <% end %>
+                </p>
+                <hr>
                <% 
                 str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                 consult = Consultant.where(str1).order(:uniqname)
@@ -354,6 +365,14 @@ end
                     <% end  %>
               </i></p>
               <% end %> 
+               <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
+                <div class="actions">
+                  <%= hidden_field_tag 'cycle', params["cycle"] %>
+                  <%= hidden_field_tag 'epic', pro.short_name %>
+                  <%= hidden_field_tag 'track', '' %>
+                  <%= submit_tag 'Add/Edit Consultants' %>
+                </div>
+                <% end %>
                <hr>
                 <p>State:
              <% if (pro.card_status.eql? "In-Progress") %>
