@@ -183,8 +183,9 @@ class CardsController < ApplicationController
   
   def save_tracks
      cycle = params["cycle"]
+     epic = params["epic"]
 
-     @cards = Card.where("activity_type LIKE '%Strategic%'")
+     @cards = Card.where("activity_type LIKE '%Strategic%' AND title LIKE '"+epic+"'")
 
      @cards.each do |one_c|
        ntrack = "ntrack" + one_c.id.to_s
@@ -199,7 +200,7 @@ class CardsController < ApplicationController
 
          if (!t_val.eql? one_t.track)
           #check chip assignment tracks and edit 
-          @assign = ChipAssignment.where("trackname='"+one_t.track+"'")
+          @assign = ChipAssignment.where("trackname='"+one_t.track+"' AND card_id='"+one_c.id.to_s+"' AND cycle='"+cycle+"'")
           @assign.each do |a|
             a.trackname = t_val
             a.save!
