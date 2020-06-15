@@ -58,7 +58,7 @@ class CycleReviewController < ApplicationController
       
        if (p_type.eql? "1") 
             
-        tracks = Track.where("card_id='"+card.id.to_s+"'")
+        tracks = Track.where("card_id='"+card.id.to_s+"' AND cycle='"+cycle+"'")
         tracks.each do |t|
 
         s_id = "s" + card.id.to_s + "_" + t.id.to_s
