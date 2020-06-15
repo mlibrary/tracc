@@ -4,16 +4,18 @@ include ApplicationHelper
 	def save
 
       card_id = params["card_id"]
+      cycle = params["cycle"]
+
       if (!params["fname"].empty? && !params["lname"].empty?)
 		track = params["track"]
-		t = Track.where("track='"+track+"' AND card_id='"+card_id.to_s+"'")
+		t = Track.where("track='"+track+"' AND card_id='"+card_id.to_s+"' AND cycle='"+cycle+"'")
 		track_id = t.first.id
 		a = Nonlit.new
 		a.fname = params["fname"]
 		a.lname = params["lname"]
 		a.track_id = track_id
 		a.card_id = card_id
-		a.cycle = params["cycle"]
+		a.cycle = cycle
 		a.save
 	  end 
 	end	
