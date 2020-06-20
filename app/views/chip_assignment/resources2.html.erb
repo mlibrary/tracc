@@ -35,7 +35,7 @@ str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle ='"+cycle+"'"
     <b>Add:</b>
   </div>
   <div class="card-body">
-<%= form_tag(save_resources_cards_path, :enctype =>"multipart/form-data") do  %>
+<%= form_tag(save_resources_chip_assignment_index_path, :enctype =>"multipart/form-data") do  %>
 
  <div class="row ml-1">
 
@@ -112,7 +112,11 @@ str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle ='"+cycle+"'"
         tname = Track.where("id='"+t_id.to_s+"' AND cycle='"+cycle+"'")
 
     %>
-    <p><%= check_box_tag ext.id, 1 %> <%=ext.fname%> <%=ext.lname %> [<%=tname.first.track%>]</p>
+    <p><%= check_box_tag ext.id, 1 %> <%=ext.fname%> <%=ext.lname %> 
+      <% if !tname.first.nil? %>
+      [<%=tname.first.track%>]
+      <% end %>
+    </p>
     <% end %>
     <p><%= hidden_field_tag 'card_id', @card_one.first.id.to_s %>
     <%= hidden_field_tag 'cycle', params["cycle"] %>

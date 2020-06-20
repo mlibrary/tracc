@@ -1,0 +1,108 @@
+ <% str = "card_id = '" + params['card_id'] + "'" 
+    tracks = Track.where(str) 
+
+    temp_chips = Chip.order(:uniqname)
+    chips = ['']
+    temp_chips.each do |t|
+      chips << t.uniqname
+    end
+    
+ nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec'] 
+cycle = params["cycle"]
+cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+s = cur_cycle.first.start.month
+
+months = ['','','','','']
+i = 1
+while (i<=4) do
+  months[i] = nameofmonths[s]
+  i = i + 1
+  s = s+1 
+  if (s>12)
+    s= 1
+  end
+end 
+    
+%>
+
+<div class="card">
+  <div class="card-header">
+    <h4> <%=params["cycle"]%> Add Resources: <%=params["epic"]%></h4>
+  </div>  
+<div class="card-body">  
+
+<%= form_tag(save_resources_chip_assignment_index_path, :enctype =>"multipart/form-data") do  %>
+
+ <div class="row ml-1">
+
+    <div class="field">
+     Track: 
+     <%= select_tag "track", options_from_collection_for_select(tracks, "track", "track")  %>
+   </div>
+</div>
+
+ <div class="row ml-1">
+    <div class="field">
+     Month: 
+     <%= select_tag "month1", options_for_select(months)  %>
+ 
+     Uniqname:
+     <%= select_tag "uniqname1", options_for_select(chips)  %>
+      Number of chips:
+     <%= text_field_tag 'num_chips1', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     Month: 
+     <%= select_tag "month2", options_for_select(months)  %> 
+     Uniqname:
+     <%= select_tag "uniqname2", options_for_select(chips)  %>
+      Number of chips:
+     <%= text_field_tag 'num_chips2', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     Month: 
+     <%= select_tag "month3", options_for_select(months)  %> 
+     Uniqname:
+     <%= select_tag "uniqname3", options_for_select(chips)  %>
+      Number of chips:
+     <%= text_field_tag 'num_chips3', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+<div class="row ml-1">
+    <div class="field">
+     Month: 
+     <%= select_tag "month4", options_for_select(months)  %> 
+     Uniqname:
+     <%= select_tag "uniqname4", options_for_select(chips)  %>
+      Number of chips:
+     <%= text_field_tag 'num_chips4', value='1' %> (1-4 chips)
+   </div>
+</div>
+
+ 
+
+      <div class="actions">
+        <%= hidden_field_tag 'epic', params["epic"] %>
+        <%= hidden_field_tag 'cycle', params["cycle"] %>
+        <%= submit_tag 'Save' %>
+      </div>
+
+     <% 
+       end 
+     %>
+     
+   
+ 
+</div>
+
+  <div class="card-footer"> 
+   
+  </div>
+</div>

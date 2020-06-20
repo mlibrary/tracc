@@ -19,7 +19,7 @@ end
 %>
 
 <h4> <%=cycle%> Update Resources for: <%=params["epic"]%></h4>
-  <%= form_tag(add_resource_cards_path, :enctype =>"multipart/form-data") do  %>
+  <%= form_tag(add_resource_chip_assignment_index_path, :enctype =>"multipart/form-data") do  %>
      <%= hidden_field_tag 'epic', params["epic"] %>
      <%= hidden_field_tag 'cycle', params["cycle"] %>
      <%= hidden_field_tag 'card_id', @card_one.first.id %>
@@ -27,7 +27,7 @@ end
    <% end %>
 
   
-  <%= form_tag(update_resources_cards_path, :enctype =>"multipart/form-data") do  %> 
+  <%= form_tag(update_resources_chip_assignment_index_path, :enctype =>"multipart/form-data") do  %> 
  <div class="card" style="padding-top: 5px">
    
  <div class="card-body"> 

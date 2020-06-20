@@ -24,8 +24,8 @@ Rails.application.routes.draw do
   
   resources :cards do
     collection do
-      get :settings, :import, :import_card, :import_complexity, :import_impact, :advance_search, :progress, :resources, :status, :edit_objectives, :edit_tracks
-      post :edit_status, :edit_rationale, :update, :save_card, :progress2, :tactical_progress2,:save_progress, :resources2, :save_resources, :update_resources, :add_resource, :tactical_resources2, :edit_objectives2, :save_objectives, :edit_consultants,:save_consultants, :save_tracks, :save_status, :edit_tracks
+      get :settings, :import, :import_card, :import_complexity, :import_impact, :advance_search, :progress,  :status, :edit_objectives, :edit_tracks
+      post :edit_status, :edit_rationale, :update, :save_card, :progress2, :tactical_progress2,:save_progress, :edit_objectives2, :save_objectives, :edit_consultants,:save_consultants, :save_tracks, :save_status, :edit_tracks
     end
   end
 
@@ -33,6 +33,13 @@ Rails.application.routes.draw do
     collection do
       get :resources, :staff_chips
       post :edit_chips, :save_chips
+    end
+  end
+
+  resources :chip_assignment do
+    collection do
+    get :resources, :tactical_resources  
+   post :resources2, :save_resources, :update_resources, :add_resource, :tactical_resources2
     end
   end
 

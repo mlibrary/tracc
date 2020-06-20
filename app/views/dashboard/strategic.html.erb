@@ -33,9 +33,9 @@ stmonth = months[1]
 endmonth = months[4]
 cur_month = Date.current.month
 cur_dt = Date.current.day
-nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
+nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
 pos= months.index(nameofmonths[cur_month])
-     
+
 if pos.nil?
   pos= 0 
 end 
@@ -103,14 +103,15 @@ end
            cols = 0
            while (cols <4) do
             cols = cols+1 
-            month = months[cols]
+            month = months[cols][0..2]
          %>    
           <div class="col-md-3">
            <p> <strong><%=month %></strong></p>
         <% 
           total = 0 
         
-          str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "' AND month LIKE '"+month + "'"
+          str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "' AND month LIKE '"+month + "%'"
+          
           @ch_st = ChipAssignment.where(str).order(:uniqname)
           @ch_st.all.each do |ch| 
 
