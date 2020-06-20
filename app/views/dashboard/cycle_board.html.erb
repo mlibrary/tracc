@@ -107,7 +107,7 @@ end
                    </p>
                    <% end%>
                    <p style="padding-top: 5px">
-                  <%= form_tag(resources2_cards_path, :enctype =>"multipart/form-data") do %>
+                  <%= form_tag(resources2_chip_assignment_index_path, :enctype =>"multipart/form-data") do %>
                    <%= hidden_field_tag 'epic', pro.short_name %>
                    <%= hidden_field_tag 'cycle', cycle %>
                    <%= submit_tag 'Edit Resources' %>
@@ -343,7 +343,7 @@ end
               </p>
               
                <p style="padding-top: 5px">
-                  <%= form_tag(tactical_resources2_cards_path, :enctype =>"multipart/form-data") do %>
+                  <%= form_tag(tactical_resources2_chip_assignment_index_path, :enctype =>"multipart/form-data") do %>
                    <%= hidden_field_tag 'epic', pro.short_name %>
                    <%= hidden_field_tag 'cycle', cycle %>
                    <%= submit_tag 'Edit Resources' %>
@@ -361,7 +361,7 @@ end
                   consult.each do |one_c|
                     one_chip = Chip.where("uniqname LIKE '"+one_c.uniqname+"'") 
                     %>
-                    <br><%= one_chip.first.fname + " " + one_chip.first.lname[0] + "."  %>
+                    <br><%= image_tag('User-consultant.png', :alt => 'User Icon', size:"30x30")%> <%= one_chip.first.fname + " " + one_chip.first.lname[0] + "." %><%= one_chip.first.fname + " " + one_chip.first.lname[0] + "."  %>
                     <% end  %>
               </i></p>
               <% end %> 

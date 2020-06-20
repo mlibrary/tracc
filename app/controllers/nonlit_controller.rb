@@ -8,8 +8,12 @@ include ApplicationHelper
 
       if (!params["fname"].empty? && !params["lname"].empty?)
 		track = params["track"]
-		t = Track.where("track='"+track+"' AND card_id='"+card_id.to_s+"' AND cycle='"+cycle+"'")
-		track_id = t.first.id
+		if track.nil?
+			t = 0 
+		else	
+		  t = Track.where("track='"+track+"' AND card_id='"+card_id.to_s+"' AND cycle='"+cycle+"'")
+		  track_id = t.first.id
+	    end
 		a = Nonlit.new
 		a.fname = params["fname"]
 		a.lname = params["lname"]

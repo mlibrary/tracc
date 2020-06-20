@@ -1,6 +1,6 @@
 <h5></h5>
 
-<%= form_tag(tactical_resources2_cards_path, method: :post, :enctype =>"multipart/form-data") do %>
+<%= form_tag(tactical_resources2_chip_assignment_index_path, method: :post, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
 <% card_epic = Card.where("activity_type LIKE '%Active%' ") %>
