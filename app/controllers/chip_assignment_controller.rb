@@ -140,7 +140,7 @@ end
       found = false
       i = 1
       while (flag)
-        byebug
+        
         if ( (chip.month.eql? (months[i])) && (chip.trackname.eql? track))
           flag = false
           found = true
