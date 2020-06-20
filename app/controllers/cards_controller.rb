@@ -129,8 +129,8 @@ class CardsController < ApplicationController
   # GET /cards/1
   # GET /cards/1.json
   def show
-    @card_one = Card.find( params[:id] )
-    setup_for_display 
+    #@card_one = Card.find( params[:id] )
+    #setup_for_display 
   end
 
   def tactical_progress
@@ -138,6 +138,7 @@ class CardsController < ApplicationController
   end
   
   def tactical_resources
+
   end  
 
   def tactical_resources2
