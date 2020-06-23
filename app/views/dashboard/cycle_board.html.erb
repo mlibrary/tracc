@@ -361,7 +361,7 @@ end
                   consult.each do |one_c|
                     one_chip = Chip.where("uniqname LIKE '"+one_c.uniqname+"'") 
                     %>
-                    <br><%= image_tag('User-consultant.png', :alt => 'User Icon', size:"30x30")%> <%= one_chip.first.fname + " " + one_chip.first.lname[0] + "." %><%= one_chip.first.fname + " " + one_chip.first.lname[0] + "."  %>
+                    <br><%= image_tag('User-consultant.png', :alt => 'User Icon', size:"30x30")%> <%= one_chip.first.fname + " " + one_chip.first.lname[0] + "."  %>
                     <% end  %>
               </i></p>
               <% end %> 
