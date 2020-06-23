@@ -146,19 +146,35 @@ str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle ='"+cycle+"'"
    
   %> 
 
-   
+     <h6><%=t.track%></h6>
     <div class="card card-body"> 
-    <h6><%=t.track%></h6>
+   
+    <p><b><i>Consultants:</b> </i>
 
-       <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
+    <%
+     str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '" + cycle + "' AND trackname = '"+ t.track + "'" 
+      @consult = Consultant.where(str)
+     %> 
+     <% count = @consult.count %>
+     <% i = 1 %>
+     <% @consult.each do |one| %>
+     <%=one.uniqname%>
+       <% if (i < count) %>
+         ,
+       <% end %>
+     <% i = i + 1 %>  
+     <% end %>
+   </p>
+       
+        <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
                 <div class="actions">
                   <%= hidden_field_tag 'cycle', params["cycle"] %>
                   <%= hidden_field_tag 'epic', @card_one.first.short_name %>
                   <%= hidden_field_tag 'track', t.track %>
                   <%= submit_tag 'Add/Edit Consultants' %>
                 </div>
-    <% end %> 
-    
+    <% end %>
+    <hr>
   
   <%= form_tag("update_resources", :enctype =>"multipart/form-data") do  %> 
  
@@ -207,7 +223,7 @@ str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle ='"+cycle+"'"
      
 </div>
 
-   <%= submit_tag 'Save' %>
+   <%= submit_tag 'Update' %>
 </div>
 <p style="padding-top: 5px"></p>
  <%end # form %>
