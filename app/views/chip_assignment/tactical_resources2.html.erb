@@ -27,6 +27,7 @@ end
    <% end %>
 
   
+
   <%= form_tag(update_resources_chip_assignment_index_path, :enctype =>"multipart/form-data") do  %> 
  <div class="card" style="padding-top: 5px">
    
@@ -71,13 +72,44 @@ end
  </div>
       
  <%end # form %>
+
+
      
 </div>
 
-   <%= submit_tag 'Save' %>
+   <%= submit_tag 'Update' %>
 </div>
 
 <% end%>
+</div>
+<div class="card card-body"> 
+ 
+<p><b><i>Consultants:</i></b>
+
+    <%
+     str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle= '" + cycle + "' " 
+      @consult = Consultant.where(str)
+     %> 
+     <% count = @consult.count %>
+     <% i = 1 %>
+     <% @consult.each do |one| %>
+     <%=one.uniqname%>
+       <% if (i < count) %>
+         ,
+       <% end %>
+     <% i = i + 1 %>  
+     <% end %>
+   </p>
+   <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
+                
+                  <%= hidden_field_tag 'cycle', params["cycle"] %>
+                  <%= hidden_field_tag 'epic', @card_one.first.short_name %>
+                  <%= hidden_field_tag 'track', "" %>
+                  <%= submit_tag 'Add/Edit Consultants' %>
+                
+    <% end %>
+
+</div>
 
 
 
