@@ -589,6 +589,7 @@ class CardsController < ApplicationController
      card.service_lead = params["service_lead"]
      card.request_type = params["request_type"]
      card.activity_type = params["activity_type"]
+     card.status = params["card_status"]
      card.save
      
   
