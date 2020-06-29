@@ -344,11 +344,11 @@ end
               <%
                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                o = Objective.where(str1)
-               
+
                if o.first.nil?
                else 
               %>
-              <p> <b>Objective(s): </b><%=o.first.objective %> </p>
+              <p> <b>Objective(s): </b><%=o.first.objective.html_safe %> </p>
 
               <% end %>
                <p style="padding-top: 5px">
