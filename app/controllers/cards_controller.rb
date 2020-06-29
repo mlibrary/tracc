@@ -622,6 +622,7 @@ class CardsController < ApplicationController
 
     @card = Card.find( params[:id] )
 
+
     if params[:card][:at_stake].nil?
       params[:card][:at_stake] =""
     else
@@ -675,6 +676,12 @@ class CardsController < ApplicationController
     else
       params[:card][:exp_end_month] = params[:exp_end_month_month] + " " + params[:exp_end_month_year]
     end
+
+   if (params[:card_status].nil?)
+      params[:card][:card_status] = ""
+    else
+      params[:card][:card_status] = params[:card_status] 
+   end    
 
     respond_to do |format|
       if @card.update(card_params)
