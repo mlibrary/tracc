@@ -29,7 +29,7 @@ $(document).ready(function () {
       <p>Status:<br>
         <%# Get status keys %>
         <% status = Status.all  %>
-        <select class="custom-select custom-select-sm card_status">
+        <select class="custom-select custom-select-sm card_status" name="card_status">
           <option selected>Select Card Status</option>
           <% status.each do |st|  %>
             <% selected_str = (@card_one.card_status == st.status) ? "selected" : "" %>
