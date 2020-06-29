@@ -341,7 +341,16 @@ end
               <p style="padding-top: 15px"><b><%= pro.short_name %></b><br>
                <i>Lead: <%=pro.lit_lead %> </i>
               </p>
-              
+              <%
+               str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
+               o = Objective.where(str1)
+               
+               if o.first.nil?
+               else 
+              %>
+              <p> <b>Objective(s): </b><%=o.first.objective %> </p>
+
+              <% end %>
                <p style="padding-top: 5px">
                   <%= form_tag(tactical_resources2_chip_assignment_index_path, :enctype =>"multipart/form-data") do %>
                    <%= hidden_field_tag 'epic', pro.short_name %>
