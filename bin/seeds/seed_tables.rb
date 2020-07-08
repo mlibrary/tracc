@@ -1,16 +1,13 @@
-User.create(name:'Nabeela Jaffer',email:'njaffer@umich.edu',password: 'topsecret')
+User.create(name:'Nabeela Jaffer',email:'njaffer@umich.edu',password: '123456')
 User.create(name:'Gordon Leacock',email:'gordonl@umich.edu',password: '123456')
 User.create(name:'Gordon Leacock',email:'gordonl@lit.edu',password: '123456')
 User.create(name:'View Only User',email:'view@umich.edu',password: '123456')
 
 
 Permit.create(email:'njaffer@umich.edu', level: 0)
-Permit.create(email:'gordonl@umich.edu', level: 0)
 Permit.create(email:'marianle@umich.edu', level: 0)
 Permit.create(email:'skorner@umich.edu', level: 0)
 Permit.create(email:'mcyork@umich.edu', level: 0)
-Permit.create(email:'khage@umich.edu', level: 0)
-Permit.create(email:'gordonl@lit.edu', level: 0)
 Permit.create(email:'view@umich.edu', level: 9)
 
 
