@@ -16,8 +16,9 @@ class AlertsController < ApplicationController
 	  
 	 
 	 card_id = params["card_id"]
-
-       @alerts = Alert.where("card_id='"+ card_id + "'")
+   str = "card_id='"+ card_id + "'"
+   one_a = Card.where(str)
+       @alerts = Alert.where(str)
        @alerts.each do |one_a| 
          comments = "a"+one_a.id.to_s
          status = "s"+one_a.id.to_s
@@ -28,10 +29,9 @@ class AlertsController < ApplicationController
          	one_a.status = 1
          end
          
-         if (params[comments].blank?)
-         	one_a.destroy!
+         if (params[comments].blank?) 	
           addlog(6,"AI Deleted",one_a.comments)
-    
+          one_a.destroy!
          else
 
            one_a.comments = params[comments]
@@ -58,7 +58,7 @@ class AlertsController < ApplicationController
 	  	nalert.status = nstatus
 
 	  	nalert.save!
-      addlog(6,"New AI Created",one_a.comments)
+      addlog(6,"New AI Created",nalert.comments)
       
 	  	
 	  end #if new comment	
