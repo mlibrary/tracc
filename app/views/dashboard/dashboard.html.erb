@@ -359,8 +359,10 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
       <div class="card">
       <div class="card-header">
         <h5><%= strategic.title %></h5>
+        <p>Lead: <%= strategic.lit_lead %></p>
         <% if (progress) %>
           <p>Cycle Progress: <%= total %>%</p>
+
         <% end %>
         <% if (fte) 
           fte_rounded = roundup(t_chips_fte)%>

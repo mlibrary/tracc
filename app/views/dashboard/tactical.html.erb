@@ -54,7 +54,9 @@
         
       %> 
       <h5 ><%= one.title.html_safe %></h5>
+      
       <p><% unless one.short_description.nil? %> <%= one.short_description.html_safe %> <%end%></p>
+      <p>Lead: <%=one.lit_lead%></p>
       <% if (obj) %>
       <% @o_st.all.each do |o|  
         ostatus =  o. status%>
@@ -98,6 +100,7 @@
       %> 
       <h5 ><%= one.title.html_safe %></h5>
       <p><% unless one.short_description.nil? %><%= one.short_description.html_safe %><%end%></p>
+      <p>Lead: <%=one.lit_lead%></p>
       <% if (obj) %>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
@@ -142,6 +145,7 @@
       %> 
       <h5 ><%= one.title.html_safe %></h5>
         <p><% unless one.short_description.nil? %><%= one.short_description.html_safe %><% end %></p>
+        <p>Lead: <%=one.lit_lead%></p>
         <% if (obj) %>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
