@@ -130,6 +130,27 @@ months = get_months(cycle)
           <div class="col-md-1"><%=fte_p%></div>
           <div class="col-md-4">
                         <%
+
+
+                 str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "'"
+                    consultants = Consultant.where(str)
+
+                    if (!consultants.first.nil?) %>
+                <p><b>Consultant:</b>
+                <% # display consultants
+                   consultants.each do |one|
+
+                     card_name= Card.where("id='"+one.card_id.to_s+"'")
+                     card_name = card_name.first.short_name
+                 %>
+                 <br><%= card_name %>
+                <%    
+                   end  
+                %>
+              </p>
+                <% end 
+               
+
                fte_array= Array.new
                     i = 0   
                 
@@ -162,6 +183,7 @@ months = get_months(cycle)
                <% end # if %>
                <% end  #each chipassignment 
                 end #if %>
+
                 <% 
                   fte_array << total_fte_month
                   
@@ -185,6 +207,7 @@ months = get_months(cycle)
                     <%= fte_array[m_cnt] %> FTE<br>
                     <% end %>
                 <% end #if 
+
                   m_cnt = m_cnt + 1
                   
                   end  # for each month
@@ -202,6 +225,8 @@ months = get_months(cycle)
                       if (rem_fte < 0)
                     %>
                     <font color="red"><%= rem_fte %> FTE</font><br>
+                     <% elsif  (rem_fte >0) %>
+                       <font color="blue"><%= rem_fte %> FTE</font><br>  
                     <% else%>
                     <%= rem_fte %> FTE<br>
                     <% end %>
