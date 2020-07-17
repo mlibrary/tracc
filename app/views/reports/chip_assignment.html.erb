@@ -141,7 +141,11 @@ months = get_months(cycle)
                    consultants.each do |one|
 
                      card_name= Card.where("id='"+one.card_id.to_s+"'")
-                     card_name = card_name.first.short_name
+                     if (card_name.nil?)
+                      card_name = "Card name not found"
+                     else 
+                      card_name = card_name.first.short_name
+                     end 
                  %>
                  <br><%= card_name %>
                 <%    
