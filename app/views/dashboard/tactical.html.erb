@@ -49,7 +49,7 @@
         cnt = cnt + 1   
         id = one.id
         #str = "card_id="+ id.to_s + " AND cycle='"+ cycle + "'"
-        str = "card_id="+ id.to_s
+        str = "card_id="+ id.to_s + " AND cycle='" + cycle +"'"
         @o_st = Objective.where(str) 
         
       %> 
@@ -93,8 +93,8 @@
         @slist.each do |one|
         cnt = cnt + 1   
         id = one.id
-        #str = "card_id="+ id.to_s + " AND cycle='"+ cycle + "'"
-        str = "card_id="+ id.to_s
+        str = "card_id="+ id.to_s + " AND cycle='"+ cycle + "'"
+        #str = "card_id="+ id.to_s
         @o_st = Objective.where(str) 
         
       %> 
@@ -138,8 +138,8 @@
         @slist.each do |one|
         cnt = cnt + 1   
         id = one.id
-        #str = "card_id="+ id.to_s + " AND cycle='"+ cycle + "'"
-        str = "card_id="+ id.to_s
+        str = "card_id="+ id.to_s + " AND cycle='"+ cycle + "'"
+        #str = "card_id="+ id.to_s
         @o_st = Objective.where(str) 
         
       %> 
