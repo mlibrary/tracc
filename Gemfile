@@ -91,5 +91,8 @@ gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
 gem 'ettin', '~> 1.2'
 #gem 'ruby', "~> 2.6.3"
 
+gem 'ffi', '~> 1.13', '>= 1.13.1'
+gem 'sassc', '~> 2.4'
+
 
 
