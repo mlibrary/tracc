@@ -29,15 +29,18 @@ $(document).ready(function () {
       
       <p style="margin-top: 20px;">Title<br><%= text_field_tag "title", '',size:  60%></p>
       <p>Short Name:<br><%= text_field_tag "short_name", '', size: 60 %></p>
-      <p>Description: <br><%= text_field_tag "short_description", '',  cols: "100", rows: "5" %></p>
+      <p>Description: <br>
+        <%= text_area_tag "short_description", '',  cols: "100", rows: "5" %></p>
 
       <p>Status:<br>
         <%# Get status keys %>
         <% status = Status.all  %>
-        <select class="custom-select custom-select-sm card_status">
+        
+        <select class="custom-select custom-select-sm card_status" name="card_status">
           <option selected>Select Card Status</option>
           <% status.each do |st|  %>
-            <option value=<%= st.status %>  <%= st.status %></option>
+            <% selected_str =  "In-Progress" %>
+            <option value=<%= st.status %> <%= selected_str %> ><%= st.status %></option>
           <% end  %>
         </select>
       </p>
@@ -46,6 +49,7 @@ $(document).ready(function () {
       <p>Service Lead: <br><%= text_field_tag "service_lead", '', size: 100 %></p>
       <p>Request Type<i>[New Service, Service Improvement, Consultation, Other]</i><br> <%= text_field_tag "request_type", '', size: 100 %></p>
       <p>Activity Type: <i>[Investigation, Project, TASC Investigation]</i><br> <%= text_field_tag "activity_type", '', size: 100 %></p>
+      <p>Request Cycle: <br><%= text_field_tag 'in_cycle', '', size: 100 %>
     
 	</div>
 
