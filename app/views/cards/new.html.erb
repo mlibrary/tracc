@@ -48,8 +48,10 @@ $(document).ready(function () {
       <p>LIT Contact:<br><%= text_field_tag "lit_lead", '', size: 100 %></p>
       <p>Service Lead: <br><%= text_field_tag "service_lead", '', size: 100 %></p>
       <p>Request Type<i>[New Service, Service Improvement, Consultation, Other]</i><br> <%= text_field_tag "request_type", '', size: 100 %></p>
-      <p>Activity Type: <i>[Investigation, Project, TASC Investigation]</i><br> <%= text_field_tag "activity_type", '', size: 100 %></p>
+      <p>Activity Type: <i>[Strategic, Tactical, Investigation, Project, TASC Investigation]</i><br> <%= text_field_tag "activity_type", '', size: 100 %></p>
       <p>Request Cycle: <br><%= text_field_tag 'in_cycle', '', size: 100 %>
+        <p>Card Type: [Internal LIT Projects, Library Projects, External Commitments] <br><%= text_field_tag 'card_type', '', size: 100 %>
+      
     
 	</div>
 

@@ -590,6 +590,7 @@ class CardsController < ApplicationController
      card.request_type = params["request_type"]
      card.activity_type = params["activity_type"]
      card.card_status = params["card_status"]
+     card.card_type = params["card_type"]
      card.save
      
   
@@ -681,7 +682,8 @@ class CardsController < ApplicationController
       params[:card][:card_status] = ""
     else
       params[:card][:card_status] = params[:card_status] 
-   end    
+   end 
+  
 
     respond_to do |format|
       if @card.update(card_params)
@@ -971,7 +973,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:request_type, :activity_type, :requester_name, :requester_email, :requester_div, :contact_names, :title, :short_description, :prev_work, :accomplish, :benefits, :goal_alignment, :at_stake, :ext_pressure, :non_tech, :time_constraints, :priority, :sponsor, :more_info, :short_name, :in_cycle, :start_cycle, :done_cycle, :card_status, :ext_link, :lit_lead, :lit_dept, :service_lead, :other_contacts, :comments, :at_stake_details, :accomplish_details, :non_tech_details, :benefits_details, :ext_pressure_details, :time_constraints_details, :exp_start_month, :exp_start_month_month, :exp_start_month_year, :exp_end_month, :exp_end_month_month, :exp_end_month_year, :epic)
+      params.require(:card).permit(:card_type, :request_type, :activity_type, :requester_name, :requester_email, :requester_div, :contact_names, :title, :short_description, :prev_work, :accomplish, :benefits, :goal_alignment, :at_stake, :ext_pressure, :non_tech, :time_constraints, :priority, :sponsor, :more_info, :short_name, :in_cycle, :start_cycle, :done_cycle, :card_status, :ext_link, :lit_lead, :lit_dept, :service_lead, :other_contacts, :comments, :at_stake_details, :accomplish_details, :non_tech_details, :benefits_details, :ext_pressure_details, :time_constraints_details, :exp_start_month, :exp_start_month_month, :exp_start_month_year, :exp_end_month, :exp_end_month_month, :exp_end_month_year, :epic)
     end
     
 end
