@@ -111,7 +111,9 @@
 %>
 <div class="container-fluid">
   <h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
-  <p>(Reflects progress through the month of <%= months[pos] %>)</p>
+  <% if (progress) %>
+    <p>(Reflects progress through the month of <%= months[pos] %>)</p>
+  <% end %>  
 
   <% 
 
@@ -376,8 +378,9 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
          <% if (!strategic.short_description.nil?) %> 
            <p> <%= strategic.short_description.html_safe %></p>
          <% end %>
-         
+         <% if (@o_st.count>0) %>
          <h6 ><strong> Objectives:</strong></h6>
+         <% end %>
          <% cnt = 0
         
            one = @c_st.first

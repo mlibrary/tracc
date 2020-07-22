@@ -444,7 +444,7 @@ class CardsController < ApplicationController
     cycle = params["cycle"]
     nobj = params["nobj"]
     #str = "epic_title LIKE '" + epic + "'"  
-    str = "short_name LIKE '" + epic + "%'"   
+    str = "short_name = '" + epic + "'"   
     one_card = Card.where(str)
     str = "card_id = '" + one_card.first.id.to_s + "' AND cycle LIKE '"+cycle+"'"  
     @track_epic = Objective.where(str) 
