@@ -44,7 +44,7 @@
           <% 
         cnt = 0 
 
-        @slist = Card.where("activity_type LIKE '%Active%' AND card_type LIKE '%Internal%'")
+        @slist = Card.where("activity_type LIKE '%Active%' AND card_type LIKE '%Internal%' AND card_status <> 'Done'")
         @slist.each do |one|
         cnt = cnt + 1   
         id = one.id
