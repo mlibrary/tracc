@@ -427,7 +427,7 @@ class CardsController < ApplicationController
       cycle= params["cycle"]
       card=  params["card"]
 
-      str = "short_name LIKE '" + card + "%'"   
+      str = "short_name LIKE '" + card + "'"   
       one_card = Card.where(str)
       str = "card_id = '" + one_card.first.id.to_s + "' AND cycle='"+cycle +"'" 
       @obj = Objective.where(str) 
