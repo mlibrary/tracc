@@ -111,7 +111,7 @@
 %>
 <div class="container-fluid">
   <h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
-  <% if (progress) %>
+  <% if ( (bar) || (progress)) %>
     <p>(Reflects progress through the month of <%= months[pos] %>)</p>
   <% end %>  
 
