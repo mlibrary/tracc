@@ -67,6 +67,7 @@ end
   if (cnt>0)
     total = total/cnt  
   end     
+
  @c_st = TrackComment.where(str)
 
  
@@ -173,7 +174,7 @@ end
         <div class="col-md-8">
         <p><%=cnt.to_s %>. <%= obj%></p>
        </div>
-       <% i = 1 
+       <% i = 0 
           while (i<=4) 
             i = i + 1
             if (i == 1)
@@ -205,10 +206,10 @@ end
       <% if (comments) %>
          <hr>
         <h6 > <strong>Comments:</strong></h6>
-        <p><strong>March 2020:</strong><br><% if one != nil %><%=one.comment1.html_safe%><% end %></p>
-        <p><strong>April 2020:</strong><br><% if one != nil %><%=one.comment2.html_safe%><% end %></p>
-        <p><strong>May 2020:</strong><br><% if one != nil %><%=one.comment3.html_safe%><% end %></p>
-        <p><strong>June 2020:</strong><br><% if one != nil %><%=one.comment4.html_safe%><% end %></p>
+        <p><strong><%= months[1] %></strong><br><% if one != nil %><%=one.comment1.html_safe%><% end %></p>
+        <p><strong><%= months[2] %></strong><br><% if one != nil %><%=one.comment2.html_safe%><% end %></p>
+        <p><strong><%= months[3] %></strong><br><% if one != nil %><%=one.comment3.html_safe%><% end %></p>
+        <p><strong><%= months[4] %></strong><br><% if one != nil %><%=one.comment4.html_safe%><% end %></p>
       <%end%>  
       
  		</div>  		 
