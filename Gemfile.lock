@@ -322,7 +322,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (>= 7.0)
+  blacklight (~> 7.10)
   blacklight-marc (>= 7.0.0.rc1, < 8)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.0)
