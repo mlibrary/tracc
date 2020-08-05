@@ -73,6 +73,7 @@
 
         <h5 ><%= active.title %> </h5>
         <p><% unless active.short_description.nil? %> <%= active.short_description.html_safe %> <%end%></p>
+        <p>Lead: <%=active.lit_lead%></p>
         <% if (progress) %>
         <p>Cycle Progress: <%= total%>%</p>
         <% end %>    
