@@ -2,7 +2,7 @@
 
 
 @card_paused = Card.where("activity_type LIKE '%Paused%' ")
-@card_active = Card.where("activity_type LIKE '%Active%' AND card_status <> 'Done' ")
+@card_active = Card.where("activity_type LIKE '%Active%' AND card_status <> 'Done' ").order(:title)
 @card_epic = Card.where("activity_type LIKE 'Strategic' ")
 
 %>
