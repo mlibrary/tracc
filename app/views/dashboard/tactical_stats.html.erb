@@ -6,7 +6,7 @@
    color4 = ""
     
 
-  @slist = Card.where("activity_type LIKE '%Active%' AND card_status <> 'Done'")
+  @slist = Card.where("activity_type LIKE '%Active%' AND card_status <> 'Done'").order(:title)
      
   total_chips = Chip.sum(:project) *1.00
 
