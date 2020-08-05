@@ -72,6 +72,7 @@
       <div class="card-header" style="background: <%= color2 %>">
 
         <h5 ><%= active.title %> </h5>
+        <p><% unless active.short_description.nil? %> <%= one.short_description.html_safe %> <%end%></p>
         <% if (progress) %>
         <p>Cycle Progress: <%= total%>%</p>
         <% end %>    
