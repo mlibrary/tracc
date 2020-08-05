@@ -18,12 +18,12 @@ class CycleReviewController < ApplicationController
     p_type = params["p_type"]
 
     if (p_type.eql? "2")
-     str = "activity_type LIKE '%Active%'"
+     str = "activity_type LIKE '%Active%' AND card_status <> 'Done'"
     else
      str = "activity_type LIKE '%Strategic%'"
     end
 
-    cards = Card.where(str).order(:card_type)
+    cards = Card.where(str).order(:title)
 
     cards.each do |card|
      
@@ -107,7 +107,7 @@ class CycleReviewController < ApplicationController
    p_type = params["p_type"]
    
    if (p_type.eql? "2")
-     str = "activity_type LIKE '%Active%'"
+     str = "activity_type LIKE '%Active%' AND card_status <> 'Done'"
    else
      str = "activity_type LIKE '%Strategic%'"
    end
@@ -119,7 +119,7 @@ class CycleReviewController < ApplicationController
    
    #if (@cards.first.nil?) # no cyclereview found
     #str1 = str1 + " AND in_cycle <= '"+cycle+"'"
-     @cards = Card.where(str).order(card_type: :desc)
+     @cards = Card.where(str).order(:title)
    #end 
    
   end 
