@@ -1,4 +1,20 @@
+<%
+cycle=params["cycle"]
+nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
+cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+s = cur_cycle.first.start.month
+months = ['','','','','']
 
+i = 1
+while (i<=4) do
+  months[i] = nameofmonths[s]
+  i = i + 1
+  s = s+1 
+  if (s>12)
+    s= 1
+  end
+end 
+%>
 
 <%= form_tag(save_progress_cards_path, :enctype =>"multipart/form-data") do  %>
 
@@ -32,10 +48,10 @@
 <%= hidden_field_tag 'epic', params["epic"] %>
 <%= hidden_field_tag 'cycle', params["cycle"] %>
 
-<p>March:<br><%= text_area_tag 'comment1',  one.comment1 , :rows => 5, :cols => 100%></p>
-<p>April:<br><%= text_area_tag 'comment2',  one.comment2, :rows => 5, :cols => 100 %></p>
-<p>May:<br><%= text_area_tag 'comment3',  one.comment3, :rows => 5, :cols => 100 %></p>
-<p>June:<br><%= text_area_tag 'comment4',  one.comment4, :rows => 5, :cols => 100 %></p>
+<p><%=months[1] %>:<br><%= text_area_tag 'comment1',  one.comment1 , :rows => 5, :cols => 100%></p>
+<p><%=months[2] %>:<br><%= text_area_tag 'comment2',  one.comment2, :rows => 5, :cols => 100 %></p>
+<p><%=months[3] %>:<br><%= text_area_tag 'comment3',  one.comment3, :rows => 5, :cols => 100 %></p>
+<p><%=months[4] %>:<br><%= text_area_tag 'comment4',  one.comment4, :rows => 5, :cols => 100 %></p>
 
 </div>
   <div class="card-footer"> 
