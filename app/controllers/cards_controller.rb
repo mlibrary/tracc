@@ -352,7 +352,7 @@ class CardsController < ApplicationController
 
       str = "short_name LIKE '" + epic + "%'"   
       one_card = Card.where(str)
-      str = "card_id = '" + one_card.first.id.to_s + "'" 
+      str = "card_id = '" + one_card.first.id.to_s +  "' AND cycle='"+ cycle + "'"
       @track_epic = Objective.where(str) 
 
     #str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
@@ -367,7 +367,7 @@ class CardsController < ApplicationController
   end
 
   def save_progress
-    
+    byebug
   #"LSP"=>"20", "epic"=>"LSP", "comment1"=>"one", "comment2"=>"one2", "comment3"=>"one3", "comment4"=>"one4", "commit"=>"Save", "controller"=>"cards", "action"=>"save_progress"} permitted: true>
     epic=  params["epic"]
     cycle = params["cycle"]
@@ -383,6 +383,7 @@ class CardsController < ApplicationController
     one_card = Card.where(str)
     str = "card_id = '" + one_card.first.id.to_s + "' AND cycle LIKE '"+cycle+"'"  
     @track_epic = Objective.where(str) 
+    byebug
     @comment = TrackComment.where(str)
     one = @comment.first
     
@@ -402,7 +403,7 @@ class CardsController < ApplicationController
 
     @track_epic.all.each do |t| 
       track = t.objective
-      t_id = "t" + pmonth.to_s + t.id.to_s
+      t_id = "t" +  t.id.to_s
       t_id1 = "t1" + t.id.to_s
       t_id2 = "t2" + t.id.to_s
       t_id3 = "t3" + t.id.to_s
@@ -415,6 +416,7 @@ class CardsController < ApplicationController
       t.save!
       note = "Percent progress saved"
       addlog(2,"Track progress",note)
+      byebug
     end   
   end  
     
