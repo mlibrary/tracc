@@ -359,19 +359,19 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
                    strategic_p << p1 
                    strategic_up << (month1p/cnt1)
                    
-                   p2 = 100- (month2p/cnt2)
+                   p2 = 100- (month2p/cnt1)
                    if (p2 < 100)
                        strategic_p << p2
                        strategic_up << (month2p/cnt1)
                    end 
 
-                   p3 = 100- (month3p/cnt3)
+                   p3 = 100- (month3p/cnt1)
                    if (p3 < 100)
                        strategic_p << p3
                        strategic_up << (month3p/cnt1)
                    end 
 
-                   p4 = 100- (month4p/cnt4)
+                   p4 = 100- (month4p/cnt1)
                    if (p4 < 100)
                        strategic_p << p4
                        strategic_up << (month4p/cnt1)
