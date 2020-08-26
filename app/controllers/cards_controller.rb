@@ -416,7 +416,7 @@ class CardsController < ApplicationController
       t.save!
       note = "Percent progress saved"
       addlog(2,"Track progress",note)
-      byebug
+      
     end   
   end  
     
