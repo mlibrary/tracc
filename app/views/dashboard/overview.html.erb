@@ -349,12 +349,12 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
                    month4p = Objective.where("card_id='" + s.id.to_s + "' AND cycle='" + cycle + "'").sum(:status4)  
 
                     cnt1 = Objective.where("card_id='"+ s.id.to_s + "' AND cycle='" + cycle + "'").count
-                   cnt2 = Objective.where("card_id='" + s.id.to_s + "' AND cycle='" + cycle + "'").count
-                   cnt3 = Objective.where("card_id='" + s.id.to_s + "' AND cycle='" + cycle + "'").count
-                   cnt4 = Objective.where("card_id='" + s.id.to_s + "' AND cycle='" + cycle + "'").count 
+                  # cnt2 = Objective.where("card_id='" + s.id.to_s + "' AND cycle='" + cycle + "'").count
+                   #cnt3 = Objective.where("card_id='" + s.id.to_s + "' AND cycle='" + cycle + "'").count
+                   #cnt4 = Objective.where("card_id='" + s.id.to_s + "' AND cycle='" + cycle + "'").count 
                    strategic_p = [100] 
                    strategic_up =[0]
-
+                  if (cnt1 >0)
                    p1 = 100- (month1p/cnt1)
                    strategic_p << p1 
                    strategic_up << (month1p/cnt1)
@@ -376,7 +376,7 @@ pro_cap = Gchart.pie_3d(:title => "Projects/Initiatives", :labels => "Strategic|
                        strategic_p << p4
                        strategic_up << (month4p/cnt1)
                    end    
-                   
+                 end  
                    ideal_p = [100] 
   i = 0 
   num = 75
