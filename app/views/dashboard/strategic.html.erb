@@ -25,7 +25,10 @@
 if (cycle.nil?)
 cur_cycle = Cycle.where("current_cycle =1")
 cycle = cur_cycle.first.cycle_name
+ active_cycle = cur_cycle.first.cycle_name
 end
+
+
 
 months = get_months(cycle)
 
@@ -40,9 +43,13 @@ if pos.nil?
   pos= 0 
 end 
 
-if (cur_dt < 24) # add curren month only if end of the month
-  pos = pos-1
-end 
+if ( (cycle.eql? active_cycle) && (cur_dt < 24) && (pos>0)) # add curren month only if end of the month
+    pos = pos-1
+  end 
+
+ if (!cycle.eql? active_cycle)
+  pos = 4 # end of cycle
+ end  
 
 %>
 
@@ -58,7 +65,15 @@ end
  @o_st = Objective.where(str) 
 
   @o_st.all.each do |o|     
-            ostatus = o.status
+             if (pos==1)
+               ostatus = o.status1
+             elsif (pos==2)
+               ostatus = o.status2
+             elsif (pos==3)
+               ostatus = o.status3
+             elsif (pos==4)
+               ostatus = o.status4    
+             end 
             cnt = cnt+1 
             if (ostatus != nil)
               total+=ostatus
