@@ -238,8 +238,15 @@ end
                %> 
                <div class="col border border-dark ">
                 <% 
-                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "' AND trackname='"+t.track + "'"  %>
+                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "' AND trackname='"+t.track + "'" 
+                str2 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i][0..2] + "' AND trackname='"+t.track + "'" 
+
+                 %>
                 <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
+                <% if (@chips.count==0)
+                     @chips = ChipAssignment.where(str2).order(:uniqname)
+                   end  
+                %>  
                 <% @chips.each do |ch| %>
                   
                   <div class="card card body" style="padding-top: 5px;">
