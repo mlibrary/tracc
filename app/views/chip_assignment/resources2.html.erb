@@ -1,7 +1,8 @@
 
 <%
 
-nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec'] 
+nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
+
 cycle = params["cycle"]
 cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
 s = cur_cycle.first.start.month
