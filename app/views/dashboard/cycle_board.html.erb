@@ -399,9 +399,9 @@ end
                 str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "'"  %>
                 <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
                 <% @chips.each do |ch| 
-                  if (ch.uniqname.nil?)
+                  #if (ch.uniqname.nil?)
 
-                  else  
+                  #else  
                   one_chip = Chip.where("uniqname LIKE '"+ ch.uniqname+"'")
                 %>
                 <%#= "\u263A".unicode_normalize %>
@@ -419,7 +419,7 @@ end
                   </div>
                 <% end %>
                  
-                <% end %>
+                <% #end %>
                 <% i = i +1 %>
                </div>
               <% end #while do%>
