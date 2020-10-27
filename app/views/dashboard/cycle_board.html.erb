@@ -403,8 +403,15 @@ end
                %> 
                <div class="col border border-dark ">
                 <% 
-                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "'"  %>
-                <% @chips = ChipAssignment.where(str1).order(:uniqname) %>
+                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i] + "'"  
+                str2 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle +"' AND month='"+months[i][0..2] +  "'" 
+
+                %>
+                <% @chips = ChipAssignment.where(str1).order(:uniqname) 
+                   if (@chips.count ==0)
+                    @chips = ChipAssignment.where(str2).order(:uniqname) 
+                   end  
+                %>
                 <% @chips.each do |ch| 
                   #if (ch.uniqname.nil?)
 
