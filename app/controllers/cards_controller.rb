@@ -7,7 +7,7 @@ class CardsController < ApplicationController
   # GET /cards.json
   def index
     if (approve_access)
-      @cards = Card.all.order(:in_cycle)(:title)
+      @cards = Card.all.order(:in_cycle)
     else
       flash.now[:notice] = I18n.t('blacklight.no_access')
     end
