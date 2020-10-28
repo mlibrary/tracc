@@ -14,7 +14,7 @@
     <tbody>
       <% @cards.each do |card| %>
         <tr>
-          <td>[<%=card.in_cycle%> | Status=<%=card.status%>] <%= card.title%></td>
+          <td>[<%=card.in_cycle%> | Status=<%=card.card_status%>] <%= card.title%></td>
           <td><%= link_to 'Show', card %></td>
           <td><%= link_to 'Edit', edit_card_path(card) %></td>
           <td><%#= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
