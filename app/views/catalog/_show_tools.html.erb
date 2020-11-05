@@ -1,3 +1,12 @@
+<% 
+
+cur_cycle = Cycle.where("current_cycle=true")
+if (cur_cycle.nil?)
+	cycle =""
+else 	
+cycle = cur_cycle.first.cycle_name
+end 
+%>
 <p style="padding-top: 85px"></p>
 <div class="card">
   <div class="card-header">
@@ -6,7 +15,7 @@
   <div class="card-body">
 
 <% card_id = params["id"]
-   str = "card_id ='"+card_id+"'"
+   str = "card_id ='"+card_id+"' AND cycle='"+ cycle + "'"
    o_one = Objective.where(str)
 
    o_one.each do |o|
