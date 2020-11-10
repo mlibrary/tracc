@@ -103,9 +103,10 @@
       <p><% unless one.short_description.nil? %><%= one.short_description.html_safe %><%end%></p>
       <p>Lead: <%=one.lit_lead%></p>
       <% if (obj) %>
+       <p><b>Objectives:</b></p>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
-      <p><b>Objectives:</b></p>
+     
       <% if (o.nil?) 
          else
       %>
@@ -148,9 +149,10 @@
         <p><% unless one.short_description.nil? %><%= one.short_description.html_safe %><% end %></p>
         <p>Lead: <%=one.lit_lead%></p>
         <% if (obj) %>
+        <p><b>Objectives:</b></p>
         <% @o_st.all.each do |o|  
         ostatus =  o. status%>
-      <p><b>Objectives:</b></p>
+      
       <% if (o.nil?) 
          else
       %>
