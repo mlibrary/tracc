@@ -5,12 +5,24 @@ super_or_admin = (access_level == 0 || access_level == 1) ? true : false
 disable_str = super_or_admin ? " " : "disabled"
 
 comments = Comment.where("card_id='" + @document.id + "'")
+
+cur_cycle = Cycle.where("current_cycle =1")
+cycle = cur_cycle.first.cycle_name
+
+str = "card_id='" + @document.id + "' AND cycle='"+ cycle + "'"
+@c_st = TrackComment.where(str)
+
+if (!@c_st.nil?)
+  one = @c_st.first
+end 
+
+months = get_months(cycle)
 %>
 
 <% doc_presenter = show_presenter(document) %>
 <div class="card">
   <div class="card-header">
-    <h2 class="mb-0 h6 d-inline-block">Details:</h2>
+    <h2 class="mb-0 h6 d-inline-block">Details</h2>
     <% if super_or_admin %>
       <% @card_one = Card.find( document.id ) %>
       <a href=<%= edit_card_path(@card_one) %> class="btn btn-outline-secondary btn-sm d-inline-block float-right" style="color:inherit;" role="button">Edit</a>
@@ -31,7 +43,7 @@ comments = Comment.where("card_id='" + @document.id + "'")
 
 <div class="card show-tools" style="margin-top: 30px;">
     <div class="card-header comments">
-      <h2 class="mb-0 h6 d-inline-block">Comments:</h2>
+      <h2 class="mb-0 h6 d-inline-block">Additional Notes</h2>
     </div>
      
     <%# List comments for this card %>
@@ -39,7 +51,7 @@ comments = Comment.where("card_id='" + @document.id + "'")
 
       <% if comments.first.nil?%>
         <li class="list-group-item">
-          <em>No comments</em>
+          <em>None</em>
         </li>
       <% else %>
         <% comments.each do |comm| %>
@@ -59,7 +71,7 @@ comments = Comment.where("card_id='" + @document.id + "'")
                   <input type="hidden" id="card_id" name="card_id" value=<%= @document.id %> />
                   <input type="hidden" id="uemail" name="uemail" value=<%= @document["uemail"] %>  />
                   <input type="hidden" id="recorded_on" name="recorded_on" value=<%= Date.today %>  />
-                  <label for="comment_txt">Add a comment:</label>
+                  <label for="comment_txt">Add a note:</label>
                   <input type="text" id="comment_txt" name="comment_txt" class="entry comment_txt form-control" />
                 </div>
               </div>
@@ -69,3 +81,17 @@ comments = Comment.where("card_id='" + @document.id + "'")
      
     </ul>
 </div>
+
+<div class="card show-tools" style="margin-top: 30px;">
+    <div class="card-header comments">
+      <h2 class="mb-0 h6 d-inline-block">Comments (Current Cycle <%= cycle %>)</h2>
+    </div>
+     <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+   <p><strong><%= months[1][0..2] %>:</strong><br><% if one != nil %><%=one.comment1.html_safe%><% end %></p></li>
+   <li class="list-group-item"> <p><strong><%= months[2][0..2] %>:</strong><br><% if one != nil %><%=one.comment2.html_safe%><% end %></p></li>
+   <li class="list-group-item"><p><strong><%= months[3][0..2] %>:</strong><br><% if one != nil %><%=one.comment3.html_safe%><% end %></p></li>
+   <li class="list-group-item"><p><strong><%= months[4][0..2] %>:</strong><br><% if one != nil %><%=one.comment4.html_safe%><% end %></p></li>
+ </ul>
+     
+  </div>      
