@@ -35,7 +35,8 @@ months = get_months(cycle)
     <% doc_presenter.fields_to_render.each do |field_name, field| -%>
     <div class="row" style="margin-bottom:20px;">
       <div class="col-md-3"><%= render_document_show_field_label document, field: field_name %></div>
-      <div class="col-md-9"><%= doc_presenter.field_value field %></div>
+      <% one_value = CGI.unescapeHTML  doc_presenter.field_value field %>
+      <div class="col-md-9"><%= one_value.html_safe  %></div>
     </div>
     <% end -%>
   </div>
