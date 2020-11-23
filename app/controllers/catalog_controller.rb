@@ -140,7 +140,7 @@ class CatalogController < ApplicationController
     #config.add_index_field 'requester_name_ssim', label: 'Requester'
     #config.add_index_field 'request_type_ssi', label: 'Request Type'
     config.add_index_field 'activity_type_ssi', label: 'Project Type'
-    config.add_index_field 'card_type_ssi', label: 'Card Type'
+    config.add_index_field 'card_type_ssi', label: 'Category'
     #config.add_index_field 'epic_ssi', label: 'Epic'
     config.add_index_field 'priority_ssi', label: 'Priority'
     config.add_index_field 'requester_div_ssim', label: 'Requester Divison'
