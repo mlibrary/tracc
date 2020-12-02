@@ -207,6 +207,8 @@
   <copyField source="author_tsim" dest="author_spell"/>
   <copyField source="subject_ssim" dest="subject_spell"/>
   <copyField source="title_tsim" dest="title_spell"/>
+  <copyField source="short_name_ssi" dest="short_name_spell"/>
+
 
   <types>
     <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
