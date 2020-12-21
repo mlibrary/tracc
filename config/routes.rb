@@ -8,6 +8,13 @@ Rails.application.routes.draw do
   #  end
   #end
 
+  resources :about do
+    collection do
+      get :about, :help
+      
+    end
+  end 
+
   resources :cycle_review do
     collection do
       get :import
@@ -85,7 +92,7 @@ Rails.application.routes.draw do
 
   resources :reports do
     collection do
-      get :index, :about, :charts, :export, :chip_assignment, :objectives, :cycle_review
+      get :index,  :charts, :export, :chip_assignment, :objectives, :cycle_review
       post :generate, :chip_assignment, :objectives, :cycle_review
     end
   end
