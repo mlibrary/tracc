@@ -28,7 +28,14 @@ cycle = cur_cycle.first.cycle_name
  active_cycle = cur_cycle.first.cycle_name
 end
 
-
+str = request.request_method
+if (str=="GET")
+  bar = true 
+  progress = true
+  comments = true 
+  obj = true 
+  resource = true 
+end
 
 months = get_months(cycle)
 
