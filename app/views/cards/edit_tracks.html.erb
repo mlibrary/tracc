@@ -21,6 +21,7 @@ card_epic = Card.where("activity_type LIKE 'Strategic' ")
 
 <div class="card" >
   <div class="card-header">
+    <div class="row"><div class="col">
     <h4 style="padding-bottom: 10px;"> Add/Edit Tracks</h4>
     
     <%= form_tag(edit_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
@@ -44,6 +45,39 @@ card_epic = Card.where("activity_type LIKE 'Strategic' ")
      </div>  
 
     <% end %>
+  </div>
+  <div class="col">
+  <h4 style="padding-bottom: 10px;"> Copy Tracks </h4>
+  <%= form_tag(edit_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
+     
+    <div class="row ml-1">
+      <div class="field">
+     <p>Strategic Project: <%=epic %></p>
+      <%= select_tag "epic", options_from_collection_for_select(card_epic, "title", "title",epic)  %>
+      </div>
+     </div>
+
+     <div class="row ml-1">
+      <div class="field">
+     <p>From: 
+      <%= select_tag "from", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> To: 
+      <%= select_tag "to", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %></p>
+      </div>
+     </div>
+
+     
+
+      <div class="row ml-1">
+       <%= submit_tag 'Go' %>
+     </div> 
+     
+
+
+     
+
+    <% end %>
+  
+  </div></div>
   </div>
   <div class="card-body">
    <%= form_tag(save_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
