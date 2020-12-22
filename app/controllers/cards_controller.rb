@@ -146,6 +146,37 @@ class CardsController < ApplicationController
       flash.now[:notice] = I18n.t('blacklight.no_access')
       @approve_access = false  
     end
+
+    #copy tracks
+    commit_method = params["commit"]
+    from = params["from"]
+      to = params["to"]
+      epic = params["epic"]
+    if ( (commit_method == "Go") && (to != from))
+
+      @cards = Card.where("activity_type LIKE '%Strategic%' AND title LIKE '"+epic+"'")
+      if (@cards.first !=nil)
+        sname = @cards.first.short_name
+      else
+       sname = "none"  
+      end  
+
+      @tracks = Track.where("cycle='"+from+"' AND epic_title='"+sname+"'")
+  
+      @tracks.each do |one_t|
+        
+       t = Track.new
+       t.card_id = one_t.card_id
+       t.track = one_t.track
+       t.disp_order = one_t.disp_order
+       t.cycle = to
+       t.epic_title = one_t.epic_title
+       t.status = one_t.status
+       t.save!
+       
+      end  
+      
+    end
   end
   
   def save_tracks
