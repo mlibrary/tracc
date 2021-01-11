@@ -1,5 +1,5 @@
 <h5></h5>
-
+<% if (@approve_access) %>
 <%= form_tag(edit_objectives2_cards_path, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
@@ -41,4 +41,5 @@
   
 </div>
 </div>
+<% end %>
 <% end %>

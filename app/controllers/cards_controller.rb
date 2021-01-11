@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   include ApplicationHelper
   protect_from_forgery with: :null_session
-  before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :set_card, only: [:show, :edit, :update, :destroy]
 
   # GET /cards
   # GET /cards.json
@@ -145,7 +145,7 @@ class CardsController < ApplicationController
     else
       flash.now[:notice] = I18n.t('blacklight.no_access')
       @approve_access = false  
-    end
+    
 
     #copy tracks
     commit_method = params["commit"]
@@ -175,7 +175,7 @@ class CardsController < ApplicationController
        t.save!
        
       end  
-      
+     end  # if access 
     end
   end
   
@@ -452,6 +452,12 @@ class CardsController < ApplicationController
   end  
     
   def edit_objectives
+     if (approve_access)
+       @approve_access = true
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false  
+    end
   end
 
   def edit_objectives2

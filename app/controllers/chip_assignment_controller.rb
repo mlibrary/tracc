@@ -1,7 +1,8 @@
 class ChipAssignmentController < ApplicationController
 include ApplicationHelper
   protect_from_forgery with: :null_session
-
+  before_action :authenticate_user!
+  
   def tactical_resources
 
   end  
