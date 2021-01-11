@@ -17,9 +17,12 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion1">
       <div class="card-body">
           <ul class="list-group list-group-flush">
-             <ul><li>Edit → Project Details<p><img src="/assets/ex2-1.png" height=100px width=500px style="border: 1px solid #555"></p></li>
-    <li>Edit a Card: Select "Edit" to edit details for a project<p><img src="/assets/ex2-2.png" height=200px width=500px style="border: 1px solid #555"></p></li>
-    <li>Create a New Card: At the end of the page, there is a link to add a new card<p><img src="/assets/ex2-3.png" height=200px width=500px style="border: 1px solid #555"></p> </li>
+             <ul><li>Edit → Project Details<p><%= image_tag('ex2-1.png', alt: "Edit Project Details", size:"500x100", :style => "border: 1px solid black") %></p>
+            </li>
+    <li>Edit a Card: Select "Edit" to edit details for a project<p>
+<%= image_tag('ex2-2.png', alt: "Edit Project Details", size:"500x200", :style => "border: 1px solid black") %>
+      <p></li>
+    <li>Create a New Card: At the end of the page, there is a link to add a new card<p><%= image_tag('ex2-3.png', alt: "Edit Project Details", size:"500x100", :style => "border: 1px solid black") %></p> </li>
     </ul>
           </ul>
         
@@ -46,16 +49,17 @@
       <div class="card-body">
           <ul class="list-group list-group-flush">
    <ul><li>Dashboards → Cycle Planning Board
-    <p><img src="/assets/ex1-1.png" height=100px width=300px style="border: 1px solid #555"></p></li>
+    <p><%= image_tag('ex1-1.png', alt: "", size:"300x100", :style => "border: 1px solid black") %>
+      </p></li>
       
     <li>Select the Cycle and Type (Strategic, Tactical)
-      <p><img src="/assets/ex1-2.png" height=200px width=300px style="border: 1px solid #555"></p>
+      <p><%= image_tag('ex1-2.png', alt: "", size:"300x200", :style => "border: 1px solid black") %></p>
        </li>
     <li>Select "Edit Resources", then "Add Resources" </li>
-     <p><img src="/assets/ex1-3.png" height=100px width=500px style="border: 1px solid #555" ></p>
+     <p><%= image_tag('ex1-3.png', alt: "Edit Project Details", size:"500x100", :style => "border: 1px solid black") %></p>
        
     <li>For strategic projects, choose the appropriate track before adding resources.
-    <p><img src="/assets/ex1-4.png" height=100px width=500px style="border: 1px solid #555"></p>
+    <p><%= image_tag('ex1-4.png', alt: "Edit Project Details", size:"500x100", :style => "border: 1px solid black") %></p>
     </li>
     <li>Return to Dashboards → Cycle Planning Board to add or edit resources</li></ul>
         </ul>
@@ -79,8 +83,8 @@
     <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordion2">
       <div class="card-body">
           <ul class="list-group list-group-flush">
-            <ul><li>Reports → Staff Allocation<p><img src="/assets/ex3-1.png" height=100px width=300px style="border: 1px solid #555"></p></li>
-    <li>Select the Cycle and Department. Select Refresh<p><img src="/assets/ex3-2.png" height=100px width=300px style="border: 1px solid #555"></p></li>
+            <ul><li>Reports → Staff Allocation<p><%= image_tag('ex2-1.png', alt: "Edit Project Details", size:"300x100", :style => "border: 1px solid black") %></p></li>
+    <li>Select the Cycle and Department. Select Refresh<p><%= image_tag('ex2-1.png', alt: "Edit Project Details", size:"300x100", :style => "border: 1px solid black") %></p></li>
    
     </ul>
           </ul>
@@ -102,8 +106,8 @@
     <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion2">
       <div class="card-body">
           <ul class="list-group list-group-flush"><ul>
-             <li>Setup → Staff Chips <p><img src="/assets/ex4-1.png" height=150px width=450px style="border: 1px solid #555"></p></li>
-<li>To add new staff, click Next<p> <img src="/assets/ex4-2.png" height=150px width=450px style="border: 1px solid #555"></p></li>
+             <li>Setup → Staff Chips <p><%= image_tag('ex4-1.png', alt: "Edit Project Details", size:"450x150", :style => "border: 1px solid black") %></p></li>
+<li>To add new staff, click Next<p> <%= image_tag('ex4-2.png', alt: "Edit Project Details", size:"450x150", :style => "border: 1px solid black") %></p></li>
 <li>To view Project/Ops allocation, click "view all" (next to Edit Staff Chips).</li>
 
 <li>To edit Project/Ops allocation, select the uniqname and click Next.</li>
@@ -132,9 +136,9 @@
     <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordion3">
       <div class="card-body">
           <ul class="list-group list-group-flush">
-             <ul><li>Edit → Progress<p> <img src="/assets/ex5-1.png" height=150px width=300px style="border: 1px solid #555"></p></li>
-      <li>Choose the appropriate cycle and strategic project <p> <img src="/assets/ex5-2.png" height=150px width=300px style="border: 1px solid #555"></p></li>
-      <li>For the relevant month, add the percent of progress for each track and comments<p> <img src="/assets/ex5-3.png" height=150px width=300px style="border: 1px solid #555"></p> </li><ul>
+             <ul><li>Edit → Progress<p> <%= image_tag('ex5-1.png', alt: "", size:"300x150", :style => "border: 1px solid black") %></p></li>
+      <li>Choose the appropriate cycle and strategic project <p><%= image_tag('ex5-2.png', alt: "", size:"300x150", :style => "border: 1px solid black") %> </p></li>
+      <li>For the relevant month, add the percent of progress for each track and comments<p> <%= image_tag('ex5-3.png', alt: "", size:"300x150", :style => "border: 1px solid black") %></p> </li><ul>
       <li>Comments should be for all progress on all tracks.</li>
       <li>Progress is cumulative, eg, if you add 20% for Nov and have made 10% more progress for the next month, you will add 30% for Dec. (Only add the number, not the percent sign.)
       </li></ul></ul>
@@ -157,9 +161,9 @@
     <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordion3">
       <div class="card-body">
           <ul class="list-group list-group-flush">
-             <ul><li>Edit → Progress<p> <img src="/assets/ex6-1.png" height=150px width=300px style="border: 1px solid #555"></p></li>
-      <li>Choose the appropriate cycle and tactical project <p> <img src="/assets/ex6-2.png" height=150px width=300px style="border: 1px solid #555"></p></li>
-      <li>For the relevant month, add the percent of progress for each track and comments<p> <img src="/assets/ex6-3.png" height=150px width=300px style="border: 1px solid #555"></p> </li><ul>
+             <ul><li>Edit → Progress<p> <%= image_tag('ex6-1.png', alt: "", size:"300x150", :style => "border: 1px solid black") %></p></li>
+      <li>Choose the appropriate cycle and tactical project <p> <%= image_tag('ex6-2.png', alt: "", size:"300x150", :style => "border: 1px solid black") %></p></li>
+      <li>For the relevant month, add the percent of progress for each track and comments<p> <%= image_tag('ex6-3.png', alt: "", size:"300x150", :style => "border: 1px solid black") %></p> </li><ul>
       <li>Comments should be for all progress on all tracks.</li>
       <li>Progress is cumulative, eg, if you add 20% for Nov and have made 10% more progress for the next month, you will add 30% for Dec. (Only add the number, not the percent sign.)
       </li></ul></ul>
