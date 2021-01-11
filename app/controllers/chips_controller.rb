@@ -2,6 +2,8 @@ class ChipsController < ApplicationController
 protect_from_forgery with: :null_session	
 include ApplicationHelper
 
+before_action :authenticate_user!
+
 	def resources
 	end
 	

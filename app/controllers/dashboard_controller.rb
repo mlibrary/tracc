@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
 protect_from_forgery with: :null_session  
+before_action :authenticate_user!
+
 include ApplicationHelper
 	def cycle_board
     cycle = params['cycle']

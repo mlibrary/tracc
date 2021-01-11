@@ -1,6 +1,7 @@
 class AlertsController < ApplicationController
   include ApplicationHelper
-
+  before_action :authenticate_user!
+   
   def index
       if (approve_access)
       @access_flag = true
