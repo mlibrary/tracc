@@ -439,11 +439,25 @@ class CardsController < ApplicationController
       t_id2 = "t2" + t.id.to_s
       t_id3 = "t3" + t.id.to_s
       t_id4 = "t4" + t.id.to_s
+      #apply progress to future months
       t.status1 = params[t_id1]
       t.status2 = params[t_id2]
       t.status3 = params[t_id3]
       t.status4 = params[t_id4]
+
+      
+      if (t.status2==nil && t.status1 != nil)
+        t.status2 = t.status1
+      end
+      if (t.status3==nil && t.status2 != nil)
+        t.status3 = t.status2
+      end
+      if (t.status4==nil && t.status3 != nil)
+        t.status4 = t.status3
+      end
+              
       t.status = params[t_id]
+      
       t.save!
       note = "Percent progress saved"
       addlog(2,"Track progress",note)
