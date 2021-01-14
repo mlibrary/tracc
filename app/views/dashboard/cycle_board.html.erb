@@ -303,7 +303,7 @@ end
     <h4 style="padding-top: 40px"> <%=cycle%> Cycle Planning Board: Tactical</h4>
   </div>
 </div>    
-          <div class="row sticky-top" style="background-color: #F7F7F7">
+          <div class="row" style="background-color: #F7F7F7">
           
             <div class = "col border border-dark" style="margin-top: auto; margin-bottom: auto;  margin-left: auto; margin-right: auto; padding-top: 20px; padding-bottom: 20px">
               <p style="text-align: center;"><b>Projects</b></p>
@@ -333,10 +333,11 @@ end
                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                o = Objective.where(str1)
 
+               linkstr = "../catalog/" + pro.id.to_s 
                if o.first.nil?
                else 
               %>
-              <p> <b>Objective(s): </b><%=o.first.objective.html_safe %> </p>
+              <p> <b>Objective(s): </b><%=o.first.objective.html_safe %> ...<a href=<%=linkstr %> target=_blank>More</a></p>
 
               <% end %>
                <p style="padding-top: 5px">
