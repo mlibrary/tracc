@@ -27,6 +27,7 @@ if p_type.nil?
 end 
 
 %>
+
 <div class="panel-group" id="accordion">
 
   <% # projects and tracks %>
@@ -34,6 +35,7 @@ end
 
    <div class="row ">
   <div class = "col  d-flex">
+
     <h4 style="padding-top: 20px"> <%=cycle%> Cycle Planning Board: Strategic </h4>
 
   </div>
@@ -334,10 +336,16 @@ end
                o = Objective.where(str1)
 
                linkstr = "../catalog/" + pro.id.to_s 
+
                if o.first.nil?
                else 
               %>
-              <p> <b>Objective(s): </b><%=o.first.objective.html_safe %> ... <%= link_to "[more]", linkstr , {:style=>'color:#1D7491; text-decoration:underline'} %>
+              <p> <b>Objective(s): </b>
+                <% if (o.count>1)%>
+                  <%=o.first.objective.html_safe %>... <%= link_to "[more]", linkstr , {:style=>'color:#1D7491; text-decoration:underline'} %>
+                  <% else %>
+                    <%=o.first.objective.html_safe %>
+                  <% end%> 
               </p>
 
               <% end %>

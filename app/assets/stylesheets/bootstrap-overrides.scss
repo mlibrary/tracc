@@ -1,14 +1,9 @@
-@import 'bootstrap-variables';
-@import 'bootstrap';
 
-@import 'bootstrap-overrides';
-
-@import 'blacklight/blacklight';
-
-.div a:hover {
+a:hover {
   outline-width: 1px !important;
   outline-style: solid !important;
   outline-color: #000 !important;
   text-decoration: none;
   background-color: #ffffff ; 
 }
+
