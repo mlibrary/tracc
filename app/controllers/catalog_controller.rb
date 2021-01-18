@@ -23,7 +23,7 @@ class CatalogController < ApplicationController
       qt: "search",
       rows: 10,
       # qf: "title_tesim description_tesim creator_tesim keyword_tesim"
-      qf: "title_tesim all_text_timv"
+      qf: "title_tesim short_name_ssi all_text_timv"
     }
 
     # solr path which will be added to solr base url before the other solr params.
