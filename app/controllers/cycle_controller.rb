@@ -39,5 +39,16 @@ include ApplicationHelper
 		  one.start = params["stn"]
 		  one.save!
 	    end
+
+	    #save staff chips
+	ch = Chip.all
+	ch.each do |ch_one|
+		if (ch_one.cycle.nil?)
+			ch_one.cycle = params["cycle"]
+			ch_one.save!
+		end	
+	end
 	end	
+		
+
 end

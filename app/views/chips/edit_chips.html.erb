@@ -26,34 +26,43 @@
 
  <div class="row ml-1">
     <div class="field">
-      Uniqname: <%= text_field_tag 'uniqname', value=one_chip.uniqname  %> (Leave it blank for deleting the chip)
+      <%= label_tag :uniqname %> <%= text_field_tag 'uniqname', value=one_chip.uniqname  %> (Leave it blank for deleting the chip)
     </div>
 </div>
 
  <div class="row ml-1">
     <div class="field">
-      First Name: <%= text_field_tag 'fname', value=one_chip.fname  %>
+      <%= label_tag :firstname %><%= text_field_tag 'fname', value=one_chip.fname  %>
     </div>
 </div>
 
  <div class="row ml-1">
     <div class="field">
-      Last Name: <%= text_field_tag 'lname', value=one_chip.lname  %>
+      <%= label_tag :lastname %><%= text_field_tag 'lname', value=one_chip.lname  %>
     </div>
 </div>
 
  <div class="row ml-1">
     <div class="field">
-      Department: <%= text_field_tag 'dept', value=one_chip.dept  %>
+      <%= label_tag :department %><%= text_field_tag 'dept', value=one_chip.dept  %>
     </div>
 </div>
 
  <div class="row ml-1">
     <div class="field">
-      Project: <%= text_field_tag 'project', value=one_chip.project  %>
-      Ops/Services: <%= text_field_tag 'ops', value=one_chip.ops  %>
+      <%= label_tag :project%> <%= text_field_tag 'project', value=one_chip.project  %>
+      <%= label_tag :ops %> <%= text_field_tag 'ops', value=one_chip.ops  %>
       
     </div>
+</div>
+
+<% cname = Cycle.all %>
+<div class="row ml-1">
+    <div class="field">
+     <%= label_tag :cycle %>
+     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", one_chip.cycle)  %>
+  
+   </div>
 </div>
 
       <div class="actions">

@@ -2,13 +2,8 @@
 
 
 <%
- ch = Chip.order(:dept)
- totalfte_o = 0
- totalfte_p = 0 
- ch.each do |t|
-  totalfte_o = totalfte_o + t.ops*1.0/4
-  totalfte_p = totalfte_p + t.project*1.0/4
- end
+ #ch = Chip.order(:dept)
+
 
  color1 = "" #neutral 100
    color2 = "#CCC" #blue-300
@@ -17,7 +12,20 @@
    color4 = "#dcdcdc"
 
  cur_cycle = Cycle.where("current_cycle =1")
-cycle = cur_cycle.first.cycle_name
+ cycle = cur_cycle.first.cycle_name
+
+ ch = Chip.where("cycle='"+cycle+"'").order(:dept)
+
+ if (ch.count <= 0 )
+  ch = Chip.order(:dept)
+ end 
+  
+ totalfte_o = 0
+ totalfte_p = 0 
+ ch.each do |t|
+  totalfte_o = totalfte_o + t.ops*1.0/4
+  totalfte_p = totalfte_p + t.project*1.0/4
+ end
   
 %>
 <div class="container">

@@ -43,6 +43,7 @@ before_action :authenticate_user!
         one_chip.dept = params["dept"]
         one_chip.project = params["project"]
         one_chip.ops= params["ops"]
+        one_chip.cycle = params["cycle"]
         one_chip.save!
         note = "Chip updated: " +  one_chip.uniqname
         addlog(5,"Chip",note)
