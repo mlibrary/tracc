@@ -114,7 +114,7 @@ months = get_months(cycle)
           end 
         %>  
          <%  
-           if ( (sel_dept.eql? "All")  || (sel_dept.eql? t.dept))
+           if ( t.cycle.eql? cycle) &&( (sel_dept.eql? "All")  || (sel_dept.eql? t.dept))
               
             str = "uniqname='"+t.uniqname+"' AND cycle='"+ cycle + "'"
             ch_a = ChipAssignment.where(str).distinct 
