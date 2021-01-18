@@ -1,12 +1,17 @@
  
 <%
   uniqname = params["uniqname"]
-  str = "uniqname='"+uniqname+"'"
+  cycle = params["cycle"]
+
+  str = "uniqname='"+uniqname+"' AND cycle='"+cycle +"'"
   one_chip = Chip.where(str)
   
   if (!one_chip.first.nil?)
     one_chip = one_chip.first
     title = "Edit Staff Chips"
+  elsif (one_chip.first.nil? && !uniqname.nil?)  
+    title = "Edit Staff Chips"
+    errflag = true
   else
     title = "Add New Staff"
     one_chip = Chip.new  
@@ -21,6 +26,7 @@
   </div>  
 <div class="card-body">  
 
+<% if (!errflag) %>
 <%= form_tag(save_chips_chips_path, :enctype =>"multipart/form-data") do  %>
 
 
@@ -56,22 +62,27 @@
     </div>
 </div>
 
-<% cname = Cycle.all %>
+
 <div class="row ml-1">
     <div class="field">
      <%= label_tag :cycle %>
-     <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", one_chip.cycle)  %>
+     <%= one_chip.cycle %>
+     
   
    </div>
 </div>
 
       <div class="actions">
         <%= hidden_field_tag 'id', one_chip.id %>
+        <%= hidden_field_tag 'cycle', one_chip.cycle %>
         <%= submit_tag 'Save' %>
       </div>
 
      <% 
        end 
+     else%>
+     Error: No record found
+     <% end 
      %>
      
    

@@ -8,6 +8,7 @@ include ApplicationHelper
 
 	def save
 		cur_cycle = Cycle.where("current_cycle =1") 
+		cur_cycle_name = cur_cycle.first.cycle_name
 		cur_cycle.each do |one|
 			one.current_cycle = 0 
 			one.save!
@@ -41,13 +42,25 @@ include ApplicationHelper
 	    end
 
 	    #save staff chips
-	ch = Chip.all
+	ch = Chip.where("cycle='"+cur_cycle_name+"'")
+
 	ch.each do |ch_one|
-		if (ch_one.cycle.nil?)
-			ch_one.cycle = params["cycle"]
-			ch_one.save!
-		end	
+		
+		ch_cur_cycle = Chip.where("cycle='"+params["cycle"]+"' AND uniqname='"+ch_one.uniqname+"'") 
+	  
+	  if (ch_cur_cycle.count <=0)
+		one_chip = Chip.new  
+		one_chip.uniqname = ch_one.uniqname
+        one_chip.fname = ch_one.fname
+        one_chip.lname= ch_one.lname
+        one_chip.dept = ch_one.dept
+        one_chip.project = ch_one.project
+        one_chip.ops= ch_one.ops
+        one_chip.cycle = params["cycle"]
+        one_chip.save!
+      end 
 	end
+
 	end	
 		
 

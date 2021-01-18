@@ -6,10 +6,18 @@ class ReportsController < ApplicationController
 
     
   def show
+
   end 
 
   def chip_assignment 
-     @ch = Chip.order(:dept)
+
+   if (params["cycle"].nil?)
+    cur_cycle = Cycle.where("current_cycle =1") 
+    cur_cycle_name = cur_cycle.first.cycle_name
+    @ch = Chip.where("cycle='"+cur_cycle_name+"'")
+   else
+     @ch = Chip.where("cycle='"+params["cycle"]+"'")
+   end
 
   end  
 
