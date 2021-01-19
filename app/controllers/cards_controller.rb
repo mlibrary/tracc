@@ -8,6 +8,7 @@ class CardsController < ApplicationController
   def index
     if (approve_access)
       @cards = Card.all.order(:in_cycle)
+      @cyclelist = Cycle.order("start desc")
     else
       flash.now[:notice] = I18n.t('blacklight.no_access')
     end
