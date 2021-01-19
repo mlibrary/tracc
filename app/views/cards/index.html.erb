@@ -1,30 +1,48 @@
 <p id="notice"><%#= notice %></p>
 
 <% unless @cards.nil? %>
-  <h1>All Cards</h1>
+  <h1>All Projects</h1>
+   <p> <button><%= link_to 'Add a New Project', new_card_path %></button></p>
+<% @cyclelist.each do |one_cycle| 
 
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th colspan="3">Options</th>
-      </tr>
-    </thead>
+   @cards = Card.where("in_cycle='"+one_cycle.cycle_name+"'").order("card_status")
+   if (@cards.count >0)
+    collapseid = "collapse" + one_cycle.id.to_s
+    accordionid = "accordion" + one_cycle.id.to_s
+%>
 
-    <tbody>
-      <% @cards.each do |card| %>
-        <tr>
-          <td>[<%=card.in_cycle%> | Status=<%=card.card_status%>] <%= card.title%></td>
-          <td><%= link_to 'Show', card %></td>
-          <td><%= link_to 'Edit', edit_card_path(card) %></td>
+<div class="accordion" id="<%=accordionid%>">
+
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#<%=collapseid%>" aria-expanded="false" aria-controls="<%=collapseid%>">
+          <%= one_cycle.cycle_name %>
+        </button>
+      </h5>
+    </div>
+
+    <div id="<%=collapseid%>" class="collapse" aria-labelledby="headingTwo" data-parent="#<%=accordionid%>">
+      <div class="card-body">
+        <% @cards.each do |card| %>
+        <p> <%= link_to card.title, card %> (<%=card.card_status%> | <%= link_to 'Edit', edit_card_path(card) %>)</p>
+        <% end %>
+
+   </div>
+</div>
+
+</div>
+</div>
+
+
+     
           <td><%#= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+   
 
   <br>
 
-  <%= link_to 'New Card', new_card_path %>
-  <%#= link_to 'Import', import_cards_path %>
-<% end %>
+<%   end
+
+  end 
+
+end %>
