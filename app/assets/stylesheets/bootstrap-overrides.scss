@@ -1,9 +1,10 @@
-
-a:hover {
-  outline-width: 1px !important;
-  outline-style: solid !important;
-  outline-color: #000 !important;
-  text-decoration: none;
-  background-color: #ffffff ; 
+body {
+	top-margin:0px !important;
 }
+a:hover {
+  text-decoration: none;
+  background-color: transparent !important ; 
+  font-weight:bold !important;
+}
+
 
