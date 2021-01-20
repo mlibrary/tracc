@@ -5,4 +5,16 @@
 
 @import 'blacklight/blacklight';
 
+body {
+	top-margin:0px !important;
+}
+container {
+	top-margin:0px !important;
+}
 
+a:hover {
+  text-decoration: none;
+  background-color: transparent !important ; 
+  font-weight:bold !important;
+  color: #1D7491 !important ;
+}
