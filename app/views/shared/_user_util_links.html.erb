@@ -31,15 +31,19 @@
    
     <% unless current_user.to_s.blank? -%>
     <li class="lead">
-      <%= link_to current_user, edit_user_registration_path, class: 'nav-link' %>
+     <button type="button" class="btn btn-light" style="margin-left: 20px;">
+      <%= link_to current_user, edit_user_registration_path, {:style=>'color:#000; text-decoration:none'} %>
+    </button>
     </li>
     <% end %>
      <% if current_user %>
-   
+  
     
     <% else %>
     <li class="lead">
-      <%= link_to t('blacklight.header_links.login'), new_user_session_path, class: 'nav-link' %>
+      <button type="button" class="btn btn-light"><%= link_to "Login", new_user_session_path , {:style=>'color:#000; text-decoration:none'} %>
+      </button>
+     
     </li>
     <% end %>
   <% end %>
