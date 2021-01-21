@@ -22,7 +22,7 @@
       </h5>
     </div>
 
-    <div id="<%=collapseid%>" class="collapse" aria-labelledby="headingTwo" data-parent="#<%=accordionid%>">
+    <div id="<%=collapseid%>" class="collapse show" aria-labelledby="headingTwo" data-parent="#<%=accordionid%>">
       <div class="card-body">
         <% @cards.each do |card| %>
         <p> <%= link_to card.title, card %> (<%=card.card_status%> | <%= link_to 'Edit', edit_card_path(card) %>)</p>
