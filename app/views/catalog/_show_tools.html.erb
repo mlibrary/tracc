@@ -10,7 +10,7 @@ end
 <p style="padding-top: 85px"></p>
 <div class="card">
   <div class="card-header">
-   <h5>Objectives</h5>
+   <h5>Objectives (<%= cycle %>)</h5>
   </div>
   <div class="card-body">
 
@@ -19,8 +19,14 @@ end
    o_one = Objective.where(str)
 
    o_one.each do |o|
+   ostatus = o.status 
 %>
-   <p><%= o.objective.html_safe %></p>
+   <p><%= o.objective.html_safe %>
+    <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: <%=ostatus%>%;" aria-valuenow="<%=ostatus%>" aria-valuemin="0" aria-valuemax="100"> <%=ostatus%>%
+          </div>
+        </div>
+      </p>
 <%    
    end 
 %>
