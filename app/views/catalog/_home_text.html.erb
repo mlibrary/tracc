@@ -3,6 +3,7 @@
 
 @card_paused = Card.where("activity_type LIKE '%Paused%' ").order(:title)
 @card_active = Card.where("activity_type LIKE '%Active%' AND card_status <> 'Done' ").order(:title)
+@card_done = Card.where("activity_type LIKE '%Active%' AND card_status LIKE '%Done%' ").order(:title)
 @card_epic = Card.where("activity_type LIKE 'Strategic' ")
 
 %>
@@ -64,6 +65,36 @@
    
         <% 
           @card_active.all.each do |c| 
+          cstatus = c.card_status
+         
+              id = c.id 
+              url ="catalog/" + id.to_s
+        %> 
+         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
+            
+            <% end %>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+    <div class="card">
+    <div class="card-header" id="heading11">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext21" aria-expanded="false" aria-controls="ext21">
+          Tactical Projects - Done
+        </button>
+      </h5>
+    </div>
+
+    <div id="ext21" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
+      <div class="card-body">
+        
+         <ul class="list-group list-group-flush">
+   
+        <% 
+          @card_done.all.each do |c| 
           cstatus = c.card_status
          
               id = c.id 
