@@ -32,26 +32,74 @@ $(document).ready(function () {
       <p>Description: <br>
         <%= text_area_tag "short_description", '',  cols: "100", rows: "5" %></p>
 
-      <p>Status:<br>
+      <p>LIT Contact:<br><%= text_field_tag "lit_lead", '', size: 100 %></p>
+      <p>Service Lead: <br><%= text_field_tag "service_lead", '', size: 100 %></p>
+       
+      <p>Status:
         <%# Get status keys %>
         <% status = Status.all  %>
         
-        <select class="custom-select custom-select-sm card_status" name="card_status">
-          <option selected>Select Card Status</option>
+        <select class="" name="card_status">
           <% status.each do |st|  %>
-            <% selected_str =  "In-Progress" %>
-            <option value=<%= st.status %> <%= selected_str %> ><%= st.status %></option>
+            <% selected_str =  "New" %>
+             <% if selected_str.eql? st.status %>
+              <option value=<%= st.status %> selected ><%= st.status %></option>
+            <% else %>
+              <option value=<%= st.status %> ><%= st.status %></option>
+            <% end %>
           <% end  %>
         </select>
       </p>
+      <% stype = ["New Service", "Service Improvement", "Consultation", "Other"] %>
 
-      <p>LIT Contact:<br><%= text_field_tag "lit_lead", '', size: 100 %></p>
-      <p>Service Lead: <br><%= text_field_tag "service_lead", '', size: 100 %></p>
-      <p>Request Type<i>[New Service, Service Improvement, Consultation, Other]</i><br> <%= text_field_tag "request_type", '', size: 100 %></p>
-      <p>Activity Type: <i>[Strategic, Tactical, Investigation, Project, TASC Investigation]</i><br> <%= text_field_tag "activity_type", '', size: 100 %></p>
-      <p>Request Cycle: <br><%= text_field_tag 'in_cycle', '', size: 100 %>
-        <p>Card Type: [Internal LIT Projects, Library Projects, External Commitments] <br><%= text_field_tag 'card_type', '', size: 100 %>
-      
+      <p>Request Type:
+       <select class="" name="request_type">
+          <% stype.each do |s|  %>
+            <% selected_str =  "Service Improvement" %>
+             <% if selected_str.eql? s %>
+              <option value=<%= s %> selected ><%= s %></option>
+            <% else %>
+              <option value=<%= s %> ><%= s %></option>
+            <% end %>
+          <% end  %>
+        </select>
+
+        </p>
+        <% stype = ["Strategic", "Tactical", "Investigation", "Project", "TASC Investigation"]%>
+      <p>Activity Type: 
+          <select class="" name="activity_type">
+          <% stype.each do |s|  %>
+            <% selected_str =  "Tactical" %>
+             <% if selected_str.eql? s %>
+              <option value=<%= s %> selected ><%= s %></option>
+            <% else %>
+              <option value=<%= s %> ><%= s %></option>
+            <% end %>
+          <% end  %>
+        </select>
+
+        </p>
+
+      <% stype = ["Internal LIT", "Library", "External"]%>
+      <p>Stakeholder Type: 
+          <select class="" name="card_type">
+          <% stype.each do |s|  %>
+            <% selected_str =  "Library Projects" %>
+            <% if selected_str.eql? s %>
+              <option value=<%= s %> selected ><%= s %></option>
+            <% else %>
+              <option value=<%= s %> ><%= s %></option>
+            <% end %>
+          <% end  %>
+        </select>
+
+        </p>
+         <p>Request Cycle:
+      <% cname = Cycle.all %>
+      <% cur_cycle = Cycle.where("current_cycle =1") %>
+       <%= select_tag "in_cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
+      </p>
+       
     
 	</div>
 
