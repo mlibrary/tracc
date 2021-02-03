@@ -745,7 +745,7 @@ class CardsController < ApplicationController
     params[:card][:card_status] = params[:card_status]
     params[:card][:card_type] = params[:card_type]
 
-byebug
+
     respond_to do |format|
       if @card.update(card_params)
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
