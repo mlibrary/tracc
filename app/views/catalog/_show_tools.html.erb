@@ -2,10 +2,24 @@
 
 cur_cycle = Cycle.where("current_cycle=true")
 if (cur_cycle.nil?)
-	cycle =""
-else 	
+  cycle =""
+else  
 cycle = cur_cycle.first.cycle_name
 end 
+
+months = get_months(cycle)
+ stmonth = months[1]
+ endmonth = months[4]
+ cur_month = Date.current.month
+ cur_dt = Date.current.day
+ nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
+ pos= months.index(nameofmonths[cur_month])
+ 
+ if pos.nil?
+  pos = 4
+ end  
+ 
+
 %>
 <p style="padding-top: 85px"></p>
 <div class="card">
@@ -15,11 +29,24 @@ end
   <div class="card-body">
 
 <% card_id = params["id"]
+   one_card = Card.where("id='"+card_id+"'")
+   card_type = one_card.first.activity_type
    str = "card_id ='"+card_id+"' AND cycle='"+ cycle + "'"
    o_one = Objective.where(str)
 
    o_one.each do |o|
    ostatus = o.status 
+   if (card_type.eql? 'Strategic')
+    if (pos==1)
+      ostatus = o.status1
+    elsif (pos==2)
+      ostatus = o.status2
+    elsif (pos==3)
+      ostatus = o.status3
+    elsif (pos==4)
+      ostatus = o.status4    
+    end  
+   end 
 %>
    <p><%= o.objective.html_safe %>
     <div class="progress">
