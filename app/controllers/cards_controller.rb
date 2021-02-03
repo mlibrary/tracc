@@ -645,6 +645,7 @@ class CardsController < ApplicationController
      card.activity_type = params["activity_type"]
      card.card_status = params["card_status"]
      card.card_type = params["card_type"]
+     card.in_cycle = params["in_cycle"]
      card.save
      
   
@@ -738,7 +739,13 @@ class CardsController < ApplicationController
       params[:card][:card_status] = params[:card_status] 
    end 
   
+    params[:card][:in_cycle] = params[:in_cycle]
+    params[:card][:request_type] = params[:request_type]
+    params[:card][:activity_type] = params[:activity_type]
+    params[:card][:card_status] = params[:card_status]
+    params[:card][:card_type] = params[:card_type]
 
+byebug
     respond_to do |format|
       if @card.update(card_params)
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }

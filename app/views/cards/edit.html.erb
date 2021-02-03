@@ -26,26 +26,76 @@ $(document).ready(function () {
       <p>Short Name:<br><%= f.text_field(:short_name, size: 60) %></p>
       <p>Description: <br><%= f.text_area(:short_description,  cols: "100", rows: "5") %></p>
 
-      <p>Status:<br>
-        <%# Get status keys %>
-        <% status = Status.all  %>
-        <select class="custom-select custom-select-sm card_status" name="card_status">
-          <option selected>Select Card Status</option>
-          <% status.each do |st|  %>
-            <% selected_str = (@card_one.card_status == st.status) ? "selected" : "" %>
-            <option value=<%= st.status %> <%= selected_str %> ><%= st.status %></option>
-          <% end  %>
-        </select>
-      </p>
+     
 
       <p>LIT Contact:<br><%= f.text_field(:lit_lead, size: 100) %></p>
       <p>Service Lead: <br><%= f.text_field(:service_lead, size: 100) %></p>
-      <p>Request Type<i>[New Service, Service Improvement, Consultation, Other]</i><br> <%= f.text_field(:request_type, size: 100) %></p>
-      <p>Activity Type: <i>[Strategic, Tactical, Investigation, Project, TASC Investigation]</i><br> <%= f.text_field(:activity_type, size: 100) %></p>
-  	  <p>Request Cycle: <br><%= f.text_field(:in_cycle, size: 100) %>
-  	 <%# <p>Start Cycle:<br><%= f.text_field(:start_cycle, size: 100) %>
-      <%#<p>Done Cycle:<br><%= f.text_field(:done_cycle, size: 100) %>
-      <p>Card Type: [Internal LIT Projects, Library Projects, External Commitments] <br><%= f.text_field(:card_type, size: 100) %>
+    
+
+         <p>Status:
+        <%# Get status keys %>
+        <% status = Status.all  %>
+         <% selected_str = @card_one.card_status %>
+        <select class="" name="card_status">
+          <% status.each do |st|  %>
+          
+             <% if selected_str.eql? st.status %>
+              <option value=<%= st.status %> selected ><%= st.status %></option>
+            <% else %>
+              <option value=<%= st.status %> ><%= st.status %></option>
+            <% end %>
+          <% end  %>
+        </select>
+      </p>
+      <% stype = ["New Service", "Service Improvement", "Consultation", "Other"] %>
+
+      <p>Request Type:
+         <% selected_str = @card_one.request_type %>
+       <select class="" name="request_type">
+          <% stype.each do |s|  %>
+             <% if selected_str.eql? s %>
+              <option value=<%= s %> selected ><%= s %></option>
+            <% else %>
+              <option value=<%= s %> ><%= s %></option>
+            <% end %>
+          <% end  %>
+        </select>
+
+        </p>
+        <% stype = ["Strategic", "Tactical", "Investigation", "Project", "TASC Investigation"]%>
+      <p>Activity Type: 
+          <select class="" name="activity_type">
+             <% selected_str = @card_one.activity_type %>
+          <% stype.each do |s|  %>
+             <% if selected_str.eql? s %>
+              <option value=<%= s %> selected ><%= s %></option>
+            <% else %>
+              <option value=<%= s %> ><%= s %></option>
+            <% end %>
+          <% end  %>
+        </select>
+
+        </p>
+
+      <% stype = ["Internal LIT", "Library", "External"]%>
+      <p>Stakeholder Type: 
+          <select class="" name="card_type">
+             <% selected_str = @card_one.card_type %>
+          <% stype.each do |s|  %>   
+            <% if selected_str.eql? s %>
+              <option value=<%= s %> selected ><%= s %></option>
+            <% else %>
+              <option value=<%= s %> ><%= s %></option>
+            <% end %>
+          <% end  %>
+        </select>
+
+        </p>
+         <p>Request Cycle:
+      <% cname = Cycle.all %>
+      <% selected_str = @card_one.in_cycle %>
+       <%= select_tag "in_cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", selected_str)  %> 
+      </p>
       <%#<p>Epic:<br><%= f.text_field(:epic, size: 100) %>
      <!-- 
       <%  
