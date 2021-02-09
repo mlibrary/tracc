@@ -456,6 +456,23 @@ class CardsController < ApplicationController
       if (t.status4==nil && t.status3 != nil)
         t.status4 = t.status3
       end
+# edit future months if the progress reported in future month is less than previous month
+
+      if ( t.status2 != nil && t.status1 != nil)
+        if (t.status2<t.status1)
+          t.status2 = t.status1
+        end 
+      end
+      if ( t.status3 != nil && t.status2 != nil)
+        if (t.status3<t.status2)
+          t.status3 = t.status2
+        end 
+      end
+      if ( t.status4 != nil && t.status3 != nil)
+        if (t.status4<t.status3)
+          t.status4 = t.status3
+        end  
+      end
               
       t.status = params[t_id]
       
