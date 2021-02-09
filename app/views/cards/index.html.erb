@@ -25,7 +25,7 @@
     <div id="<%=collapseid%>" class="collapse show" aria-labelledby="headingTwo" data-parent="#<%=accordionid%>">
       <div class="card-body">
         <% @cards.each do |card| %>
-        <p> <%= link_to card.title, card %> (<%=card.card_status%> | <%= link_to 'Edit', edit_card_path(card) %>)</p>
+        <p> <u><%= link_to card.title, card %></u> (<%=card.card_status%> |<u> <%= link_to 'Edit', edit_card_path(card) %>)</u></p>
         <% end %>
 
    </div>
