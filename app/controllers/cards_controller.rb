@@ -514,6 +514,9 @@ class CardsController < ApplicationController
     epic=  params["epic"]
     cycle = params["cycle"]
     nobj = params["nobj"]
+    nobj1 = params["nobj1"]
+    nobj2 = params["nobj2"]
+    
     #str = "epic_title LIKE '" + epic + "'"  
     str = "short_name = '" + epic + "'"   
     one_card = Card.where(str)
@@ -544,6 +547,28 @@ class CardsController < ApplicationController
       obj_new.cycle = cycle
       obj_new.save
       note = "New objective added: "+nobj
+      addlog(4,"Objective",note)
+    end  
+
+    if (nobj1.empty?)
+    else
+      obj_new = Objective.new
+      obj_new.card_id = one_card.first.id.to_s
+      obj_new.objective = nobj1
+      obj_new.cycle = cycle
+      obj_new.save
+      note = "New objective added: "+nobj1
+      addlog(4,"Objective",note)
+    end  
+
+      if (nobj2.empty?)
+    else
+      obj_new = Objective.new
+      obj_new.card_id = one_card.first.id.to_s
+      obj_new.objective = nobj2
+      obj_new.cycle = cycle
+      obj_new.save
+      note = "New objective added: "+nobj2
       addlog(4,"Objective",note)
     end  
 
