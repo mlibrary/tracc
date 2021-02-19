@@ -109,7 +109,7 @@ class CycleReviewController < ApplicationController
    p_type = params["p_type"]
    
    if (p_type.eql? "2")
-     str = "activity_type LIKE '%Active%'"
+     str = "activity_type LIKE '%Tactical%'"
    else
      str = "activity_type LIKE '%Strategic%'"
    end
