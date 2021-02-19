@@ -34,7 +34,7 @@ eview = params["eview"]
 </div>
 <div class="card-body">
       <% @cards.each do |card|
-        byebug
+        
         if (card.card_status.eql? "Done")%>
           <%= card.short_name%> - DONE
         <% else
