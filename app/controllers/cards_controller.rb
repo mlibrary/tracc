@@ -141,12 +141,10 @@ class CardsController < ApplicationController
 
 
   def edit_tracks
+
+    
      if (approve_access)
        @approve_access = true
-    else
-      flash.now[:notice] = I18n.t('blacklight.no_access')
-      @approve_access = false  
-    
 
     #copy tracks
     commit_method = params["commit"]
@@ -176,8 +174,12 @@ class CardsController < ApplicationController
        t.save!
        
       end  
-     end  # if access 
     end
+    else
+      flash.now[:notice] = I18n.t('blacklight.no_access')
+      @approve_access = false  
+     end  # if access 
+    
   end
   
   def save_tracks
