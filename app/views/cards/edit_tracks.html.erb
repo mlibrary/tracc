@@ -27,55 +27,18 @@ card_epic = Card.where("activity_type LIKE 'Strategic' ")
     <%= form_tag(edit_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
      <div class="row ml-1">
       <div class="field">
-     <p>Current Cycle: <%=cycle %></p>
+     <p>Cycle: 
       <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> 
-      </div>
-     </div>
-
-     <div class="row ml-1">
-      <div class="field">
-     <p>Strategic Project: <%=epic %></p>
+     Strategic Project: 
       <%= select_tag "epic", options_from_collection_for_select(card_epic, "title", "title",epic)  %>
-      </div>
-     </div>
-
-
-     <div class="row ml-1">
+    </p>
        <%= submit_tag 'Refresh' %>
+     </div>
      </div>  
-
     <% end %>
   </div>
   <div class="col">
-  <h4 style="padding-bottom: 10px;"> Copy Tracks </h4>
-  <%= form_tag(edit_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
-     
-    <div class="row ml-1">
-      <div class="field">
-     <p>Strategic Project: <%=epic %></p>
-      <%= select_tag "epic", options_from_collection_for_select(card_epic, "title", "title",epic)  %>
-      </div>
-     </div>
-
-     <div class="row ml-1">
-      <div class="field">
-     <p>From: 
-      <%= select_tag "from", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> To: 
-      <%= select_tag "to", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %></p>
-      </div>
-     </div>
-
-     
-
-      <div class="row ml-1">
-       <%= submit_tag 'Go' %>
-     </div> 
-     
-
-
-     
-
-    <% end %>
+ 
   
   </div></div>
   </div>
@@ -121,6 +84,36 @@ card_epic = Card.where("activity_type LIKE 'Strategic' ")
 
 </div>
 </div>
+
+<div class="card" style="margin-top:25px " >
+  <div class="card-header">
+ <h4 style="padding-bottom: 10px;"> Copy tracks from a previous cycle</h4>
+  <%= form_tag(edit_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
+    </div>
+    <div class="card-body"> 
+    <div class="row ml-1">
+      <div class="field">
+     <p>Strategic Project: 
+      <%= select_tag "epic", options_from_collection_for_select(card_epic, "title", "title",epic)  %>
+     
+     From: 
+      <%= select_tag "from", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> To: 
+      <%= select_tag "to", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %></p>
+      </div>
+     </div>
+
+     
+
+      <div class="row ml-1">
+       <%= submit_tag 'Go' %>
+     </div> 
+     
+
+</div>
+
+     
+
+    <% end %>
 <% end #if access %>
 
 
