@@ -107,20 +107,23 @@ end
             saved_status = 'Not Recorded' #card.card_status
             saved_r = 'Not Recorded' #card.rationale
             saved_n = '' #card.comments
+            print_flag = false 
           else
             saved_status = cr.status
             saved_r = cr.rationale
             saved_n = cr.notes
+            print_flag = true
           end 
           s = "s" + card.id.to_s + "_0" 
           r = "r" + card.id.to_s + "_0"   
           comment =  "c" + card.id.to_s + "_0" 
       %>
-         <% if (p_type.eql? "2") %>
+         <% if ( (p_type.eql? "2") && print_flag) %>
            <div class="col-md-12 border border-light">
-         <% else %>
+         <% elsif (print_flag)%>
            <div class="col border border-light">
-         <% end %>   
+         <% end %> 
+         <% if (print_flag) %>  
           <p style="padding-top: 15px;"><b><%= card.title %>
           <% if (p_type.eql? "2") %> ( <%=card.short_name%>, <%= card.in_cycle %> [<%=card.card_type %>]) <% end %>
         </b> </p>
@@ -136,7 +139,7 @@ end
            <%= saved_r %><br>
           </p>
           <p><b>Comments:</b> <%= saved_n%></p> 
-            
+           <% end #if print %> 
           <% end #if ptype eql 2%>
         </div>
      </div>
