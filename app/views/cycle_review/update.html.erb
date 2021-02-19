@@ -34,10 +34,17 @@ eview = params["eview"]
 </div>
 <div class="card-body">
       <% @cards.each do |card|
+
+        if (card.card_status.eql? "Done")
+        # do something
+        elsif (card.card_status.eql? "Paused")
+        # do something
+        elsif (card.card_status.eql? "Archived")
+        # do something
         
-        if (card.card_status.eql? "Done")%>
-          <%= card.short_name%> - DONE
-        <% else
+              
+          
+        else
           
       %>
      
