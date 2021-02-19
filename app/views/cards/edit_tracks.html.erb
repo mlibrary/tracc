@@ -27,9 +27,9 @@ card_epic = Card.where("activity_type LIKE 'Strategic' ")
     <%= form_tag(edit_tracks_cards_path, :enctype =>"multipart/form-data") do  %>
      <div class="row ml-1">
       <div class="field">
-     <p>Cycle: 
+     <p>
       <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cycle)  %> 
-     Strategic Project: 
+     
       <%= select_tag "epic", options_from_collection_for_select(card_epic, "title", "title",epic)  %>
     </p>
        <%= submit_tag 'Refresh' %>
@@ -49,7 +49,7 @@ card_epic = Card.where("activity_type LIKE 'Strategic' ")
 
      @cards.each do |one_c|
       %>
-      <p><b><%= one_c.short_name %></b></p>
+      <p><b><%= one_c.short_name %>(<%=cycle%>)</b></p>
       <%
         ntrack = "ntrack" + one_c.id.to_s
         otrack = "otrack"+ one_c.id.to_s
