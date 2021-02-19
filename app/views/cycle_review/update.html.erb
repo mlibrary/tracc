@@ -1,5 +1,4 @@
 
-
 <% r_all = Rationale.all %>
 <% s_all = Status.all  %>
 
@@ -34,7 +33,10 @@ eview = params["eview"]
       <%= hidden_field_tag "cycle", cycle %>
 </div>
 <div class="card-body">
-      <% @cards.each do |card| %>
+      <% @cards.each do |card|
+
+      %>
+     
       <div class="row">
         
           
@@ -42,8 +44,8 @@ eview = params["eview"]
           cr = cr1.first
           
           if (cr.nil?)
-            saved_status = 'Not Recorded' #card.card_status
-            saved_r = 'Not Recorded' #card.rationale
+            saved_status = '' #card.card_status
+            saved_r = '' #card.rationale
             saved_n = '' #card.comments
           else
             saved_status = cr.status
