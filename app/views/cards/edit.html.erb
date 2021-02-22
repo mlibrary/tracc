@@ -47,7 +47,7 @@ $(document).ready(function () {
           <% end  %>
         </select>
       </p>
-      <% stype = ["New Service", "Service Improvement", "Consultation", "Other"] %>
+      <% stype = ["New Service", "Service Improvement", "Consultation", "Partnership","Other"] %>
 
       <p>Request Type:
          <% selected_str = @card_one.request_type %>
@@ -62,7 +62,7 @@ $(document).ready(function () {
         </select>
 
         </p>
-        <% stype = ["Strategic", "Tactical", "Investigation", "Project", "Partnership", "Strategic-Closed"]%>
+        <% stype = ["Strategic", "Tactical", "Investigation", "Project", "Strategic-Closed"]%>
       <p>Activity Type: 
           <select class="" name="activity_type">
              <% selected_str = @card_one.activity_type %>
