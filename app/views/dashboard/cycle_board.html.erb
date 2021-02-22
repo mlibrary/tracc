@@ -207,7 +207,7 @@ end
               
                   <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
                 <div class="actions">
-                  <%= hidden_field_tag 'cycle', params["cycle"] %>
+                  <%= hidden_field_tag 'cycle', cycle %>
                   <%= hidden_field_tag 'epic', pro.short_name %>
                   <%= hidden_field_tag 'track', t.track %>
                   <%= submit_tag 'Add/Edit Consultants' %>
@@ -374,7 +374,7 @@ end
               <% end %> 
                <%= form_tag("/cards/edit_consultants", :enctype =>"multipart/form-data") do %>
                 <div class="actions">
-                  <%= hidden_field_tag 'cycle', params["cycle"] %>
+                  <%= hidden_field_tag 'cycle', cycle %>
                   <%= hidden_field_tag 'epic', pro.short_name %>
                   <%= hidden_field_tag 'track', '' %>
                   <%= submit_tag 'Add/Edit Consultants' %>
