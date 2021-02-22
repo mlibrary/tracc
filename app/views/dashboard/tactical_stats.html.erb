@@ -4,9 +4,9 @@
 
    color3 = "" 
    color4 = ""
-    
+   
 
-  @slist = Card.where("activity_type LIKE '%Active%' AND card_status <> 'Done'").order(:title)
+  @slist = Card.where("activity_type LIKE '%Tactical%'").order(:title)
      
   total_chips = Chip.sum(:project) *1.00
 
@@ -54,6 +54,16 @@ end
 <h3> <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Tactical Projects - LIT Board </h3>
 
 <% @slist.all.each do |active| 
+  if (active.card_status.eql? "Done")
+        # do something
+        elsif (active.card_status.eql? "Paused")
+        # do something
+        elsif (active.card_status.eql? "Archived")
+        # do something
+        
+              
+          
+        else
  card_id = active.id 
  str = "card_id='" + card_id.to_s + "' AND cycle='"+ cycle + "'"
  
@@ -192,7 +202,7 @@ end
     </div>
     </div>
 <% end %>
-
+<% end %>
 
    
   
