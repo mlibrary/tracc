@@ -19,8 +19,8 @@ end
 
 str = "card_id = '" + @card_one.first.id.to_s + "' AND cycle ='"+cycle+"'" 
     tracks = Track.where(str) 
-
-    temp_chips = Chip.order(:uniqname)
+str2 = "cycle ='" + cycle + "'"
+    temp_chips = Chip.where(str2).order(:uniqname)
     chips = ['']
     temp_chips.each do |t|
       chips << t.uniqname

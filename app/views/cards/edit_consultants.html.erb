@@ -4,10 +4,17 @@
     epic=  params["epic"]
     track = params["track"] 
 
+    if cycle.nil?
+      cur_cycle = Cycle.where("current_cycle =1")
+      cycle = cur_cycle.first.cycle_name
+    end
+
     str = "short_name LIKE '" + epic + "%'"   
     @card_one = Card.where(str)
 
-    temp_chips = Chip.order(:uniqname)
+    
+    str2 = "cycle ='" + cycle + "'"
+    temp_chips = Chip.where(str2).order(:uniqname)
     chips = ['']
     temp_chips.each do |t|
       chips << t.uniqname
