@@ -37,10 +37,18 @@ class CycleReviewController < ApplicationController
         r = params[r_id]
         c = params[c_id]
 
+       if ( (s.nil?) || (s.size.eql? 0))
+        save_flag = false
+       else
+        save_flag = true
+       end
+       
+       if (save_flag)  
         card.rationale = r 
         card.comments = c
         card.card_status = s 
         card.save!
+       end
 
         cr1 = CycleReview.where("card_id=? AND obj_id=? AND review_type=? AND cycle=?",card.id,0,review_type,cycle)
         cr = cr1.first
@@ -49,6 +57,7 @@ class CycleReviewController < ApplicationController
           cr = CycleReview.new
         end
         
+
         cr.card_id = card.id
         cr.status = s
         cr.rationale = r
