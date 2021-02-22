@@ -21,7 +21,7 @@ include ApplicationHelper
     end
     
     if ( (type.eql? 'Tactical') || (type.eql? 'All Boards') )
-      @pro_list1 = Card.where("activity_type LIKE '%Active%' AND card_status !='Done' ")
+      @pro_list1 = Card.where("activity_type LIKE '%Tactical%'")
     end
 
   end  
