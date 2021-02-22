@@ -324,8 +324,14 @@ end
              end %>  
           </div>
 
-     <% @pro_list1.each do |pro| %>  
-          
+     <% @pro_list1.each do |pro|   
+          if (pro.card_status.eql? "Done")
+        # do something
+        elsif (pro.card_status.eql? "Paused")
+        # do something
+        elsif (pro.card_status.eql? "Archived")
+        # do something    
+        else %>
            <div class="row">
              <div class="col border border-dark ">
               <p style="padding-top: 15px"><b><%= pro.short_name %></b><br>
@@ -452,7 +458,8 @@ end
            </div>
 
            <% end %>  
-   <% end                
+   <%    end 
+      end                
        
  if  ((p_type.eql? "Operational") ||  (p_type.eql? 'All Boards') )
     dept = Array.new
