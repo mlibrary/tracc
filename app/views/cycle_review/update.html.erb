@@ -55,14 +55,19 @@ eview = params["eview"]
           cr = cr1.first
           
           if (cr.nil?)
-            saved_status = '' #card.card_status
-            saved_r = '' #card.rationale
-            saved_n = '' #card.comments
+            saved_status = card.card_status
+            saved_r = card.rationale
+            saved_n = card.comments
           else
             saved_status = cr.status
             saved_r = cr.rationale
             saved_n = cr.notes
           end 
+
+          if ((saved_status.eql? nil) || (saved_status.size.eql? 0))
+            saved_status = card.card_status
+          end   
+          
           s = "s" + card.id.to_s + "_0" 
           r = "r" + card.id.to_s + "_0"   
           comment =  "c" + card.id.to_s + "_0" 
