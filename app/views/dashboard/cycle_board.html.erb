@@ -331,17 +331,18 @@ end
         # do something
         elsif (pro.card_status.eql? "Archived")
         # do something    
-        else %>
+        else 
+          linkstr = "../catalog/" + pro.id.to_s  %>
            <div class="row">
              <div class="col border border-dark ">
-              <p style="padding-top: 15px"><b><%= pro.short_name %></b><br>
+              <p style="padding-top: 15px"><b><%= link_to pro.short_name, linkstr , {:style=>'color:#1D7491; text-decoration:underline'} %></b><br>
                <i>Lead: <%=pro.lit_lead %> </i>
               </p>
               <%
                str1 = "card_id = '" + pro.id.to_s + "' AND cycle='"+ cycle + "'"
                o = Objective.where(str1)
 
-               linkstr = "../catalog/" + pro.id.to_s 
+               
 
                if o.first.nil?
                else 
