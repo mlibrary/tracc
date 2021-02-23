@@ -1,6 +1,6 @@
 
 <%
-nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec'] 
+nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
 cycle = params["cycle"]
 cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
 s = cur_cycle.first.start.month
@@ -18,21 +18,16 @@ end
 
 %>
 
-<h4> <%=cycle%> Update Resources for: <%=params["epic"]%></h4>
-  <%= form_tag(add_resource_chip_assignment_index_path, :enctype =>"multipart/form-data") do  %>
-     <%= hidden_field_tag 'epic', params["epic"] %>
-     <%= hidden_field_tag 'cycle', params["cycle"] %>
-     <%= hidden_field_tag 'card_id', @card_one.first.id %>
-     <%= submit_tag 'Add Resources' %>
-   <% end %>
+<h4 style="margin-bottom: 20px;"> <%=cycle%> Update Resources for: <%=params["epic"]%></h4>
 
-  
 
   <%= form_tag(update_resources_chip_assignment_index_path, :enctype =>"multipart/form-data") do  %> 
  <div class="card" style="padding-top: 5px">
    
  <div class="card-body"> 
+  <p><b><i>Edit Staff Chips:</i></b>
   <div class="row">
+
     <% j = 0
        i = 0 
        while (j<4) do 
@@ -43,7 +38,7 @@ end
     <div class="col-md-3">
    <p><strong><%= month %></strong></p>
    <%= hidden_field_tag 'epic', params["epic"] %>
-   <%= hidden_field_tag 'cycle', params["cycle"] %>
+   <%= hidden_field_tag 'cycle', cycle %>
    <%= hidden_field_tag 'track', "" %>
    <%= hidden_field_tag 'card_id', @card_one.first.id %>
    
@@ -78,10 +73,22 @@ end
 </div>
 
    <%= submit_tag 'Update' %>
+
 </div>
 
 <% end%>
 </div>
+<div class="card card-body"> 
+ 
+<p><b><i>Add Staff Chips:</i></b>
+    <%= form_tag(add_resource_chip_assignment_index_path, :enctype =>"multipart/form-data") do  %>
+     <%= hidden_field_tag 'epic', params["epic"] %>
+     <%= hidden_field_tag 'cycle', params["cycle"] %>
+     <%= hidden_field_tag 'card_id', @card_one.first.id %>
+     <%= submit_tag 'Add Resources' %>
+   <% end %>
+</div>
+
 <div class="card card-body"> 
  
 <p><b><i>Consultants:</i></b>
