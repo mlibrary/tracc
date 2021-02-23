@@ -1,20 +1,22 @@
  
 <%
+
   uniqname = params["uniqname"]
   cycle = params["cycle"]
 
   str = "uniqname='"+uniqname+"' AND cycle='"+cycle +"'"
   one_chip = Chip.where(str)
-  
+  errflag = false
+
   if (!one_chip.first.nil?)
     one_chip = one_chip.first
     title = "Edit Staff Chips"
-  elsif (one_chip.first.nil? && !uniqname.nil?)  
-    title = "Edit Staff Chips"
-    errflag = true
-  else
+  elsif (!uniqname.nil?)
     title = "Add New Staff"
-    one_chip = Chip.new  
+    one_chip = Chip.new   
+  else 
+    title = "Add/Edit Staff Chips"
+    errflag = true   
   end  
 
   
@@ -66,7 +68,7 @@
 <div class="row ml-1">
     <div class="field">
      <%= label_tag :cycle %>
-     <%= one_chip.cycle %>
+     <%= cycle %>
      
   
    </div>
@@ -74,7 +76,7 @@
 
       <div class="actions">
         <%= hidden_field_tag 'id', one_chip.id %>
-        <%= hidden_field_tag 'cycle', one_chip.cycle %>
+        <%= hidden_field_tag 'cycle', cycle %>
         <%= submit_tag 'Save' %>
       </div>
 

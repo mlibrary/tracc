@@ -1,16 +1,21 @@
- <% str = "card_id = '" + params['card_id'] + "'" 
-    tracks = Track.where(str) 
+ <% 
 
-    temp_chips = Chip.order(:uniqname)
+    cycle = params["cycle"]
+    cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
+    s = cur_cycle.first.start.month
+
+    str = "card_id = '" + params['card_id'] + "'" 
+
+    tracks = Track.where(str) 
+    str2 = "cycle ='" + cycle + "'"
+    temp_chips = Chip.where(str2).order(:uniqname)
     chips = ['']
     temp_chips.each do |t|
       chips << t.uniqname
     end
     
  nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec'] 
-cycle = params["cycle"]
-cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
-s = cur_cycle.first.start.month
+
 
 months = ['','','','','']
 i = 1
