@@ -50,7 +50,7 @@
   <%= form_tag(tactical_resources2_chip_assignment_index_path, method: :post, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
-<% card_epic = Card.where("activity_type LIKE '%Active%' ") %>
+<% card_epic = Card.where("activity_type LIKE '%Tactical%' ") %>
 <% cur_cycle = Cycle.where("current_cycle =1") 
 %>
 <div class="card">
