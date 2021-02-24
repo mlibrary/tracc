@@ -9,7 +9,7 @@
  end    
 atype = 'Strategic'
 
-temp_chips = Chip.order(:uniqname)
+temp_chips = Chip.where("cycle='"+cycle+"'").order(:uniqname)
     chips = ['']
     temp_chips.each do |t|
       chips << t.uniqname
