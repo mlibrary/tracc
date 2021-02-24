@@ -44,7 +44,7 @@
           <% 
         cnt = 0 
 
-        @slist = Card.where("activity_type LIKE '%Active%' AND card_type LIKE '%Internal%' AND card_status !='Done' ")
+        @slist = Card.where("activity_type LIKE '%Tactical%' AND card_type LIKE '%Internal%' AND card_status != 'Archived' AND card_status != 'Done' AND card_status != 'Paused' ")
         @slist.each do |one|
         cnt = cnt + 1   
         id = one.id
@@ -90,7 +90,7 @@
              <% 
         cnt = 0 
 
-        @slist = Card.where("activity_type LIKE '%Active%' AND card_type LIKE '%Library%' AND card_status !='Done'")
+        @slist = Card.where("activity_type LIKE '%Tactical%' AND card_type LIKE '%Library%' AND card_status != 'Archived' AND card_status != 'Done' AND card_status != 'Paused'")
         @slist.each do |one|
         cnt = cnt + 1   
         id = one.id
@@ -136,7 +136,7 @@
              <% 
         cnt = 0 
 
-        @slist = Card.where("activity_type LIKE '%Active%' AND card_type LIKE '%External%' AND card_status !='Done'")
+        @slist = Card.where("activity_type LIKE '%Tactical%' AND card_type LIKE '%External%' AND card_status != 'Archived' AND card_status != 'Done' AND card_status != 'Paused'")
         @slist.each do |one|
         cnt = cnt + 1   
         id = one.id
