@@ -13,7 +13,7 @@ cur_cycle = Cycle.where("current_cycle =1")
 cycle = cur_cycle.first.cycle_name
 
 if (p_type.eql? "2")
-     str = "activity_type LIKE '%Active%'"
+     str = "activity_type LIKE '%Tactical%'"
      caption = "Tactical Projects"
     else
      str = "activity_type LIKE '%Strategic%'"

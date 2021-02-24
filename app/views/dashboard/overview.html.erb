@@ -6,7 +6,7 @@
     
 
   @slist = Card.where("activity_type LIKE 'Strategic'")
-  @alist = Card.where("activity_type LIKE '%Active%' ")   
+  @alist = Card.where("activity_type LIKE '%Tactical%' AND card_status != 'Archived' AND card_status != 'Done' AND card_status != 'Paused' ")   
 
   total_chips = Chip.sum(:project) *1.00
 

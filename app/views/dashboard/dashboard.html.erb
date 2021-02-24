@@ -129,7 +129,7 @@
 if (capacity) 
 
  @slist = Card.where("activity_type LIKE 'Strategic'")
- @alist = Card.where("activity_type LIKE '%Active%' ") 
+ @alist = Card.where("activity_type LIKE '%Tactical%' ") 
 
          total_strategic = 0 
          @slist.all.each do |active| 
