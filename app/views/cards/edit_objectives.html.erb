@@ -3,7 +3,7 @@
 <%= form_tag(edit_objectives2_cards_path, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
-<% card = Card.where("card_status != 'Archived' AND card_status != 'Done'") %>
+<% card = Card.where("card_status != 'Archived' AND card_status != 'Done'").order(:title) %>
 <% cur_cycle = Cycle.where("current_cycle =1") %>
 
 <div class="card">
