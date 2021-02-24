@@ -1,5 +1,12 @@
 <%
-    
+
+ cycle = params["cycle"]
+
+  
+ if (cycle.nil?)
+  cur_cycle = Cycle.where("current_cycle =1")
+  cycle = cur_cycle.first.cycle_name
+ end    
 atype = 'Strategic'
 
 temp_chips = Chip.order(:uniqname)
@@ -18,11 +25,11 @@ if (@access_flag)
   <div class="card-body">
    
    <%
-     @cards = Card.where("activity_type LIKE '%Strategic%'")
+     @cards = Card.where("activity_type LIKE '%Strategic'")
 
      @cards.each do |one_c|
      	
-     	tracks = Track.where("card_id='"+ one_c.id.to_s + "'")
+     	tracks = Track.where("card_id='"+ one_c.id.to_s + "' AND cycle='"+cycle+"'")
       %>
       <%= form_tag(save_alerts_path, :enctype =>"multipart/form-data") do  %>
       <div class="card card-body">
