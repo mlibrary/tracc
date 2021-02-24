@@ -486,7 +486,7 @@ end
      <div class="col border border-dark " >
       <p style="text-align: center; padding-top: 10px; "><b><%= dept[i] %></b></p>
       <%  
-        str  = "dept LIKE '" + dept[i] + "'"
+        str  = "dept LIKE '" + dept[i] + "' AND cycle='"+cycle+"'"
         sum =  Chip.where(str).sum(:ops)
       %>
       <p>Total: <%= sum%> chips; <%= sum/4.00 %> FTE </p>
@@ -499,7 +499,7 @@ end
      while (i < 5) do %> 
      
       <div class="col border border-dark ">
-       <% str  = "dept LIKE '" + dept[i] + "'"
+       <% str  = "dept LIKE '" + dept[i] + "' AND cycle='"+cycle+"'"
           ch = Chip.where(str).order(:uniqname) 
           ch.each do |one| 
             one_chip = Chip.where("uniqname LIKE '"+ one.uniqname+"'")
