@@ -47,7 +47,7 @@
 <%= form_tag(tactical_progress2_cards_path, :enctype =>"multipart/form-data") do %>
    
 <% cname = Cycle.all %>
-<% card_epic = Card.where("activity_type LIKE '%Tactical%' AND card_status != 'Done' AND card_status != 'Archived' AND card_status != 'Paused'").order(:title) %>
+<% card_epic = Card.where("activity_type LIKE '%Tactical%' AND card_status LIKE '%In-Progress%'").order(:short_name) %>
 <% cur_cycle = Cycle.where("current_cycle =1") %>
 
 <div class="card">
@@ -67,7 +67,7 @@
 <div class="row ml-1">
     <div class="field">
      <%= label_tag :project %>
-     <%= select_tag "epic", options_from_collection_for_select(card_epic, "short_name", "title")  %>
+     <%= select_tag "epic", options_from_collection_for_select(card_epic, "short_name", "short_name")  %>
      
    </div>
 </div>
