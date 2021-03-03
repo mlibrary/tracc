@@ -3,7 +3,7 @@
 
 @card_paused = Card.where("activity_type LIKE '%Paused%' ").order(:title)
 @card_active = Card.where("activity_type LIKE '%Tactical%' AND card_status = 'In-Progress' ").order(:title)
-@card_done = Card.where("activity_type LIKE '%Active%' AND card_status LIKE '%Done%' ").order(:title)
+@card_done = Card.where("activity_type LIKE '%Tactical%' AND card_status ='Done' ").order(:title)
 @card_epic = Card.where("activity_type LIKE 'Strategic' ")
 
 %>
