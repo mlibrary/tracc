@@ -24,6 +24,8 @@ months = get_months(cycle)
       <% @card_one = Card.find( document.id ) 
       %>
       <p><a href=<%= edit_card_path(@card_one) %> class="btn btn-outline-secondary btn-sm d-inline-block" style="color:inherit;" role="button">Edit Details</a></p>
+      <% 
+      if (@card_one.activity_type.include? "Tactical") %>
       <%= form_tag(tactical_progress2_cards_path, :enctype =>"multipart/form-data") do %>
        <%= hidden_field_tag 'epic', @card_one.id  %>
        <%= hidden_field_tag 'cycle', cycle  %>
@@ -31,8 +33,8 @@ months = get_months(cycle)
        
       <div class="actions">
       <%= submit_tag 'Update Progress' %>
-   </div>
- 
+      </div>
+      <% end %>
       <% end #form %>
     <% end %>
 <div class="card">
