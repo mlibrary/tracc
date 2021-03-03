@@ -379,18 +379,18 @@ class CardsController < ApplicationController
 
   def tactical_progress2
 
-   
-    
       cycle= params["cycle"]
       epic=  params["epic"]
 
-      str = "short_name LIKE '" + epic + "%'"   
-      one_card = Card.where(str)
-      str = "card_id = '" + one_card.first.id.to_s +  "' AND cycle='"+ cycle + "'"
+      str = "id= '" + epic + "'"   
+      @one_card = Card.where(str)
+      epic = @one_card.first.short_name
+
+      str = "card_id = '" + @one_card.first.id.to_s +  "' AND cycle='"+ cycle + "'"
       @track_epic = Objective.where(str) 
 
     #str = "epic_title LIKE '" + epic + "' AND cycle LIKE '"+cycle+"'"  
-      str = "card_id='" + one_card.first.id.to_s + "' AND cycle='"+ cycle + "'"
+      str = "card_id='" + @one_card.first.id.to_s + "' AND cycle='"+ cycle + "'"
       @comment = TrackComment.where(str)
       if (@comment.first == nil)
         TrackComment.create(epic_title: epic,cycle:cycle)
@@ -413,7 +413,12 @@ class CardsController < ApplicationController
     pmonth = cur_month - cur_cycle.first.start.month + 1
 
     #str = "epic_title LIKE '" + epic + "'"  
-    str = "short_name LIKE '" + epic + "%'"   
+    if (epic.to_i >0) #tactical project
+      str = "id='"+epic+"'"
+    else
+      str = "short_name LIKE '" + epic + "%'"   
+    end  
+
     one_card = Card.where(str)
     str = "card_id = '" + one_card.first.id.to_s + "' AND cycle LIKE '"+cycle+"'"  
     @track_epic = Objective.where(str) 
@@ -504,6 +509,7 @@ class CardsController < ApplicationController
       one_card = Card.where(str)
       str = "card_id = '" + one_card.first.id.to_s + "' AND cycle='"+cycle +"'" 
       @obj = Objective.where(str) 
+
       @approve_access = true
     else
       flash.now[:notice] = I18n.t('blacklight.no_access')
