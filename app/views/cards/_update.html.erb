@@ -1,18 +1,23 @@
-<div class="dropdown" style="margin-left: 20px;">
+
+  <div class="dropdown" style="margin-left: 20px; z-index: 200;">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Edit
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="<%= alerts_path %>">Action Items/Alerts</a>
-    <hr>
-    <a class="dropdown-item" href="<%= cards_path %>">Project Details</a>
-    <a class="dropdown-item" href="<%= edit_objectives_cards_path %>">Objectives</a>
     <a class="dropdown-item" href="<%= progress_cards_path %>">Progress</a>
-    <a class="dropdown-item" href="<%= resources_chip_assignment_index_path %>">Resources</a>
-    
     <hr>
+    <a class="dropdown-item" href="<%= edit_objectives_cards_path %>">Objectives</a>
+     <hr>
+    <a class="dropdown-item" href="<%= cards_path %>">Project Details</a> 
+    <hr>
+    <a class="dropdown-item" href="<%= resources_chip_assignment_index_path %>">Resource Allocation</a>
+    <hr>
+    <a class="dropdown-item"  href="<%= staff_chips_chips_path %>">Staff Chips</a>
+    <hr>
+    <a class="dropdown-item"  href="<%= edit_tracks_cards_path %>">Strategic Tracks</a>
+    <hr>
+     <a class="dropdown-item"  href="<%= alerts_path %>">Action Items/Alerts</a>
     
-    <a class="dropdown-item" href="<%= cycle_review_index_path %>">Cycle Review</a>
         <%#<a class="dropdown-item" href="/impact">Impact</a>
     <a class="dropdown-item" href="/complexity">Complexity</a>%>
   </div>
