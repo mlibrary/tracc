@@ -23,7 +23,11 @@
  
   <%= render_nav_actions do |config, action|%>
     <% if (access_level != 9) # guest%>
-      <li class="lead"><%= action %></li>   
+    
+      <% if ( (config.partial.include? "tools") && (access_level > 0) ) %>
+        <% else %>
+         <li class="lead"><%= action %></li>     
+      <% end %>    
     <% end %>
   <% end %>
 
