@@ -57,9 +57,9 @@ class CatalogController < ApplicationController
     #config.add_nav_action(:import, partial: 'cards/import')
     config.add_nav_action(:import, partial: 'dashboard/dashboard')
 
-    config.add_nav_action(:reports, partial: 'cards/reports')
-
     config.add_nav_action(:update, partial: 'cards/update')
+
+    config.add_nav_action(:reports, partial: 'cards/reports')
 
     config.add_nav_action(:tools, partial: 'cards/tools')
     config.add_nav_action(:about, partial: 'reports/about')

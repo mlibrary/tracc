@@ -9,17 +9,21 @@
 %>
 
 <div class="jumbotron text-center" style="padding-top: 70px;" >  
+
   <p class="lead"> TRACC: Track projects from intake to close</p>
   <p class="lead">Take - Rate - Assess - Communicate - Close </p>
 
   <p>
     <%#= link_to 'Process Documentation', '', class: 'btn btn-primary' %>
   </p>
+  <div class="navbar-search navbar navbar-light bg-faded" role="navigation">
+  <div class="<%= container_classes %>" style="margin-top: 30px;">
+     <p align="center"><%= render_search_bar  %></p>
+  </div>
+</div>
 </div>
 
-<div style="padding-bottom: 30px;">
-<%= render_search_bar  %>
-</div>
+
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
