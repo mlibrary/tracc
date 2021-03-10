@@ -35,9 +35,9 @@
  cur_dt = Date.current.day
  nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
  pos= months.index(nameofmonths[cur_month])
- 
+ byebug
  if pos.nil?
-  pos = 0 
+  pos = 4
  end  
 
  if ( (cycle.eql? active_cycle) && (cur_dt < 24) && (pos>0)) # add curren month only if end of the month
@@ -51,7 +51,7 @@
 
   #burndown chart data
   
-
+byebug
   data_array = []
   data_array_up = []
   legend = []
