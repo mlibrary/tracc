@@ -1,6 +1,6 @@
 
 <% if (@approve_access) %>
-<h4>Settings</h4>
+
 
 <%= form_tag(edit_status_cards_path, :enctype =>"multipart/form-data") do %>
    
@@ -8,7 +8,7 @@
 
 <div class="card">
   <div class="card-header">
-    <h5> Edit Status</h5><p>TO DELETE AN ENTRY: LEAVE IT BLANK </p>
+    <h5> Setup: Status</h5><p>TO DELETE AN ENTRY: LEAVE IT BLANK </p>
   </div>  
   <div class="card-body">  
   	<% status.each do |s| 
@@ -48,7 +48,7 @@
 
 <div class="card">
   <div class="card-header">
-    <h5> Edit Rationale</h5><p>TO DELETE AN ENTRY: LEAVE IT BLANK </p>
+    <h5> Setup:  Rationale</h5><p>TO DELETE AN ENTRY: LEAVE IT BLANK </p>
   </div>  
   <div class="card-body">  
   	<% rat.each do |s| 

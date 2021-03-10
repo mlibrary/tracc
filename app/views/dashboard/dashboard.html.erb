@@ -37,7 +37,7 @@
  pos= months.index(nameofmonths[cur_month])
  
  if pos.nil?
-  pos = 0 
+  pos = 4
  end  
 
  if ( (cycle.eql? active_cycle) && (cur_dt < 24) && (pos>0)) # add curren month only if end of the month
@@ -51,7 +51,6 @@
 
   #burndown chart data
   
-
   data_array = []
   data_array_up = []
   legend = []
