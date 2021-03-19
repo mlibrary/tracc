@@ -1,17 +1,14 @@
 <%
-
-
-@card_paused = Card.where("activity_type LIKE '%Tactical%' AND card_status = 'Paused' ").order(:title)
-@card_active = Card.where("activity_type LIKE '%Tactical%' AND card_status = 'In-Progress' ").order(:title)
-@card_done = Card.where("activity_type LIKE '%Tactical%' AND card_status ='Done' ").order(:title)
-@card_epic = Card.where("activity_type LIKE 'Strategic' ")
+cur_cycle = Cycle.where("current_cycle =1")
+ cycle = cur_cycle.first.cycle_name
 
 %>
 
 <div class="jumbotron text-center" style="margin-top: 10px;" >  
 
-  <p class="lead"> TRACC: Track projects from intake to close</p>
-  <p class="lead">Take - Rate - Assess - Communicate - Close </p>
+  <h1> TRACC</h1>
+  <h2>Track projects from intake to close</h2>
+  <h3>Take - Rate - Assess - Communicate - Close </h3>
 
   <p>
     <%#= link_to 'Process Documentation', '', class: 'btn btn-primary' %>
@@ -23,145 +20,16 @@
 </div>
 </div>
 
-
-<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          <u>Strategic Projects</u>
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-          <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_epic.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
-
-  
-</div>
-</div>
-  <div class="card">
-    <div class="card-header" id="heading1">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext1" aria-expanded="false" aria-controls="ext1">
-          <u>Tactical Projects - Active</u>
-        </button>
-      </h5>
-    </div>
-
-    <div id="ext1" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
-      <div class="card-body">
-        
-         <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_active.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
-
-      </div>
-    </div>
-  </div>
-
-    <div class="card">
-    <div class="card-header" id="heading11">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext21" aria-expanded="false" aria-controls="ext21">
-          <u>Tactical Projects - Done</u>
-        </button>
-      </h5>
-    </div>
-
-    <div id="ext21" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
-      <div class="card-body">
-        
-         <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_done.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="heading11">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext11" aria-expanded="false" aria-controls="ext11">
-          <u>Tactical Projects - Paused</u>
-        </button>
-      </h5>
-    </div>
-
-    <div id="ext11" class="collapse" aria-labelledby="heading11" data-parent="#accordionExample">
-      <div class="card-body">
-        
-         <ul class="list-group list-group-flush">
-   
-        <% 
-          @card_paused.all.each do |c| 
-          cstatus = c.card_status
-         
-              id = c.id 
-              url ="catalog/" + id.to_s
-              ctype = c.activity_type
-        %> 
-         <li class="list-group-item"><a href=<%=url%> ><%= c.title %></a></li>
-            
-            <% end %>
-        </ul>
-
-      </div>
-    </div>
-  </div>
-
 <div class="card">
-    <div class="card-header" id="heading2">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ext2" aria-expanded="false" aria-controls="ext2">
-          <u>Operational Work</u>
-        </button>
-      </h5>
+  <div class= "card-header"><h3 align="center">  <%=cycle%> Dashboards</h3></div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col"><p align="center"><%= image_tag('Strategic-dashboard.png', alt: "Link to Public strategic dashboard", size: "200x300", :style => "border: 1px solid black") %><br><b><%= link_to "Strategic", "/dashboard/dashboard" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
+      <div class="col"><p align="center"><%= image_tag('Tactical-dashboard.png', alt: "Link to Public tactical dashboard", size: "200x300", :style => "border: 1px solid black") %><br><b><%= link_to "Tactical", "/dashboard/tactical" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
+      <div class="col"><p align="center"><%= image_tag('CyclePlanningBoard.png', alt: "Link to Cycle Planning Board", size: "200x300", :style => "border: 1px solid black") %><br><b><%= link_to "Cycle Planning Board", "/dashboard/cycle_board" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
     </div>
-
-    <div id="ext2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
-      <div class="card-body">
-        
-       
-
-
-      </div>
-    </div>
-  </div>
+  </div>  
+</div>
 
 
 
