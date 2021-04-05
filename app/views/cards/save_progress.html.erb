@@ -1,5 +1,6 @@
-<% id = params["epic"] 
-#one_card = Card.where ("id='"+id+"'")
+<% epic = params["epic"] 
+one_card = Card.where ("short_name LIKE'"+epic+"'")
+id = one_card.first.id
 url ="../catalog/" + id.to_s
 %>
 
