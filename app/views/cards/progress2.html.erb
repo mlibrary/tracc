@@ -1,6 +1,9 @@
 <%
 
 cycle=params["cycle"]
+epic = params["epic"] 
+one_card = Card.where ("short_name LIKE'"+epic+"'")
+id = one_card.first.id
 
 nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
 cur_cycle = Cycle.where("cycle_name LIKE '"+cycle+"'")
@@ -97,7 +100,7 @@ end
   <%end %> 
  
 <h5><b>Comments:</b></h5>
-<%= hidden_field_tag 'epic', params["epic"] %>
+<%= hidden_field_tag 'epic', id %>
 <%= hidden_field_tag 'cycle', params["cycle"] %>
 
 <p><%= months[1] %><br><%= text_area_tag 'comment1',  one.comment1 , :rows => 5, :cols => 100%></p>

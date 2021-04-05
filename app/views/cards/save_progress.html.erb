@@ -1,6 +1,5 @@
-<% epic = params["epic"] 
-one_card = Card.where ("short_name LIKE'"+epic+"'")
-id = one_card.first.id
+<% 
+id = params["epic"]
 url ="../catalog/" + id.to_s
 %>
 
