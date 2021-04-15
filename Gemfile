@@ -80,7 +80,7 @@ gem 'rsolr', '>= 1.0', '< 3'
 gem 'bootstrap', '~> 4.0'
 gem 'popper_js'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'devise-guests', '~> 0.6'
 #gem 'blacklight-marc', '~> 6.2.0'
 gem 'blacklight-marc', '>= 7.0.0.rc1', '< 8'
@@ -89,3 +89,6 @@ gem 'ettin', '~> 1.2'
 #gem 'ruby', "~> 2.6.3"
 gem 'ffi', '~> 1.13', '>= 1.13.1'
 gem 'sassc', '~> 2.4'
+
+gem 'omniauth', ">= 1.0.0"
+gem 'omniauth-google-oauth2'
