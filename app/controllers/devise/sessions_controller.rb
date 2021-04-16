@@ -9,6 +9,9 @@ class Devise::SessionsController < DeviseController
 
   # GET /resource/sign_in
   def new
+    if auth = request.env["omniauth.auth"]
+      byebug
+    end  
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
     yield resource if block_given?
