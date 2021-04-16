@@ -92,3 +92,4 @@ gem 'sassc', '~> 2.4'
 
 gem 'omniauth', ">= 1.0.0"
 gem 'omniauth-google-oauth2'
+gem 'dotenv-rails'
