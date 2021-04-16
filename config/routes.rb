@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   #devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
-
+  #devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   #devise_scope :admin do
   #  get 'admins/sign_in', to: 'admins/sessions#new', as: :new_admin_session
   #  get 'admins/sign_out', to: 'admins/sessions#destroy', as: :destroy_admin_session
@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   #  end
   #end
 
-  get '/auth/:provider/callback' => 'sessions#omniauth' 
+  #get '/auth/:provider/callback' => 'sessions#omniauth' 
+
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  concern :exportable, Blacklight::Routes::Exportable.new
+
   resources :about do
     collection do
       get :about, :help
@@ -135,10 +139,6 @@ Rails.application.routes.draw do
   post 'assessment/import_assessment'
   post 'complexity/edit'
   post 'complexity/update'
-
-  devise_for :users
-  concern :exportable, Blacklight::Routes::Exportable.new
-
   
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
