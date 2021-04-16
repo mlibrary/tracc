@@ -1,2 +1,5 @@
 new
-<%= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path %>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<%#= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path %>
+<%#= link_to "Log In with Google", '/auth/google_oauth2' %>
