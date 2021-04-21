@@ -17,7 +17,6 @@ class User < ApplicationRecord
 
   
   def self.from_omniauth(auth)
-    byebug
     where(email: auth.info.email).first_or_initialize do |user|
       user.user_name = auth.info.name
       user.email = auth.info.email

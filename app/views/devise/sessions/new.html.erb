@@ -1,9 +1,7 @@
 <h2>Log in</h2>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id" content="581284559742-584cc9aup8rbv2eaoht8podv8vdlkond.apps.googleusercontent.com">
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-<%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
+
+<%= button_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
 
 <div style="margin-top: 20px;">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
