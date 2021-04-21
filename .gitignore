@@ -33,6 +33,10 @@ db/tracc_development
 /config/master.key
 /config/secret.yml
 
+
 # Ignore mac directory files
 */.DS_Store
 .DS_Store
+
+/google.env
+google.env
