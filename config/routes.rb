@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   #  end
   #end
 
-  #get '/auth/:provider/callback' => 'sessions#omniauth' 
+  get '/auth/:provider/callback' => 'sessions#omniauth' 
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   concern :exportable, Blacklight::Routes::Exportable.new
