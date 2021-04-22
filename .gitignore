@@ -31,7 +31,12 @@ db/tracc_development
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/secret.yml
+
 
 # Ignore mac directory files
 */.DS_Store
 .DS_Store
+
+/google.env
+google.env
