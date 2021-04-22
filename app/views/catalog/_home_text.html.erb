@@ -24,9 +24,9 @@ cur_cycle = Cycle.where("current_cycle =1")
   <div class= "card-header"><h3 align="center">  <%=cycle%> Dashboards</h3></div>
   <div class="card-body">
     <div class="row">
-      <div class="col"><p align="center"><%= image_tag('Strategic-dashboard.png', alt: "Link to Public strategic dashboard", size: "200x300", :style => "border: 1px solid black") %><br><b><%= link_to "Strategic", "/dashboard/dashboard" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
-      <div class="col"><p align="center"><%= image_tag('Tactical-dashboard.png', alt: "Link to Public tactical dashboard", size: "200x300", :style => "border: 1px solid black") %><br><b><%= link_to "Tactical", "/dashboard/tactical" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
-      <div class="col"><p align="center"><%= image_tag('CyclePlanningBoard.png', alt: "Link to Cycle Planning Board", size: "200x300", :style => "border: 1px solid black") %><br><b><%= link_to "Cycle Planning Board", "/dashboard/cycle_board" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
+      <div class="col"><p align="center"><%= image_tag('Strategic-dashboard.png', alt: "Link to Public strategic dashboard", size: "200x300", :style => "border: 1px solid black") %><br><br><b><%= link_to "Strategic", "/dashboard/dashboard" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
+      <div class="col"><p align="center"><%= image_tag('Tactical-dashboard.png', alt: "Link to Public tactical dashboard", size: "200x300", :style => "border: 1px solid black") %><br><br><b><%= link_to "Tactical", "/dashboard/tactical" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
+      <div class="col"><p align="center"><%= image_tag('CyclePlanningBoard.png', alt: "Link to Cycle Planning Board", size: "200x300", :style => "border: 1px solid black") %><br><br><b><%= link_to "Cycle Planning Board", "/dashboard/cycle_board" , {:style=>'color:#1D7491; text-decoration:underline'} %></b></p></div>
     </div>
   </div>  
 </div>
