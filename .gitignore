@@ -38,3 +38,5 @@ db/tracc_development
 */.DS_Store
 .DS_Store
 
+/google.env
+google.env
