@@ -1,7 +1,7 @@
 module ReportsHelper
 	def get_months(cycle)
         
-nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
+nameofmonths = ['','Jan', 'Feb','March','April','May','June','July','Aug', 'Sep','Oct','Nov','Dec']
 
 cur_cycle = Cycle.where("cycle_name='"+cycle+"'")
 
