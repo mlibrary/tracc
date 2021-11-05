@@ -12,7 +12,8 @@
   pchart = params["pchart"]
   pchartup = params["pchartup"]
   capacity = params["capacity"]
-  
+  mname = params["mname"]
+
  cur_cycle = Cycle.where("current_cycle =1")
  active_cycle = cur_cycle.first.cycle_name
  if cycle.nil?
@@ -31,22 +32,28 @@
  months = get_months(cycle)
  stmonth = months[1]
  endmonth = months[4]
- cur_month = Date.current.month
- cur_dt = Date.current.day
- nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
- pos= months.index(nameofmonths[cur_month])
- 
- if pos.nil?
-  pos = 4
- end  
 
- if ( (cycle.eql? active_cycle) && (cur_dt < 24) && (pos>0)) # add curren month only if end of the month
+ if (mname.nil?)
+  cur_month = Date.current.month
+  cur_dt = Date.current.day
+  nameofmonths = ['','January', 'February','March','April','May','June','July','August', 'September','October','November','December']
+  pos= months.index(nameofmonths[cur_month])
+ 
+  if pos.nil?
+   pos = 4
+  end  
+
+  if ( (cycle.eql? active_cycle) && (cur_dt < 24) && (pos>0)) # add curren month only if end of the month
     pos = pos-1
   end 
 
- if (!cycle.eql? active_cycle)
-  pos = 4 # end of cycle
- end  
+  if (!cycle.eql? active_cycle)
+   pos = 4 # end of cycle
+  end
+ else
+   pos =   months.index(mname)
+ end #if month
+    
   @slist = Card.where("activity_type LIKE 'Strategic'")
 
   #burndown chart data
@@ -120,9 +127,9 @@
 <div class="container-fluid">
   <h3>  <%=cycle%> (<%= stmonth %>-<%= endmonth %>) Library IT Strategic Projects  </h3>
   <% if ( (bar) || (progress)) %>
-   
-  <% end %>  
-
+    <p>(Reflects progress through the month of <%= mname %>)</p>  
+  <% end %> 
+ 
   <% 
 
 if (capacity) 

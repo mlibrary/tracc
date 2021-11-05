@@ -5,6 +5,8 @@
    
 <% cname = Cycle.all %>
 <% cur_cycle = Cycle.where("current_cycle =1") %>
+<% months = get_months(cur_cycle.first.cycle_name) %>
+<% cur_month = Date.current.month %>
 
 <div class="row" style="padding-top: 10px">
 <div class="col-md-12"> <h2> Dashboard for Strategic Projects</h2></div>
@@ -25,6 +27,7 @@
      <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
    </div>
  </div>
+
 
 <div class="row ml-1">
     <div class="field">     
@@ -138,7 +141,12 @@
      <%= select_tag "cycle", options_from_collection_for_select(cname, "cycle_name", "cycle_name", cur_cycle.first.cycle_name)  %> 
    </div>
  </div>
- 
+ <div class="row ml-1">
+    <div class="field">
+     <%= label_tag :month %>
+     <%= select_tag "mname", options_for_select(months,cur_month)  %> 
+   </div>
+ </div>
   <div class="row ml-1">
     <div class="field">     
      <%= check_box_tag "bar", 1, {:checked => "checked"}  %> Progress Bars
@@ -153,7 +161,7 @@
 
 
 
- <p style="padding-top: 65px"> </p>
+ <p style="padding-top: 10px"> </p>
  </div>
  <div class="card-footer"> 
    <div class="actions">
