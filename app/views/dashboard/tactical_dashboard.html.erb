@@ -3,6 +3,8 @@
    
 <% cname = Cycle.all %>
 <% cur_cycle = Cycle.where("current_cycle =1") %>
+<% months = get_months(cur_cycle.first.cycle_name) %>
+<% cur_month = Date.current.month %>
 
 <div class="row" style="padding-top: 20px">
  <div class="col-md-6">
@@ -76,6 +78,13 @@
    </div>
  </div>
 
+   <div class="row ml-1">
+    <div class="field">
+     <%= label_tag :month %>
+     <%= select_tag "mname", options_for_select(months,cur_month)  %> 
+   </div>
+ </div>
+
   <div class="row ml-1">
     <div class="field">     
      <%= check_box_tag "bar", 1, {:checked => "checked"}  %> Progress Bar
@@ -87,7 +96,7 @@
    </div>
  </div>
 
- <p style="padding-top: 65px"> </p>
+ <p style="padding-top: 15px"> </p>
  </div>
  <div class="card-footer"> 
    <div class="actions">
