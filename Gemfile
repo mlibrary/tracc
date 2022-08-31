@@ -91,6 +91,6 @@ gem 'ffi', '~> 1.13', '>= 1.13.1'
 gem 'sassc', '~> 2.4'
 
 
-gem "omniauth", "~> 1.9.1"
+gem "omniauth", "~> 1.9.2"
 gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
